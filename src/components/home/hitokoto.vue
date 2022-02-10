@@ -20,7 +20,7 @@ export default {
     return {
       hitokotoData: {
         from: '二次元入口',
-        hitokoto: '这条一言去二次元了，所以一直没有加载出来。'
+        hitokoto: '这条一言去二次元玩啦，你可以等它一会儿。'
       },
       loading: true
     }
@@ -35,6 +35,7 @@ export default {
           from: 'Http Requests',
           hitokoto: code2str(e.status)
         }
+        this.loading = false
       })
     }
   },
