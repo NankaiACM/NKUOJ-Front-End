@@ -10,13 +10,7 @@
       <div class="col-md-4">
         <user-panel class="mb-2"></user-panel>
         <hitokoto class="mb-2"></hitokoto>
-        <div class="card mb-2">
-          <div class="card-body">
-            <h5 class="card-title">南开大学ACM算法协会</h5>
-            <h6 class="card-subtitle mb-2 text-muted">纳新喵~</h6>
-            <img class="img-fluid" src="../assets/qq-group.jpg" alt="QQ Group ID: 1001918732">
-          </div>
-        </div>
+        <association-poster></association-poster>
       </div>
     </div>
   </div>
@@ -28,6 +22,7 @@ import userCourses from '../components/home/user-courses'
 import userAssignments from '../components/home/user-assignments'
 import userContests from '../components/home/user-contests'
 import hitokoto from '../components/home/hitokoto'
+import associationPoster from "@/components/home/association-poster";
 
 export default {
   name: 'component-home',
@@ -37,6 +32,7 @@ export default {
     userAssignments,
     userContests,
     hitokoto,
+    associationPoster
   },
   methods: {
     logIn () {
