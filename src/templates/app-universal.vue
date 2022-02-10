@@ -1,9 +1,9 @@
 <template>
 <div id="app">
   <div class="custom-header">
-    <head-bar @toHome="localTo('home')"
-              @toProblem="localTo('problems')" @toStatus="localTo('status')"
-              @toContest="localTo('contest')" @toDiscuss="localTo('discuss')">
+    <head-bar @toHome="switchTo('home')"
+              @toProblem="switchTo('problems')" @toStatus="switchTo('status')"
+              @toContest="switchTo('contest')" @toDiscuss="switchTo('discuss')">
     </head-bar>
   </div>
   <div>
@@ -27,9 +27,11 @@ export default {
     }
   },
   methods: {
-    localTo: function (str) {
+    switchTo: function (path) {
+      if (this.$route.path === `/${path}`)
+        return
       this.$router.push({
-        path: '/' + str
+        path: '/' + path
       })
     },
     updateUserData: function () {

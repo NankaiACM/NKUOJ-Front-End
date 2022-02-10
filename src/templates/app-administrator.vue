@@ -26,6 +26,8 @@ export default {
   },
   methods: {
     switchTo: function (path) {
+      if (this.$route.path === `/${path}`)
+        return
       this.$router.push({
         path: path
       })
