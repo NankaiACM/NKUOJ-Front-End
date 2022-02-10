@@ -11,6 +11,7 @@
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
+    "js-cookie": "^3.0.1",
     "less": "^4.1.1",
     "less-loader": "^7.3.0",
     "markdown-it": "^12.2.0",
