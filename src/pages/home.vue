@@ -9,13 +9,7 @@
       </div>
       <div class="col-md-4">
         <user-panel class="mb-2"></user-panel>
-        <div class="card mb-2">
-          <div class="card-body">
-            <h5 class="card-title">网站开发正在进行</h5>
-            <h6 class="card-subtitle mb-2 text-muted">班级、作业等基本功能已经完成。</h6>
-            <h6 class="card-subtitle mb-2 text-muted">竞赛、考试会尽快上线。</h6>
-          </div>
-        </div>
+        <hitokoto class="mb-2"></hitokoto>
         <div class="card mb-2">
           <div class="card-body">
             <h5 class="card-title">南开大学ACM算法协会</h5>
@@ -33,6 +27,7 @@ import userPanel from '../components/home/user-panel'
 import userCourses from '../components/home/user-courses'
 import userAssignments from '../components/home/user-assignments'
 import userContests from '../components/home/user-contests'
+import hitokoto from '../components/home/hitokoto'
 
 export default {
   name: 'component-home',
@@ -40,7 +35,8 @@ export default {
     userPanel,
     userCourses,
     userAssignments,
-    userContests
+    userContests,
+    hitokoto,
   },
   methods: {
     logIn () {
