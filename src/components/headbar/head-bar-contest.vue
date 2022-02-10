@@ -3,7 +3,9 @@
     <div class="container-fluid bg-light shadow-sm">
       <div class="container">
         <b-navbar class="navbar-expand-lg" toggleable="lg" type="light" variant="light">
-          <img class="slogan" src="../../assets/nkuoj-slogan.svg" alt="Nankai University Online Judge">
+          <a href="/">
+            <img class="slogan" src="../../assets/nkuoj-slogan.svg" alt="Nankai University Online Judge">
+          </a>
 
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
