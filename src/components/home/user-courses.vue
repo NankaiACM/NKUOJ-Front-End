@@ -33,7 +33,7 @@ export default {
   },
   mounted () {
     this.$http.get(`${window.backendOrigin}/api/courses`).then(res => {
-      this.courses = res.data.courses
+      this.courses = res.data
       this.loading = false
     }, e => {
       console.log(e)
