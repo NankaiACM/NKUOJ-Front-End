@@ -22,7 +22,7 @@
           </b-tab>
 
           <b-tab title="作业">
-            <b-card :title="assignment.name" :sub-title="assignment.during" class="mt-3" v-for="assignment in assignments" :key="assignment.id">
+            <b-card :title="assignment.name" :sub-title="'截止时间 ' + assignment.end" class="mt-3" v-for="assignment in assignments" :key="assignment.id">
               <a :href="'/assignment/' + assignment.id" class="card-link">
                 <b-card-text class="text-muted">
                   点击查看

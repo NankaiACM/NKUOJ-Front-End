@@ -5,7 +5,7 @@
         <b-list-group-item v-bind:href="'/assignment/' + assignment.id" v-for="assignment in assignments" v-bind:key="assignment.id">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{assignment.name}}</h5>
-            <small>{{assignment.deadline}}</small>
+            <small>{{assignment.end}} 截止</small>
           </div>
           <p class="mb-1">{{assignment.courseName}}</p>
         </b-list-group-item>
