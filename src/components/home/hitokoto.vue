@@ -32,7 +32,7 @@ export default {
         this.loading = false
       }, e => {
         this.hitokotoData = {
-          from: 'Http Requests',
+          from: 'Http Response',
           hitokoto: code2str(e.status)
         }
         this.loading = false
