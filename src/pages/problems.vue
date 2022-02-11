@@ -4,18 +4,19 @@
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">公开题库</h1>
-          <p class="lead">这里收录了来自各方面公开的题目。您可以在此挑选题目练习。</p>
-          <p class="lead">请注意：在此处完成的作业不会计入课程，请前往作业页面提交答案。</p>
+          <p class="lead">这里收录了一些练习题，您可以在此挑选题目练习。</p>
         </div>
       </div>
       <div class="container">
         <div class="list-group">
-          <router-link :to="{path:'/problem/'+problem.id}" class="list-group-item list-group-item-action" v-for="problem in problemList" v-bind:key="problem.id">
+          <router-link :to="{path:'/problem/' + problem.pid}" class="list-group-item list-group-item-action" v-for="problem in problemList" v-bind:key="problem.pid">
             <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1"> {{problem.title}}</h5>
-              <small>{{problem.id}}</small>
+              <h5 class="mb-1"> {{problem.name}}</h5>
+              <small>{{problem.pid}}</small>
             </div>
-            <small> {{problem.acceptedCount}} / {{problem.submittedCount}}</small>
+            <small v-if="problem.status === 0"> 未提交 </small>
+            <small v-else-if="problem.status === 1" class="text-warning"> 未通过 </small>
+            <small v-else class="text-success"> 已通过 </small>
           </router-link>
         </div>
 
@@ -51,17 +52,16 @@ export default {
   },
   methods: {
     loadProblemsData: function () {
-      this.$http.get(`${window.backendOrigin}/api/problems`)
+      this.$http.get(`${window.backendOrigin}/api/problems/global/total`)
         .then(res => {
-          this.totalRows = res.data.rows
+          this.totalRows = res.data
         })
-
       this.loadDataOfPage(this.currentPage)
     },
     loadDataOfPage: function (pageNumber) {
-      this.$http.get(`${window.backendOrigin}/api/problems/page/${pageNumber}`)
+      this.$http.get(`${window.backendOrigin}/api/problems/global?page=${pageNumber}&item=20`)
         .then(res => {
-          this.problemList = res.data.problems
+          this.problemList = res.data
         })
     }
   },
