@@ -66,7 +66,6 @@ export default {
       }
       this.$http.post(`${window.backendOrigin}/api/login`, postPackage).then(res => {
         console.log('Successfully logged in.')
-        console.log(res)
         if (res.data.ok) {
           this.$store.commit('setUserData', res.data.userData)
           this.$router.push('/home')
