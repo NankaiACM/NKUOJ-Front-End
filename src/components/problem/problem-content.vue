@@ -1,9 +1,11 @@
 <template>
-  <div class="card mt-4">
-    <div class="p-5">
-      <div v-html="problemMarkDown"></div>
+  <b-overlay :show="loading" rounded="sm">
+    <div class="card mt-4">
+      <div class="p-5">
+        <div v-html="problemMarkDown"></div>
+      </div>
     </div>
-  </div>
+  </b-overlay>
 </template>
 
 <script>
@@ -24,7 +26,8 @@ window.markdownit = markdownItObject
 export default {
   name: "problem-content",
   props: {
-    markdownText: String
+    markdownText: String,
+    loading: Boolean
   },
   data: function () {
     return {

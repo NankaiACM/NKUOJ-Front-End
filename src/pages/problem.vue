@@ -1,8 +1,9 @@
 <template>
   <div class="container">
-    <problem-header :problem-info="problemInfo"></problem-header>
-    <problem-navigator :psid="problemInfo.psid" v-if="problemInfo.psid"></problem-navigator>
-    <problem-content :markdown-text="markdownText"></problem-content>
+    <problem-header :problem-info="problemInfo" :loading="loading"></problem-header>
+    <problem-navigator :psid="problemInfo.psid" v-if="problemInfo.psid" :loading="loading" :pid="problemInfo.pid">
+    </problem-navigator>
+    <problem-content :markdown-text="markdownText" :loading="loading"></problem-content>
     <submit-modal ref="submit-modal"></submit-modal>
 
     <div class="container d-flex justify-content-center">
@@ -31,7 +32,7 @@ export default {
     return {
       problemInfo: {},
       problemMarkDown: '',
-      isLoading: true,
+      loading: true,
       markdownText: ''
     }
   },
@@ -44,7 +45,7 @@ export default {
         res => {
           this.problemInfo = res.data
           this.markdownText = String.fromCharCode.apply(null, this.problemInfo.content.data)
-          this.isLoading = false
+          this.loading = false
       })
     },
     showSubmitModal: function () {
