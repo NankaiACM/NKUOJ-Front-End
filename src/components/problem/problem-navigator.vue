@@ -1,5 +1,5 @@
 <template>
-  <b-overlay :show="loading || problemsListLoading" rounded="sm">
+  <b-overlay :show="loading || problemsListLoading" rounded="sm" v-if="problems.length > 1">
     <b-card class="container-fluid">
       <small class="display-6 d-flex justify-content-center text-muted">题目列表</small>
 
