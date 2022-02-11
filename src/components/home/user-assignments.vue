@@ -7,7 +7,7 @@
             <h5 class="mb-1">{{assignment.name}}</h5>
             <small>{{assignment.end}} 截止</small>
           </div>
-          <p class="mb-1">{{assignment.courseName}}</p>
+          <p class="mb-1">{{assignment.courseName ? assignment.courseName : '无所属课程'}}</p>
         </b-list-group-item>
       </b-list-group>
 
@@ -35,7 +35,7 @@ export default {
     }
   },
   mounted () {
-    this.$http.get(`${window.backendOrigin}/api/assignments`).then(res => {
+    this.$http.get(`${window.backendOrigin}/api/assignment/open`).then(res => {
       this.assignments = res.data
       this.loading = false
     }, e => {
