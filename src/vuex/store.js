@@ -11,8 +11,7 @@ export default new Vuex.Store({
       storage: {
         getItem: (key) => Cookies.get(key),
         setItem: (key, value) =>
-          Cookies.set(key, value, { expires: 3, secure: false }),
-        // TODO: set attributes sameSite: 'Strict' and secure true in production build
+          Cookies.set(key, value, { expires: 3, secure: false, sameSite: 'None'}),
         removeItem: (key) => Cookies.remove(key),
       },
     })
