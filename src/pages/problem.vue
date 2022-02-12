@@ -44,7 +44,7 @@ export default {
       this.$http.get(`${window.backendOrigin}/api/problem/id/${this.$route.params.problemId}`).then(
         res => {
           this.problemInfo = res.data
-          this.markdownText = String.fromCharCode.apply(null, this.problemInfo.content.data)
+          this.markdownText = new TextDecoder('utf-8').decode(new Uint8Array(this.problemInfo.content.data).buffer)
           this.loading = false
       })
     },
