@@ -35,7 +35,7 @@
       <div class="form-group">
         <label>内存限制：</label>
         <b-form-input type="number" v-model="dataObject.memoryLimit"></b-form-input>
-        <small class="form-text text-muted">以B为单位，是单个测试点的内存限制。</small>
+        <small class="form-text text-muted">以KiB为单位，是单个测试点的内存限制。</small>
       </div>
       <div class="form-group">
         <label>测试点数量：</label>
