@@ -25,7 +25,7 @@
       <div class="form-group">
         <label>题面：</label>
         <b-form-textarea v-model="dataObject.content"></b-form-textarea>
-        <small class="form-text text-muted">题面。使用Markdown语言，暂不支持预览。</small>
+        <small class="form-text text-muted">题面。使用Markdown语言，  <b-link @click="previewMarkdown">预览</b-link>。</small>
       </div>
       <div class="form-group">
         <label>时间限制：</label>
@@ -53,6 +53,7 @@
 
     <admin-problem-clone-modal :pid="selectedId" ref="clone-modal"></admin-problem-clone-modal>
     <admin-problem-upload-data-modal :pid="selectedId" ref="upload-modal"></admin-problem-upload-data-modal>
+    <admin-markdown-preview-modal :markdown-text="dataObject.content" ref="preview-modal"></admin-markdown-preview-modal>
   </div>
 </template>
 
@@ -61,10 +62,12 @@ import itemSelectCard from '../../components/admin/admin-problem-select-card'
 import code2str from '@/code/code'
 import AdminProblemCloneModal from "@/components/admin/admin-problem-clone-modal";
 import AdminProblemUploadDataModal from "@/components/admin/admin-problem-upload-data-modal";
+import AdminMarkdownPreviewModal from "@/components/admin/admin-markdown-preview-modal";
 
 export default {
   name: 'problem-page',
   components: {
+    AdminMarkdownPreviewModal,
     AdminProblemUploadDataModal,
     AdminProblemCloneModal,
     itemSelectCard
@@ -115,6 +118,9 @@ export default {
     },
     uploadData: function () {
       this.$refs['upload-modal'].show()
+    },
+    previewMarkdown: function () {
+      this.$refs['preview-modal'].show()
     }
   }
 }
