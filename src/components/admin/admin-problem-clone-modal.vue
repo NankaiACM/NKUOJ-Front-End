@@ -46,7 +46,7 @@ export default {
     submit: function () {
       const validateResult = this.validateSubmitForm()
       if (validateResult) {
-        this.$bvModal.msgBoxOk(this.validateResults[validateResult], {centered: true, title: '新建失败'})
+        this.$bvModal.msgBoxOk(this.validateResults[validateResult], {centered: true, title: '克隆失败'})
         return
       }
 
