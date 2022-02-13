@@ -47,7 +47,6 @@ export default {
       this.$http.get(`${window.backendOrigin}/api/admin/${this.api}?page=${pageNumber}&item=${this.perPage}`)
         .then(res => {
           this.itemsList = res.data
-          console.log(this.itemsList)
       })
     },
     selectItem: function (item) {
