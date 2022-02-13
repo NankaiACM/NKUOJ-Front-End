@@ -28,10 +28,10 @@
           </div>
         </div>
         <div class="row d-flex justify-content-center">
-          <div class="btn-group m-2" role="group" v-if="problemInfo.enabledSpecialJudge">
+          <div class="btn-group m-2" role="group" v-if="problemInfo.specialJudge !== 0">
             <button type="button" class="btn btn-outline-warning disabled">Special Judge</button>
           </div>
-          <div class="btn-group m-2" role="group" v-if="problemInfo.enabledDetailJudge">
+          <div class="btn-group m-2" role="group" v-if="problemInfo.detailJudge">
             <button type="button" class="btn btn-outline-info disabled">Detail Judge</button>
           </div>
         </div>
