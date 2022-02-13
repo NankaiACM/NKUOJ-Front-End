@@ -3,14 +3,13 @@
     <div class="container" v-if="itemsList.length > 0">
       <b-list-group>
         <b-list-group-item class="d-flex justify-content-between align-items-center" button @click="selectItem(item.id)"
-                           v-for="item in itemsList.slice((currentPage - 1) * perPage, currentPage * perPage)"
-                           :key="item.id">
+                           v-for="item in itemsList" :key="item.id">
           {{item.name}}
           <span class="text-muted">#{{item.id}}</span>
         </b-list-group-item>
       </b-list-group>
       <div class="container-fluid d-flex justify-content-center mt-4">
-        <b-pagination v-model="currentPage" :total-rows="itemsCount" :per-page="perPage"></b-pagination>
+        <b-pagination v-model="currentPage" :total-rows="itemsCount" :per-page="perPage" @change="updateItemsInPage"></b-pagination>
       </div>
     </div>
     <div class="container" v-else>
@@ -33,7 +32,6 @@ export default {
       perPage: 8,
       itemsCount: 0,
       itemsList: [],
-      loading: true
     }
   },
   methods: {
@@ -43,14 +41,13 @@ export default {
     loadItemsData: function () {
       this.$http.get(`${window.backendOrigin}/api/admin/${this.api}/total`).then(res => {
         this.itemsCount = res.data
-        this.loading = false
       })
     },
-    updateItemsInPage: function () {
-      this.$http.get(`${window.backendOrigin}/api/admin/${this.api}?page=${this.currentPage}&item=${this.perPage}`)
+    updateItemsInPage: function (pageNumber) {
+      this.$http.get(`${window.backendOrigin}/api/admin/${this.api}?page=${pageNumber}&item=${this.perPage}`)
         .then(res => {
-        this.itemsList = res.data
-        this.loading = false
+          this.itemsList = res.data
+          console.log(this.itemsList)
       })
     },
     selectItem: function (item) {
@@ -60,14 +57,7 @@ export default {
   },
   mounted() {
     this.loadItemsData()
-    this.updateItemsInPage()
-  },
-  watch: {
-    currentPage: {
-      handler() {
-        this.updateItemsInPage()
-      }
-    }
+    this.updateItemsInPage(this.currentPage)
   }
 }
 </script>
