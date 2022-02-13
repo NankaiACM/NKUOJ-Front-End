@@ -14,7 +14,7 @@
           </div>
           <div class="btn-group m-2" role="group">
             <button type="button" class="btn btn-warning disabled">空间限制</button>
-            <button type="button" class="btn btn-light disabled">{{ problemInfo.memoryLimit }} KiB</button>
+            <button type="button" class="btn btn-light disabled">{{ problemInfo.memoryLimit }} B</button>
           </div>
         </div>
         <div class="row d-flex justify-content-center">
