@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import itemSelectCard from '../../components/admin/admin-item-select-card'
+import itemSelectCard from '../../components/admin/admin-problem-select-card'
 
 export default {
   name: 'user-page',

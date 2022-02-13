@@ -31,27 +31,28 @@ export default {
         title: '题目管理',
         href: '/admin/problem',
         description: '创建和修改题目。'
-      }, {
-        title: '作业管理',
-        href: '/admin/assignment',
-        description: '创建、修改、分发作业，分发作业需要指定课程。在此查看作业完成情况。'
-      }, {
-        title: '课程管理',
-        href: '/admin/course',
-        description: '创建、修改课程。为课程添加学生。'
-      }, {
-        title: '竞赛和考试管理',
-        href: '/admin/contest',
-        description: '注册、修改竞赛和考试，亦可批量报名考试。'
-      }, {
-        title: '公告管理',
-        href: '/admin/announcement',
-        description: '创建、修改公告。'
-      }, {
-        title: '用户数据管理',
-        href: '/admin/user',
-        description: '修改用户数据、授权。'
-      } ]
+       }, //{
+      //   title: '作业管理',
+      //   href: '/admin/assignment',
+      //   description: '创建、修改、分发作业，分发作业需要指定课程。在此查看作业完成情况。'
+      // }, {
+      //   title: '课程管理',
+      //   href: '/admin/course',
+      //   description: '创建、修改课程。为课程添加学生。'
+      // }, {
+      //   title: '竞赛和考试管理',
+      //   href: '/admin/contest',
+      //   description: '注册、修改竞赛和考试，亦可批量报名考试。'
+      // }, {
+      //   title: '公告管理',
+      //   href: '/admin/announcement',
+      //   description: '创建、修改公告。'
+      // }, {
+      //   title: '用户数据管理',
+      //   href: '/admin/user',
+      //   description: '修改用户数据、授权。'
+      // }
+      ]
     }
   }
 }
