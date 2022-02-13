@@ -10,7 +10,7 @@
         </b-list-group-item>
       </b-list-group>
       <div class="container-fluid d-flex justify-content-center mt-4">
-        <b-pagination v-model="currentPage" :total-rows="itemsList.length" :per-page="perPage"></b-pagination>
+        <b-pagination v-model="currentPage" :total-rows="itemsCount" :per-page="perPage"></b-pagination>
       </div>
     </div>
     <div class="container" v-else>
