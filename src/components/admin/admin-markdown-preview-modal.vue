@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="modal" title="预览" centered ok-only ok-title="关闭">
+  <b-modal size="lg" id="modal" title="预览" centered ok-only ok-title="关闭">
     <div class="p-2">
       <div v-html="problemMarkDown"></div>
     </div>
