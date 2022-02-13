@@ -25,7 +25,7 @@
       <div class="form-group">
         <label>题面：</label>
         <b-form-textarea v-model="dataObject.content"></b-form-textarea>
-        <small class="form-text text-muted">题面。使用Markdown语言，暂不支持预览；建议使用Typora编辑后复制到这里。</small>
+        <small class="form-text text-muted">题面。使用Markdown语言，暂不支持预览。</small>
       </div>
       <div class="form-group">
         <label>时间限制：</label>
