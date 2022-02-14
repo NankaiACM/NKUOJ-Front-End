@@ -45,7 +45,7 @@ export default {
         { key: 'submit_id', label: '提交ID' },
         { key: 'problem_id', label: '题目ID' },
         { key: 'problem_name', label: '题目名' },
-        { key: 'status', label: '状态'}
+        { key: 'status', label: '状态' }
       ],
       isLoading: true
     }
