@@ -14,7 +14,7 @@
       </b-form-group>
     </b-card>
 
-    <b-table hover :items="items" :fields="fields" striped class="text-center" :busy="isLoading" responsive>
+    <b-table hover :items="items" :fields="fields" striped class="text-center mt-4" :busy="isLoading" responsive>
       <template #table-busy>
         <div class="text-center my-2">
           <b-spinner class="align-middle"></b-spinner>
