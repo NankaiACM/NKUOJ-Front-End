@@ -34,6 +34,9 @@ export default new Vuex.Store({
     },
     getUserData: function (state) {
       return state.userData
+    },
+    getUID: function (state) {
+      return state.userData.uid
     }
   },
   mutations: {

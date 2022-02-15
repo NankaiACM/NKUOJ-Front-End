@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <b-jumbotron header="评测记录" lead="在此查看您最近的评测记录。">
+    <b-jumbotron header="评测记录" lead="在此查看评测记录。">
     </b-jumbotron>
     <b-table hover :items="items" :fields="fields" striped class="text-center" :busy="isLoading" responsive>
       <template #table-busy>
@@ -10,20 +10,20 @@
         </div>
       </template>
 
-      <template #cell(status)="data">
-        <p>{{data.value}}</p>
-      </template>
       <template #cell(status_id)="data">
-        <p>{{data.value}}</p>
+        <h6>{{data.value}}</h6>
+      </template>
+      <template #cell(status)="data">
+        <h6 :class="`text-${getStatusVariant(data.value)}`">{{getStatusText(data.value)}}</h6>
       </template>
       <template #cell(problem_id)="data">
-        <p>{{data.value}}</p>
+        <h6>{{data.value}}</h6>
       </template>
       <template #cell(problem_name)="data">
-        <p>{{data.value}}</p>
+        <h6>{{data.value}}</h6>
       </template>
       <template #cell(uid)="data">
-        <p>{{data.value}}</p>
+        <h6>{{data.value === uid ? '您' : `#${data.value}`}}</h6>
       </template>
     </b-table>
 
@@ -36,6 +36,9 @@
 </template>
 
 <script>
+
+import status2text from "@/code/status-text";
+import status2variant from "@/code/status-variant";
 
 export default {
   name: "status",
@@ -52,6 +55,7 @@ export default {
       isLoading: true,
       currentPage: 1,
       totalRows: 0,
+      uid: this.$store.getters.getUID
     }
   },
   methods: {
@@ -76,6 +80,12 @@ export default {
       }, e => {
         console.log(e)
       })
+    },
+    getStatusText: function (status) {
+      return status2text(status)
+    },
+    getStatusVariant: function (status) {
+      return status2variant(status)
     }
   }, mounted() {
     this.loadStatus()
