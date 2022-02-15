@@ -22,6 +22,9 @@
       <template #cell(problem_name)="data">
         <p>{{data.value}}</p>
       </template>
+      <template #cell(uid)="data">
+        <p>{{data.value}}</p>
+      </template>
     </b-table>
 
     <div class="container d-flex justify-content-center p-5">
@@ -40,6 +43,7 @@ export default {
     return {
       items: [],
       fields: [
+        { key: 'uid', label: '用户' },
         { key: 'status_id', label: '记录ID' },
         { key: 'problem_id', label: '题目ID' },
         { key: 'problem_name', label: '题目名' },
@@ -56,7 +60,8 @@ export default {
       this.$http.get(`${window.backendOrigin}/api/solutions?page=${this.currentPage}&item=20`, ).then(res => {
         this.items = []
         for(const item of res.data) {
-          this.items.push({ status_id: item.sid, problem_id: item.pid, problem_name: item.name, status: item.statusId })
+          this.items.push({ status_id: item.sid, problem_id: item.pid, problem_name: item.name,
+            status: item.statusId, uid: item.uid })
         }
         this.isLoading = false
       }, e => {
