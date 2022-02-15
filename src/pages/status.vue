@@ -2,6 +2,18 @@
   <div class="container">
     <b-jumbotron header="评测记录" lead="在此查看评测记录。">
     </b-jumbotron>
+
+    <b-card bg-variant="light">
+      <b-form-group label-cols-lg="3" label="筛选" label-class="font-weight-bold pt-0" class="mb-0">
+        <b-form-group label="用户UID:" label-for="input-uid" label-cols-sm="3" label-align-sm="right" label-size="sm">
+          <b-form-input id="input-uid" size="sm" placeholder="所有用户"></b-form-input>
+        </b-form-group>
+        <b-form-group label="题目PID:" label-for="input-pid" label-cols-sm="3" label-align-sm="right" label-size="sm">
+          <b-form-input id="input-pid" size="sm" placeholder="所有题目"></b-form-input>
+        </b-form-group>
+      </b-form-group>
+    </b-card>
+
     <b-table hover :items="items" :fields="fields" striped class="text-center" :busy="isLoading" responsive>
       <template #table-busy>
         <div class="text-center my-2">
