@@ -42,6 +42,8 @@ export default {
           return '正在编译'
         case 110:
           return '多组数据'
+        case 121:
+          return '被隐藏'
       }
       return '未知状态'
     },
@@ -75,6 +77,8 @@ export default {
           return 'dark'
         case 98:
           return 'secondary'
+        case 121:
+          return 'dark'
       }
       return 'light'
     }
