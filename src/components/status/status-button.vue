@@ -40,6 +40,8 @@ export default {
           return '评测系统错误'
         case 98:
           return '正在编译'
+        case 110:
+          return '多组数据'
       }
       return '未知状态'
     },
@@ -68,6 +70,8 @@ export default {
         case 109:
           return 'dark'
         case 118:
+          return 'dark'
+        case 110:
           return 'dark'
         case 98:
           return 'secondary'
