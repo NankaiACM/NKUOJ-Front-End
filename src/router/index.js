@@ -9,6 +9,7 @@ const loginPage = () => import('../pages/login')
 const coursePage = () => import('../pages/course')
 const homePage = () => import('../pages/home')
 const problemsPage = () => import('../pages/problems')
+const coursesPage = () => import('../pages/courses')
 const statusPage = () => import('../pages/status')
 const problemPage = () => import('../pages/problem')
 const notFoundPage = () => import('../pages/404')
@@ -33,6 +34,7 @@ const router = new Router({
     children: [
       { path: '/home', component: homePage },
       { path: '/problems', component: problemsPage },
+      { path: '/courses', component: coursesPage },
       { path: '/status', component: statusPage },
       { path: '/notFound', component: notFoundPage },
       { path: '/profile', component: profilePage },

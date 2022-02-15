@@ -12,6 +12,7 @@
               <b-nav-item @click="$emit('toHome')">主页</b-nav-item>
               <b-nav-item @click="$emit('toProblem')">题目</b-nav-item>
               <b-nav-item @click="$emit('toStatus')">记录</b-nav-item>
+              <b-nav-item @click="$emit('toCourse')">课程</b-nav-item>
               <!--<b-nav-item @click="$emit('toContest')">竞考</b-nav-item>-->
               <!--<b-nav-item @click="$emit('toDiscuss')">讨论</b-nav-item>-->
               <!--<b-nav-item @click="$emit('toVideos')">视频</b-nav-item>-->

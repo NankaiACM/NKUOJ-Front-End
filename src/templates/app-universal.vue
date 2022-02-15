@@ -3,7 +3,8 @@
   <div class="custom-header">
     <head-bar @toHome="switchTo('home')"
               @toProblem="switchTo('problems')" @toStatus="switchTo('status')"
-              @toContest="switchTo('contest')" @toDiscuss="switchTo('discuss')">
+              @toContest="switchTo('contest')" @toDiscuss="switchTo('discuss')"
+              @toCourse="switchTo('courses')">
     </head-bar>
   </div>
   <div>
