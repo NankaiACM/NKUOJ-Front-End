@@ -25,14 +25,8 @@
     </b-table>
 
     <div class="container d-flex justify-content-center p-5">
-      <b-pagination
-        v-model="currentPage"
-        :per-page="20"
-        :total-rows="totalRows"
-        first-text="<<"
-        prev-text="<"
-        next-text=">"
-        last-text=">>"
+      <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" first-text="<<"
+        prev-text="<" next-text=">" last-text=">>" @change="changePage"
       ></b-pagination>
     </div>
   </div>
