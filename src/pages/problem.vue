@@ -4,7 +4,7 @@
     <problem-navigator :psid="problemInfo.psid" v-if="problemInfo.psid" :loading="loading" :pid="problemInfo.pid">
     </problem-navigator>
     <problem-content :markdown-text="markdownText" :loading="loading"></problem-content>
-    <submit-modal ref="submit-modal"></submit-modal>
+    <submit-modal ref="submit-modal" :pid="problemInfo.pid"></submit-modal>
 
     <div class="container d-flex justify-content-center">
       <div class="btn-group m-4" role="group">

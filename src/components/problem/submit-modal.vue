@@ -28,97 +28,72 @@
 
 <script>
 import StatusTracingModal from "@/components/problem/status-tracing-modal";
+import code2str from '@/code/code'
+
 export default {
   name: "submit-modal",
   components: {
     StatusTracingModal
+  },
+  props: {
+    pid: Number
   },
   data: function () {
     return {
       options: [],
       sourceCode: '',
       validateResults: ['', '未填写代码', '未选择语言'],
-      backendResults: ['', '没有权限', '已截止提交', '不支持所选择的语言', '重复提交'],
       selectedLanguage: -1,
-      codePublic: true
+      codePublic: "false",
+      languageList: ['c++', 'python', 'javascript', 'go', 'text', 'pypy3']
     }
   },
   methods: {
     submitProblem: function (view) {
       const validateCode = this.validateSubmitForm()
       if (validateCode !== 0) {
-        this.$bvModal.msgBoxOk(this.validateResults[validateCode], {
-          title: '提示',
-          centered: true
-        })
+        this.$bvModal.msgBoxOk(this.validateResults[validateCode], {title: '提示', centered: true})
         return view.preventDefault()
       }
       const requestPackage = {
-        submitId: this.problemInfo.submitId,
-        language: this.selectedLanguage,
-        code: this.sourceCode
+        pid: this.pid,
+        lang: this.languageList[this.selectedLanguage],
+        code: this.sourceCode,
+        share: this.codePublic !== 'false'
       }
       this.$http.post(`${window.backendOrigin}/api/judge`, requestPackage).then(res => {
-        if (!res.data.ok) {
-          this.$bvModal.msgBoxOk(this.backendResults[res.data.errorCode], {
-            title: '提交失败',
-            centered: true
-          })
+        if (res.status !== 200) {
+          this.$bvModal.msgBoxOk(code2str(res.status), {title: '提交失败', centered: true})
         } else {
-          this.startTrackStatus(res.data.statusId)
-          this.$bvModal.show('status-modal')
+          this.$refs['tracing-modal'].show(res.data)
         }
       }, e => {
         console.log(e)
-        this.$bvModal.msgBoxOk('网络错误', {
-          title: '提交失败',
-          centered: true
-        })
+        this.$bvModal.msgBoxOk(code2str(e.status), {title: '提交失败', centered: true})
       })
     },
     validateSubmitForm: function () {
       if (this.sourceCode === '') {
         return 1
-      } else if (this.selectedLanguage === '') {
+      } else if (this.selectedLanguage === -1) {
         return 2
       }
       return 0
-    },
-    startTrackStatus: function (id) {
-      this.statusId = id
-      this.judgeFinished = false
-      this.statusUpdateTries = 300
-      this.statusObject = {
-        code: 99
-      }
-      this.updateSubmitStatus()
-    },
-    updateSubmitStatus: function () {
-      if (this.statusUpdateTries > 0) {
-        this.statusUpdateTries--
-      } else {
-        this.statusShouldUpdate = false
-        this.judgeFinished = true
-        return
-      }
-      this.$http.get(`${window.backendOrigin}/api/judge/status/${this.statusId}`).then(res => {
-        this.statusObject = res.data
-        this.statusShouldUpdate = this.statusObject.code <= 100
-        this.judgeFinished = !this.statusShouldUpdate
-      }, e => {
-        console.log(e)
-        this.$bvModal.msgBoxOk('同步评测记录失败', { title: '网络错误', centered: true })
-        this.$bvModal.hide('status-modal')
-        this.statusShouldUpdate = false
-        this.judgeFinished = true
-      })
     },
     show: function () {
       this.$refs['modal'].show()
     }
   },
   mounted() {
-    this.options = [{ value: -1, text: '请选择...', disabled: true }]
+    this.options = [
+      { value: -1, text: '请选择...', disabled: true },
+      { value: 0, text: 'C++' },
+      { value: 1, text: 'Python' },
+      { value: 2, text: 'Javascript' },
+      { value: 3, text: 'Go' },
+      { value: 4, text: 'Text' },
+      { value: 5, text: 'Pypy3' },
+    ]
   }
 }
 </script>
