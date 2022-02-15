@@ -26,6 +26,7 @@
         <label>题面：</label>
         <b-form-textarea v-model="dataObject.content"></b-form-textarea>
         <small class="form-text text-muted">题面。使用Markdown语言，  <b-link @click="previewMarkdown">预览</b-link>。</small>
+        <small class="form-text text-muted">公式请使用`$和$`包围，例如`$e=mc^2$`。</small>
       </div>
       <div class="form-group">
         <label>时间限制：</label>
