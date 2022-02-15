@@ -20,7 +20,7 @@
         <div class="row d-flex justify-content-center">
           <div class="btn-group m-2" role="group">
             <button type="button" class="btn btn-success disabled">完成状态</button>
-            <button type="button" class="btn btn-light disabled">{{ ['未提交', '未通过', '已提交'][problemInfo.status] }}</button>
+            <button type="button" class="btn btn-light disabled">{{ ['未提交', '未通过', '已通过'][problemInfo.status] }}</button>
           </div>
           <div class="btn-group m-2" role="group">
             <button type="button" class="btn btn-primary disabled">通过率</button>
