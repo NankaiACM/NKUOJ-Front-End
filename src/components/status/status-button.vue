@@ -1,7 +1,7 @@
 <template>
-  <b-button :variant="statusVariant" block disabled class="p-3">
+  <b-button :variant="statusVariant()" block disabled class="p-3">
     <b-spinner small v-if="status <= 100"></b-spinner>
-    {{ statusText }}
+    {{ statusText() }}
   </b-button>
 </template>
 
