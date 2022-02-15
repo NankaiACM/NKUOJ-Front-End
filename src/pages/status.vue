@@ -11,18 +11,30 @@
       </template>
 
       <template #cell(status)="data">
-        <p class="p-3">{{data.value}}</p>
+        <p>{{data.value}}</p>
       </template>
       <template #cell(status_id)="data">
-        <p class="p-3">{{data.value}}</p>
+        <p>{{data.value}}</p>
       </template>
       <template #cell(problem_id)="data">
-        <p class="p-3">{{data.value}}</p>
+        <p>{{data.value}}</p>
       </template>
       <template #cell(problem_name)="data">
-        <p class="p-3">{{data.value}}</p>
+        <p>{{data.value}}</p>
       </template>
     </b-table>
+
+    <div class="container d-flex justify-content-center p-5">
+      <b-pagination
+        v-model="currentPage"
+        :per-page="20"
+        :total-rows="totalRows"
+        first-text="<<"
+        prev-text="<"
+        next-text=">"
+        last-text=">>"
+      ></b-pagination>
+    </div>
   </div>
 </template>
 
@@ -39,25 +51,36 @@ export default {
         { key: 'problem_name', label: '题目名' },
         { key: 'status', label: '状态' }
       ],
-      isLoading: true
+      isLoading: true,
+      currentPage: 1,
+      totalRows: 0,
     }
   },
   methods: {
-    loadStatus: function () {
-      this.$http.post(`${window.backendOrigin}/api/status`, {
-        start: 0,
-        end: 100,
-        myself: true
-      }).then(res => {
+    changePage: function (number) {
+      this.currentPage = number
+      this.$http.get(`${window.backendOrigin}/api/solutions?page=${this.currentPage}&item=20`, ).then(res => {
         this.items = []
         for(const item of res.data) {
-          this.items.push({ status_id: item.statusId, submit_id: item.submitId, problem_id: item.problemId, problem_name: item.problemName, status: item.status })
+          this.items.push({ status_id: item.sid, problem_id: item.pid, problem_name: item.name, status: item.statusId })
         }
         this.isLoading = false
+      }, e => {
+        console.log(e)
+        this.isLoading = true
+        this.items = []
+      })
+    },
+    loadStatus: function () {
+      this.$http.get(`${window.backendOrigin}/api/solutions/total`, ).then(res => {
+        this.totalRows = res.data
+      }, e => {
+        console.log(e)
       })
     }
   }, mounted() {
     this.loadStatus()
+    this.changePage(1)
   }
 }
 </script>
