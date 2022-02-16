@@ -64,7 +64,7 @@ export default {
         return
       }
       const postPackage = {
-        email: this.loginForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''),
+        username: this.loginForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''),
         password: encryptMsg(this.loginForm.passwordRaw)
       }
       this.$http.post(`${window.backendOrigin}/api/login`, postPackage).then(res => {

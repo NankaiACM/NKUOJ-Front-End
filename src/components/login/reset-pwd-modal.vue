@@ -92,7 +92,7 @@ export default {
         return
       }
       const postPackage = {
-        email: this.resetForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''),
+        username: this.resetForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''),
         password: encryptMsg(this.resetForm.passwordRaw1),
         emailCaptcha: this.resetForm.emailCaptcha
       }

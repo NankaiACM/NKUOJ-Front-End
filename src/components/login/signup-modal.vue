@@ -74,7 +74,7 @@ export default {
         return
       }
       const postPackage = {
-        email: this.signupForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''),
+        username: this.signupForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''),
         nickname: this.signupForm.nickname,
         password: encryptMsg(this.signupForm.passwordRaw1),
         emailCaptcha: this.signupForm.emailCaptcha
