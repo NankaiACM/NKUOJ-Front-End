@@ -1,6 +1,6 @@
 <template>
   <b-modal ref="modal" title="提交记录" centered ok-only ok-title="关闭">
-    <div class="container" v-if="submissions">
+    <div class="container" v-if="submissions.length > 0">
       <b-list-group>
         <b-list-group-item class="d-flex justify-content-between align-items-center" button @click="selectItem(item.sid)"
                            v-for="item in submissions" :key="item.sid">
