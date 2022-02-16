@@ -1,14 +1,19 @@
 <template>
-  <b-overlay :show="loading" spinner-variant="secondary" spinner-type="grow" spinner-small rounded="sm">
-    <b-card header="一言">
+  <b-card header="一言">
+    <b-skeleton-wrapper :loading="loading">
+      <template #loading>
+        <b-skeleton width="85%"></b-skeleton>
+        <b-skeleton width="55%"></b-skeleton>
+        <b-skeleton width="70%"></b-skeleton>
+      </template>
       <blockquote class="blockquote mb-0">
         <h6 class="text-muted text-center">{{ hitokotoData.hitokoto }}</h6>
         <footer class="blockquote-footer text-right">
           {{hitokotoData.from}}
         </footer>
       </blockquote>
-    </b-card>
-  </b-overlay>
+    </b-skeleton-wrapper>
+  </b-card>
 </template>
 
 <script>
@@ -18,10 +23,7 @@ export default {
   name: "hitokoto",
   data() {
     return {
-      hitokotoData: {
-        from: '二次元入口',
-        hitokoto: '这条一言去二次元玩啦，你可以等它一会儿。'
-      },
+      hitokotoData: {},
       loading: true
     }
   },
@@ -32,7 +34,7 @@ export default {
         this.loading = false
       }, e => {
         this.hitokotoData = {
-          from: 'Http Response',
+          from: 'HTTP Response',
           hitokoto: code2str(e.status)
         }
         this.loading = false
