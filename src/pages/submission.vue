@@ -59,7 +59,7 @@
         <pre><code>{{data.code}}</code></pre>
       </b-skeleton-wrapper>
     </b-card>
-    <b-card bg-variant="light" class="p-5 m-4" v-else>
+    <b-card bg-variant="light" class="p-5 mt-4" v-else>
       <h2 class="text-center text-muted">没有权限查看该代码</h2>
     </b-card>
   </div>
