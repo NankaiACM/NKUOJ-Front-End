@@ -49,7 +49,7 @@
       </b-skeleton-wrapper>
     </b-card>
 
-    <b-card title="代码" class="mt-4" v-if="data.code && !loading">
+    <b-card title="代码" class="mt-4" v-if="data.code || loading">
       <b-skeleton-wrapper :loading="loading">
         <template #loading>
           <b-skeleton :width="`${Math.floor(Math.random() * 80 + 20)}%`"
