@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <b-card bg-variant="light" :title="`提交 #${sid}`" v-if="open">
+    <b-card bg-variant="light" :title="`提交 #${sid}`">
       <b-skeleton-wrapper :loading="loading">
         <template #loading>
           <b-skeleton :width="`${Math.floor(Math.random() * 80 + 20)}%`"
@@ -48,12 +48,9 @@
         </b-row>
       </b-skeleton-wrapper>
     </b-card>
-    <b-card bg-variant="light" class="p-5" v-else>
-      <h2 class="text-center text-muted">没有权限查看该提交</h2>
-    </b-card>
 
-    <b-card title="代码" class="mt-4">
-      <b-skeleton-wrapper :loading="!open || loading">
+    <b-card title="代码" class="mt-4" v-if="data.code">
+      <b-skeleton-wrapper :loading="loading">
         <template #loading>
           <b-skeleton :width="`${Math.floor(Math.random() * 80 + 20)}%`"
                       v-for="i in Array(42).keys()" :key="i"></b-skeleton>
@@ -61,6 +58,9 @@
 
         <pre><code>{{data.code}}</code></pre>
       </b-skeleton-wrapper>
+    </b-card>
+    <b-card bg-variant="light" class="p-5" v-else>
+      <h2 class="text-center text-muted">没有权限查看该代码</h2>
     </b-card>
   </div>
 </template>
@@ -76,7 +76,6 @@ export default {
   data: function () {
     return {
       sid: 0,
-      open: true,
       loading: true,
       data: {}
     }
@@ -90,7 +89,6 @@ export default {
       }, e => {
         console.log(e)
         if (e.status === 403) {
-          this.open = false
           this.loading = false
         }
       })
