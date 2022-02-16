@@ -36,6 +36,8 @@ export default {
   },
   methods: {
     show: function () {
+      this.loadItemsData()
+      this.updateItemsInPage(this.currentPage)
       this.$refs['modal'].show()
     },
     loadItemsData: function () {
