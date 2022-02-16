@@ -11,6 +11,7 @@ const homePage = () => import('../pages/home')
 const problemsPage = () => import('../pages/problems')
 const coursesPage = () => import('../pages/courses')
 const statusPage = () => import('../pages/status')
+const submissionPage = () => import('../pages/submission')
 const problemPage = () => import('../pages/problem')
 const notFoundPage = () => import('../pages/404')
 const profilePage = () => import('../pages/profile')
@@ -41,6 +42,7 @@ const router = new Router({
       { path: '/problem/:problemId', component: problemPage },
       { path: '/assignment/:assignmentId/problem/:problemId', component: problemPage },
       { path: '/course/:courseId', component: coursePage },
+      { path: '/submission/:submissionId', component: submissionPage },
       { path: '/assignment/:assignmentId', component: assignmentPage },
       { path: '/', redirect: '/login', meta: { isLoginPage: true } },
     ]

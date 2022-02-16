@@ -26,7 +26,7 @@
       </template>
 
       <template #cell(status_id)="data">
-        <h6>{{data.value}}</h6>
+        <h6><a class="text-decoration-none text-dark" :href="`/submission/${data.value}`">#{{data.value}}</a></h6>
       </template>
       <template #cell(status)="data">
         <h6 :class="`text-${getStatusVariant(data.value)}`">{{getStatusText(data.value)}}</h6>
