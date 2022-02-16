@@ -20,17 +20,8 @@
           </router-link>
         </div>
 
-        <div class="container d-flex justify-content-center p-5">
-          <b-pagination
-            v-model="currentPage"
-            :per-page="20"
-            :total-rows="totalRows"
-            first-text="<<"
-            prev-text="<"
-            next-text=">"
-            last-text=">>"
-          ></b-pagination>
-        </div>
+        <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" v-if="totalRows > 20"
+                      align="center" class="m-4" first-number last-number @change="loadDataOfPage"></b-pagination>
       </div>
     </div>
   </div>
@@ -48,27 +39,21 @@ export default {
     }
   },
   mounted: function () {
-    this.loadProblemsData()
+    this.loadProblemsTotalData()
+    this.loadDataOfPage(this.currentPage)
   },
   methods: {
-    loadProblemsData: function () {
+    loadProblemsTotalData: function () {
       this.$http.get(`${window.backendOrigin}/api/problems/global/total`)
         .then(res => {
           this.totalRows = res.data
         })
-      this.loadDataOfPage(this.currentPage)
     },
     loadDataOfPage: function (pageNumber) {
       this.$http.get(`${window.backendOrigin}/api/problems/global?page=${pageNumber}&item=20`)
         .then(res => {
           this.problemList = res.data
         })
-    }
-  },
-  watch: {
-    // eslint-disable-next-line no-unused-vars
-    currentPage: function (current, _) {
-      this.loadDataOfPage(current)
     }
   }
 }

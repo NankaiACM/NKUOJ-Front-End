@@ -40,11 +40,8 @@
       </template>
     </b-table>
 
-    <div class="container d-flex justify-content-center p-5">
-      <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" first-text="<<"
-        prev-text="<" next-text=">" last-text=">>" @change="changePage"
-      ></b-pagination>
-    </div>
+    <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" v-if="totalRows > 20"
+                  @change="changePage" align="center" class="m-4" first-number last-number></b-pagination>
   </div>
 </template>
 

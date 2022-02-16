@@ -8,9 +8,8 @@
           <span class="text-muted">#{{item.id}}</span>
         </b-list-group-item>
       </b-list-group>
-      <div class="container-fluid d-flex justify-content-center mt-4">
-        <b-pagination v-model="currentPage" :total-rows="itemsCount" :per-page="perPage" @change="updateItemsInPage"></b-pagination>
-      </div>
+      <b-pagination v-model="currentPage" :total-rows="itemsCount" :per-page="perPage" v-if="itemsCount > perPage"
+                    @change="updateItemsInPage" align="center" class="m-4" first-number last-number></b-pagination>
     </div>
     <div class="container" v-else>
       <h5 class="text-muted text-center" v-if="newable">没有内容可供选择，请新建。</h5>
