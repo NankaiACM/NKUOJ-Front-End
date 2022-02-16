@@ -3,10 +3,10 @@
     <div class="container">
       <div class="form-row align-items-center">
         <div class="container">
-          <label for="loginUserNameInput">用户名</label>
+          <label for="loginUserNameInput">邮箱</label>
           <div class="input-group mb-2">
-            <input type="text" class="form-control" id="loginUserNameInput" placeholder="学号（邮箱）" v-model="loginForm.username">
-            <div class="input-group-prepend">
+            <input type="text" class="form-control" id="loginUserNameInput" :placeholder="isStudent ? '学号' : '邮箱'" v-model="loginForm.email">
+            <div class="input-group-prepend" v-if="isStudent">
               <div class="input-group-text">@mail.nankai.edu.cn</div>
             </div>
           </div>
@@ -31,18 +31,21 @@ export default {
   data: function() {
     return {
       loginForm: {
-        username: '',
+        email: '',
         passwordRaw: ''
       },
-      validateResults: ['', '用户名不合法', '未填写用户名', '密码不一致', '未填写密码', '未填写邮件验证码', '未填写昵称', '密码长度不足6位'],
-      usernameRegex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))/
+      validateResults: ['', '邮箱不合法', '未填写邮箱', '密码不一致', '未填写密码', '未填写邮件验证码', '未填写昵称', '密码长度不足6位'],
+      emailRegex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     }
+  },
+  props: {
+    isStudent: Boolean
   },
   methods: {
     validateLoginForm: function () {
-      if (this.loginForm.username === '') {
+      if (this.loginForm.email === '') {
         return 2
-      } else if (!this.usernameRegex.test(this.loginForm.username)) {
+      } else if (!this.emailRegex.test(this.loginForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''))) {
         return 1
       } else if (this.loginForm.nickname === '') {
         return 6
@@ -61,12 +64,12 @@ export default {
         return
       }
       const postPackage = {
-        username: this.loginForm.username + '@mail.nankai.edu.cn',
+        email: this.loginForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''),
         password: encryptMsg(this.loginForm.passwordRaw)
       }
       this.$http.post(`${window.backendOrigin}/api/login`, postPackage).then(res => {
-        console.log('Successfully logged in.')
         if (res.data.ok) {
+          console.log('Successfully logged in.')
           this.$store.commit('setUserData', res.data.userData)
           this.$router.push('/home')
         } else {

@@ -22,15 +22,19 @@
                 </div>
               </div>
               <p class="m-2 text-secondary">忘记密码或者帐号已被注册？<a @click="showResetModal" href="#" class="link-info">点击重置</a>。</p>
+              <b-form-checkbox id="checkbox-student" v-model="isStudent" name="i-am-student"
+                               value="true" unchecked-value="false" class="text-muted">
+                我是学生
+              </b-form-checkbox>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <login-modal ref="login-modal"></login-modal>
-    <signup-modal ref="signup-modal"></signup-modal>
-    <reset-pwd-modal ref="reset-pwd-modal"></reset-pwd-modal>
+    <login-modal ref="login-modal" :is-student="isStudent === 'true'"></login-modal>
+    <signup-modal ref="signup-modal" :is-student="isStudent === 'true'"></signup-modal>
+    <reset-pwd-modal ref="reset-pwd-modal" :is-student="isStudent === 'true'"></reset-pwd-modal>
   </div>
 </template>
 
@@ -45,6 +49,11 @@ export default {
     loginModal,
     signupModal,
     resetPwdModal
+  },
+  data: function () {
+    return {
+      isStudent: 'true'
+    }
   },
   methods: {
     showLoginModal: function () {
