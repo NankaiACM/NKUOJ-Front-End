@@ -45,6 +45,7 @@ export default {
       })
     },
     updateItemsInPage: function (pageNumber) {
+      this.currentPage = pageNumber
       this.$http.get(`${window.backendOrigin}/api/admin/${this.api}?page=${pageNumber}&item=${this.perPage}`)
         .then(res => {
           this.itemsList = res.data

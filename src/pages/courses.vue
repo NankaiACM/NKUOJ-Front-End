@@ -50,6 +50,7 @@ export default {
         })
     },
     loadDataOfPage: function (pageNumber) {
+      this.currentPage = pageNumber
       this.$http.get(`${window.backendOrigin}/api/problems/global?page=${pageNumber}&item=20`)
         .then(res => {
           this.problemList = res.data
