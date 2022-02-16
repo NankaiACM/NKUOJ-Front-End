@@ -5,7 +5,7 @@
     </problem-navigator>
     <problem-content :markdown-text="markdownText" :loading="loading"></problem-content>
     <submit-modal ref="submit-modal" :pid="problemInfo.pid"></submit-modal>
-
+    <status-list-modal ref="status-list-modal" :pid="problemInfo.pid" :uid="$store.getters.getUID"></status-list-modal>
     <div class="container d-flex justify-content-center">
       <div class="btn-group m-4" role="group">
         <b-button type="button" variant="success" @click="showSubmitModal">提交</b-button>
@@ -19,10 +19,12 @@ import ProblemNavigator from "@/components/problem/problem-navigator";
 import SubmitModal from "@/components/problem/submit-modal";
 import ProblemContent from "@/components/problem/problem-content";
 import ProblemHeader from "@/components/problem/problem-header";
+import StatusListModal from "@/components/status/status-list-modal";
 
 export default {
   name: 'problems-page',
   components: {
+    StatusListModal,
     ProblemHeader,
     ProblemContent,
     SubmitModal,
@@ -52,7 +54,7 @@ export default {
       this.$refs['submit-modal'].show()
     },
     toSubmitStatus: function () {
-      window.location.href = ('/status')
+      this.$refs['status-list-modal'].show()
     }
   }
 }
