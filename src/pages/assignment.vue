@@ -7,7 +7,7 @@
         <hr class="my-4">
         <p>{{assignmentData.begin}} 开始 {{assignmentData.end}} 截止</p>
         <p v-if="assignmentData.open" class="text-success">正在进行，可提交</p>
-        <p v-else class="text-danger">未开始或已截至，无法提交</p>
+        <p v-else class="text-danger">未开始或已截止，无法提交</p>
       </div>
     </b-overlay>
     <b-overlay :show="isProblemsLoading" rounded="sm">
