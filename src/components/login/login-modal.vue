@@ -24,7 +24,7 @@
 
 <script>
 import encryptMsg from "@/encrypt/encryptMsg";
-import code2str from "@/code/code";
+import code2str from "@/util/code";
 
 export default {
   name: "login-modal",

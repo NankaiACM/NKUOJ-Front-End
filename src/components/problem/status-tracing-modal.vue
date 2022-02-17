@@ -16,7 +16,7 @@
 
 <script>
 import StatusButton from "@/components/status/status-button";
-import code2str from '@/code/code'
+import code2str from '@/util/code'
 
 export default {
   name: "status-tracing-modal",

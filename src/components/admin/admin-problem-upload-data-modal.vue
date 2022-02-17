@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import code2str from '@/code/code'
+import code2str from '@/util/code'
 export default {
   name: "admin-problem-upload-data-modal",
   props: {

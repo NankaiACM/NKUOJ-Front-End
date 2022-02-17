@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import code2str from "@/code/code";
+import code2str from "@/util/code";
 import encryptMsg from "@/encrypt/encryptMsg";
 
 export default {

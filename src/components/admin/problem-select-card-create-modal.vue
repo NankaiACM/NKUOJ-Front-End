@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import code2str from "@/code/code";
+import code2str from "@/util/code";
 
 export default {
   name: "problem-select-card-create-modal",

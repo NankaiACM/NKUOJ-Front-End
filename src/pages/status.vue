@@ -47,8 +47,8 @@
 
 <script>
 
-import status2text from "@/code/status-text";
-import status2variant from "@/code/status-variant";
+import status2text from "@/util/status-text";
+import status2variant from "@/util/status-variant";
 
 export default {
   name: "status",

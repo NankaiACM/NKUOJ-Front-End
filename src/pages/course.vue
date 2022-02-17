@@ -14,7 +14,7 @@
       <b-card no-body>
         <b-tabs content-class="mt-3" fill card>
           <b-tab title="公告">
-            <b-card :title="announcement.title" :sub-title="announcement.time + '发布'" class="mt-3" v-for="announcement in announcements" :key="announcement.id">
+            <b-card :title="announcement.title" :sub-title="getLocaleDate(announcement.time) + '发布'" class="mt-3" v-for="announcement in announcements" :key="announcement.id">
               <b-card-text>
                 {{announcement.content}}
               </b-card-text>
@@ -22,7 +22,7 @@
           </b-tab>
 
           <b-tab title="作业">
-            <b-card :title="assignment.name" :sub-title="'截止时间 ' + assignment.end" class="mt-3" v-for="assignment in assignments" :key="assignment.id">
+            <b-card :title="assignment.name" :sub-title="'截止时间 ' + getLocaleDate(assignment.end)" class="mt-3" v-for="assignment in assignments" :key="assignment.id">
               <a :href="'/assignment/' + assignment.id" class="card-link">
                 <b-card-text class="text-muted">
                   点击查看
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import date2Text from "@/util/date";
+
 export default {
   name: 'course',
   data: function () {
@@ -68,6 +70,9 @@ export default {
       }, e => {
         console.log(e)
       })
+    },
+    getLocaleDate: function (string) {
+      return date2Text(string)
     }
   },
   mounted () {

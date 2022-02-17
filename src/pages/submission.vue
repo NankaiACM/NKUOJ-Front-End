@@ -17,7 +17,7 @@
         </b-row>
         <b-row class="mb-2">
           <b-col sm="3" class="text-sm-left"><b>时间：</b></b-col>
-          <b-col>{{data.when}}</b-col>
+          <b-col>{{getLocaleDate(data.when)}}</b-col>
         </b-row>
         <b-row class="mb-2">
           <b-col sm="3" class="text-sm-left"><b>公开：</b></b-col>
@@ -67,9 +67,10 @@
 
 <script>
 
-import status2text from "@/code/status-text";
-import status2variant from "@/code/status-variant";
-import langId2Text from "@/code/lang-code-text";
+import status2text from "@/util/status-text";
+import status2variant from "@/util/status-variant";
+import langId2Text from "@/util/lang-code-text";
+import date2Text from "@/util/date";
 
 export default {
   name: "submission",
@@ -101,6 +102,9 @@ export default {
     },
     getLangText: function (id) {
       return langId2Text(id)
+    },
+    getLocaleDate: function (string) {
+      return date2Text(string)
     },
     getVariantForScore: function (score) {
       if (score <= 0) {

@@ -5,7 +5,7 @@
         <h1 class="display-4">{{assignmentData.name}}</h1>
         <p class="lead">{{assignmentData.courseName}}</p>
         <hr class="my-4">
-        <p>{{assignmentData.begin}} 开始 {{assignmentData.end}} 截止</p>
+        <p>{{getLocaleDate(assignmentData.begin)}} 开始 {{getLocaleDate(assignmentData.end)}} 截止</p>
         <p v-if="assignmentData.open" class="text-success">正在进行，可提交</p>
         <p v-else class="text-danger">未开始或已截止，无法提交</p>
       </div>
@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import date2Text from "@/util/date";
+
 export default {
   name: 'assignment',
   data: function () {
@@ -59,6 +61,9 @@ export default {
         this.problemsData = res.data
         this.isProblemsLoading = false
       })
+    },
+    getLocaleDate: function (string) {
+      return date2Text(string)
     }
   },
   mounted () {

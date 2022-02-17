@@ -60,7 +60,7 @@
 
 <script>
 import itemSelectCard from '../../components/admin/admin-problem-select-card'
-import code2str from '@/code/code'
+import code2str from '@/util/code'
 import AdminProblemCloneModal from "@/components/admin/admin-problem-clone-modal";
 import AdminProblemUploadDataModal from "@/components/admin/admin-problem-upload-data-modal";
 import AdminMarkdownPreviewModal from "@/components/admin/admin-markdown-preview-modal";
