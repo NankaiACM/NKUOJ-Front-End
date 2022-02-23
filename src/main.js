@@ -14,10 +14,6 @@ Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
-
-Vue.component('vue-slide-up-down',
-  () => import('vue-slide-up-down')
-)
 /*
  * data of notify should be post
  * title, message, count
