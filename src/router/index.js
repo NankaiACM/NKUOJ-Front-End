@@ -26,7 +26,6 @@ const administratorAnnouncementPage = () => import('../pages/admin/announcement-
 const administratorUserPage = () => import('../pages/admin/user-page')
 
 Vue.use(Router)
-console.log(window.backendOrigin)
 const router = new Router({
   mode: 'history',
   routes: [{
