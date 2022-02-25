@@ -64,7 +64,7 @@ export default {
       }, e => {
         console.log(e)
       })
-      this.$http.get(`${window.backendOrigin}/api/assignment?cid=${this.$route.params.courseId}`).then(res => {
+      this.$http.get(`${window.backendOrigin}/api/assignment/course/${this.$route.params.courseId}`).then(res => {
         this.assignments = res.data
         this.completedTasks += 1
       }, e => {
