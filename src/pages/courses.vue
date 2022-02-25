@@ -13,6 +13,7 @@
                              v-for="course in coursesList" v-bind:key="course.id">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1"> {{course.name}}</h5>
+              <small>{{course.number}}</small>
             </div>
             <small v-if="course.public"> 公开 </small>
             <small v-else class="text-info"> 需要验证加入 </small>
