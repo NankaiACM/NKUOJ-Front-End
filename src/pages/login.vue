@@ -21,7 +21,7 @@
                   <b-button pill variant="outline-success" class="btn-block" @click="showSignupModal">注册</b-button>
                 </div>
               </div>
-              <p class="m-2 text-secondary">忘记密码或者帐号已被注册？<a @click="showResetModal" href="#" class="link-info">点击重置</a>。</p>
+              <p class="m-2 text-secondary">忘记密码或者帐号已被注册？<b-link @click="showResetModal" class="link-info">点击重置</b-link>。</p>
               <b-form-checkbox id="checkbox-student" v-model="isStudent" name="i-am-student"
                                value="true" unchecked-value="false" class="text-muted">
                 我是学生
