@@ -52,9 +52,22 @@ export default function (uid) {
     {title: '玩 Minecraft', summary: '挖到钻石', day: 0},
     {title: '女装', summary: '卡哇伊', day: 0},
     {title: '喝红茶', summary: '修身养性', day: 0},
-    {title: '嘉然', summary: '今天吃什么', day: 0},
+    {title: '看嘉然', summary: '今天吃什么', day: 0},
     {title: '上B站', summary: '你所热爱的就是你的生活', day: 0},
     {title: '元和西饼', summary: '好吃', day: 0},
+    {title: '点外卖', summary: '5元优惠券', day: 0},
+    {title: '学离散数学', summary: '证明了四色定理', day: 0},
+    {title: '看 CSAPP', summary: '手搓 x64 汇编', day: 0},
+    {title: '背单词', summary: '过目不忘', day: 0},
+    {title: '玩 wordle', summary: '第一个词就对了', day: 0},
+    {title: '逛商场', summary: '商场好多人', day: 0},
+    {title: '喝奶茶', summary: '奶茶好喝', day: 0},
+    {title: '吃兰州拉面', summary: '今日特价', day: 0},
+    {title: '骑共享单车', summary: '扫到一辆新车', day: 0},
+    {title: '退学', summary: '念不下去了', day: 0},
+    {title: '睡觉', summary: '春困夏乏秋倦冬打盹', day: 0},
+    {title: '炼丹', summary: '发论文', day: 0},
+    {title: '体测', summary: '一口气跑三圈', day: 0},
   ]
   const secondaryTitlesBad = [
     {title: '玩 maimai', summary: '您被歌打了', day: 0},
@@ -80,9 +93,22 @@ export default function (uid) {
     {title: '玩 Minecraft', summary: 'Creeper!', day: 0},
     {title: '女装', summary: '被大家拍下来', day: 0},
     {title: '喝红茶', summary: '哼！啊啊啊', day: 0},
-    {title: '嘉然', summary: '今天创什么', day: 0},
+    {title: '看嘉然', summary: '今天创什么', day: 0},
     {title: '上B站', summary: '你 *什么时候*啊？', day: 0},
     {title: '元和西饼', summary: '卖完了', day: 0},
+    {title: '点外卖', summary: '卖完了', day: 0},
+    {title: '学离散数学', summary: '上课被点名', day: 0},
+    {title: '看 CSAPP', summary: '绕进去了', day: 0},
+    {title: '背单词', summary: '全忘了', day: 0},
+    {title: '玩 wordle', summary: '全是灰色的', day: 0},
+    {title: '逛商场', summary: '保安不让你出门', day: 0},
+    {title: '喝奶茶', summary: '买不起', day: 0},
+    {title: '吃兰州拉面', summary: '坐满了', day: 0},
+    {title: '骑共享单车', summary: '都被骑走了', day: 0},
+    {title: '退学', summary: '已经被开除了', day: 0},
+    {title: '睡觉', summary: '舍友闹铃一直响', day: 0},
+    {title: '炼丹', summary: '显卡烧了', day: 0},
+    {title: '体测', summary: '跑一圈就累了', day: 0},
   ]
   // Obtain primary state
   const primaryKey = rand() % resultTitles.length
@@ -90,18 +116,12 @@ export default function (uid) {
   // Obtain secondary state
   let key1 = rand() % secondaryTitlesGood.length
   let key2 = rand() % secondaryTitlesGood.length
-  let key3 = rand() % secondaryTitlesBad.length
-  let key4 = rand() % secondaryTitlesBad.length
   while (secondaryTitlesGood[key1].day !== 0 && secondaryTitlesGood[key1].day !== day)
     key1 = rand() % secondaryTitlesGood.length
   while (key2 === key1 || (secondaryTitlesBad[key2].day !== 0 && secondaryTitlesBad[key2].day !== day))
     key2 = rand() % secondaryTitlesBad.length
-  while (key3 === key2 || key3 === key1 || (secondaryTitlesGood[key3].day !== 0 && secondaryTitlesGood[key3].day !== day))
-    key3 = rand() % secondaryTitlesGood.length
-  while (key4 === key3 || key4 === key2 || key4 === key1 || (secondaryTitlesBad[key4].day !== 0 && secondaryTitlesBad[key4].day !== day))
-    key4 = rand() % secondaryTitlesBad.length
-  let goodList = [secondaryTitlesGood[key1], secondaryTitlesGood[key3]]
-  let badList = [secondaryTitlesBad[key2], secondaryTitlesBad[key4]]
+  let goodList = [secondaryTitlesGood[key1]]
+  let badList = [secondaryTitlesBad[key2]]
   if (primaryState.type === 0) {
     badList = [{title: '诸事皆宜', summary: ''}]
   } else if (primaryState.type === 4) {
