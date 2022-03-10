@@ -2,7 +2,10 @@
   <div class="container d-flex justify-content-center flex-column text-center">
     <hr class="my-4 custom-foot-hr">
     <p class="footer-text-1">NKUOJ © NKU ACM Association, All Rights Reserved. </p>
-    <p class="footer-text-1">如需技术支持请联系 ACM 算法协会</p>
+    <p class="footer-text-1">来 Github Star 我们喵～
+      <b-link href="https://github.com/NankaiACM/NKUOJ-Front-End">前端</b-link> |
+      <b-link href="https://github.com/ArcanusNEO/ArcOJ-BackEnd">后端</b-link>
+    </p>
   </div>
 </template>
 
