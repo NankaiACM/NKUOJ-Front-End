@@ -5,7 +5,7 @@
         <b-list-group-item v-bind:href="'/assignment/' + assignment.id" v-for="assignment in assignments" v-bind:key="assignment.id">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{assignment.name}}</h5>
-            <small>{{assignment.end}} 截止</small>
+            <small>{{getLocaleDate(assignment.end)}} 截止</small>
           </div>
           <p class="mb-1">{{assignment.courseName ? assignment.courseName : '无所属课程'}}</p>
         </b-list-group-item>
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import date2Text from "@/util/date";
+
 export default {
   name: 'user-assignments',
   data: function () {
@@ -32,6 +34,11 @@ export default {
       assignments: [],
       loading: false,
       statusCode: 200
+    }
+  },
+  methods: {
+    getLocaleDate: function (string) {
+      return date2Text(string)
     }
   },
   mounted () {
