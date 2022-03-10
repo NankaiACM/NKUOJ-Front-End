@@ -18,6 +18,7 @@
     "markdown-it-latex": "^0.2.0",
     "markdown-it-mathjax": "^2.0.0",
     "node-forge": "^1.2.1",
+    "seedrandom": "^3.0.5",
     "vue": "^2.6.11",
     "vue-resource": "^1.5.3",
     "vue-router": "^3.5.2",

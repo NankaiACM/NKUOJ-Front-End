@@ -3,6 +3,7 @@
   <div id="home-content" class="container">
     <div class="row">
       <div class="col-md-8">
+        <draw-stick class="mb-2"></draw-stick>
         <user-contests class="mb-2"></user-contests>
         <user-courses class="mb-2"></user-courses>
         <user-assignments class="mb-2"></user-assignments>
@@ -23,10 +24,12 @@ import userAssignments from '../components/home/user-assignments'
 import userContests from '../components/home/user-contests'
 import hitokoto from '../components/home/hitokoto'
 import associationPoster from "@/components/home/association-poster";
+import DrawStick from "@/components/draw-stick";
 
 export default {
   name: 'component-home',
   components: {
+    DrawStick,
     userPanel,
     userCourses,
     userAssignments,

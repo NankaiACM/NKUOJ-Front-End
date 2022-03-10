@@ -23,6 +23,7 @@ export default new Vuex.Store({
       permission: 0,
       username: '',
       nickname: '',
+      lastPulledStick: 0
     }
   },
   getters: {
@@ -42,17 +43,19 @@ export default new Vuex.Store({
   mutations: {
     setUserData (state, payload) {
       state.userData.isUserLogin = true
-      state.userData.uid = payload.uid
-      state.userData.permission = payload.permission
-      state.userData.username = payload.username
-      state.userData.nickname = payload.nickname
+      state.userData.uid = ('uid' in payload ? payload.uid : state.userData.uid)
+      state.userData.permission = ('permission' in payload ? payload.permission : state.userData.permission)
+      state.userData.username = ('username' in payload ? payload.username : state.userData.username)
+      state.userData.nickname = ('nickname' in payload ? payload.nickname : state.userData.nickname)
+      state.userData.lastPulledStick = ('lastPulledStick' in payload ? payload.lastPulledStick : state.userData.lastPulledStick)
     },
     clearUserData (state) {
       state.userData.isUserLogin = false
       state.userData.uid = ''
-      state.userData.permission = -1
+      state.userData.permission = 0
       state.userData.username = ''
       state.userData.nickname = ''
+      state.userData.lastPulledStick = 0
       sessionStorage.clear()
     }
   }
