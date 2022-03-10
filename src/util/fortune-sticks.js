@@ -68,6 +68,8 @@ export default function (uid) {
     {title: '睡觉', summary: '春困夏乏秋倦冬打盹', day: 0},
     {title: '炼丹', summary: '发论文', day: 0},
     {title: '体测', summary: '一口气跑三圈', day: 0},
+    {title: '吃饭', summary: '真香', day: 0},
+    {title: '学数字逻辑', summary: '电路一接上就亮', day: 0},
   ]
   const secondaryTitlesBad = [
     {title: '玩 maimai', summary: '您被歌打了', day: 0},
@@ -109,6 +111,8 @@ export default function (uid) {
     {title: '睡觉', summary: '舍友闹铃一直响', day: 0},
     {title: '炼丹', summary: '显卡烧了', day: 0},
     {title: '体测', summary: '跑一圈就累了', day: 0},
+    {title: '吃饭', summary: '排队排了半小时', day: 0},
+    {title: '学数字逻辑', summary: '元件坏了', day: 0},
   ]
   // Obtain primary state
   const primaryKey = rand() % resultTitles.length
