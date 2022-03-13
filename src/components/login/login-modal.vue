@@ -1,5 +1,5 @@
 <template>
-  <b-modal ref="modal" title="登录" centered @ok="loginSubmit" ok-title="登录" cancel-title="取消">
+  <b-modal ref="modal" title="登录" centered @ok="loginSubmit" ok-title="登录" cancel-title="取消" auto-focus-button="ok">
     <div class="container">
       <div class="form-row align-items-center">
         <div class="container">

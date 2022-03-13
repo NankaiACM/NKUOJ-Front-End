@@ -1,5 +1,5 @@
 <template>
-  <b-modal ref="modal" title="重置密码" centered @ok="resetSubmit" ok-title="重置密码并登录" cancel-title="取消">
+  <b-modal ref="modal" title="重置密码" centered @ok="resetSubmit" ok-title="重置密码并登录" cancel-title="取消" auto-focus-button="ok">
     <div class="container">
       <div class="form-row align-items-center needs-validation">
         <div class="container">

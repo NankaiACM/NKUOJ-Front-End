@@ -1,5 +1,5 @@
 <template>
-  <b-modal ref="modal" title="填写注册信息" centered @ok="signupSubmit" ok-title="注册" cancel-title="取消">
+  <b-modal ref="modal" title="填写注册信息" centered @ok="signupSubmit" ok-title="注册" cancel-title="取消" auto-focus-button="ok">
     <div class="container">
       <div class="form-row align-items-center needs-validation">
         <div class="container">
