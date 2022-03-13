@@ -3,15 +3,13 @@
   <div id="home-content" class="container">
     <div class="row">
       <div class="col-md-8">
-        <draw-stick class="mb-2"></draw-stick>
-        <user-contests class="mb-2"></user-contests>
         <user-courses class="mb-2"></user-courses>
         <user-assignments class="mb-2"></user-assignments>
+        <user-contests class="mb-2"></user-contests>
       </div>
       <div class="col-md-4">
         <user-panel class="mb-2"></user-panel>
-        <hitokoto class="mb-2"></hitokoto>
-        <association-poster></association-poster>
+        <association-poster class="mb-2"></association-poster>
       </div>
     </div>
   </div>
@@ -22,19 +20,15 @@ import userPanel from '../components/home/user-panel'
 import userCourses from '../components/home/user-courses'
 import userAssignments from '../components/home/user-assignments'
 import userContests from '../components/home/user-contests'
-import hitokoto from '../components/home/hitokoto'
 import associationPoster from "@/components/home/association-poster";
-import DrawStick from "@/components/home/draw-stick";
 
 export default {
   name: 'component-home',
   components: {
-    DrawStick,
     userPanel,
     userCourses,
     userAssignments,
     userContests,
-    hitokoto,
     associationPoster
   },
   methods: {

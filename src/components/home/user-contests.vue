@@ -1,15 +1,19 @@
 <template>
-  <b-card no-body header="我报名的竞赛或考试" v-if="contests.length > 0 && false">
-    <b-list-group flush>
-      <b-list-group-item button @click="onItemClicked(contest)" v-for="contest in contests" v-bind:key="contest.id">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">{{contest.name}}</h5>
-          <small v-if="contest.status === 0" class="text-info">正在进行</small>
-          <small v-if="contest.status === 1" class="text-muted">将在{{contest.time}}开始</small>
-        </div>
-      </b-list-group-item>
-    </b-list-group>
+  <b-card no-body header="竞赛、考试">
+    <b-overlay :show="loading" rounded="sm">
+      <b-list-group flush>
+      </b-list-group>
 
+      <b-card-body v-if="loading" class="m-4">
+        正在加载
+      </b-card-body>
+      <b-card-body v-else-if="statusCode !== 200" class="m-3">
+        [{{statusCode}}] 网络请求出错，内容获取失败。
+      </b-card-body>
+      <b-card-body v-else-if="contests.length === 0" class="m-3">
+        您没有报名的竞赛或考试。
+      </b-card-body>
+    </b-overlay>
   </b-card>
 </template>
 
@@ -18,9 +22,9 @@ export default {
   name: 'user-contests',
   data: function () {
     return {
-      password: '',
-      securityCode: '',
-      contests: []
+      contests: [],
+      loading: false,
+      statusCode: 200
     }
   },
   methods: {
@@ -36,9 +40,9 @@ export default {
     }
   },
   mounted () {
-    this.$http.get(`${window.backendOrigin}/api/user/contests`).then(res => {
-      this.contests = res.data.contests
-    })
+    // this.$http.get(`${window.backendOrigin}/api/user/contests`).then(res => {
+    //   this.contests = res.data.contests
+    // })
   }
 }
 </script>
