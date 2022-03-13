@@ -24,7 +24,7 @@ import userAssignments from '../components/home/user-assignments'
 import userContests from '../components/home/user-contests'
 import hitokoto from '../components/home/hitokoto'
 import associationPoster from "@/components/home/association-poster";
-import DrawStick from "@/components/draw-stick";
+import DrawStick from "@/components/home/draw-stick";
 
 export default {
   name: 'component-home',

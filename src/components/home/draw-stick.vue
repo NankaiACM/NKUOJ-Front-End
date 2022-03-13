@@ -1,6 +1,6 @@
 <template>
   <b-card body-bg-variant="light">
-    <h6 class="text-center"> 今日运势 </h6>
+    <h6 class="text-center"> {{ stickDrown ? '今日运势' : '每日签到'}} </h6>
     <div v-if="stickDrown">
       <h1 :class="`text-${['danger', 'danger', 'success', 'dark', 'dark'][stickResult.primary.type]} text-center`">
         § {{stickResult.primary.title}} § </h1>
@@ -19,8 +19,11 @@
         </div>
       </div>
     </div>
-    <div class="container d-flex justify-content-center" v-else>
-      <b-button variant="secondary" @click="drawStick" class="m-2">求签！</b-button>
+    <div v-else>
+      <h1 class="text-dark text-center"> ?? </h1>
+      <div class="container d-flex justify-content-center">
+        <b-button variant="secondary" @click="drawStick" class="m-2">签到</b-button>
+      </div>
     </div>
   </b-card>
 </template>
