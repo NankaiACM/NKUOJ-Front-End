@@ -4,7 +4,7 @@
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">公开题库</h1>
-          <p class="lead">这里收录了一些练习题，您可以在此挑选题目练习。</p>
+          <p class="lead">您可以在此挑选题目练习。此处题目不会计入课程成绩。</p>
         </div>
       </div>
       <div class="container">
