@@ -1,5 +1,9 @@
 <template>
-  <b-card header="一言">
+  <b-card>
+    <template #header>
+      <h6 class="m-1"><b-icon icon="chat-quote" class="mr-2"></b-icon>一言</h6>
+    </template>
+
     <b-skeleton-wrapper :loading="loading">
       <template #loading>
         <b-skeleton width="85%"></b-skeleton>

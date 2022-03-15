@@ -3,12 +3,14 @@
   <div id="home-content" class="container">
     <div class="row">
       <div class="col-md-8">
+        <announcements-panel class="mb-2"></announcements-panel>
         <user-courses class="mb-2"></user-courses>
         <user-assignments class="mb-2"></user-assignments>
         <user-contests class="mb-2"></user-contests>
       </div>
       <div class="col-md-4">
         <user-panel class="mb-2"></user-panel>
+        <hitokoto class="mb-2"></hitokoto>
         <association-poster class="mb-2"></association-poster>
       </div>
     </div>
@@ -21,10 +23,14 @@ import userCourses from '../components/home/user-courses'
 import userAssignments from '../components/home/user-assignments'
 import userContests from '../components/home/user-contests'
 import associationPoster from "@/components/home/association-poster";
+import AnnouncementsPanel from "@/components/home/announcements-panel";
+import Hitokoto from "@/components/home/hitokoto";
 
 export default {
   name: 'component-home',
   components: {
+    Hitokoto,
+    AnnouncementsPanel,
     userPanel,
     userCourses,
     userAssignments,
@@ -32,8 +38,6 @@ export default {
     associationPoster
   },
   methods: {
-    logIn () {
-    }
   },
   computed: {
   },
