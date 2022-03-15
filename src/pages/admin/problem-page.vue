@@ -79,7 +79,7 @@ export default {
       hasItemSelected: false,
       dataObject: {},
       createDummy: {
-        title: '新建题目',
+        title: '未命名题目',
         extra: '',
         specialJudge: 0,
         detailJudge: false,
