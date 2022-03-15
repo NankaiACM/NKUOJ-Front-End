@@ -19,6 +19,9 @@
       </b-collapse>
     </b-jumbotron>
 
+    <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" v-if="totalRows > 20"
+                  @change="changePage" align="center" class="m-4" first-number last-number></b-pagination>
+
     <b-table hover :items="items" :fields="fields" striped class="text-center mt-4" :busy="isLoading" responsive show-empty>
       <template #table-busy>
         <div class="text-center my-2">

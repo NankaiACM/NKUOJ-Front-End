@@ -8,6 +8,9 @@
         </div>
       </div>
       <div class="container">
+        <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" v-if="totalRows > 20"
+                      align="center" class="m-4" first-number last-number @change="loadDataOfPage"></b-pagination>
+
         <div class="list-group">
           <router-link :to="{path:'/problem/' + problem.pid}" class="list-group-item list-group-item-action" v-for="problem in problemList" v-bind:key="problem.pid">
             <div class="d-flex w-100 justify-content-between">
