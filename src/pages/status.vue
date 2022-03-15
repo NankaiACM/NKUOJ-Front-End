@@ -40,8 +40,7 @@
         <h6 :class="`text-${getStatusVariant(data.value)}`">{{getStatusText(data.value)}}</h6>
       </template>
       <template #cell(problem_info)="data">
-        <h6><a class="text-decoration-none text-dark" :href="`/problem/${data.value.pid}`"
-               v-b-popover.hover.top="`PID: ${data.value.pid}`">{{data.value.name}}</a></h6>
+        <h6><a class="text-decoration-none text-dark" :href="`/problem/${data.value.pid}`">{{data.value.name}}</a> #{{data.value.pid}}</h6>
       </template>
       <template #cell(user)="data">
         <h6 v-b-popover.hover.top="data.value.nickname">{{data.value.uid === uid ? '您' : `#${data.value.uid}`}}</h6>
@@ -66,7 +65,7 @@ export default {
       fields: [
         { key: 'user', label: '用户' },
         { key: 'status_id', label: '记录ID' },
-        { key: 'problem_info', label: '题目名' },
+        { key: 'problem_info', label: '题目' },
         { key: 'status', label: '状态' }
       ],
       isLoading: true,
