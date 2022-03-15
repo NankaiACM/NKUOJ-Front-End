@@ -11,6 +11,7 @@
       <div class="col-md-4">
         <user-panel class="mb-2"></user-panel>
         <hitokoto class="mb-2"></hitokoto>
+        <jump-panel class="mb-2"></jump-panel>
         <association-poster class="mb-2"></association-poster>
       </div>
     </div>
@@ -25,10 +26,12 @@ import userContests from '../components/home/user-contests'
 import associationPoster from "@/components/home/association-poster";
 import AnnouncementsPanel from "@/components/home/announcements-panel";
 import Hitokoto from "@/components/home/hitokoto";
+import JumpPanel from "@/components/home/jump-panel";
 
 export default {
   name: 'component-home',
   components: {
+    JumpPanel,
     Hitokoto,
     AnnouncementsPanel,
     userPanel,
