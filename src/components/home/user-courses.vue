@@ -11,10 +11,10 @@
       <b-card-body v-if="loading" class="m-4">
         正在加载
       </b-card-body>
-      <b-card-body v-else-if="statusCode !== 200" class="m-3">
+      <b-card-body v-else-if="statusCode !== 200">
         [{{statusCode}}] 网络请求出错，内容获取失败。
       </b-card-body>
-      <b-card-body v-else-if="courses.length === 0" class="m-3">
+      <b-card-body v-else-if="courses.length === 0">
         暂无修读的课程。
       </b-card-body>
     </b-overlay>
