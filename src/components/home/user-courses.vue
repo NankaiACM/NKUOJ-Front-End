@@ -1,5 +1,9 @@
 <template>
-  <b-card no-body header="我听的课">
+  <b-card no-body>
+    <template #header>
+      <h6 class="m-1"><b-icon icon="journals" class="mr-2"></b-icon>我听的课</h6>
+    </template>
+
     <b-overlay :show="loading" rounded="sm">
       <b-list-group flush>
         <b-list-group-item v-bind:href="'/course/' + course.id" class="d-flex justify-content-between align-items-center pt-4 pb-4"

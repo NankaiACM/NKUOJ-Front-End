@@ -1,5 +1,9 @@
 <template>
-  <b-card no-body header="我的作业">
+  <b-card no-body>
+    <template #header>
+      <h6 class="m-1"><b-icon icon="vector-pen" class="mr-2"></b-icon>我的作业</h6>
+    </template>
+
     <b-overlay :show="loading" rounded="sm">
       <b-list-group flush>
         <b-list-group-item v-bind:href="'/assignment/' + assignment.id" v-for="assignment in assignments" v-bind:key="assignment.id">
