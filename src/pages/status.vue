@@ -1,10 +1,8 @@
 <template>
   <div class="container">
-    <b-jumbotron header="评测记录">
-
-      <template #lead>
-        在此查看评测记录。<b-link v-b-toggle.collapse-1>筛选</b-link>
-      </template>
+    <div class="jumbotron">
+      <h1 class="display-4">评测记录</h1>
+      <p class="lead">在此查看评测记录。<b-link v-b-toggle.collapse-1>筛选</b-link></p>
       <b-collapse id="collapse-1">
         <b-card bg-variant="light">
           <b-form-group label-cols-lg="3" label="筛选" label-class="font-weight-bold pt-0" class="mb-0">
@@ -17,7 +15,7 @@
           </b-form-group>
         </b-card>
       </b-collapse>
-    </b-jumbotron>
+    </div>
 
     <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" v-if="totalRows > 20"
                   @change="changePage" align="center" class="m-4" first-number last-number></b-pagination>
