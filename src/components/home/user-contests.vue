@@ -1,7 +1,7 @@
 <template>
   <b-card no-body>
     <template #header>
-      <h6 class="m-1"><b-icon icon="reception4" class="mr-2"></b-icon>竞赛、考试</h6>
+      <h6 class="m-1"><b-icon icon="card-checklist" class="mr-2"></b-icon>竞赛、考试</h6>
     </template>
 
     <b-overlay :show="loading" rounded="sm">
