@@ -37,7 +37,6 @@ export default {
       this.loading = false
     }, e => {
       console.log(e)
-      this.success = false
       this.statusCode = e.status
       this.loading = false
     })
