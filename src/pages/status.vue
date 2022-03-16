@@ -2,19 +2,7 @@
   <div class="container">
     <div class="jumbotron">
       <h1 class="display-4">评测记录</h1>
-      <p class="lead">在此查看评测记录。<b-link v-b-toggle.collapse-1>筛选</b-link></p>
-      <b-collapse id="collapse-1">
-        <b-card bg-variant="light">
-          <b-form-group label-cols-lg="3" label="筛选" label-class="font-weight-bold pt-0" class="mb-0">
-            <b-form-group label="用户 UID:" label-for="input-uid" label-cols-sm="3" label-align-sm="right" label-size="sm">
-              <b-form-input id="input-uid" type="number" size="sm" placeholder="所有用户" min="1" v-model="filters.uid" @change="updateFilters" no-wheel></b-form-input>
-            </b-form-group>
-            <b-form-group label="题目 PID:" label-for="input-pid" label-cols-sm="3" label-align-sm="right" label-size="sm">
-              <b-form-input id="input-pid" type="number" size="sm" placeholder="所有题目" min="1" v-model="filters.pid" @change="updateFilters" no-wheel></b-form-input>
-            </b-form-group>
-          </b-form-group>
-        </b-card>
-      </b-collapse>
+      <p class="lead">在此查看评测记录。<b-link @click="showFilterModal" class="text-decoration-none text-muted">筛选</b-link></p>
     </div>
 
     <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" v-if="totalRows > 20"
@@ -47,6 +35,15 @@
 
     <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" v-if="totalRows > 20"
                   @change="changePage" align="center" class="m-4" first-number last-number></b-pagination>
+
+    <b-modal id="filter-modal" title="筛选" ok-title="确定" ok-only centered>
+      <b-form-group label="用户 UID:" label-for="input-uid" label-cols-sm="3" label-align-sm="right" label-size="sm">
+        <b-form-input id="input-uid" type="number" size="sm" placeholder="所有用户" min="1" v-model="filters.uid" @change="updateFilters" no-wheel></b-form-input>
+      </b-form-group>
+      <b-form-group label="题目 PID:" label-for="input-pid" label-cols-sm="3" label-align-sm="right" label-size="sm">
+        <b-form-input id="input-pid" type="number" size="sm" placeholder="所有题目" min="1" v-model="filters.pid" @change="updateFilters" no-wheel></b-form-input>
+      </b-form-group>
+    </b-modal>
   </div>
 </template>
 
@@ -121,6 +118,9 @@ export default {
         ret += `pid=${this.filters.pid}`
       }
       return ret
+    },
+    showFilterModal: function () {
+      this.$bvModal.show('filter-modal')
     }
   }, mounted() {
     this.loadStatus()
