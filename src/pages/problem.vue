@@ -1,13 +1,17 @@
 <template>
   <div class="container">
-    <problem-header :problem-info="problemInfo" :loading="loading"></problem-header>
-    <problem-navigator :psid="problemInfo.psid" v-if="problemInfo.psid" :loading="loading" :pid="problemInfo.pid">
+    <div class="jumbotron text-center">
+      <h1 class="display-6">{{ problemInfo.name ? problemInfo.name : '(～﹃～)~zZ' }}</h1>
+      <h4><span class="badge bg-danger text-light">题目</span></h4>
+    </div>
+    <problem-header :problem-info="problemInfo" :loading="loading" class="mb-3"></problem-header>
+    <problem-navigator :psid="problemInfo.psid" v-if="problemInfo.psid" :loading="loading" :pid="problemInfo.pid" class="mb-3">
     </problem-navigator>
-    <problem-content :markdown-text="markdownText" :loading="loading"></problem-content>
+    <problem-content :markdown-text="markdownText" :loading="loading" class="mb-4"></problem-content>
     <submit-modal ref="submit-modal" :pid="problemInfo.pid"></submit-modal>
     <status-list-modal ref="status-list-modal" :pid="problemInfo.pid" :uid="$store.getters.getUID"></status-list-modal>
     <div class="container d-flex justify-content-center">
-      <div class="btn-group m-4" role="group">
+      <div class="btn-group" role="group">
         <b-button type="button" variant="success" @click="showSubmitModal">提交</b-button>
         <b-button type="button" variant="info" @click="toSubmitStatus">查看提交记录</b-button>
       </div>

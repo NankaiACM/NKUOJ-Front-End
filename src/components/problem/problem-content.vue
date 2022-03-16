@@ -1,11 +1,15 @@
 <template>
-  <b-overlay :show="loading" rounded="sm">
-    <div class="card mt-4">
-      <div class="p-5">
-        <div v-html="problemMarkDown"></div>
-      </div>
-    </div>
-  </b-overlay>
+  <b-skeleton-wrapper :loading="loading">
+    <template #loading>
+      <b-card>
+        <b-skeleton :width="`${Math.floor(Math.random() * 80 + 20)}%`"
+                    v-for="i in Array(42).keys()" :key="i"></b-skeleton>
+      </b-card>
+    </template>
+    <b-card class="p-3">
+      <div v-html="problemMarkDown"></div>
+    </b-card>
+  </b-skeleton-wrapper>
 </template>
 
 <script>
