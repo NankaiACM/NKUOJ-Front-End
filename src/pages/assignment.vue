@@ -19,7 +19,7 @@
               <span class="h6">课程：</span>
               {{ assignmentData.courseName }}
             </p>
-            <p class="card-text">
+            <p>
               <span class="h6">介绍：</span>
               {{ assignmentData.description }}
             </p>
