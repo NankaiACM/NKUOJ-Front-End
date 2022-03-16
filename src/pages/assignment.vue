@@ -2,7 +2,7 @@
   <div class="container">
     <div class="jumbotron text-center">
       <h1 class="display-4">{{ assignmentData.name }}</h1>
-      <h4><span class="badge bg-info text-dark">作业</span></h4>
+      <h4><span class="badge bg-info text-light">作业</span></h4>
     </div>
 
     <div class="card">
