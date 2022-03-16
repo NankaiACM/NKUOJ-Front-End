@@ -37,10 +37,8 @@
         <b-col sm="3" class="text-sm-left"><b>姓名：</b></b-col>
         <b-col>{{profileData.realname}}</b-col>
       </b-row>
-    </b-card>
 
-    <b-card title="更新个人信息" class="mt-3">
-      <b-button variant="primary" @click="showUpdateModal">重新填写</b-button>
+      <b-link @click="showUpdateModal" class="card-link text-muted">更新个人信息</b-link>
     </b-card>
 
     <!-- Login Modal -->
