@@ -22,6 +22,7 @@
                 <em>{{$store.getters.getUserData.nickname}}</em>
               </template>
               <b-dropdown-item href="/profile">用户中心</b-dropdown-item>
+              <b-dropdown-item @click="showDrawStick">每日签到</b-dropdown-item>
               <b-dropdown-item href="/admin/home" v-if="$store.getters.isAdministrator">管理面板</b-dropdown-item>
               <b-dropdown-item href="/logout">退出</b-dropdown-item>
             </b-nav-item-dropdown>
@@ -29,12 +30,21 @@
         </b-collapse>
       </b-navbar>
     </div>
+
+    <draw-stick ref="draw-stick-modal"></draw-stick>
   </div>
 </template>
 
 <script>
+import DrawStick from "@/components/others/draw-stick";
 export default {
-  name: 'head-bar-universal'
+  name: 'head-bar-universal',
+  components: {DrawStick},
+  methods: {
+    showDrawStick: function () {
+      this.$refs['draw-stick-modal'].show()
+    }
+  }
 }
 </script>
 

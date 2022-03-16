@@ -18,7 +18,7 @@
 
 <script>
 import headBar from '../components/headbar/head-bar-universal'
-import foot from '../components/footer.vue'
+import foot from '../components/others/footer.vue'
 
 export default {
   components: {headBar, foot},

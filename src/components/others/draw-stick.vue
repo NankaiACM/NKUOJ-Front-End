@@ -1,7 +1,7 @@
 <template>
-  <b-card body-bg-variant="light">
-    <h6 class="text-center"> {{ stickDrown ? '今日运势' : '每日签到'}} </h6>
-    <div v-if="stickDrown">
+  <b-modal id="stick-modal" title="每日签到" centered ok-title="坠吼滴" ok-only auto-focus-button="ok">
+    <h6 class="text-center"> 今日运势 </h6>
+    <div>
       <h1 :class="`text-${['danger', 'danger', 'success', 'dark', 'dark'][stickResult.primary.type]} text-center`">
         § {{stickResult.primary.title}} § </h1>
       <div class="row">
@@ -19,13 +19,7 @@
         </div>
       </div>
     </div>
-    <div v-else>
-      <h1 class="text-dark text-center"> ?? </h1>
-      <div class="container d-flex justify-content-center">
-        <b-button variant="secondary" @click="drawStick" class="m-2">签到</b-button>
-      </div>
-    </div>
-  </b-card>
+  </b-modal>
 </template>
 
 <script>
@@ -33,19 +27,14 @@ import drawAStick from "@/util/fortune-sticks";
 
 export default {
   name: "draw-stick",
-  data: function () {
-    return {
-      stickDrown: this.isStickDrown(),
-      stickResult: drawAStick(this.$store.getters.getUID)
+  computed: {
+    stickResult: function () {
+      return drawAStick(this.$store.getters.getUID)
     }
   },
   methods: {
-    isStickDrown: function() {
-      return (new Date().getDate()) === this.$store.state.userData.lastPulledStick
-    },
-    drawStick: function () {
-      this.$store.commit('setUserData', {lastPulledStick: new Date().getDate()})
-      this.stickDrown = true
+    show: function () {
+      this.$bvModal.show('stick-modal')
     }
   }
 }
