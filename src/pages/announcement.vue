@@ -4,7 +4,7 @@
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-5 text-center">{{announcement.title}}</h1>
-          <h4><span class="badge bg-warning text-light">公告</span></h4>
+          <h4 class="text-center"><span class="badge bg-warning text-light">公告</span></h4>
           <p class="lead text-center">{{getLocaleDate(announcement.time)}}</p>
         </div>
       </div>
