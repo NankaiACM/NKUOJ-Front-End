@@ -12,7 +12,7 @@
         </b-list-group-item>
 
         <b-list-group-item>
-          <b-link class="text-dark text-decoration-none" href="/announcements">查看全部...</b-link>
+          <b-link class="text-muted text-decoration-none" href="/announcements">查看全部...</b-link>
         </b-list-group-item>
       </b-list-group>
 

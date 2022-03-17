@@ -21,7 +21,7 @@
               {{announcement.content}}
             </b-card-text>
 
-            <b-link :href="`/announcement/${announcement.id}`" class="card-link">查看详情</b-link>
+            <b-link :href="`/announcement/${announcement.id}`" class="text-decoration-none text-muted">查看详情</b-link>
           </b-card>
 
         </b-skeleton-wrapper>
