@@ -12,8 +12,8 @@
     <status-list-modal ref="status-list-modal" :pid="problemInfo.pid" :uid="$store.getters.getUID"></status-list-modal>
     <div class="container d-flex justify-content-center">
       <div class="btn-group" role="group">
-        <b-button type="button" variant="success" @click="showSubmitModal">提交</b-button>
-        <b-button type="button" variant="info" @click="toSubmitStatus">查看提交记录</b-button>
+        <b-button type="button" variant="success" @click="showSubmitModal">提交代码</b-button>
+        <b-button type="button" variant="info" @click="toSubmitStatus">查看记录</b-button>
       </div>
     </div>
   </div>
