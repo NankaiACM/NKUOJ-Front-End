@@ -36,12 +36,12 @@
     <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" v-if="totalRows > 20"
                   @change="changePage" align="center" class="m-4" first-number last-number></b-pagination>
 
-    <b-modal id="filter-modal" title="筛选" ok-title="确定" ok-only centered>
+    <b-modal id="filter-modal" title="筛选" ok-title="确定" ok-only centered @ok="updateFilters">
       <b-form-group label="用户 UID:" label-for="input-uid" label-cols-sm="3" label-align-sm="right" label-size="sm">
-        <b-form-input id="input-uid" type="number" size="sm" placeholder="所有用户" min="1" v-model="filters.uid" @change="updateFilters" no-wheel></b-form-input>
+        <b-form-input id="input-uid" type="number" size="sm" placeholder="所有用户" min="1" v-model="filters.uid" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
       </b-form-group>
       <b-form-group label="题目 PID:" label-for="input-pid" label-cols-sm="3" label-align-sm="right" label-size="sm">
-        <b-form-input id="input-pid" type="number" size="sm" placeholder="所有题目" min="1" v-model="filters.pid" @change="updateFilters" no-wheel></b-form-input>
+        <b-form-input id="input-pid" type="number" size="sm" placeholder="所有题目" min="1" v-model="filters.pid" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
       </b-form-group>
     </b-modal>
   </div>
@@ -105,6 +105,7 @@ export default {
     updateFilters: function () {
       this.loadStatus()
       this.changePage(1)
+      this.$bvModal.hide('filter-modal')
     },
     filtersToString: function (flag) {
       let ret = ''

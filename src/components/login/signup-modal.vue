@@ -3,34 +3,34 @@
     <div class="container">
       <div class="form-row align-items-center needs-validation">
         <div class="container">
-          <label for="signupUserNameInput">邮箱</label>
+          <label>邮箱</label>
           <div class="input-group mb-2">
-            <input type="text" class="form-control" id="signupUserNameInput" :placeholder="isStudent ? '学号' : '邮箱'" v-model="signupForm.email">
+            <b-input type="text" class="form-control" id="signupUserNameInput" :placeholder="isStudent ? '学号' : '邮箱'" v-model="signupForm.email" @keydown.enter.native="signupSubmit"></b-input>
             <div class="input-group-prepend" v-if="isStudent">
               <div class="input-group-text">@mail.nankai.edu.cn</div>
             </div>
           </div>
         </div>
         <div class="container">
-          <label for="signupPasswordInput1">密码</label>
+          <label>密码</label>
           <div class="input-group mb-2">
-            <input type="password" id="signupPasswordInput1" class="form-control" v-model="signupForm.passwordRaw1">
+            <b-input type="password" id="signupPasswordInput1" class="form-control" v-model="signupForm.passwordRaw1" @keydown.enter.native="signupSubmit"></b-input>
           </div>
-          <label for="signupPasswordInput2">重复密码</label>
+          <label>重复密码</label>
           <div class="input-group mb-2">
-            <input type="password" id="signupPasswordInput2" class="form-control" v-model="signupForm.passwordRaw2">
-          </div>
-        </div>
-        <div class="container">
-          <label for="signupNickNameInput">昵称</label>
-          <div class="input-group mb-2">
-            <input type="text" class="form-control" id="signupNickNameInput" placeholder="建议填写真实姓名" v-model="signupForm.nickname">
+            <b-input type="password" id="signupPasswordInput2" class="form-control" v-model="signupForm.passwordRaw2" @keydown.enter.native="signupSubmit"></b-input>
           </div>
         </div>
         <div class="container">
-          <label for="signupEmailValidationCode">邮箱核验</label>
+          <label>昵称</label>
+          <div class="input-group mb-2">
+            <b-input type="text" class="form-control" id="signupNickNameInput" placeholder="建议填写真实姓名" v-model="signupForm.nickname" @keydown.enter.native="signupSubmit"></b-input>
+          </div>
+        </div>
+        <div class="container">
+          <label>邮箱核验</label>
           <b-input-group class="mb-2">
-            <input type="text" id="signupEmailValidationCode" class="form-control" placeholder="验证码" v-model="signupForm.emailCaptcha">
+            <b-input type="text" id="signupEmailValidationCode" class="form-control" placeholder="验证码" v-model="signupForm.emailCaptcha" @keydown.enter.native="signupSubmit"></b-input>
             <b-input-group-append>
               <b-button variant="outline-primary" v-if="emailCaptchaSendTimer<=0" v-on:click="sendEmailValidationCode()">发送验证码</b-button>
               <b-button variant="outline-success" v-if="emailCaptchaSendTimer>0" v-on:click="gotoEmailBox">前往邮箱 {{ emailCaptchaSendTimer }}</b-button>

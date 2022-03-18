@@ -3,18 +3,18 @@
     <div class="container">
       <div class="form-row align-items-center">
         <div class="container">
-          <label for="loginUserNameInput">邮箱</label>
+          <label>邮箱</label>
           <div class="input-group mb-2">
-            <input type="text" class="form-control" id="loginUserNameInput" :placeholder="isStudent ? '学号' : '邮箱'" v-model="loginForm.email">
+            <b-input type="text" class="form-control" id="loginUserNameInput" :placeholder="isStudent ? '学号' : '邮箱'" v-model="loginForm.email" @keydown.enter.native="loginSubmit"></b-input>
             <div class="input-group-prepend" v-if="isStudent">
               <div class="input-group-text">@mail.nankai.edu.cn</div>
             </div>
           </div>
         </div>
         <div class="container">
-          <label for="loginPasswordInput">密码</label>
+          <label>密码</label>
           <div class="input-group mb-2">
-            <input type="password" id="loginPasswordInput" class="form-control" v-model="loginForm.passwordRaw">
+            <b-input type="password" id="loginPasswordInput" class="form-control" v-model="loginForm.passwordRaw" @keydown.enter.native="loginSubmit"></b-input>
           </div>
         </div>
       </div>

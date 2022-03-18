@@ -3,28 +3,28 @@
     <div class="container">
       <div class="form-row align-items-center needs-validation">
         <div class="container">
-          <label for="resetUserNameInput">邮箱</label>
+          <label>邮箱</label>
           <div class="input-group mb-2">
-            <input type="text" class="form-control" id="resetUserNameInput" :placeholder="isStudent ? '学号' : '邮箱'" v-model="resetForm.email">
+            <b-input type="text" class="form-control" id="resetUserNameInput" :placeholder="isStudent ? '学号' : '邮箱'" v-model="resetForm.email" @keydown.enter.native="resetSubmit"></b-input>
             <div class="input-group-prepend" v-if="isStudent">
               <div class="input-group-text">@mail.nankai.edu.cn</div>
             </div>
           </div>
         </div>
         <div class="container">
-          <label for="resetPasswordInput1">新密码</label>
+          <label>新密码</label>
           <div class="input-group mb-2">
-            <input type="password" id="resetPasswordInput1" class="form-control" v-model="resetForm.passwordRaw1">
+            <b-input type="password" id="resetPasswordInput1" class="form-control" v-model="resetForm.passwordRaw1" @keydown.enter.native="resetSubmit"></b-input>
           </div>
-          <label for="resetPasswordInput2">重复新密码</label>
+          <label>重复新密码</label>
           <div class="input-group mb-2">
-            <input type="password" id="resetPasswordInput2" class="form-control" v-model="resetForm.passwordRaw2">
+            <b-input type="password" id="resetPasswordInput2" class="form-control" v-model="resetForm.passwordRaw2" @keydown.enter.native="resetSubmit"></b-input>
           </div>
         </div>
         <div class="container">
-          <label for="resetEmailValidationCode">邮箱核验</label>
+          <label>邮箱核验</label>
           <b-input-group class="mb-2">
-            <input type="text" id="resetEmailValidationCode" class="form-control" placeholder="验证码" v-model="resetForm.emailCaptcha">
+            <b-input type="text" id="resetEmailValidationCode" class="form-control" placeholder="验证码" v-model="resetForm.emailCaptcha" @keydown.enter.native="resetSubmit"></b-input>
             <b-input-group-append>
               <b-button variant="outline-primary" v-if="emailCaptchaSendTimer<=0" v-on:click="sendEmailValidationCode()">发送验证码</b-button>
               <b-button variant="outline-success" v-if="emailCaptchaSendTimer>0" v-on:click="gotoEmailBox">前往邮箱 {{ emailCaptchaSendTimer }}</b-button>
