@@ -11,7 +11,7 @@
           {{announcement.title}}
         </b-list-group-item>
 
-        <b-list-group-item>
+        <b-list-group-item v-if="announcements.length > 0">
           <b-link class="text-muted text-decoration-none" href="/announcements">查看全部...</b-link>
         </b-list-group-item>
       </b-list-group>
