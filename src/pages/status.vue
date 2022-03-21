@@ -43,6 +43,9 @@
       <b-form-group label="题目 PID:" label-for="input-pid" label-cols-sm="3" label-align-sm="right" label-size="sm">
         <b-form-input id="input-pid" type="number" size="sm" placeholder="所有题目" min="1" v-model="filters.pid" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
       </b-form-group>
+      <b-form-group label="昵称:" label-for="input-nickname" label-cols-sm="3" label-align-sm="right" label-size="sm">
+        <b-form-input id="input-nickname" type="text" size="sm" placeholder="所有用户" min="1" v-model="filters.nickname" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
+      </b-form-group>
     </b-modal>
   </div>
 </template>
@@ -69,7 +72,8 @@ export default {
       uid: this.$store.getters.getUID,
       filters: {
         uid: this.$store.getters.getUID,
-        pid: null
+        pid: null,
+        nickname: ''
       }
     }
   },
@@ -116,7 +120,12 @@ export default {
       }
       if (this.filters.pid) {
         ret += flag ? '&' : '?'
+        flag = true
         ret += `pid=${this.filters.pid}`
+      }
+      if (this.filters.nickname) {
+        ret += flag ? '&' : '?'
+        ret += `nickname=${this.filters.nickname}`
       }
       return ret
     },
