@@ -45,9 +45,10 @@
       </div>
       <div class="container d-flex justify-content-center">
         <b-button-group>
-          <b-button variant="outline-info" @click="submit">保存并提交</b-button>
-          <b-button variant="outline-primary" @click="clone">克隆</b-button>
+          <b-button variant="outline-info" @click="submit">保存提交</b-button>
+          <b-button variant="outline-primary" @click="clone">克隆题目</b-button>
           <b-button variant="outline-success" @click="uploadData">上传数据</b-button>
+          <b-button variant="outline-warning" @click="downloadData">下载数据</b-button>
         </b-button-group>
       </div>
     </b-card>
@@ -119,6 +120,17 @@ export default {
     },
     uploadData: function () {
       this.$refs['upload-modal'].show()
+    },
+    downloadData: function () {
+      this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/io`, {responseType: 'arraybuffer'})
+        .then(response => {
+          const blob = new Blob([response.data], {type: 'application/zip'});
+
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = `problem-data-${this.selectedId}.zip`;
+          link.click();
+        })
     },
     previewMarkdown: function () {
       this.$refs['preview-modal'].show()
