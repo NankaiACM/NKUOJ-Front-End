@@ -7,7 +7,6 @@
     <div class="container">
       <div class="row d-flex justify-content-center">
         <div class="col-md-6">
-          <b-alert show variant="danger">警告：服务器已进行安全更新，请大家重置密码后登录。</b-alert>
           <div class="card text-center m-3 shadow-sm">
             <img src="../assets/Sakura_Nene_CPP.jpg" class="card-img-top" alt="...">
             <div class="card-body">
