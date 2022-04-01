@@ -120,10 +120,10 @@ export default {
       return 'warning'
     },
     viewCompilationInfo: function () {
-      this.$bvModal.msgBoxOk(this.data.compileInfo, {centered: true, title: '编译信息'})
+      this.$bvModal.msgBoxOk(this.data.compileInfo, {centered: true, title: '编译信息', size: 'lg'})
     },
     viewJudgeDetails: function () {
-      this.$bvModal.msgBoxOk(JSON.stringify(this.data.detail), {centered: true, title: '评测信息'})
+      this.$bvModal.msgBoxOk(JSON.stringify(this.data.detail), {centered: true, title: '评测信息', size: 'lg'})
     }
   },
   mounted() {
