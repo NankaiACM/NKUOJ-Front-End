@@ -1,7 +1,7 @@
 <template>
   <b-overlay :show="loading || problemsListLoading" rounded="sm" v-if="problems.length > 1">
     <b-card class="container-fluid">
-      <small class="display-6 d-flex justify-content-center text-muted">题目列表</small>
+      <h6 class="text-center">题目列表</h6>
 
       <div class="container-fluid d-flex justify-content-center pt-4">
         <b-button-group>
