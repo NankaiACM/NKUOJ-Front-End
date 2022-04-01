@@ -43,6 +43,11 @@
         <b-form-input type="number" v-model="dataObject.cases"></b-form-input>
         <small class="form-text text-muted">测试点的数量。</small>
       </div>
+      <div class="form-group">
+        <label>Detail Judge：</label>
+        <b-form-checkbox v-model="dataObject.detailJudge">启用 Detail Judge</b-form-checkbox>
+        <small class="form-text text-muted">Detail Judge会对所有测试点进行评测。如不启用该功能，则评测机遇到第一个非正确测试点就会停止评测，导致分数偏低。</small>
+      </div>
       <div class="container d-flex justify-content-center">
         <b-button-group>
           <b-button variant="outline-info" @click="submit">保存提交</b-button>
@@ -87,7 +92,7 @@ export default {
         cases: 0,
         timeLimit: 0,
         memoryLimit: 0,
-        content: ''
+        content: '',
       }
     }
   },
