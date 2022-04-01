@@ -8,7 +8,7 @@
     </template>
 
     <b-card>
-      <h6 class="text-center">题目信息</h6>
+      <h6 class="text-center">题目信息 #{{pid}}</h6>
       <div class="row d-flex justify-content-center">
         <div class="btn-group m-2" role="group">
           <button type="button" class="btn btn-sm btn-info disabled">测试点数量</button>
@@ -49,7 +49,8 @@ export default {
   name: "problem-header",
   props: {
     problemInfo: Object,
-    loading: Boolean
+    loading: Boolean,
+    pid: Number
   }
 }
 </script>

@@ -4,7 +4,7 @@
       <h1 class="display-6">{{ problemInfo.name ? problemInfo.name : '(～﹃～)~zZ' }}</h1>
       <h4><span class="badge bg-danger text-light">题目</span></h4>
     </div>
-    <problem-header :problem-info="problemInfo" :loading="loading" class="mb-3"></problem-header>
+    <problem-header :problem-info="problemInfo" :loading="loading" class="mb-3" :pid="problemInfo.pid"></problem-header>
     <problem-navigator :psid="problemInfo.psid" v-if="problemInfo.psid" :loading="loading" :pid="problemInfo.pid" class="mb-3">
     </problem-navigator>
     <problem-content :markdown-text="markdownText" :loading="loading" class="mb-4"></problem-content>
