@@ -33,11 +33,15 @@
             {{ problemInfo.submitAll }}
           </button>
         </div>
-        <div class="btn-group m-2" role="group" v-if="problemInfo.specialJudge !== 0">
-          <button type="button" class="btn btn-sm btn-outline-warning disabled">Special Judge</button>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="btn-group m-2" role="group" v-if="problemInfo.specialJudge">
+          <button type="button" class="btn btn-sm btn-outline-warning"
+                  v-b-popover.hover.bottom="'本题启用 Special Judge。所有输出会使用特别程序校验，而不是与标准输出进行比对。'">Special Judge</button>
         </div>
         <div class="btn-group m-2" role="group" v-if="problemInfo.detailJudge">
-          <button type="button" class="btn btn-sm btn-outline-info disabled">Detail Judge</button>
+          <button type="button" class="btn btn-sm btn-outline-info"
+                  v-b-popover.hover.bottom="'本题启用 Detail Judge。所有测试点都会被评测，而不是遇到第一个非正确运行即停止评测。'">Detail Judge</button>
         </div>
       </div>
     </b-card>
