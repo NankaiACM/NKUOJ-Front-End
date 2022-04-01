@@ -39,6 +39,11 @@
           <b-col sm="3" class="text-sm-left"><b>编译信息：</b></b-col>
           <b-col><b-link @click="viewCompilationInfo()" class="text-primary text-decoration-none">查看</b-link></b-col>
         </b-row>
+        <b-row class="mb-2" v-if="data.detail">
+          <b-col sm="3" class="text-sm-left"><b>评测信息：</b></b-col>
+          <b-col><b-link @click="viewJudgeDetails()" class="text-primary text-decoration-none">查看</b-link></b-col>
+        </b-row>
+
         <b-row class="mb-2">
           <b-col sm="3" class="text-sm-left"><b>判定结果：</b></b-col>
           <b-col>
@@ -117,6 +122,9 @@ export default {
     viewCompilationInfo: function () {
       this.$bvModal.msgBoxOk(this.data.compileInfo, {centered: true, title: '编译信息'})
     },
+    viewJudgeDetails: function () {
+      this.$bvModal.msgBoxOk(JSON.stringify(this.data.detail), {centered: true, title: '评测信息'})
+    }
   },
   mounted() {
     this.loadSubmissionData()
