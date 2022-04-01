@@ -121,10 +121,22 @@ export default {
       })
     },
     clone: function () {
-      this.$refs['clone-modal'].show()
+      // eslint-disable-next-line no-unused-vars
+      this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
+        this.$refs['clone-modal'].show()
+      }, e => {
+        console.log(e)
+        this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败，无法进行克隆'})
+      })
     },
     uploadData: function () {
-      this.$refs['upload-modal'].show()
+      // eslint-disable-next-line no-unused-vars
+      this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
+        this.$refs['upload-modal'].show()
+      }, e => {
+        console.log(e)
+        this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败，无法进行上传'})
+      })
     },
     downloadData: function () {
       this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/io`, {responseType: 'arraybuffer'})
