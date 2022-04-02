@@ -29,8 +29,8 @@
             </p>
             <p>
               <span class="h6">状态：</span>
-              <span v-if="assignmentData.open" class="text-success">正在进行，可提交</span>
-              <span v-else class="text-danger">未开始或已截止，无法提交</span>
+              <span v-if="assignmentData.open" class="text-success">可提交</span>
+              <span v-else class="text-danger">无法提交</span>
             </p>
           </b-skeleton-wrapper>
         </div>
