@@ -29,7 +29,7 @@
         <h6><a class="text-decoration-none text-dark" :href="`/problem/${data.value.pid}`">{{data.value.name}}</a> #{{data.value.pid}}</h6>
       </template>
       <template #cell(user)="data">
-        <h6 v-b-popover.hover.top="data.value.nickname">{{data.value.uid === uid ? '您' : `#${data.value.uid}`}}</h6>
+        <h6 v-b-popover.hover.top="data.value.nickname">{{data.value.uid === uid ? '您' : `#${uidToStr(data.value.uid)}`}}</h6>
       </template>
     </b-table>
 
@@ -54,6 +54,7 @@
 
 import status2text from "@/util/status-text";
 import status2variant from "@/util/status-variant";
+import uid2Str from "@/util/uidToStr";
 
 export default {
   name: "status",
@@ -105,6 +106,9 @@ export default {
     },
     getStatusVariant: function (status) {
       return status2variant(status)
+    },
+    uidToStr: function (uid) {
+      return uid2Str(uid)
     },
     updateFilters: function () {
       this.loadStatus()

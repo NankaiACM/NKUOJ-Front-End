@@ -4,7 +4,7 @@
     <div class="d-flex align-items-center m-3">
       <b-avatar class="mr-3"></b-avatar>
       <span class="mr-auto">{{$store.getters.getUserData.nickname}}</span>
-      <span class="text-secondary">#{{$store.getters.getUID}}</span>
+      <span class="text-secondary">#{{uidToStr($store.getters.getUID)}}</span>
     </div>
     <b-list-group flush>
       <b-list-group-item href="/profile" class="text-center">用户中心</b-list-group-item>
@@ -16,10 +16,14 @@
 </template>
 
 <script>
+import uid2Str from '@/util/uidToStr'
+
 export default {
   name: 'user-panel',
   methods: {
-
+    uidToStr: function (uid) {
+      return uid2Str(uid)
+    }
   }
 }
 </script>
