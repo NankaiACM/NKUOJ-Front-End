@@ -54,6 +54,10 @@
       </div>
       <div class="col-md-8 order-md-first order-last">
         <status-details :details="data.detail" v-if="data.detail" class="mb-4"></status-details>
+        <b-card bg-variant="light" class="p-5 mb-4" v-else>
+          <h2 class="text-center text-muted">无法查看测试点详情</h2>
+        </b-card>
+
         <b-card title="代码" class="mb-4" v-if="data.code || loading">
           <b-skeleton-wrapper :loading="loading">
             <template #loading>
@@ -64,7 +68,7 @@
             <pre><code>{{data.code}}</code></pre>
           </b-skeleton-wrapper>
         </b-card>
-        <b-card bg-variant="light" class="p-5 mt-4" v-else>
+        <b-card bg-variant="light" class="p-5 mb-4" v-else>
           <h2 class="text-center text-muted">没有权限查看该代码</h2>
         </b-card>
       </div>
