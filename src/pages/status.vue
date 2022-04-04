@@ -2,7 +2,10 @@
   <div class="container">
     <div class="jumbotron">
       <h1 class="display-4">评测记录</h1>
-      <p class="lead">在此查看评测记录。<b-link @click="showFilterModal" class="text-decoration-none text-muted">筛选</b-link></p>
+      <p class="lead">在此查看评测记录。
+        <b-link @click="showFilterModal" class="text-decoration-none text-muted">筛选</b-link> |
+        <b-link @click="showJumpModal" class="text-decoration-none text-muted">跳转</b-link>
+      </p>
     </div>
 
     <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" v-if="totalRows > 20"
@@ -47,6 +50,10 @@
         <b-form-input id="input-nickname" type="text" size="sm" placeholder="所有用户" min="1" v-model="filters.nickname" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
       </b-form-group>
     </b-modal>
+
+    <b-modal id="jump-modal" title="跳转到某个记录" ok-title="确定" ok-only centered @ok="jumpToSubmission">
+      <b-form-input type="number" size="sm" placeholder="键入提交记录的ID..." min="0" v-model="jumpID" no-wheel @keydown.enter.native="jumpToSubmission"></b-form-input>
+    </b-modal>
   </div>
 </template>
 
@@ -75,7 +82,8 @@ export default {
         uid: this.$store.getters.getUID,
         pid: null,
         nickname: ''
-      }
+      },
+      jumpID: 0
     }
   },
   methods: {
@@ -135,6 +143,12 @@ export default {
     },
     showFilterModal: function () {
       this.$bvModal.show('filter-modal')
+    },
+    showJumpModal: function () {
+      this.$bvModal.show('jump-modal')
+    },
+    jumpToSubmission: function () {
+      this.$router.push(`/submission/${this.jumpID}`)
     }
   }, mounted() {
     this.loadStatus()
