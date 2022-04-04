@@ -69,6 +69,10 @@
         </b-card>
       </div>
     </div>
+
+    <b-modal id="compile-info-modal" title="编译信息" size="lg" centered ok-only ok-title="关闭">
+      <pre>{{data.compileInfo}}</pre>
+    </b-modal>
   </div>
 </template>
 
@@ -124,7 +128,7 @@ export default {
       return 'warning'
     },
     viewCompilationInfo: function () {
-      this.$bvModal.msgBoxOk(this.data.compileInfo, {centered: true, title: '编译信息', size: 'lg'})
+      this.$bvModal.show('compile-info-modal')
     }
   },
   mounted() {
