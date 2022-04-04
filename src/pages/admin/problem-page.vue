@@ -121,12 +121,18 @@ export default {
       })
     },
     clone: function () {
-      // eslint-disable-next-line no-unused-vars
-      this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
-        this.$refs['clone-modal'].show()
-      }, e => {
-        console.log(e)
-        this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败，无法进行克隆'})
+      this.$bvModal.msgBoxConfirm('是否保存后再克隆？', {centered: true, title: '提示', okTitle: '保存后克隆', cancelTitle: '直接克隆', noCloseOnBackdrop: true}).then(value => {
+        if (value) {
+          // eslint-disable-next-line no-unused-vars
+          this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
+            this.$refs['clone-modal'].show()
+          }, e => {
+            console.log(e)
+            this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败。'})
+          })
+        } else {
+          this.$refs['clone-modal'].show()
+        }
       })
     },
     uploadData: function () {
