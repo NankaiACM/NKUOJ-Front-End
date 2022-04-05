@@ -11,7 +11,7 @@
       <div class="col-md-4 p-3 d-flex" v-for="route in routes" :key="route">
         <div class="card flex-fill">
           <div class="card-header text-center">
-            <a :href="route.href" class="card-link text-dark">{{route.title}}</a>
+            <a :href="route.href" class="card-link text-dark stretched-link">{{route.title}}</a>
           </div>
           <div class="card-body">
             <p class="card-text text-center">{{route.description}}</p>
@@ -31,7 +31,12 @@ export default {
         title: '题目管理',
         href: '/admin/problem',
         description: '创建和修改题目。'
-       }, //{
+       }, {
+        title: '重测',
+        href: '/admin/rejudge',
+        description: '对题目的所有提交或者单个提交进行重测。'
+      },
+      //{
       //   title: '作业管理',
       //   href: '/admin/assignment',
       //   description: '创建、修改、分发作业，分发作业需要指定课程。在此查看作业完成情况。'
