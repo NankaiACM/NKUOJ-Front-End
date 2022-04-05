@@ -36,6 +36,10 @@
             <b-icon icon="geo-fill"></b-icon>
           </b-input-group-prepend>
           <b-form-input type="number" no-wheel placeholder="请输入题目ID..." v-model="pid"></b-form-input>
+          <b-input-group-prepend is-text>
+            时延(ms)
+          </b-input-group-prepend>
+          <b-form-input type="number" no-wheel placeholder="时延" v-model="interval" min="50"></b-form-input>
           <b-input-group-append>
             <b-button variant="outline-danger" v-on:click="rejudgeProblem">重测</b-button>
           </b-input-group-append>
@@ -54,6 +58,21 @@
       <p>请在下方输入：<strong>{{desiredText}}</strong></p>
       <b-form-input type="text" placeholder="请输入..." v-model="captcha"></b-form-input>
     </b-modal>
+
+    <b-modal title="正在进行重测..." centered id="rejudge-problem-processing-modal" ok-only
+             :ok-disabled="processing || submittingRejudges !== 0"
+             :hide-header-close="processing || submittingRejudges !== 0"
+             ok-title="关闭" no-close-on-backdrop no-close-on-esc>
+      <b-progress class="mt-2" :max="submissionsCount" animated>
+        <b-progress-bar :value="successRejudges" variant="success"></b-progress-bar>
+        <b-progress-bar :value="submittingRejudges" variant="warning"></b-progress-bar>
+        <b-progress-bar :value="failedRejudges" variant="danger"></b-progress-bar>
+      </b-progress>
+      <p class="text-center text-muted mt-3" v-if="processing || submittingRejudges !== 0">正在提交重测...完成{{successRejudges}}，失败{{failedRejudges}}，正在提交{{submittingRejudges}}</p>
+      <p class="text-center text-muted mt-3" v-else>已经完成重测。成功{{successRejudges}}，失败{{failedRejudges}}</p>
+      <p class="text-center text-muted mt-3" v-if="failedSubmissions.length > 0">所有失败的重测：{{JSON.stringify(this.failedSubmissions)}}</p>
+    </b-modal>
+
   </div>
 </template>
 
@@ -67,7 +86,15 @@ export default {
       pid: null,
       sid: null,
       captcha: '',
-      desiredText: '我已阅读并知悉所有警告并愿意为此负责'
+      desiredText: '我已阅读并知悉所有警告并愿意为此负责',
+      processing: false,
+      interval: 50,
+      submissionsCount: 0,
+      successRejudges: 0,
+      submittingRejudges: 0,
+      failedRejudges: 0,
+      submissions: [],
+      failedSubmissions: []
     }
   },
   methods: {
@@ -91,10 +118,56 @@ export default {
     },
     rejudgeProblemModalOK: function () {
       if (this.desiredText === this.captcha) {
-        this.$bvModal.msgBoxOk('还没做好', {centered: true, size: 'sm', okTitle: '关闭', title: '重测失败'})
+        if (this.interval < 50) {
+          this.$bvModal.msgBoxOk('时间间隔不合法。', {centered: true, size: 'sm', okTitle: '关闭', title: '重测失败'})
+        } else {
+          this.rejudgeProblemProcess()
+        }
       } else {
         this.$bvModal.msgBoxOk('未正确输入，不会进行重测。', {centered: true, size: 'sm', okTitle: '关闭', title: '重测失败'})
       }
+    },
+    rejudgeProblemProcess: function () {
+      this.processing = true
+      this.submittingRejudges = 0
+      this.failedRejudges = 0
+      this.successRejudges = 0
+      this.failedSubmissions = 0
+      this.$http.get(`${window.backendOrigin}/api/solutions?pid=${this.pid}`, ).then(res => {
+        if (res.status === 200) {
+          this.submissions = res.data
+          this.submissionsCount = res.data.length
+          let worker = (index) => {
+            if (index < this.submissions.length) {
+              this.submittingRejudges += 1
+              this.$http.get(`${window.backendOrigin}/api/admin/rejudge/sid/${this.submissions[index].sid}`).then(res => {
+                if (res.status === 200) {
+                  this.submittingRejudges -= 1
+                  this.successRejudges += 1
+                } else {
+                  this.submittingRejudges -= 1
+                  this.failedRejudges += 1
+                  this.failedSubmissions.push(this.submissions[index].sid)
+                }
+                // eslint-disable-next-line no-unused-vars
+              }, _ => {
+                this.submittingRejudges -= 1
+                this.failedRejudges += 1
+                this.failedSubmissions.push(this.submissions[index].sid)
+              })
+              setTimeout(worker, this.interval, index + 1)
+            } else {
+              this.processing = false
+            }
+          }
+          setTimeout(worker, this.interval, 0)
+          this.$bvModal.show('rejudge-problem-processing-modal')
+        } else {
+          this.$bvModal.msgBoxOk(code2str(res.status), {centered: true, size: 'sm', okTitle: '关闭', title: '获取题目的提交列表失败'})
+        }
+      }, e => {
+        this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, size: 'sm', okTitle: '关闭', title: '获取题目的提交列表失败'})
+      })
     }
   }
 }
