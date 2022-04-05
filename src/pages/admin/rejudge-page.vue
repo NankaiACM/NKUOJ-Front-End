@@ -64,9 +64,9 @@
              :hide-header-close="processing || submittingRejudges !== 0"
              ok-title="关闭" no-close-on-backdrop no-close-on-esc>
       <b-progress class="mt-2" :max="submissionsCount" animated>
+        <b-progress-bar :value="failedRejudges" variant="danger"></b-progress-bar>
         <b-progress-bar :value="successRejudges" variant="success"></b-progress-bar>
         <b-progress-bar :value="submittingRejudges" variant="warning"></b-progress-bar>
-        <b-progress-bar :value="failedRejudges" variant="danger"></b-progress-bar>
       </b-progress>
       <p class="text-center text-muted mt-3" v-if="processing || submittingRejudges !== 0">正在提交重测...完成{{successRejudges}}，失败{{failedRejudges}}，正在提交{{submittingRejudges}}</p>
       <p class="text-center text-muted mt-3" v-else>已经完成重测。成功{{successRejudges}}，失败{{failedRejudges}}</p>
