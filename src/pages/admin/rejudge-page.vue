@@ -132,7 +132,7 @@ export default {
       this.submittingRejudges = 0
       this.failedRejudges = 0
       this.successRejudges = 0
-      this.failedSubmissions = 0
+      this.failedSubmissions = []
       this.$http.get(`${window.backendOrigin}/api/solutions?pid=${this.pid}`, ).then(res => {
         if (res.status === 200) {
           this.submissions = res.data
