@@ -10,7 +10,7 @@
             </div>
             <div class="form-group">
               <label>代码</label>
-              <b-form-textarea v-model="sourceCode" placeholder="粘贴您的代码"></b-form-textarea>
+              <b-form-textarea v-model="sourceCode" placeholder="粘贴您的代码" rows="12"></b-form-textarea>
             </div>
             <div class="form-group">
               <b-form-checkbox v-model="codePublic" value="true" unchecked-value="false">

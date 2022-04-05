@@ -1,6 +1,6 @@
 <template>
-  <b-modal id="tracing-modal" :title="'评测 #' + statusId" size="sm" centered no-close-on-esc no-close-on-backdrop
-           hide-header-close ok-only :ok-disabled="!judgeFinished" ok-title="关闭">
+  <b-modal id="tracing-modal" :title="'评测 #' + statusId" size="md" centered no-close-on-esc no-close-on-backdrop
+           hide-header-close :ok-only="!judgeFinished" :ok-disabled="!judgeFinished" ok-title="关闭" cancel-title="查看" @cancel="viewSubmission">
     <div class="form-row align-items-center">
       <div class="container text-center" v-if="statusUpdateTries <= 0">
         <h5>(っ╥╯﹏╰╥c)</h5>
@@ -62,6 +62,9 @@ export default {
         this.judgeFinished = true
       })
     },
+    viewSubmission: function () {
+      this.$router.push(`/submission/${this.statusId}`)
+    }
   },
   watch: {
     statusShouldUpdate: {
