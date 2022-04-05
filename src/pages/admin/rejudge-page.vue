@@ -70,7 +70,7 @@
       </b-progress>
       <p class="text-center text-muted mt-3" v-if="processing || submittingRejudges !== 0">正在提交重测...完成{{successRejudges}}，失败{{failedRejudges}}，正在提交{{submittingRejudges}}</p>
       <p class="text-center text-muted mt-3" v-else>已经完成重测。成功{{successRejudges}}，失败{{failedRejudges}}</p>
-      <p class="text-center text-muted mt-3" v-if="failedSubmissions.length > 0">所有失败的重测：{{JSON.stringify(this.failedSubmissions)}}</p>
+      <p class="text-center text-muted mt-3 text-break" v-if="failedSubmissions.length > 0">所有失败的重测：<br> {{JSON.stringify(this.failedSubmissions)}}</p>
     </b-modal>
 
   </div>
