@@ -53,10 +53,23 @@
         </b-card>
       </div>
       <div class="col-md-8 order-md-first order-last">
-        <status-details :details="data.detail" v-if="data.detail" class="mb-4"></status-details>
-        <b-card bg-variant="light" class="p-5 mb-4" v-else>
-          <h2 class="text-center text-muted">无法查看测试点详情</h2>
-        </b-card>
+        <b-skeleton-wrapper :loading="loading">
+          <template #loading>
+            <b-card class="mb-4">
+              <b-skeleton :width="`${Math.floor(Math.random() * 80 + 20)}%`"
+                          v-for="i in Array(8).keys()" :key="i"></b-skeleton>
+            </b-card>
+          </template>
+
+          <status-details :details="data.detail" v-if="data.detail" class="mb-4"></status-details>
+          <b-alert show variant="info" v-else class="mb-4">
+            <h4 class="alert-heading">无法查看测试点详情</h4>
+            <hr>
+            <p class="mb-0">
+              对于编译失败的题目，代码未进行测试，您无法查看测试点通过详情。非公开的提交不会向您提供测试点详情。通过制的题目不会计分，亦不会提供测试点详情。
+            </p>
+          </b-alert>
+        </b-skeleton-wrapper>
 
         <b-card title="代码" class="mb-4" v-if="data.code || loading">
           <b-skeleton-wrapper :loading="loading">
@@ -68,9 +81,13 @@
             <pre><code>{{data.code}}</code></pre>
           </b-skeleton-wrapper>
         </b-card>
-        <b-card bg-variant="light" class="p-5 mb-4" v-else>
-          <h2 class="text-center text-muted">没有权限查看该代码</h2>
-        </b-card>
+        <b-alert show variant="warning" v-else class="mb-4">
+          <h4 class="alert-heading">没有权限查看该代码</h4>
+          <hr>
+          <p class="mb-0">
+            您没有权限查看该代码。只有代码的提交者将其设为公开后才能被查看。为了防止抄袭代码，作业、考试、竞赛的提交在其截止之前不会向他人公开。
+          </p>
+        </b-alert>
       </div>
     </div>
 
