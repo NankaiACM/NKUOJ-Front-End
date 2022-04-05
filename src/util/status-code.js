@@ -4,7 +4,7 @@ export default function (code) {
     100: 'PROC',
     107: 'AC',
     0: 'AC',
-    1: 'AC*',
+    1: 'PE',
     102: 'WA',
     2: 'WA',
     108: 'AC*',
