@@ -121,7 +121,25 @@ export default {
     updateFilters: function () {
       this.loadStatus()
       this.changePage(1)
+      this.saveFilterPreferences()
       this.$bvModal.hide('filter-modal')
+    },
+    loadFilterPreferences: function () {
+      if (this.$store.state.preferences.statusFilterHasPreferences) {
+        this.filters.nickname = this.$store.state.preferences.statusFilterNickname
+        this.filters.uid = this.$store.state.preferences.statusFilterUID
+        this.filters.pid = this.$store.state.preferences.statusFilterPID
+      } else {
+        this.saveFilterPreferences()
+      }
+    },
+    saveFilterPreferences: function () {
+      this.$store.commit('setPreferencesItem', {
+        statusFilterNickname: this.filters.nickname,
+        statusFilterUID: this.filters.uid,
+        statusFilterPID: this.filters.pid,
+        statusFilterHasPreferences: true
+      })
     },
     filtersToString: function (flag) {
       let ret = ''
@@ -151,6 +169,7 @@ export default {
       this.$router.push(`/submission/${this.jumpID}`)
     }
   }, mounted() {
+    this.loadFilterPreferences()
     this.loadStatus()
     this.changePage(1)
   }

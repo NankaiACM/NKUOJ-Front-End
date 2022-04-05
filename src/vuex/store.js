@@ -23,6 +23,12 @@ export default new Vuex.Store({
       permission: 0,
       username: '',
       nickname: '',
+    },
+    preferences: {
+      statusFilterUID: null,
+      statusFilterPID: null,
+      statusFilterNickname: null,
+      statusFilterHasPreferences: false
     }
   },
   getters: {
@@ -54,6 +60,15 @@ export default new Vuex.Store({
       state.userData.username = ''
       state.userData.nickname = ''
       sessionStorage.clear()
+    },
+    setPreferences (state, payload) {
+      state.preferences = payload
+    },
+    setPreferencesItem (state, payload) {
+      for (const [key, val] of Object.entries(payload)) {
+        state.preferences[key] = val
+        console.log(key, val)
+      }
     }
   }
 })
