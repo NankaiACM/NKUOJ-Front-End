@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import code2str from "@/util/code";
+// import code2str from "@/util/code";
 
 export default {
   name: "rejudge-page",
@@ -73,17 +73,19 @@ export default {
   methods: {
     rejudgeSubmission: function () {
       this.$bvModal.msgBoxConfirm(`确定重新测评 #${this.sid}？`, {centered: true, title: '重测提交', okTitle: '确定', cancelTitle: '取消'}).then(value => {
-        if (value) {
-          this.$http.get(`${window.backendOrigin}/api/admin/rejudge/sid/${this.sid}`).then(res => {
-            if (res.status === 200) {
-              this.$bvModal.msgBoxOk(`已经向服务器提交对 #${this.sid} 的重测`, {centered: true, size: 'sm', okTitle: '关闭', title: '提示'})
-            } else {
-              this.$bvModal.msgBoxOk(code2str(res.status), {title: '提示', centered: true})
-            }
-          }, e => {
-            this.$bvModal.msgBoxOk(code2str(e.status), {title: '提示', centered: true})
-          })
-        }
+        // if (value) {
+        //   this.$http.get(`${window.backendOrigin}/api/admin/rejudge/sid/${this.sid}`).then(res => {
+        //     if (res.status === 200) {
+        //       this.$bvModal.msgBoxOk(`已经向服务器提交对 #${this.sid} 的重测`, {centered: true, size: 'sm', okTitle: '关闭', title: '提示'})
+        //     } else {
+        //       this.$bvModal.msgBoxOk(code2str(res.status), {title: '提示', centered: true})
+        //     }
+        //   }, e => {
+        //     this.$bvModal.msgBoxOk(code2str(e.status), {title: '提示', centered: true})
+        //   })
+        // }
+        if (value)
+          this.$bvModal.msgBoxOk('还没做好', {centered: true, size: 'sm', okTitle: '关闭', title: '重测失败'})
       })
     },
     rejudgeProblem: function () {
