@@ -42,24 +42,60 @@
         </b-input-group>
       </div>
     </b-card>
+
+    <b-modal title="重测题目" centered id="rejudge-problem-modal" ok-title="重测" cancel-title="取消" @ok="rejudgeProblemModalOK">
+      <b-alert show variant="danger" class="mb-4">
+        <h4 class="alert-heading">再次警告！</h4>
+        <hr>
+        <p>
+          对整个问题的所有提交进行重测会导致大规模的提交排队现象！
+        </p>
+      </b-alert>
+      <p>请在下方输入：<strong>{{desiredText}}</strong></p>
+      <b-form-input type="text" placeholder="请输入..." v-model="captcha"></b-form-input>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import code2str from "@/util/code";
+
 export default {
   name: "rejudge-page",
   data: function () {
     return {
       pid: null,
-      sid: null
+      sid: null,
+      captcha: '',
+      desiredText: '我已阅读并知悉所有警告并愿意为此负责'
     }
   },
   methods: {
     rejudgeSubmission: function () {
-
+      this.$bvModal.msgBoxConfirm(`确定重新测评 #${this.sid}？`, {centered: true, title: '重测提交', okTitle: '确定', cancelTitle: '取消'}).then(value => {
+        if (value) {
+          this.$http.get(`${window.backendOrigin}/api/admin/rejudge/sid/${this.sid}`).then(res => {
+            if (res.status === 200) {
+              this.$bvModal.msgBoxOk(`已经向服务器提交对 #${this.sid} 的重测`, {centered: true, size: 'sm', okTitle: '关闭', title: '提示'})
+            } else {
+              this.$bvModal.msgBoxOk(code2str(res.status), {title: '提示', centered: true})
+            }
+          }, e => {
+            this.$bvModal.msgBoxOk(code2str(e.status), {title: '提示', centered: true})
+          })
+        }
+      })
     },
-    rejudgeProblem: function () {}
-
+    rejudgeProblem: function () {
+      this.$bvModal.show('rejudge-problem-modal')
+    },
+    rejudgeProblemModalOK: function () {
+      if (this.desiredText === this.captcha) {
+        this.$bvModal.msgBoxOk('还没做好', {centered: true, size: 'sm', okTitle: '关闭', title: '重测失败'})
+      } else {
+        this.$bvModal.msgBoxOk('未正确输入，不会进行重测。', {centered: true, size: 'sm', okTitle: '关闭', title: '重测失败'})
+      }
+    }
   }
 }
 </script>
