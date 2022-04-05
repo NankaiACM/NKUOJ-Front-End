@@ -59,7 +59,7 @@
       <b-form-input type="text" placeholder="请输入..." v-model="captcha"></b-form-input>
     </b-modal>
 
-    <b-modal title="正在进行重测..." centered id="rejudge-problem-processing-modal" ok-only
+    <b-modal :title="(processing || submittingRejudges !== 0) ? '正在进行重测...' : '重测完成'" centered id="rejudge-problem-processing-modal" ok-only
              :ok-disabled="processing || submittingRejudges !== 0"
              :hide-header-close="processing || submittingRejudges !== 0"
              ok-title="关闭" no-close-on-backdrop no-close-on-esc>
