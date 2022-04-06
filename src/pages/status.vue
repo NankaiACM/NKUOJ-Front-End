@@ -89,6 +89,7 @@ export default {
   methods: {
     changePage: function (number) {
       this.currentPage = number
+      this.loadRowsCount()
       this.$http.get(`${window.backendOrigin}/api/solutions?page=${this.currentPage}&item=20${this.filtersToString(true)}`, ).then(res => {
         this.items = []
         for(const item of res.data) {
@@ -102,7 +103,7 @@ export default {
         this.items = []
       })
     },
-    loadStatus: function () {
+    loadRowsCount: function () {
       this.$http.get(`${window.backendOrigin}/api/solutions/total${this.filtersToString(false)}`, ).then(res => {
         this.totalRows = res.data
       }, e => {
@@ -119,7 +120,7 @@ export default {
       return uid2Str(uid)
     },
     updateFilters: function () {
-      this.loadStatus()
+      this.loadRowsCount()
       this.changePage(1)
       this.saveFilterPreferences()
       this.$bvModal.hide('filter-modal')
@@ -170,7 +171,7 @@ export default {
     }
   }, mounted() {
     this.loadFilterPreferences()
-    this.loadStatus()
+    this.loadRowsCount()
     this.changePage(1)
   }
 }
