@@ -18,7 +18,7 @@
           <b-card :title="announcement.title" :sub-title="`${getLocaleDate(announcement.time)}`" v-for="announcement in announcements"
                   :key="announcement.id" class="mb-3">
             <b-card-text>
-              <pre>{{announcement.content}}</pre>
+              <pre class="text-wrap">{{announcement.content}}</pre>
             </b-card-text>
 
             <b-link :href="`/announcement/${announcement.id}`" class="text-decoration-none text-muted">查看详情</b-link>

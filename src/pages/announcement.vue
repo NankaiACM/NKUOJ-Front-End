@@ -19,7 +19,7 @@
 
         <b-card title="详情">
           <b-card-text>
-            <pre>{{announcement.content}}</pre>
+            <pre class="text-wrap">{{announcement.content}}</pre>
           </b-card-text>
         </b-card>
       </b-skeleton-wrapper>
