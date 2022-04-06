@@ -51,7 +51,7 @@
             <p class="mb-1 text-muted">
               {{getLocaleDate(activity.object.time)}} 发布
             </p>
-            <pre class="mb-1 text-wrap">{{activity.object.content}}</pre>
+            <pre class="mb-1">{{activity.object.content}}</pre>
           </b-card>
           <b-card class="flex-column align-items-start" v-else>
             <h5 class="mb-1"><span class="badge bg-info text-light mr-2">作业</span>{{activity.object.name}}</h5>
@@ -138,5 +138,8 @@ export default {
 </script>
 
 <style scoped>
-
+pre {
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
 </style>

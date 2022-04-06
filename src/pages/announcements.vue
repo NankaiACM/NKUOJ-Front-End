@@ -18,7 +18,7 @@
           <b-card :title="announcement.title" :sub-title="`${getLocaleDate(announcement.time)}`" v-for="announcement in announcements"
                   :key="announcement.id" class="mb-3">
             <b-card-text>
-              <pre class="text-wrap">{{announcement.content}}</pre>
+              <pre>{{announcement.content}}</pre>
             </b-card-text>
 
             <b-link :href="`/announcement/${announcement.id}`" class="text-decoration-none text-muted">查看详情</b-link>
@@ -58,5 +58,8 @@ export default {
 </script>
 
 <style scoped>
-
+pre {
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
 </style>

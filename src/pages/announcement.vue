@@ -19,7 +19,7 @@
 
         <b-card title="详情">
           <b-card-text>
-            <pre class="text-wrap">{{announcement.content}}</pre>
+            <pre>{{announcement.content}}</pre>
           </b-card-text>
         </b-card>
       </b-skeleton-wrapper>
@@ -55,5 +55,8 @@ export default {
 </script>
 
 <style scoped>
-
+pre {
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
 </style>
