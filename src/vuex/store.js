@@ -28,7 +28,6 @@ export default new Vuex.Store({
       statusFilterUID: null,
       statusFilterPID: null,
       statusFilterNickname: null,
-      statusFilterHasPreferences: false
     }
   },
   getters: {

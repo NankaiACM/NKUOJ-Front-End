@@ -40,14 +40,16 @@
                   @change="changePage" align="center" class="m-4" first-number last-number></b-pagination>
 
     <b-modal id="filter-modal" title="筛选" ok-title="确定" ok-only centered @ok="updateFilters">
+      <label>筛选用户：</label>
       <b-form-group label="用户 UID:" label-for="input-uid" label-cols-sm="3" label-align-sm="right" label-size="sm">
         <b-form-input id="input-uid" type="number" size="sm" placeholder="所有用户" min="1" v-model="filters.uid" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
       </b-form-group>
-      <b-form-group label="题目 PID:" label-for="input-pid" label-cols-sm="3" label-align-sm="right" label-size="sm">
-        <b-form-input id="input-pid" type="number" size="sm" placeholder="所有题目" min="1" v-model="filters.pid" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
-      </b-form-group>
       <b-form-group label="昵称:" label-for="input-nickname" label-cols-sm="3" label-align-sm="right" label-size="sm">
         <b-form-input id="input-nickname" type="text" size="sm" placeholder="所有用户" min="1" v-model="filters.nickname" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
+      </b-form-group>
+      <label>筛选题目：</label>
+      <b-form-group label="题目 PID:" label-for="input-pid" label-cols-sm="3" label-align-sm="right" label-size="sm">
+        <b-form-input id="input-pid" type="number" size="sm" placeholder="所有题目" min="1" v-model="filters.pid" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
       </b-form-group>
     </b-modal>
 
@@ -81,7 +83,8 @@ export default {
       filters: {
         uid: this.$store.getters.getUID,
         pid: null,
-        nickname: ''
+        nickname: '',
+        meOnly: false
       },
       jumpID: 0
     }
@@ -126,20 +129,15 @@ export default {
       this.$bvModal.hide('filter-modal')
     },
     loadFilterPreferences: function () {
-      if (this.$store.state.preferences.statusFilterHasPreferences) {
-        this.filters.nickname = this.$store.state.preferences.statusFilterNickname
-        this.filters.uid = this.$store.state.preferences.statusFilterUID
-        this.filters.pid = this.$store.state.preferences.statusFilterPID
-      } else {
-        this.saveFilterPreferences()
-      }
+      this.filters.nickname = this.$store.state.preferences.statusFilterNickname
+      this.filters.uid = this.$store.state.preferences.statusFilterUID
+      this.filters.pid = this.$store.state.preferences.statusFilterPID
     },
     saveFilterPreferences: function () {
       this.$store.commit('setPreferencesItem', {
         statusFilterNickname: this.filters.nickname,
         statusFilterUID: this.filters.uid,
         statusFilterPID: this.filters.pid,
-        statusFilterHasPreferences: true
       })
     },
     filtersToString: function (flag) {
