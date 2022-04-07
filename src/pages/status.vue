@@ -47,6 +47,7 @@
       <b-form-group label="昵称:" label-for="input-nickname" label-cols-sm="3" label-align-sm="right" label-size="sm">
         <b-form-input id="input-nickname" type="text" size="sm" placeholder="所有用户" min="1" v-model="filters.nickname" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
       </b-form-group>
+      <small class="text-muted">您的UID: {{uid}}</small>
       <label>筛选题目：</label>
       <b-form-group label="题目 PID:" label-for="input-pid" label-cols-sm="3" label-align-sm="right" label-size="sm">
         <b-form-input id="input-pid" type="number" size="sm" placeholder="所有题目" min="1" v-model="filters.pid" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
@@ -81,7 +82,7 @@ export default {
       totalRows: 0,
       uid: this.$store.getters.getUID,
       filters: {
-        uid: this.$store.getters.getUID,
+        uid: null,
         pid: null,
         nickname: '',
         meOnly: false
