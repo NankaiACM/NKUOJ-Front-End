@@ -7,9 +7,13 @@
     <div class="container">
       <div class="row d-flex justify-content-center">
         <div class="col-md-6">
-          <b-alert variant="info" show class="text-center" v-if="checkIfUsingIP">请使用<b-link href="https://acm.nankai.edu.cn/">acm.nankai.edu.cn</b-link>访问我们的网页～</b-alert>
+          <b-alert variant="info" show class="text-center mt-5 md-5 p-5" v-if="checkIfUsingIP">
+            <h4>网站域名已经可用！</h4>
+            <hr>
+            <p class="mt-5 md-5">请使用<b-link href="https://acm.nankai.edu.cn/">acm.nankai.edu.cn</b-link>访问我们的网页～</p>
+          </b-alert>
 
-          <div class="card text-center m-3 shadow-sm">
+          <div class="card text-center m-3 shadow-sm" v-else>
             <img src="../assets/Sakura_Nene_CPP.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">南开大学计算机课程辅助评测系统</h5>
