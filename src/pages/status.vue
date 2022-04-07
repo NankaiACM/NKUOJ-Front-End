@@ -54,7 +54,7 @@
     </b-modal>
 
     <b-modal id="jump-modal" title="跳转到某个记录" ok-title="确定" ok-only centered @ok="jumpToSubmission">
-      <b-form-input type="number" size="sm" placeholder="键入提交记录的ID..." min="0" v-model="jumpID" no-wheel @keydown.enter.native="jumpToSubmission"></b-form-input>
+      <b-form-input type="number" size="sm" placeholder="键入提交记录的ID..." v-model="jumpID" no-wheel @keydown.enter.native="jumpToSubmission"></b-form-input>
     </b-modal>
   </div>
 </template>
@@ -86,7 +86,7 @@ export default {
         nickname: '',
         meOnly: false
       },
-      jumpID: 0
+      jumpID: null
     }
   },
   methods: {
