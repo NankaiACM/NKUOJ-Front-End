@@ -7,6 +7,8 @@
     <div class="container">
       <div class="row d-flex justify-content-center">
         <div class="col-md-6">
+          <b-alert variant="info" show class="text-center" v-if="checkIfUsingIP">请使用<b-link href="https://acm.nankai.edu.cn/">acm.nankai.edu.cn</b-link>访问我们的网页～</b-alert>
+
           <div class="card text-center m-3 shadow-sm">
             <img src="../assets/Sakura_Nene_CPP.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -66,6 +68,11 @@ export default {
       this.$refs['signup-modal'].show()
     },
   },
+  computed: {
+    checkIfUsingIP: function () {
+      return window.location.href.indexOf('222.30.51.68:8080') > -1
+    }
+  }
 }
 </script>
 
