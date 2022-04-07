@@ -9,6 +9,7 @@
     <b-list-group flush>
       <b-list-group-item href="/profile" class="text-center">用户中心</b-list-group-item>
       <b-list-group-item href="/admin/home" v-if="$store.getters.isAdministrator" class="text-center">管理面板</b-list-group-item>
+      <b-list-group-item href="/courses" class="text-center">加入课程</b-list-group-item>
       <b-list-group-item href="/logout" class="text-center text-danger">退出</b-list-group-item>
     </b-list-group>
   </b-card>

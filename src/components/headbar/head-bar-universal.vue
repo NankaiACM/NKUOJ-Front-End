@@ -11,7 +11,6 @@
             <b-nav-item @click="$emit('toHome')">主页</b-nav-item>
             <b-nav-item @click="$emit('toProblem')">题目</b-nav-item>
             <b-nav-item @click="$emit('toStatus')">记录</b-nav-item>
-            <b-nav-item @click="$emit('toCourse')">课程</b-nav-item>
             <!--<b-nav-item @click="$emit('toContest')">竞考</b-nav-item>-->
             <!--<b-nav-item @click="$emit('toDiscuss')">讨论</b-nav-item>-->
             <!--<b-nav-item @click="$emit('toVideos')">视频</b-nav-item>-->
@@ -24,6 +23,7 @@
               <b-dropdown-item href="/profile">用户中心</b-dropdown-item>
               <b-dropdown-item @click="showDrawStick">每日签到</b-dropdown-item>
               <b-dropdown-item href="/admin/home" v-if="$store.getters.isAdministrator">管理面板</b-dropdown-item>
+              <b-dropdown-item href="/courses">加入课程</b-dropdown-item>
               <b-dropdown-item href="/logout">退出</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>

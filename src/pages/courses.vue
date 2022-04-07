@@ -3,7 +3,7 @@
     <div class="container">
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-4">课程</h1>
+          <h1 class="display-4">加入课程</h1>
           <p class="lead">查看和加入课程。</p>
         </div>
       </div>
