@@ -4,6 +4,7 @@
  * @type {import('@vue/cli-service').ProjectOptions}
  */
 module.exports = {
-  runtimeCompiler: true
+  runtimeCompiler: true,
+  productionSourceMap: false
 }
 
