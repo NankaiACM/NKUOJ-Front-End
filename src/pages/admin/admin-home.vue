@@ -11,10 +11,10 @@
       <div class="col-md-4 p-3 d-flex" v-for="route in routes" :key="route">
         <div class="card flex-fill">
           <div class="card-header text-center">
-            <a :href="route.href" class="card-link text-dark stretched-link">{{route.title}}</a>
+            <a :href="route.href" class="card-link text-dark stretched-link">{{ route.title }}</a>
           </div>
           <div class="card-body">
-            <p class="card-text text-center">{{route.description}}</p>
+            <p class="card-text text-center">{{ route.description }}</p>
           </div>
         </div>
       </div>
@@ -27,36 +27,40 @@ export default {
   name: 'admin-home',
   data: function () {
     return {
-      routes: [ {
-        title: '题目管理',
-        href: '/admin/problem',
-        description: '创建和修改题目。'
-       }, {
-        title: '重测',
-        href: '/admin/rejudge',
-        description: '对题目的所有提交或者单个提交进行重测。'
-      },
-      //{
-      //   title: '作业管理',
-      //   href: '/admin/assignment',
-      //   description: '创建、修改、分发作业，分发作业需要指定课程。在此查看作业完成情况。'
-      // }, {
-      //   title: '课程管理',
-      //   href: '/admin/course',
-      //   description: '创建、修改课程。为课程添加学生。'
-      // }, {
-      //   title: '竞赛和考试管理',
-      //   href: '/admin/contest',
-      //   description: '注册、修改竞赛和考试，亦可批量报名考试。'
-      // }, {
-      //   title: '公告管理',
-      //   href: '/admin/announcement',
-      //   description: '创建、修改公告。'
-      // }, {
-      //   title: '用户数据管理',
-      //   href: '/admin/user',
-      //   description: '修改用户数据、授权。'
-      // }
+      routes: [{
+          title: '题目管理',
+          href: '/admin/problem',
+          description: '创建、修改、克隆题目和上传下载数据。'
+        }, {
+          title: '重测',
+          href: '/admin/rejudge',
+          description: '对题目的所有提交或者单个提交进行重测。'
+        }, {
+          title: '完成数据',
+          href: '/admin/statistics',
+          description: '查看和下载题目完成数据。'
+        },
+        //{
+        //   title: '作业管理',
+        //   href: '/admin/assignment',
+        //   description: '创建、修改、分发作业，分发作业需要指定课程。在此查看作业完成情况。'
+        // }, {
+        //   title: '课程管理',
+        //   href: '/admin/course',
+        //   description: '创建、修改课程。为课程添加学生。'
+        // }, {
+        //   title: '竞赛和考试管理',
+        //   href: '/admin/contest',
+        //   description: '注册、修改竞赛和考试，亦可批量报名考试。'
+        // }, {
+        //   title: '公告管理',
+        //   href: '/admin/announcement',
+        //   description: '创建、修改公告。'
+        // }, {
+        //   title: '用户数据管理',
+        //   href: '/admin/user',
+        //   description: '修改用户数据、授权。'
+        // }
       ]
     }
   }

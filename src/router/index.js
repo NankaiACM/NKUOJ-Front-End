@@ -22,6 +22,7 @@ const announcementPage = () => import('../pages/announcement')
 const administratorHomePage = () => import('../pages/admin/admin-home')
 const administratorProblemPage = () => import('../pages/admin/problem-page')
 const administratorRejudgePage = () => import('../pages/admin/rejudge-page')
+const administratorSatisticsPage = () => import('../pages/admin/statistics-page')
 const administratorContestPage = () => import('../pages/admin/contest-page')
 const administratorAssignmentPage = () => import('../pages/admin/assignment-page')
 const administratorCoursePage = () => import('../pages/admin/course-page')
@@ -74,6 +75,7 @@ const router = new Router({
       },
       { path: '/admin', redirect: '/admin/home', meta: { isAdministrator: true } },
       { path: '/admin/problem', component: administratorProblemPage, meta: { isAdministrator: true } },
+      { path: '/admin/statistics', component: administratorSatisticsPage, meta: { isAdministrator: true } },
       { path: '/admin/contest', component: administratorContestPage, meta: { isAdministrator: true } },
       { path: '/admin/assignment', component: administratorAssignmentPage, meta: { isAdministrator: true } },
       { path: '/admin/course', component: administratorCoursePage, meta: { isAdministrator: true } },
