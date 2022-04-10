@@ -43,8 +43,6 @@
 <script>
 import itemSelectCard from '../../components/admin/admin-problem-select-card'
 import code2str from "@/util/code";
-import status2text from "@/util/status-text";
-import status2variant from "@/util/status-variant";
 import uid2Str from "@/util/uidToStr";
 
 export default {
@@ -91,12 +89,6 @@ export default {
         console.log(e)
         this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '载入信息失败'})
       })
-    },
-    getStatusText: function (status) {
-      return status2text(status)
-    },
-    getStatusVariant: function (status) {
-      return status2variant(status)
     },
     uidToStr: function (uid) {
       return uid2Str(uid)
