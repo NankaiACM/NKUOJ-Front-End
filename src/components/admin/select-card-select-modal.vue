@@ -3,7 +3,7 @@
     <div class="container">
       <div class="form-group">
         <label>ID:</label>
-        <b-form-input type="text" v-model="itemID"></b-form-input>
+        <b-form-input type="text" v-model="itemID" @keydown.enter.native="submit"></b-form-input>
       </div>
     </div>
   </b-modal>
@@ -25,6 +25,7 @@ export default {
       this.$bvModal.show('select-modal')
     },
     submit: function () {
+      this.$bvModal.hide('select-modal')
       if (this.itemID === '') {
         this.$bvModal.msgBoxOk('ID不能为空', {centered: true, title: '提示'})
       } else {
