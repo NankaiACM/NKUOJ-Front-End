@@ -26,11 +26,11 @@
       </b-table>
       <div class="container-fluid d-flex justify-content-center mt-4 mb-4">
         <b-button-group class="center">
-          <b-button variant="info" :disabled="isLoading">
+          <b-button variant="info" :disabled="isLoading" @click="downloadStatistics">
             <b-spinner small type="grow" v-if="isLoading"></b-spinner>
             下载数据
           </b-button>
-          <b-button variant="secondary" :disabled="isLoading">
+          <b-button variant="secondary" :disabled="isLoading" @click="downloadSourceCode">
             <b-spinner small type="grow" v-if="isLoading"></b-spinner>
             下载源码
           </b-button>
@@ -93,6 +93,28 @@ export default {
     uidToStr: function (uid) {
       return uid2Str(uid)
     },
+    downloadStatistics: function () {
+      this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/statistics`, {responseType: 'arraybuffer'})
+        .then(response => {
+          const blob = new Blob([response.data], {type: 'application/text'});
+
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = `statistics-${this.selectedId}.json`;
+          link.click();
+        })
+    },
+    downloadSourceCode: function () {
+      this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/statistics/code`, {responseType: 'arraybuffer'})
+        .then(response => {
+          const blob = new Blob([response.data], {type: 'application/zip'});
+
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = `source-code-${this.selectedId}.zip`;
+          link.click();
+        })
+    }
   }
 }
 </script>
