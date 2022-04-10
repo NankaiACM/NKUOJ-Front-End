@@ -2,7 +2,7 @@
   <div class="container">
     <item-select-card api="problem" @select="onItemSelected" :newable="false"></item-select-card>
     <div v-if="hasItemSelected" class="mt-3">
-      <b-alert show variant="secondary" class="text-center" dismissible fade>提示：统计数据只提供最近的最高分。</b-alert>
+      <b-alert show variant="secondary" class="text-center" dismissible fade>提示：统计数据只提供最高分中的最后一次提交。没有提交的用户不会计入统计。</b-alert>
       <b-table hover :items="items" :fields="fields" striped class="text-center mt-4" :busy="isLoading" responsive show-empty>
         <template #table-busy>
           <div class="text-center my-2">
