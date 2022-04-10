@@ -16,7 +16,7 @@
               <small>{{course.number}}</small>
             </div>
             <small v-if="course.public"> 公开 </small>
-            <small v-else class="text-info"> 需要验证加入 </small>
+            <small v-else> 需要验证加入 </small>
           </b-list-group-item>
         </b-list-group>
       </div>
