@@ -6,7 +6,7 @@
         <h3 v-else>正在编辑 #{{selectedItemId}}</h3>
 
         <b-button-group class="mt-3">
-          <b-button variant="outline-primary" @click="showSelectModal">选择</b-button>
+          <b-button variant="outline-primary" @click="showSelectModal">索引</b-button>
           <b-button variant="outline-success" @click="showBrowseModal">浏览</b-button>
           <b-button variant="outline-info" @click="showCreateModal" v-if="newable">新建</b-button>
         </b-button-group>

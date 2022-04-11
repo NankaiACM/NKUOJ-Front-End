@@ -36,7 +36,7 @@ export default {
           href: '/admin/rejudge',
           description: '对题目的所有提交或者单个提交进行重测。'
         }, {
-          title: '完成数据',
+          title: '题目完成数据',
           href: '/admin/statistics',
           description: '查看和下载题目完成数据。'
         },
