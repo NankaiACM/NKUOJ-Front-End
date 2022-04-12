@@ -1,7 +1,7 @@
 <template>
   <b-card no-body>
     <template #header>
-      <h6 class="m-1"><b-icon icon="trophy" class="mr-2"></b-icon>竞赛</h6>
+      <h6 class="m-1"><b-icon icon="trophy" class="mr-2"></b-icon>我的竞赛</h6>
     </template>
 
     <b-overlay :show="loading" rounded="sm">
