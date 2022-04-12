@@ -6,6 +6,7 @@
         <announcements-panel class="mb-2"></announcements-panel>
         <user-courses class="mb-2"></user-courses>
         <user-assignments class="mb-2"></user-assignments>
+        <user-exams class="mb-2"></user-exams>
         <user-contests class="mb-2"></user-contests>
       </div>
       <div class="col-md-4">
@@ -23,6 +24,7 @@ import userPanel from '../components/home/user-panel'
 import userCourses from '../components/home/user-courses'
 import userAssignments from '../components/home/user-assignments'
 import userContests from '../components/home/user-contests'
+import userExams from '../components/home/user-exams'
 import associationPoster from "@/components/home/association-poster";
 import AnnouncementsPanel from "@/components/home/announcements-panel";
 import Hitokoto from "@/components/home/hitokoto";
@@ -37,6 +39,7 @@ export default {
     userPanel,
     userCourses,
     userAssignments,
+    userExams,
     userContests,
     associationPoster
   },

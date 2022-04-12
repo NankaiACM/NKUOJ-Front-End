@@ -1,7 +1,7 @@
 <template>
   <b-card no-body>
     <template #header>
-      <h6 class="m-1"><b-icon icon="trophy" class="mr-2"></b-icon>竞赛</h6>
+      <h6 class="m-1"><b-icon icon="card-checklist" class="mr-2"></b-icon>考试</h6>
     </template>
 
     <b-overlay :show="loading" rounded="sm">
@@ -15,7 +15,7 @@
         [{{statusCode}}] 网络请求出错，内容获取失败。
       </b-card-body>
       <b-card-body v-else-if="contests.length === 0">
-        您没有报名的竞赛。
+        您没有报名的考试。
       </b-card-body>
     </b-overlay>
   </b-card>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'user-contests',
+  name: 'user-exams',
   data: function () {
     return {
       contests: [],
