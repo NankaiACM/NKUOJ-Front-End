@@ -24,9 +24,19 @@
       </div>
       <div class="form-group">
         <label>题面：</label>
-        <b-form-textarea v-model="dataObject.content"></b-form-textarea>
-        <small class="form-text text-muted">题面。使用Markdown语言，  <b-link @click="previewMarkdown">预览</b-link>。</small>
-        <small class="form-text text-muted">公式请使用`$和$`包围，例如`$e=mc^2$`。</small>
+        <b-form-group label="题面类型" v-slot="{ ariaDescribedby }">
+          <b-form-radio v-model="dataObject.extension" :aria-describedby="ariaDescribedby" name="some-radios" value="md">Markdown</b-form-radio>
+          <b-form-radio v-model="dataObject.extension" :aria-describedby="ariaDescribedby" name="some-radios" value="pdf">PDF</b-form-radio>
+        </b-form-group>
+        <div v-if="dataObject.extension === 'md'">
+          <b-form-textarea v-model="dataObject.content"></b-form-textarea>
+          <small class="form-text text-muted">题面。使用Markdown语言，  <b-link @click="previewMarkdown">预览</b-link>。</small>
+          <small class="form-text text-muted">公式请使用`$和$`包围，例如`$e=mc^2$`。</small>
+        </div>
+        <div v-else-if="dataObject.extension === 'pdf'">
+          <small class="form-text text-muted">暂不支持，请等待后续开发</small>
+<!--          <b-form-file v-model="pdfFile" placeholder="选择文件或者拖到这里..." drop-placeholder="拖到这里..."></b-form-file>-->
+        </div>
       </div>
       <div class="form-group">
         <label>时间限制：</label>
@@ -92,9 +102,11 @@ export default {
         cases: 0,
         timeLimit: 0,
         memoryLimit: 0,
-        content: '',
+        content: [],
         extension: 'md'
-      }
+      },
+      markdownText: '',
+      pdfFile: null
     }
   },
   methods: {
@@ -158,6 +170,14 @@ export default {
     },
     previewMarkdown: function () {
       this.$refs['preview-modal'].show()
+    }
+  },
+  watch: {
+    markdownText: function (newValue) {
+      this.dataObject.content = Buffer.from(newValue, "utf-8");
+    },
+    pdfFile: function (newValue) {
+      this.dataObject.content = Buffer.from(newValue)
     }
   }
 }
