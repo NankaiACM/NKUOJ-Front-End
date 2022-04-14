@@ -88,7 +88,7 @@ export default {
       captcha: '',
       desiredText: '我已阅读并知悉所有警告并愿意为此负责',
       processing: false,
-      interval: 50,
+      interval: 200,
       submissionsCount: 0,
       successRejudges: 0,
       submittingRejudges: 0,
@@ -118,7 +118,7 @@ export default {
     },
     rejudgeProblemModalOK: function () {
       if (this.desiredText === this.captcha) {
-        if (this.interval < 50) {
+        if (this.interval < 100) {
           this.$bvModal.msgBoxOk('时间间隔不合法。', {centered: true, size: 'sm', okTitle: '关闭', title: '重测失败'})
         } else {
           this.rejudgeProblemProcess()
