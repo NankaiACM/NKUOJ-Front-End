@@ -93,6 +93,7 @@ export default {
         timeLimit: 0,
         memoryLimit: 0,
         content: '',
+        extension: 'md'
       }
     }
   },
