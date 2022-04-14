@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <div class="jumbotron text-center">
-      <h1 class="display-6">{{ problemInfo.name ? problemInfo.name : '(～﹃～)~zZ' }}</h1>
+      <h1 class="display-6">{{ problemInfo.name ? problemInfo.name : '加载中...' }}</h1>
       <h4><span class="badge bg-danger text-light">题目</span></h4>
     </div>
     <problem-header :problem-info="problemInfo" :loading="loading" class="mb-3" :pid="problemInfo.pid"></problem-header>
     <problem-navigator :psid="problemInfo.psid" v-if="problemInfo.psid" :loading="loading" :pid="problemInfo.pid" class="mb-3">
     </problem-navigator>
-    <problem-content :markdown-text="markdownText" :loading="loading" class="mb-4"></problem-content>
+    <problem-content :type="extension" :content="content" :loading="loading" class="mb-4"></problem-content>
     <submit-modal ref="submit-modal" :pid="problemInfo.pid"></submit-modal>
     <status-list-modal ref="status-list-modal" :pid="problemInfo.pid" :uid="$store.getters.getUID"></status-list-modal>
     <div class="container d-flex justify-content-center">
@@ -37,9 +37,9 @@ export default {
   data: function () {
     return {
       problemInfo: {},
-      problemMarkDown: '',
       loading: true,
-      markdownText: ''
+      content: '',
+      extension: ''
     }
   },
   mounted: function () {
@@ -50,7 +50,8 @@ export default {
       this.$http.get(`${window.backendOrigin}/api/problem/id/${this.$route.params.problemId}`).then(
         res => {
           this.problemInfo = res.data
-          this.markdownText = new TextDecoder('utf-8').decode(new Uint8Array(this.problemInfo.content.data).buffer)
+          this.extension = this.problemInfo.extension
+          this.content = Buffer.from(new Uint8Array(this.problemInfo.content.data).buffer).toString('base64')
           this.loading = false
       })
     },

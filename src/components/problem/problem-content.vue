@@ -7,7 +7,8 @@
       </b-card>
     </template>
     <b-card class="p-3">
-      <div v-html="problemMarkDown"></div>
+      <div v-html="markdownView" v-if="type === 'md'"></div>
+      <vue-pdf-embed :source="`data:application/pdf;base64,${content}`" v-else-if="type === 'pdf'"/>
     </b-card>
   </b-skeleton-wrapper>
 </template>
@@ -17,6 +18,8 @@ import markdownIt from 'markdown-it'
 import markdownItMathjax from 'markdown-it-mathjax'
 import markdownItLatex from 'markdown-it-latex'
 import 'markdown-it-latex/dist/index.css'
+import VuePdfEmbed from 'vue-pdf-embed/dist/vue2-pdf-embed'
+
 const markdownItObject = markdownIt({
   html: true,
   linkify: true,
@@ -29,30 +32,42 @@ window.markdownit = markdownItObject
 
 export default {
   name: "problem-content",
+  components: {
+    VuePdfEmbed: VuePdfEmbed
+  },
   props: {
-    markdownText: String,
-    loading: Boolean
+    content: String,
+    loading: Boolean,
+    type: String
   },
   data: function () {
     return {
-      problemMarkDown: ''
+      markdownView: '',
     }
   },
   methods: {
     getMarkMathjaxLatex () {
-      let markdown = this.markdownText
+      let markdown = Buffer.from(this.content, 'base64').toString('utf-8');
       window.markdown = markdown
       return markdownItObject.render(markdown)
     },
     loadMarkdownView: function () {
-      this.problemMarkDown = this.getMarkMathjaxLatex()
+      this.markdownView = this.getMarkMathjaxLatex()
+    },
+    loadPDFView: function () {
+
+    },
+    reload: function () {
+      if (this.type === 'pdf') {
+        this.loadPDFView()
+      } else if (this.type === 'md') {
+        this.loadMarkdownView()
+      }
     }
   },
   watch: {
-    markdownText: {
-      handler() {
-        this.loadMarkdownView()
-      }
+    content: function () {
+      this.reload()
     }
   }
 }
