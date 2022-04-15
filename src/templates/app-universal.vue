@@ -45,10 +45,11 @@ export default {
             permission: res.data.permission,
             contest: res.data.contest
           })
-          // eslint-disable-next-line no-unused-vars
-        }, _ => {
-           this.$store.commit('clearUserData')
-           this.$router.push('/login')
+        }, error => {
+          if (error.status === 401) {
+            this.$store.commit('clearUserData')
+            this.$router.push('/login')
+          }
         })
       }
     }
