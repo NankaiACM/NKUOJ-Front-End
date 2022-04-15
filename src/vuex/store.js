@@ -1,18 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import Cookies from 'js-cookie'
 
+import SecureLS from "secure-ls";
+const ls = new SecureLS({ isCompression: false });
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
       storage: {
-        getItem: (key) => Cookies.get(key),
+        getItem: (key) => ls.get(key),
         setItem: (key, value) =>
-          Cookies.set(key, value, window.frontendCookiesWithSecure ? { expires: 7, secure: true } : {}),
-        removeItem: (key) => Cookies.remove(key),
+          ls.set(key, value),
+        removeItem: (key) => ls.remove(key),
       },
     })
   ],
