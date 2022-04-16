@@ -56,7 +56,8 @@ export default {
   },
   data: function () {
     return {
-      statistics: [],
+      statisticsJSON: [],
+      statisticsCSV: '',
       items: [],
       selectedId: 0,
       hasItemSelected: false,
@@ -82,7 +83,8 @@ export default {
       this.hasItemSelected = true
       this.isLoading = true
       this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/statistics`).then(res => {
-        this.statistics = res.data.json
+        this.statisticsJSON = res.data.json
+        this.statisticsCSV = res.data.csv
         this.items = []
         for(const item of res.data.json) {
           this.items.push({ status_id: item.sid, score: item.score, nickname: item.nickname, username: item.email,
@@ -98,26 +100,18 @@ export default {
       return uid2Str(uid)
     },
     downloadStatisticsJson: function () {
-      this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/statistics`, {responseType: 'arraybuffer'})
-        .then(response => {
-          const blob = new Blob([response.data.json], {type: 'application/text'});
-
-          const link = document.createElement('a');
-          link.href = window.URL.createObjectURL(blob);
-          link.download = `statistics-${this.selectedId}.json`;
-          link.click();
-        })
+      const blob = new Blob([JSON.stringify(this.statisticsJSON)], {type: 'application/text'});
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `statistics-${this.selectedId}.json`;
+      link.click();
     },
     downloadStatisticsCsv: function () {
-      this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/statistics`, {responseType: 'arraybuffer'})
-        .then(response => {
-          const blob = new Blob([response.data.csv], {type: 'application/text'});
-
-          const link = document.createElement('a');
-          link.href = window.URL.createObjectURL(blob);
-          link.download = `statistics-${this.selectedId}.csv`;
-          link.click();
-        })
+      const blob = new Blob([this.statisticsCSV], {type: 'application/text'});
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `statistics-${this.selectedId}.csv`;
+      link.click();
     },
     downloadSourceCode: function () {
       this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/statistics/code`, {responseType: 'arraybuffer'})
