@@ -24,15 +24,19 @@
           <h6>{{`#${uidToStr(data.value)}`}}</h6>
         </template>
       </b-table>
-      <div class="container-fluid d-flex justify-content-center mt-4 mb-4">
+      <div class="container-fluid d-flex justify-content-center mt-4 mb-4 position-sticky fixed-bottom">
         <b-button-group class="center">
-          <b-button variant="info" :disabled="isLoading" @click="downloadStatistics">
+          <b-button variant="success" :disabled="isLoading" @click="downloadStatisticsJson">
             <b-spinner small type="grow" v-if="isLoading"></b-spinner>
-            下载数据
+            下载数据 (Json)
+          </b-button>
+          <b-button variant="info" :disabled="isLoading" @click="downloadStatisticsCsv">
+            <b-spinner small type="grow" v-if="isLoading"></b-spinner>
+            下载数据 (Csv)
           </b-button>
           <b-button variant="secondary" :disabled="isLoading" @click="downloadSourceCode">
             <b-spinner small type="grow" v-if="isLoading"></b-spinner>
-            下载源码
+            下载源码 (Zip)
           </b-button>
         </b-button-group>
       </div>
@@ -78,9 +82,9 @@ export default {
       this.hasItemSelected = true
       this.isLoading = true
       this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/statistics`).then(res => {
-        this.statistics = res.data
+        this.statistics = res.data.json
         this.items = []
-        for(const item of res.data) {
+        for(const item of res.data.json) {
           this.items.push({ status_id: item.sid, score: item.score, nickname: item.nickname, username: item.email,
             status: item.status, uid: item.uid, name: item.realname, lang: item.lang })
         }
@@ -93,14 +97,25 @@ export default {
     uidToStr: function (uid) {
       return uid2Str(uid)
     },
-    downloadStatistics: function () {
+    downloadStatisticsJson: function () {
       this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/statistics`, {responseType: 'arraybuffer'})
         .then(response => {
-          const blob = new Blob([response.data], {type: 'application/text'});
+          const blob = new Blob([response.data.json], {type: 'application/text'});
 
           const link = document.createElement('a');
           link.href = window.URL.createObjectURL(blob);
           link.download = `statistics-${this.selectedId}.json`;
+          link.click();
+        })
+    },
+    downloadStatisticsCsv: function () {
+      this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/statistics`, {responseType: 'arraybuffer'})
+        .then(response => {
+          const blob = new Blob([response.data.csv], {type: 'application/text'});
+
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = `statistics-${this.selectedId}.csv`;
           link.click();
         })
     },
