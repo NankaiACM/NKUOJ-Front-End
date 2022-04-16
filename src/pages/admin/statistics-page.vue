@@ -24,7 +24,7 @@
           <h6>{{`#${uidToStr(data.value)}`}}</h6>
         </template>
       </b-table>
-      <div class="container-fluid d-flex justify-content-center mt-4 mb-4 position-sticky fixed-bottom">
+      <div class="container-fluid d-flex justify-content-center mt-4 mb-4 position-sticky fixed-bottom pb-1">
         <b-button-group class="center">
           <b-button variant="success" :disabled="isLoading" @click="downloadStatisticsJson">
             <b-spinner small type="grow" v-if="isLoading"></b-spinner>

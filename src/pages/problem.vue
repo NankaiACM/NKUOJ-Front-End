@@ -10,7 +10,7 @@
     <problem-content :type="extension" :content="content" :loading="loading" class="mb-4"></problem-content>
     <submit-modal ref="submit-modal" :pid="problemInfo.pid"></submit-modal>
     <status-list-modal ref="status-list-modal" :pid="problemInfo.pid" :uid="$store.getters.getUID"></status-list-modal>
-    <div class="fixed-bottom container d-flex justify-content-center pb-3 position-sticky">
+    <div class="fixed-bottom container d-flex justify-content-center pb-1 position-sticky">
       <div class="btn-group" role="group">
         <b-button type="button" variant="success" @click="showSubmitModal">提交代码</b-button>
         <b-button type="button" variant="info" @click="toSubmitStatus">查看记录</b-button>
