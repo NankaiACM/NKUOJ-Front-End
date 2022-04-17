@@ -2,74 +2,99 @@
   <div class="container">
     <item-select-card api="problem" @select="onItemSelected" :newable="true" :create-dummy="createDummy"></item-select-card>
 
-    <b-card class="mt-4 p-3 mb-4" v-if="hasItemSelected">
-      <div class="form-group">
-        <label>题目名称：</label>
-        <b-form-input type="text" v-model="dataObject.name"></b-form-input>
-        <small class="form-text text-muted">题目的标题。</small>
-      </div>
-      <div class="form-group">
-        <label>题目ID：</label>
-        <b-form-input type="text" v-model="dataObject.pid" disabled></b-form-input>
-        <small class="form-text text-muted">题目的索引ID，不可修改。</small>
-      </div>
-      <div class="form-group" v-if="dataObject.psid">
-        <label>题目单ID：</label>
-        <b-form-input type="text" v-model="dataObject.psid" disabled></b-form-input>
-        <small class="form-text text-muted">题目单的索引ID，不可修改。如要转移题目请使用克隆功能。</small>
-      </div>
-      <div class="form-group" v-else>
-        <label>题目公开：该题目位于公开练习题内。</label>
-        <small class="form-text text-muted">如要转移题目请使用克隆功能。</small>
-      </div>
-      <div class="form-group">
-        <label>题面：</label>
-        <b-form-group label="题面类型" v-slot="{ ariaDescribedby }">
-          <b-form-radio v-model="dataObject.extension" :aria-describedby="ariaDescribedby" name="some-radios" value="md">Markdown</b-form-radio>
-          <b-form-radio v-model="dataObject.extension" disabled :aria-describedby="ariaDescribedby" name="some-radios" value="pdf">PDF</b-form-radio>
-        </b-form-group>
-        <div v-if="dataObject.extension === 'md'">
-          <b-form-textarea v-model="dataObject.content"></b-form-textarea>
-          <small class="form-text text-muted">题面。使用Markdown语言，  <b-link @click="previewMarkdown">预览</b-link>。</small>
-          <small class="form-text text-muted">公式请使用`$和$`包围，例如`$e=mc^2$`。</small>
-        </div>
-        <div v-else-if="dataObject.extension === 'pdf'">
-<!--          <b-form-file v-model="pdfFile" placeholder="选择文件或者拖到这里..." drop-placeholder="拖到这里..."></b-form-file>-->
-        </div>
-      </div>
-      <div class="form-group">
-        <label>时间限制：</label>
-        <b-form-input type="number" v-model="dataObject.timeLimit"></b-form-input>
-        <small class="form-text text-muted">以ms为单位，是单个测试点的限时。</small>
-      </div>
-      <div class="form-group">
-        <label>内存限制：</label>
-        <b-form-input type="number" v-model="dataObject.memoryLimit"></b-form-input>
-        <small class="form-text text-muted">以KiB为单位，是单个测试点的内存限制。</small>
-      </div>
-      <div class="form-group">
-        <label>测试点数量：</label>
-        <b-form-input type="number" v-model="dataObject.cases"></b-form-input>
-        <small class="form-text text-muted">测试点的数量。</small>
-      </div>
-      <div class="form-group">
-        <label>Detail Judge：</label>
-        <b-form-checkbox v-model="dataObject.detailJudge">启用 Detail Judge</b-form-checkbox>
-        <small class="form-text text-muted">Detail Judge会对所有测试点进行评测。如不启用该功能，则评测机遇到第一个非正确测试点就会停止评测，导致分数偏低。</small>
-      </div>
-      <div class="container d-flex justify-content-center">
-        <b-button-group>
-          <b-button variant="outline-info" @click="submit">保存提交</b-button>
-          <b-button variant="outline-primary" @click="clone">克隆题目</b-button>
-          <b-button variant="outline-success" @click="uploadData">上传数据</b-button>
-          <b-button variant="outline-warning" @click="downloadData">下载数据</b-button>
-        </b-button-group>
-      </div>
+    <b-card no-body class="mt-4 mb-4" v-if="hasItemSelected">
+      <b-tabs card>
+        <b-tab title="题目配置信息" active>
+          <div class="form-group">
+            <label>题目名称：</label>
+            <b-form-input type="text" v-model="dataObject.name"></b-form-input>
+            <small class="form-text text-muted">题目的标题。</small>
+          </div>
+          <div class="form-group">
+            <label>题目ID：</label>
+            <b-form-input type="text" v-model="dataObject.pid" disabled></b-form-input>
+            <small class="form-text text-muted">题目的索引ID，不可修改。</small>
+          </div>
+          <div class="form-group" v-if="dataObject.psid">
+            <label>题目单ID：</label>
+            <b-form-input type="text" v-model="dataObject.psid" disabled></b-form-input>
+            <small class="form-text text-muted">题目单的索引ID，不可修改。如要转移题目请使用克隆功能。</small>
+          </div>
+          <div class="form-group" v-else>
+            <label>题目公开：该题目位于公开练习题内。</label>
+            <small class="form-text text-muted">如要转移题目请使用克隆功能。</small>
+          </div>
+          <div class="form-group">
+            <label>时间限制：</label>
+            <b-form-input type="number" v-model="dataObject.timeLimit"></b-form-input>
+            <small class="form-text text-muted">以ms为单位，是单个测试点的限时。</small>
+          </div>
+          <div class="form-group">
+            <label>内存限制：</label>
+            <b-form-input type="number" v-model="dataObject.memoryLimit"></b-form-input>
+            <small class="form-text text-muted">以KiB为单位，是单个测试点的内存限制。</small>
+          </div>
+          <div class="form-group">
+            <label>测试点数量：</label>
+            <b-form-input type="number" v-model="dataObject.cases"></b-form-input>
+            <small class="form-text text-muted">测试点的数量。</small>
+          </div>
+          <div class="form-group">
+            <label>Detail Judge：</label>
+            <b-form-checkbox v-model="dataObject.detailJudge">启用 Detail Judge</b-form-checkbox>
+            <small class="form-text text-muted">Detail Judge会对所有测试点进行评测。如不启用该功能，则评测机遇到第一个非正确测试点就会停止评测，导致分数偏低。</small>
+          </div>
+          <div class="container d-flex justify-content-center">
+            <b-button-group>
+              <b-button variant="outline-info" @click="submit">保存提交</b-button>
+            </b-button-group>
+          </div>
+        </b-tab>
+        <b-tab title="题面">
+          <div class="form-group">
+            <label>题面：</label>
+            <b-card no-body>
+              <b-tabs card v-model="tabsIndex">
+                <b-tab title="Markdown">
+                  <b-form-textarea v-model="markdownText" rows="10"></b-form-textarea>
+                  <small class="form-text text-muted">题面。使用Markdown语言，<b-link @click="previewMarkdown">预览</b-link>。</small>
+                  <small class="form-text text-muted">公式请使用`$和$`包围，例如`$e=mc^2$`。</small>
+                </b-tab>
+                <b-tab title="PDF">
+                  <b-form-file v-model="pdfFile" placeholder="选择文件或者拖到这里..." drop-placeholder="拖到这里..."></b-form-file>
+                  <small class="form-text text-muted">只有选择文件后才会更新题面。</small>
+                </b-tab>
+              </b-tabs>
+            </b-card>
+          </div>
+          <div class="container d-flex justify-content-center">
+            <b-button-group>
+              <b-button variant="outline-success" @click="uploadContent">上传题面</b-button>
+              <b-button variant="outline-warning" @click="downloadContent">下载题面</b-button>
+            </b-button-group>
+          </div>
+        </b-tab>
+        <b-tab title="数据">
+          <p class="text-center">上传或下载题目数据</p>
+          <div class="container d-flex justify-content-center">
+            <b-button-group>
+              <b-button variant="outline-success" @click="uploadData">上传数据</b-button>
+              <b-button variant="outline-warning" @click="downloadData">下载数据</b-button>
+            </b-button-group>
+          </div>
+        </b-tab>
+        <b-tab title="克隆">
+          <p class="text-center">克隆题目</p>
+          <div class="container d-flex justify-content-center">
+            <b-button variant="outline-primary" @click="clone">克隆题目</b-button>
+          </div>
+        </b-tab>
+      </b-tabs>
     </b-card>
 
     <admin-problem-clone-modal :pid="selectedId" ref="clone-modal"></admin-problem-clone-modal>
     <admin-problem-upload-data-modal :pid="selectedId" ref="upload-modal"></admin-problem-upload-data-modal>
-    <admin-markdown-preview-modal :markdown-text="dataObject.content" ref="preview-modal"></admin-markdown-preview-modal>
+    <admin-markdown-preview-modal :markdown-text="markdownText" ref="preview-modal"></admin-markdown-preview-modal>
   </div>
 </template>
 
@@ -100,12 +125,11 @@ export default {
         detailJudge: false,
         cases: 0,
         timeLimit: 0,
-        memoryLimit: 0,
-        content: [],
-        extension: 'md'
+        memoryLimit: 0
       },
       markdownText: '',
-      pdfFile: null
+      pdfFile: null,
+      tabsIndex: 0
     }
   },
   methods: {
@@ -116,10 +140,10 @@ export default {
     loadSelectedItem: function () {
       this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}`).then(res => {
         this.dataObject = res.data
-        this.dataObject.content = new TextDecoder('utf-8').decode(new Uint8Array(this.dataObject.content.data).buffer)
+        this.markdownText = new TextDecoder('utf-8').decode(new Uint8Array(this.dataObject.content.data).buffer)
+        this.tabsIndex = res.data.extension === 'md' ? 0 : 1
         this.hasItemSelected = true
       }, e => {
-        console.log(e)
         this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '载入信息失败'})
       })
     },
@@ -128,7 +152,6 @@ export default {
       this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
         this.$bvModal.msgBoxOk('保存成功！', {centered: true, title: '提示'})
       }, e => {
-        console.log(e)
         this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败'})
       })
     },
@@ -139,7 +162,6 @@ export default {
           this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
             this.$refs['clone-modal'].show()
           }, e => {
-            console.log(e)
             this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败。'})
           })
         } else {
@@ -152,7 +174,6 @@ export default {
       this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
         this.$refs['upload-modal'].show()
       }, e => {
-        console.log(e)
         this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败，无法进行上传'})
       })
     },
@@ -160,23 +181,33 @@ export default {
       this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/io`, {responseType: 'arraybuffer'})
         .then(response => {
           const blob = new Blob([response.data], {type: 'application/zip'});
-
           const link = document.createElement('a');
           link.href = window.URL.createObjectURL(blob);
           link.download = `problem-data-${this.selectedId}.zip`;
           link.click();
         })
     },
+    uploadContent: function () {
+      // // eslint-disable-next-line no-unused-vars
+      // this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
+      //   this.$refs['upload-modal'].show()
+      // }, e => {
+      //   this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败，无法进行上传'})
+      // })
+    },
+    downloadContent: function () {
+      // this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/io`, {responseType: 'arraybuffer'})
+      //   .then(response => {
+      //     const blob = new Blob([response.data], {type: 'application/zip'});
+      //     const link = document.createElement('a');
+      //     link.href = window.URL.createObjectURL(blob);
+      //     link.download = `problem-content-${this.selectedId}.zip`;
+      //     link.click();
+      //   })
+    },
+
     previewMarkdown: function () {
       this.$refs['preview-modal'].show()
-    }
-  },
-  watch: {
-    markdownText: function (newValue) {
-      this.dataObject.content = Buffer.from(newValue, "utf-8");
-    },
-    pdfFile: function (newValue) {
-      this.dataObject.content = Buffer.from(newValue)
     }
   }
 }
