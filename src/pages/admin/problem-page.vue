@@ -4,7 +4,7 @@
 
     <b-card no-body class="mt-4 mb-4" v-if="hasItemSelected">
       <b-tabs card>
-        <b-tab title="题目配置信息" active>
+        <b-tab title="配置" active>
           <div class="form-group">
             <label>题目名称：</label>
             <b-form-input type="text" v-model="dataObject.name"></b-form-input>
@@ -24,6 +24,13 @@
             <label>题目公开：该题目位于公开练习题内。</label>
             <small class="form-text text-muted">如要转移题目请使用克隆功能。</small>
           </div>
+          <div class="form-group">
+            <label>题面类型：</label>
+            <b-form-radio-group v-model="dataObject.extension">
+              <b-form-radio value="md">Markdown</b-form-radio>
+              <b-form-radio value="pdf">PDF</b-form-radio>
+            </b-form-radio-group>
+            </div>
           <div class="form-group">
             <label>时间限制：</label>
             <b-form-input type="number" v-model="dataObject.timeLimit"></b-form-input>
@@ -52,29 +59,28 @@
         </b-tab>
         <b-tab title="题面">
           <div class="form-group">
+            <b-alert variant="secondary" show class="text-center" dismissible fade> 注意：上传题面前请先保存提交配置信息。</b-alert>
             <label>题面：</label>
-            <b-card no-body>
-              <b-tabs card v-model="tabsIndex">
-                <b-tab title="Markdown">
-                  <b-form-textarea v-model="markdownText" rows="10"></b-form-textarea>
-                  <small class="form-text text-muted">题面。使用Markdown语言，<b-link @click="previewMarkdown">预览</b-link>。</small>
-                  <small class="form-text text-muted">公式请使用`$和$`包围，例如`$e=mc^2$`。</small>
-                </b-tab>
-                <b-tab title="PDF">
-                  <b-form-file v-model="pdfFile" placeholder="选择文件或者拖到这里..." drop-placeholder="拖到这里..."></b-form-file>
-                  <small class="form-text text-muted">只有选择文件后才会更新题面。</small>
-                </b-tab>
-              </b-tabs>
-            </b-card>
+            <div v-if="dataObject.extension === 'md'">
+              <b-form-textarea v-model="markdownText" rows="10" placeholder="输入新的题面..."></b-form-textarea>
+              <small class="form-text text-muted">题面。使用Markdown语言，<b-link @click="previewMarkdown">预览</b-link>。</small>
+              <small class="form-text text-muted">公式请使用`$和$`包围，例如`$e=mc^2$`。</small>
+              <small class="form-text text-muted">如需查看现有题面请使用下载功能。</small>
+            </div>
+            <div v-else-if="dataObject.extension === 'pdf'">
+              <b-form-file v-model="pdfFile" placeholder="选择文件或者拖到这里..." drop-placeholder="拖到这里..."></b-form-file>
+              <small class="form-text text-muted">只有选择文件后才会更新题面。</small>
+            </div>
           </div>
           <div class="container d-flex justify-content-center">
             <b-button-group>
-              <b-button variant="outline-success" @click="uploadContent">上传题面</b-button>
+              <b-button variant="outline-success" @click="uploadContent">保存题面</b-button>
               <b-button variant="outline-warning" @click="downloadContent">下载题面</b-button>
             </b-button-group>
           </div>
         </b-tab>
         <b-tab title="数据">
+          <b-alert variant="secondary" show class="text-center" dismissible fade> 注意：上传数据前请先保存提交配置信息。</b-alert>
           <p class="text-center">上传或下载题目数据</p>
           <div class="container d-flex justify-content-center">
             <b-button-group>
@@ -125,7 +131,9 @@ export default {
         detailJudge: false,
         cases: 0,
         timeLimit: 0,
-        memoryLimit: 0
+        memoryLimit: 0,
+        extension: 'md',
+        content: Buffer.from([])
       },
       markdownText: '',
       pdfFile: null,
@@ -140,42 +148,23 @@ export default {
     loadSelectedItem: function () {
       this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}`).then(res => {
         this.dataObject = res.data
-        this.markdownText = new TextDecoder('utf-8').decode(new Uint8Array(this.dataObject.content.data).buffer)
-        this.tabsIndex = res.data.extension === 'md' ? 0 : 1
         this.hasItemSelected = true
       }, e => {
         this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '载入信息失败'})
       })
     },
     submit: function () {
-      // eslint-disable-next-line no-unused-vars
-      this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
+      this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(() => {
         this.$bvModal.msgBoxOk('保存成功！', {centered: true, title: '提示'})
       }, e => {
         this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败'})
       })
     },
     clone: function () {
-      this.$bvModal.msgBoxConfirm('是否保存后再克隆？', {centered: true, title: '提示', okTitle: '保存后克隆', cancelTitle: '直接克隆', noCloseOnBackdrop: true}).then(value => {
-        if (value) {
-          // eslint-disable-next-line no-unused-vars
-          this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
-            this.$refs['clone-modal'].show()
-          }, e => {
-            this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败。'})
-          })
-        } else {
-          this.$refs['clone-modal'].show()
-        }
-      })
+      this.$refs['clone-modal'].show()
     },
     uploadData: function () {
-      // eslint-disable-next-line no-unused-vars
-      this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
-        this.$refs['upload-modal'].show()
-      }, e => {
-        this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败，无法进行上传'})
-      })
+      this.$refs['upload-modal'].show()
     },
     downloadData: function () {
       this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/io`, {responseType: 'arraybuffer'})
@@ -188,22 +177,44 @@ export default {
         })
     },
     uploadContent: function () {
-      // // eslint-disable-next-line no-unused-vars
-      // this.$http.post(`${window.backendOrigin}/api/admin/problem/update/${this.selectedId}`, this.dataObject).then(_ => {
-      //   this.$refs['upload-modal'].show()
-      // }, e => {
-      //   this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败，无法进行上传'})
-      // })
+      if (this.dataObject.extension === 'md') {
+        const formData = new FormData();
+        const blob = new Blob([this.markdownText], {type : 'text/plain'})
+        formData.append('content', blob)
+        this.$http.post(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/upload/content`, formData).then(() => {
+          this.$bvModal.msgBoxOk('上传成功', {centered: true, title: '提示'})
+        }, e => {
+          this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '上传失败'})
+        })
+      } else if (this.dataObject.extension === 'pdf') {
+        const formData = new FormData();
+        formData.append('content', this.pdfFile)
+        this.$http.post(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/upload/content`, formData).then(() => {
+          this.$bvModal.msgBoxOk('上传成功', {centered: true, title: '提示'})
+        }, e => {
+          this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '上传失败'})
+        })
+      }
     },
     downloadContent: function () {
-      // this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/io`, {responseType: 'arraybuffer'})
-      //   .then(response => {
-      //     const blob = new Blob([response.data], {type: 'application/zip'});
-      //     const link = document.createElement('a');
-      //     link.href = window.URL.createObjectURL(blob);
-      //     link.download = `problem-content-${this.selectedId}.zip`;
-      //     link.click();
-      //   })
+      this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/content`)
+        .then(response => {
+          if (response.data.extension === 'md') {
+            const blob = new Blob([response.data.content.data], {type: 'text/plain'});
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = `problem-content-${this.selectedId}.md`;
+            link.click();
+          } else {
+            const blob = new Blob([Buffer.from(response.data.content.data)], {type: 'application/pdf'});
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = `problem-content-${this.selectedId}.pdf`;
+            link.click();
+          }
+        }, error => {
+          this.$bvModal.msgBoxOk(code2str(error.status), {centered: true, title: '下载失败'})
+        })
     },
 
     previewMarkdown: function () {
