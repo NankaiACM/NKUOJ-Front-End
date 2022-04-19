@@ -18,11 +18,11 @@
           <div class="form-group" v-if="dataObject.psid">
             <label>题目单ID：</label>
             <b-form-input type="text" v-model="dataObject.psid" disabled></b-form-input>
-            <small class="form-text text-muted">题目单的索引ID，不可修改。如要转移题目请使用克隆功能。</small>
+            <small class="form-text text-muted">题目单的索引ID，不可修改。如要转移题目请使用克隆或转移功能。</small>
           </div>
           <div class="form-group" v-else>
             <label>题目公开：该题目位于公开练习题内。</label>
-            <small class="form-text text-muted">如要转移题目请使用克隆功能。</small>
+            <small class="form-text text-muted">如要转移题目请使用克隆或转移功能。</small>
           </div>
           <div class="form-group">
             <label>题面类型：</label>
@@ -62,14 +62,14 @@
             <b-alert variant="secondary" show class="text-center" dismissible fade> 注意：上传题面前请先保存提交配置信息。</b-alert>
             <label>题面：</label>
             <div v-if="dataObject.extension === 'md'">
-              <b-form-textarea v-model="markdownText" rows="10" placeholder="输入新的题面..."></b-form-textarea>
+              <b-form-textarea v-model="edit.markdownText" rows="10" placeholder="输入新的题面..."></b-form-textarea>
               <small class="form-text text-muted">题面。使用Markdown语言，<b-link @click="previewMarkdown">预览</b-link>。</small>
               <small class="form-text text-muted">公式请使用`$和$`包围，例如`$e=mc^2$`。</small>
               <small class="form-text text-muted">如需查看现有题面请使用下载功能。</small>
             </div>
             <div v-else-if="dataObject.extension === 'pdf'">
-              <b-form-file v-model="pdfFile" placeholder="选择文件或者拖到这里..." drop-placeholder="拖到这里..."></b-form-file>
-              <small class="form-text text-muted">只有选择文件后才会更新题面。</small>
+              <b-form-file v-model="edit.pdfFile" placeholder="选择文件或者拖到这里..." drop-placeholder="拖到这里..."></b-form-file>
+              <small class="form-text text-muted">如需查看现有题面请使用下载功能。</small>
             </div>
           </div>
           <div class="container d-flex justify-content-center">
@@ -90,24 +90,50 @@
           </div>
         </b-tab>
         <b-tab title="克隆">
-          <p class="text-center">克隆题目</p>
+          <form>
+            <div class="form-group">
+              <label>克隆到</label>
+              <b-form-select v-model="cloning.type" :options="cloning.options"></b-form-select>
+            </div>
+            <div class="form-group" v-if="cloning.type === 1">
+              <label>题目集ID</label>
+              <b-form-input v-model="cloning.psid" placeholder="题目集的ID"></b-form-input>
+            </div>
+          </form>
           <div class="container d-flex justify-content-center">
-            <b-button variant="outline-primary" @click="clone">克隆题目</b-button>
+            <b-button-group>
+              <b-button variant="outline-primary" @click="submitClone">克隆</b-button>
+            </b-button-group>
+          </div>
+        </b-tab>
+        <b-tab title="转移">
+          <form>
+            <div class="form-group">
+              <label>转移到</label>
+              <b-form-select v-model="transfer.type" :options="transfer.options"></b-form-select>
+            </div>
+            <div class="form-group" v-if="transfer.type === 1">
+              <label>题目集ID</label>
+              <b-form-input v-model="transfer.psid" placeholder="题目集的ID"></b-form-input>
+            </div>
+          </form>
+          <div class="container d-flex justify-content-center">
+            <b-button-group>
+              <b-button variant="outline-danger" @click="submitTransfer">转移</b-button>
+            </b-button-group>
           </div>
         </b-tab>
       </b-tabs>
     </b-card>
 
-    <admin-problem-clone-modal :pid="selectedId" ref="clone-modal"></admin-problem-clone-modal>
     <admin-problem-upload-data-modal :pid="selectedId" ref="upload-modal"></admin-problem-upload-data-modal>
-    <admin-markdown-preview-modal :markdown-text="markdownText" ref="preview-modal"></admin-markdown-preview-modal>
+    <admin-markdown-preview-modal :markdown-text="edit.markdownText" ref="preview-modal"></admin-markdown-preview-modal>
   </div>
 </template>
 
 <script>
 import itemSelectCard from '../../components/admin/admin-problem-select-card'
 import code2str from '@/util/code'
-import AdminProblemCloneModal from "@/components/admin/admin-problem-clone-modal";
 import AdminProblemUploadDataModal from "@/components/admin/admin-problem-upload-data-modal";
 import AdminMarkdownPreviewModal from "@/components/admin/admin-markdown-preview-modal";
 
@@ -116,7 +142,6 @@ export default {
   components: {
     AdminMarkdownPreviewModal,
     AdminProblemUploadDataModal,
-    AdminProblemCloneModal,
     itemSelectCard
   },
   data () {
@@ -135,9 +160,28 @@ export default {
         extension: 'md',
         content: Buffer.from([])
       },
-      markdownText: '',
-      pdfFile: null,
-      tabsIndex: 0
+      edit: {
+        markdownText: '',
+        pdfFile: null,
+      },
+      cloning: {
+        type: -1,
+        psid: '',
+        options:
+          [{ value: -1, text: '请选择...', disabled: true },
+            { value: 0, text: '公开' },
+            { value: 1, text: '属于某个题目集...' }],
+        validateResults: ['', '未选择目的', '未填写题目集ID'],
+      },
+      transfer: {
+        type: -1,
+        psid: '',
+        options:
+          [{ value: -1, text: '请选择...', disabled: true },
+            { value: 0, text: '公开' },
+            { value: 1, text: '属于某个题目集...' }],
+        validateResults: ['', '未选择目的', '未填写题目集ID'],
+      }
     }
   },
   methods: {
@@ -160,9 +204,6 @@ export default {
         this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '保存失败'})
       })
     },
-    clone: function () {
-      this.$refs['clone-modal'].show()
-    },
     uploadData: function () {
       this.$refs['upload-modal'].show()
     },
@@ -179,7 +220,7 @@ export default {
     uploadContent: function () {
       if (this.dataObject.extension === 'md') {
         const formData = new FormData();
-        const blob = new Blob([this.markdownText], {type : 'text/plain'})
+        const blob = new Blob([this.edit.markdownText], {type : 'text/plain'})
         formData.append('content', blob)
         this.$http.post(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/upload/content`, formData).then(() => {
           this.$bvModal.msgBoxOk('上传成功', {centered: true, title: '提示'})
@@ -188,7 +229,7 @@ export default {
         })
       } else if (this.dataObject.extension === 'pdf') {
         const formData = new FormData();
-        formData.append('content', this.pdfFile)
+        formData.append('content', this.edit.pdfFile)
         this.$http.post(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/upload/content`, formData).then(() => {
           this.$bvModal.msgBoxOk('上传成功', {centered: true, title: '提示'})
         }, e => {
@@ -216,7 +257,57 @@ export default {
           this.$bvModal.msgBoxOk(code2str(error.status), {centered: true, title: '下载失败'})
         })
     },
+    validateCloneForm: function () {
+      if (this.cloning.type === -1) {
+        return 1
+      } else if (this.cloning.type === 1 && this.cloning.psid === '') {
+        return 2
+      }
+      return 0
+    },
+    validateTransferForm: function () {
+      if (this.transfer.type === -1) {
+        return 1
+      } else if (this.transfer.type === 1 && this.transfer.psid === '') {
+        return 2
+      }
+      return 0
+    },
+    submitClone: function () {
+      const validateResult = this.validateCloneForm()
+      if (validateResult) {
+        this.$bvModal.msgBoxOk(this.cloning.validateResults[validateResult], {centered: true, title: '克隆失败'})
+        return
+      }
 
+      const createUrl = [
+        `${window.backendOrigin}/api/admin/problem/fork/${this.selectedId}/global`,
+        `${window.backendOrigin}/api/admin/problem/fork/${this.selectedId}/into/${this.cloning.psid}`][this.cloning.type]
+
+      this.$http.get(createUrl).then(res => {
+        this.$bvModal.msgBoxOk(`克隆成功，新题目ID为#${res.data}`, {centered: true, title: '提示'})
+      }, e => {
+        this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '克隆失败'})
+      })
+    },
+    submitTransfer: function () {
+      const validateResult = this.validateTransferForm()
+      if (validateResult) {
+        this.$bvModal.msgBoxOk(this.transfer.validateResults[validateResult], {centered: true, title: '转移失败'})
+        return
+      }
+
+      const createUrl = [
+        `${window.backendOrigin}/api/admin/problem/move/${this.selectedId}/from/${this.dataObject.psid ? this.dataObject.psid : 'global'}/to/global`,
+        `${window.backendOrigin}/api/admin/problem/move/${this.selectedId}/from/${this.dataObject.psid ? this.dataObject.psid : 'global'}/to/${this.transfer.psid}`][this.transfer.type]
+
+      this.$http.get(createUrl).then(() => {
+        this.$bvModal.msgBoxOk(`转移成功。`, {centered: true, title: '提示'})
+        this.loadSelectedItem()
+      }, e => {
+        this.$bvModal.msgBoxOk(code2str(e.status), {centered: true, title: '转移失败'})
+      })
+    },
     previewMarkdown: function () {
       this.$refs['preview-modal'].show()
     }
