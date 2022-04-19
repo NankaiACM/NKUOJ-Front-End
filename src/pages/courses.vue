@@ -18,9 +18,9 @@
 
           <b-list-group>
             <b-list-group-item v-bind:href="'/course/' + course.id"
-                               class="d-flex justify-content-between align-items-center pt-4 pb-4 pl-3"
+                               class="d-flex justify-content-between align-items-center pt-4 pb-3 pl-4"
                                v-for="course in myCourses" v-bind:key="course.id">
-              <strong>{{ course.name }}</strong>
+              <h5>{{ course.name }}</h5>
             </b-list-group-item>
           </b-list-group>
 
