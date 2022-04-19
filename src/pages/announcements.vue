@@ -4,6 +4,7 @@
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">全站公告</h1>
+          <p class="lead">查看和浏览全站公告。</p>
         </div>
       </div>
       <div class="container">

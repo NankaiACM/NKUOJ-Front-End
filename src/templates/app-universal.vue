@@ -3,7 +3,9 @@
   <div class="custom-header">
     <head-bar @toHome="switchTo('home')"
               @toProblem="switchTo('problems')" @toStatus="switchTo('status')"
-              @toContest="switchTo('contest')" @toDiscuss="switchTo('discuss')">
+              @toContest="switchTo('contest')" @toDiscuss="switchTo('discuss')"
+              @toAnnouncements="switchTo('announcements')" @toCourses="switchTo('courses')"
+              @toAssignments="switchTo('assignments')">
     </head-bar>
   </div>
   <div>

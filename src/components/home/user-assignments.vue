@@ -36,7 +36,7 @@ export default {
   data: function () {
     return {
       assignments: [],
-      loading: false,
+      loading: true,
       statusCode: 200
     }
   },

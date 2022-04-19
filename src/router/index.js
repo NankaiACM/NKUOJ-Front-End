@@ -17,6 +17,7 @@ const notFoundPage = () => import('../pages/404')
 const profilePage = () => import('../pages/profile')
 const contestAuthorizePage = () => import('../pages/authorize')
 const assignmentPage = () => import('../pages/assignment')
+const assignmentsPage = () => import('../pages/assignments')
 const announcementsPage = () => import('../pages/announcements')
 const announcementPage = () => import('../pages/announcement')
 const administratorHomePage = () => import('../pages/admin/admin-home')
@@ -41,6 +42,7 @@ const router = new Router({
       { path: '/courses', component: coursesPage },
       { path: '/status', component: statusPage },
       { path: '/announcements', component: announcementsPage },
+      { path: '/assignments', component: assignmentsPage },
       { path: '/notFound', component: notFoundPage },
       { path: '/profile', component: profilePage },
       { path: '/problem/:problemId', component: problemPage },
