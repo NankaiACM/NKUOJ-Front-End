@@ -62,7 +62,6 @@ export default {
       this.assignments = res.data
       this.loading = false
     }, e => {
-      console.log(e)
       this.statusCode = e.status
       this.loading = false
     })
