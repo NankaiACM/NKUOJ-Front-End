@@ -5,7 +5,7 @@
               @toProblem="switchTo('problems')" @toStatus="switchTo('status')"
               @toContest="switchTo('contest')" @toDiscuss="switchTo('discuss')"
               @toAnnouncements="switchTo('announcements')" @toCourses="switchTo('courses')"
-              @toAssignments="switchTo('assignments')">
+              @toAssignments="switchTo('assignments')" @toExams="switchTo('exams')">
     </head-bar>
   </div>
   <div>
