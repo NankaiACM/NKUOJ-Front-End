@@ -1,26 +1,28 @@
 <template>
-  <b-modal id="tracing-modal" :title="'评测 #' + statusId" size="md" centered no-close-on-esc no-close-on-backdrop
-           hide-header-close :ok-only="!judgeFinished" :ok-disabled="!judgeFinished" ok-title="关闭" cancel-title="查看" @cancel="viewSubmission">
+  <b-modal id="tracing-modal" :title="'评测 #' + statusId" size="md" centered
+           :no-close-on-esc="!judgeFinished" :no-close-on-backdrop="!judgeFinished"
+           :hide-header-close="!judgeFinished" :ok-only="!judgeFinished" :ok-disabled="!judgeFinished" ok-title="关闭" cancel-title="查看" @cancel="viewSubmission">
     <div class="form-row align-items-center">
       <div class="container text-center" v-if="statusUpdateTries <= 0">
         <h5>(っ╥╯﹏╰╥c)</h5>
         <h6 class="text-muted">服务器长时间无法完成评测，该评测结果将不会继续进行跟踪。</h6>
         <h6 class="text-muted">请前往评测记录页面查看您的评测结果。</h6>
       </div>
-      <div class="container" v-if="statusUpdateTries > 0">
-        <status-button :status="statusCode"></status-button>
+      <div class="container text-center m-4" v-if="statusUpdateTries > 0">
+        <b-spinner v-if="statusCode <= 100"></b-spinner>
+        <h5 :class="`text-${statusVariant(statusCode)}`">{{ statusText(statusCode) }}</h5>
       </div>
     </div>
   </b-modal>
 </template>
 
 <script>
-import StatusButton from "@/components/status/status-button";
 import code2str from '@/util/code'
+import status2text from "@/util/status-text";
+import status2variant from "@/util/status-variant";
 
 export default {
   name: "status-tracing-modal",
-  components: {StatusButton},
   data: function () {
     return {
       statusShouldUpdate: false,
@@ -55,7 +57,6 @@ export default {
         this.statusShouldUpdate = this.statusCode <= 100
         this.judgeFinished = !this.statusShouldUpdate
       }, e => {
-        console.log(e)
         this.$bvModal.msgBoxOk(code2str(e.status), { title: '同步评测记录失败', centered: true })
         this.$bvModal.hide('tracing-modal')
         this.statusShouldUpdate = false
@@ -64,6 +65,12 @@ export default {
     },
     viewSubmission: function () {
       this.$router.push(`/submission/${this.statusId}`)
+    },
+    statusText: function (s) {
+      return status2text(s)
+    },
+    statusVariant: function (s) {
+      return status2variant(s)
     }
   },
   watch: {
