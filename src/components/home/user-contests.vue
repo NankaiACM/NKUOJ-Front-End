@@ -25,7 +25,7 @@
       [{{ statusCode }}] 网络请求出错，内容获取失败。
     </b-card-body>
     <b-card-body v-else-if="contests.length === 0">
-      您没有报名的竞赛。
+      没有正在进行中的竞赛，请前往竞赛页面查看所有竞赛。
     </b-card-body>
   </b-card>
 </template>

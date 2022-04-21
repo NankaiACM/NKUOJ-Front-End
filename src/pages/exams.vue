@@ -58,7 +58,7 @@ export default {
     }
   },
   mounted () {
-    this.$http.get(`${window.backendOrigin}/api/exam/open`).then(res => {
+    this.$http.get(`${window.backendOrigin}/api/exam`).then(res => {
       this.exams = res.data
       this.loading = false
     }, e => {
