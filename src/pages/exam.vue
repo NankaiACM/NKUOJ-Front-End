@@ -5,10 +5,10 @@
       <h4><span class="badge bg-danger text-light">考试</span></h4>
     </div>
 
-    <div class="card">
-      <div class="card-body">
-        <div class="container">
-          <h5 class="card-title mt-4">考试详情</h5>
+    <div class="row">
+      <div class="col-md-4 mb-4 order-md-last order-first">
+        <countdown :begin="examData.begin" :end="examData.end" class="mb-2"></countdown>
+        <b-card title="考试详情" class="mb-2">
           <b-skeleton-wrapper :loading="isDetailsLoading">
             <template #loading>
               <b-skeleton :width="`${Math.floor(Math.random() * 80 + 20)}%`"
@@ -29,13 +29,14 @@
             </p>
             <p>
               <span class="h6">状态：</span>
-              <span v-if="examData.open" class="text-success">可提交</span>
+              <span v-if="examData.open" class="text-success">正在进行</span>
               <span v-else class="text-danger">无法提交</span>
             </p>
           </b-skeleton-wrapper>
-        </div>
-        <div class="container">
-          <h5 class="card-title mt-4">完成题目</h5>
+        </b-card>
+      </div>
+      <div class="col-md-8 order-md-first order-last">
+        <b-card title="试题">
           <b-skeleton-wrapper :loading="isProblemsLoading">
             <template #loading>
               <b-card>
@@ -60,7 +61,7 @@
               </b-list-group-item>
             </b-list-group>
           </b-skeleton-wrapper>
-        </div>
+        </b-card>
       </div>
     </div>
   </div>
@@ -68,9 +69,11 @@
 
 <script>
 import date2Text from "@/util/date";
+import Countdown from "@/components/contest/countdown";
 
 export default {
   name: 'exam',
+  components: {Countdown},
   data: function () {
     return {
       examId: '',
