@@ -1,10 +1,11 @@
 <template>
   <b-card title="倒计时">
-    <div v-if="enabled">
+    <div v-if="started && !ended">
       <h1 :class="`text-center ${variant}`">{{hours}}:{{String(minutes).padStart(2, '0')}}:{{String(seconds).padStart(2, '0')}}</h1>
       <b-progress :value="progress" variant="info" striped animated class="mt-2"></b-progress>
     </div>
-    <h1 class="text-center" v-else>暂未开始</h1>
+    <h1 class="text-center" v-else-if="!started">暂未开始</h1>
+    <h1 class="text-center text-danger" v-else-if="ended">已经结束</h1>
   </b-card>
 </template>
 
@@ -31,10 +32,13 @@ export default {
       return Math.floor((new Date(Date.parse(this.end)) - this.currentDate - this.hours * 1000 * 3600 - this.minutes * 60000) / (1000))
     },
     progress: function () {
-      return (this.currentDate - new Date(Date.parse(this.begin))) / (new Date(Date.parse(this.end)) - new Date(Date.parse(this.begin))) * 100
+      return 100 - (this.currentDate - new Date(Date.parse(this.begin))) / (new Date(Date.parse(this.end)) - new Date(Date.parse(this.begin))) * 100
     },
-    enabled: function () {
+    started: function () {
       return new Date() > new Date(Date.parse(this.begin))
+    },
+    ended: function () {
+      return new Date() > new Date(Date.parse(this.end))
     },
     variant: function () {
       if (this.hours === 0 && this.minutes < 5) {
