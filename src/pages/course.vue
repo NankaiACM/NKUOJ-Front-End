@@ -53,12 +53,19 @@
             </p>
             <pre class="mb-1">{{activity.object.content}}</pre>
           </b-card>
-          <b-card class="flex-column align-items-start" v-else>
+          <b-card class="flex-column align-items-start" v-else-if="activity.type === 1">
             <h5 class="mb-1"><span class="badge bg-info text-light mr-2">作业</span>{{activity.object.name}}</h5>
             <p class="mb-1 text-muted">
               {{getLocaleDate(activity.object.begin)}} 发布，{{getLocaleDate(activity.object.end)}} 截止
             </p>
-            <b-link class="text-decoration-none text-muted" :href="'/assignment/' + activity.object.id">查看作业</b-link>
+            <b-link class="text-decoration-none text-muted stretched-link" :href="'/exam/' + activity.object.id">查看作业</b-link>
+          </b-card>
+          <b-card class="flex-column align-items-start" v-else-if="activity.type === 2">
+            <h5 class="mb-1"><span class="badge bg-danger text-light mr-2">考试</span>{{activity.object.name}}</h5>
+            <p class="mb-1 text-muted">
+              {{getLocaleDate(activity.object.begin)}} 发布，{{getLocaleDate(activity.object.end)}} 截止
+            </p>
+            <b-link class="text-decoration-none text-muted stretched-link" :href="'/exam/' + activity.object.id">查看考试</b-link>
           </b-card>
         </div>
     </b-card>
@@ -77,7 +84,8 @@ export default {
       courseData: {},
       activities: [],
       announcements: [],
-      assignments: []
+      assignments: [],
+      exams: []
     }
   },
   methods: {
@@ -85,46 +93,36 @@ export default {
       this.$http.get(`${window.backendOrigin}/api/courses/id/${this.$route.params.courseId}`).then(res => {
         this.courseData = res.data
         this.isLoading = false
-      }, e => {
-        console.log(e)
       })
       this.$http.get(`${window.backendOrigin}/api/announcement/course/${this.$route.params.courseId}`).then(res => {
         this.announcements = res.data
         this.completedTasks += 1
         this.updateActivities()
-      }, e => {
-        console.log(e)
       })
       this.$http.get(`${window.backendOrigin}/api/assignment/course/${this.$route.params.courseId}`).then(res => {
         this.assignments = res.data
         this.completedTasks += 1
         this.updateActivities()
-      }, e => {
-        console.log(e)
+      })
+      this.$http.get(`${window.backendOrigin}/api/exam/course/${this.$route.params.courseId}`).then(res => {
+        this.exams = res.data
+        this.completedTasks += 1
+        this.updateActivities()
       })
     },
     updateActivities: function () {
-      if (this.completedTasks === 2) {
+      if (this.completedTasks === 3) {
         this.activities = []
-        let i = 0
-        let j = 0
-        while (i < this.announcements.length && j < this.assignments.length) {
-          if (this.announcements[i].time > this.assignments[j].begin) {
-            this.activities.push({type: 0, object: this.announcements[i]})
-            i++
-          } else {
-            this.activities.push({type: 1, object: this.assignments[j]})
-            j++
-          }
-        }
-        while (i < this.announcements.length) {
-          this.activities.push({type: 0, object: this.announcements[i]})
-          i++
-        }
-        while (j < this.assignments.length) {
-          this.activities.push({type: 1, object: this.assignments[j]})
-          j++
-        }
+        this.announcements.forEach((obj) => {
+          this.activities.push({type: 0, object: obj, time: obj.time})
+        })
+        this.assignments.forEach((obj) => {
+          this.activities.push({type: 1, object: obj, time: obj.begin})
+        })
+        this.exams.forEach((obj) => {
+          this.activities.push({type: 2, object: obj, time: obj.begin})
+        })
+        this.activities.sort((a, b) => (a.time < b.time) ? 1 : -1)
       }
     },
     getLocaleDate: function (string) {
