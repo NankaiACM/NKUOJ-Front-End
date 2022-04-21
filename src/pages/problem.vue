@@ -2,7 +2,7 @@
   <div class="container">
     <div class="jumbotron text-center">
       <h1 class="display-6">{{ problemInfo.name ? problemInfo.name : '加载中...' }}</h1>
-      <h4><span class="badge bg-danger text-light">题目</span></h4>
+      <h4><span class="badge bg-secondary text-light">题目</span></h4>
     </div>
     <problem-header :problem-info="problemInfo" :loading="loading" class="mb-3" :pid="problemInfo.pid"></problem-header>
     <problem-navigator :psid="problemInfo.psid" v-if="problemInfo.psid" :loading="loading" :pid="problemInfo.pid" class="mb-3">
