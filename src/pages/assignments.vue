@@ -14,7 +14,7 @@
                         v-for="i in Array(42).keys()" :key="i"></b-skeleton>
           </template>
 
-          <b-list-group>
+          <b-list-group v-if="assignments && assignments.length > 0">
             <b-list-group-item v-bind:href="'/assignment/' + assignment.id" v-for="assignment in assignments" v-bind:key="assignment.id">
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{assignment.name}}</h5>

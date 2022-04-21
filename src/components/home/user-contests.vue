@@ -7,7 +7,7 @@
       </h6>
     </template>
 
-    <b-list-group flush>
+    <b-list-group flush v-if="contests && contests.length > 0">
     </b-list-group>
 
     <b-card-body v-if="loading">

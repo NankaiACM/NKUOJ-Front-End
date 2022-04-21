@@ -7,7 +7,7 @@
       </h6>
     </template>
 
-    <b-list-group flush>
+    <b-list-group flush v-if="courses && courses.length > 0">
       <b-list-group-item v-bind:href="'/course/' + course.id"
                          class="d-flex justify-content-between align-items-center pt-4 pb-4"
                          v-for="course in courses" v-bind:key="course.id">

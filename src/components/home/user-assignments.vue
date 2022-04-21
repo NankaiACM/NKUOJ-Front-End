@@ -4,7 +4,7 @@
       <h6 class="m-1"><b-icon icon="vector-pen" class="mr-2"></b-icon>我的作业</h6>
     </template>
 
-    <b-list-group flush>
+    <b-list-group flush v-if="assignments && assignments.length > 0">
       <b-list-group-item v-bind:href="'/assignment/' + assignment.id" v-for="assignment in assignments" v-bind:key="assignment.id">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{assignment.name}}</h5>
