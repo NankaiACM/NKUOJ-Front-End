@@ -4,7 +4,6 @@
       <h6 class="m-1"><b-icon icon="patch-exclamation" class="mr-2"></b-icon>全站公告</h6>
     </template>
 
-    <b-overlay :show="loading" rounded="sm">
       <b-list-group flush>
         <b-list-group-item v-bind:href="'/announcement/' + announcement.id" class="d-flex justify-content-between align-items-center"
                            v-for="announcement in announcements" v-bind:key="announcement.id">
@@ -17,16 +16,22 @@
       </b-list-group>
 
 
-      <b-card-body v-if="loading" class="m-4">
-        正在加载
-      </b-card-body>
+    <b-card-body v-if="loading">
+      <b-skeleton width="85%"></b-skeleton>
+      <b-skeleton width="55%"></b-skeleton>
+      <b-skeleton width="64%"></b-skeleton>
+      <b-skeleton width="90%"></b-skeleton>
+      <b-skeleton width="40%"></b-skeleton>
+      <b-skeleton width="100%"></b-skeleton>
+      <b-skeleton width="72%"></b-skeleton>
+      <b-skeleton width="80%"></b-skeleton>
+    </b-card-body>
       <b-card-body v-else-if="statusCode !== 200">
         [{{statusCode}}] 网络请求出错，内容获取失败。
       </b-card-body>
       <b-card-body v-else-if="announcements.length === 0">
         没有全站公告。
       </b-card-body>
-    </b-overlay>
   </b-card>
 
 </template>
@@ -37,7 +42,7 @@ export default {
   data: function () {
     return {
       announcements: [],
-      loading: false,
+      loading: true,
       statusCode: 200,
       hasMoreAnnouncements: false,
       announcementsLimit: 4
