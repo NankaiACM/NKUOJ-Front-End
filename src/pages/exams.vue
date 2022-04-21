@@ -14,6 +14,15 @@
                         v-for="i in Array(42).keys()" :key="i"></b-skeleton>
           </template>
 
+          <b-list-group v-if="exams && exams.length > 0">
+            <b-list-group-item v-bind:href="'/assignment/' + exam.id" v-for="exam in exams" v-bind:key="exam.id">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{exam.name}}</h5>
+                <small>{{getLocaleDate(exam.end)}} 截止</small>
+              </div>
+              <p class="mb-1">{{exam.courseName ? exam.courseName : '无所属课程'}}</p>
+            </b-list-group-item>
+          </b-list-group>
           <h5 v-if="loading" class="m-5 text-center">
             正在加载
           </h5>
@@ -49,7 +58,13 @@ export default {
     }
   },
   mounted () {
-
+    this.$http.get(`${window.backendOrigin}/api/exam/open`).then(res => {
+      this.exams = res.data
+      this.loading = false
+    }, e => {
+      this.statusCode = e.status
+      this.loading = false
+    })
   }
 }
 </script>
