@@ -2,7 +2,7 @@
   <b-card title="倒计时">
     <div v-if="started && !ended">
       <h1 :class="`text-center ${variant}`">{{hours}}:{{String(minutes).padStart(2, '0')}}:{{String(seconds).padStart(2, '0')}}</h1>
-      <b-progress :value="progress" variant="info" striped animated class="mt-2"></b-progress>
+      <b-progress :value="progress" :variant="progressVariant" striped animated class="mt-2"></b-progress>
     </div>
     <h1 class="text-center" v-else-if="!started">暂未开始</h1>
     <h1 class="text-center text-danger" v-else-if="ended">已经结束</h1>
@@ -45,6 +45,12 @@ export default {
         return this.seconds % 2 ? "text-dark" : "text-danger"
       }
       return "text-dark"
+    },
+    progressVariant: function () {
+      if (this.hours === 0 && this.minutes < 5) {
+        return "danger"
+      }
+      return "info"
     }
   },
   mounted() {
