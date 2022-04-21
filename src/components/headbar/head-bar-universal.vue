@@ -9,7 +9,7 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <b-nav-item @click="$emit('toHome')">主页</b-nav-item>
-            <b-nav-item @click="$emit('toProblem')">题目</b-nav-item>
+            <b-nav-item @click="$emit('toProblem')">题库</b-nav-item>
             <b-nav-item @click="$emit('toStatus')">记录</b-nav-item>
             <b-nav-item @click="$emit('toAnnouncements')">公告</b-nav-item>
             <b-nav-item @click="$emit('toCourses')">课程</b-nav-item>
