@@ -58,7 +58,7 @@
             <p class="mb-1 text-muted">
               {{getLocaleDate(activity.object.begin)}} 发布，{{getLocaleDate(activity.object.end)}} 截止
             </p>
-            <b-link class="text-decoration-none text-muted stretched-link" :href="'/exam/' + activity.object.id">查看作业</b-link>
+            <b-link class="text-decoration-none text-muted stretched-link" :href="'/assignment/' + activity.object.id">查看作业</b-link>
           </b-card>
           <b-card class="flex-column align-items-start" v-else-if="activity.type === 2">
             <h5 class="mb-1"><span class="badge bg-danger text-light mr-2">考试</span>{{activity.object.name}}</h5>
@@ -66,6 +66,13 @@
               {{getLocaleDate(activity.object.begin)}} 发布，{{getLocaleDate(activity.object.end)}} 截止
             </p>
             <b-link class="text-decoration-none text-muted stretched-link" :href="'/exam/' + activity.object.id">查看考试</b-link>
+          </b-card>
+          <b-card class="flex-column align-items-start" v-else-if="activity.type === 3">
+            <h5 class="mb-1"><span class="badge bg-primary text-light mr-2">竞赛</span>{{activity.object.name}}</h5>
+            <p class="mb-1 text-muted">
+              {{getLocaleDate(activity.object.begin)}} 发布，{{getLocaleDate(activity.object.end)}} 截止
+            </p>
+            <b-link class="text-decoration-none text-muted stretched-link" :href="'/contest/' + activity.object.id">查看竞赛</b-link>
           </b-card>
         </div>
     </b-card>
@@ -85,7 +92,8 @@ export default {
       activities: [],
       announcements: [],
       assignments: [],
-      exams: []
+      exams: [],
+      contests: []
     }
   },
   methods: {
@@ -109,9 +117,14 @@ export default {
         this.completedTasks += 1
         this.updateActivities()
       })
+      this.$http.get(`${window.backendOrigin}/api/contest/course/${this.$route.params.courseId}`).then(res => {
+        this.contests = res.data
+        this.completedTasks += 1
+        this.updateActivities()
+      })
     },
     updateActivities: function () {
-      if (this.completedTasks === 3) {
+      if (this.completedTasks === 4) {
         this.activities = []
         this.announcements.forEach((obj) => {
           this.activities.push({type: 0, object: obj, time: obj.time})
@@ -121,6 +134,9 @@ export default {
         })
         this.exams.forEach((obj) => {
           this.activities.push({type: 2, object: obj, time: obj.begin})
+        })
+        this.contests.forEach((obj) => {
+          this.activities.push({type: 3, object: obj, time: obj.begin})
         })
         this.activities.sort((a, b) => (a.time < b.time) ? 1 : -1)
       }

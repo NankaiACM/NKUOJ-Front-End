@@ -11,6 +11,7 @@ const homePage = () => import('../pages/home')
 const problemsPage = () => import('../pages/problems')
 const coursesPage = () => import('../pages/courses')
 const examsPage = () => import('../pages/exams')
+const contestsPage = () => import('../pages/contests')
 const statusPage = () => import('../pages/status')
 const submissionPage = () => import('../pages/submission')
 const problemPage = () => import('../pages/problem')
@@ -45,6 +46,7 @@ const router = new Router({
       { path: '/announcements', component: announcementsPage },
       { path: '/assignments', component: assignmentsPage },
       { path: '/exams', component: examsPage },
+      { path: '/contests', component: contestsPage },
       { path: '/notFound', component: notFoundPage },
       { path: '/profile', component: profilePage },
       { path: '/problem/:problemId', component: problemPage },

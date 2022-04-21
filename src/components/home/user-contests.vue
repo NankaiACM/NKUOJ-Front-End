@@ -8,6 +8,13 @@
     </template>
 
     <b-list-group flush v-if="contests && contests.length > 0">
+      <b-list-group-item v-bind:href="'/contest/' + contest.id" v-for="contest in contests" v-bind:key="contest.id">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{contest.name}}</h5>
+          <small>{{getLocaleDate(contest.end)}} 截止</small>
+        </div>
+        <p class="mb-1">{{contest.courseName ? contest.courseName : '无所属课程'}}</p>
+      </b-list-group-item>
     </b-list-group>
 
     <b-card-body v-if="loading">
@@ -24,6 +31,8 @@
 </template>
 
 <script>
+import date2Text from "@/util/date";
+
 export default {
   name: 'user-contests',
   data: function () {
@@ -34,21 +43,15 @@ export default {
     }
   },
   methods: {
-    onItemClicked: function (contest) {
-      if (contest.status === 0) {
-        this.$router.push(`/contest/${this.$route.params.contestId}/authorize`)
-      } else {
-        this.$bvModal.msgBoxOk(`${contest.name} 未开始，请开始后再进入。`, {title: '提示', okTitle: '返回'})
-      }
-    },
-    submit: function () {
-
+    getLocaleDate: function (string) {
+      return date2Text(string)
     }
   },
   mounted() {
-    // this.$http.get(`${window.backendOrigin}/api/user/contests`).then(res => {
-    //   this.contests = res.data.contests
-    // })
+    this.$http.get(`${window.backendOrigin}/api/contest/open`).then(res => {
+      this.contests = res.data
+      this.loading = false
+    })
   }
 }
 </script>

@@ -15,6 +15,7 @@
             <b-nav-item @click="$emit('toCourses')">课程</b-nav-item>
             <b-nav-item @click="$emit('toAssignments')">作业</b-nav-item>
             <b-nav-item @click="$emit('toExams')">考试</b-nav-item>
+            <b-nav-item @click="$emit('toContests')">竞赛</b-nav-item>
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown right>
