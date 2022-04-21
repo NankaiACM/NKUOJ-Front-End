@@ -9,8 +9,10 @@
         <h6 class="text-muted">请前往评测记录页面查看您的评测结果。</h6>
       </div>
       <div class="container text-center m-4" v-if="statusUpdateTries > 0">
-        <b-spinner v-if="statusCode <= 100"></b-spinner>
-        <h5 :class="`text-${statusVariant(statusCode)}`">{{ statusText(statusCode) }}</h5>
+        <b-spinner v-if="statusCode <= 100" small class="m-2" type="grow"></b-spinner>
+        <b-spinner v-if="statusCode <= 100" small class="m-2" type="grow"></b-spinner>
+        <b-spinner v-if="statusCode <= 100" small class="m-2" type="grow"></b-spinner>
+        <h3 :class="`text-${statusVariant(statusCode)}`">{{ statusText(statusCode) }}</h3>
       </div>
     </div>
   </b-modal>
