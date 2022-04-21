@@ -20,6 +20,7 @@ const profilePage = () => import('../pages/profile')
 const contestAuthorizePage = () => import('../pages/authorize')
 const assignmentPage = () => import('../pages/assignment')
 const examPage = () => import('../pages/exam')
+const contestPage = () => import('../pages/contest')
 const assignmentsPage = () => import('../pages/assignments')
 const announcementsPage = () => import('../pages/announcements')
 const announcementPage = () => import('../pages/announcement')
@@ -55,6 +56,7 @@ const router = new Router({
       { path: '/course/:courseId', component: coursePage },
       { path: '/submission/:submissionId', component: submissionPage },
       { path: '/assignment/:assignmentId', component: assignmentPage },
+      { path: '/contest/:contestId', component: contestPage },
       { path: '/exam/:examId', component: examPage },
       { path: '/', redirect: '/login', meta: { isLoginPage: true } },
     ]
