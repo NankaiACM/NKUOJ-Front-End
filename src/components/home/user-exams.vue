@@ -7,7 +7,7 @@
       </h6>
     </template>
 
-    <b-list-group flush>
+    <b-list-group flush v-if="exams && exams.length > 0">
       <b-list-group-item v-bind:href="'/exam/' + exam.id" v-for="exam in exams" v-bind:key="exam.id">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{exam.name}}</h5>
@@ -43,13 +43,6 @@ export default {
     }
   },
   methods: {
-    onItemClicked: function (contest) {
-      if (contest.status === 0) {
-        this.$router.push(`/contest/${this.$route.params.contestId}/authorize`)
-      } else {
-        this.$bvModal.msgBoxOk(`${contest.name} 未开始，请开始后再进入。`, {title: '提示', okTitle: '返回'})
-      }
-    },
     getLocaleDate: function (string) {
       return date2Text(string)
     }
