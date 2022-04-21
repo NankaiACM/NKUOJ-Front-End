@@ -22,7 +22,7 @@
       [{{statusCode}}] 网络请求出错，内容获取失败。
     </b-card-body>
     <b-card-body v-else-if="assignments.length === 0">
-      暂无作业。
+      暂无作业。过往作业请前往课程页面查看。
     </b-card-body>
   </b-card>
 </template>

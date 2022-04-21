@@ -23,7 +23,7 @@
       [{{ statusCode }}] 网络请求出错，内容获取失败。
     </b-card-body>
     <b-card-body v-else-if="courses.length === 0">
-      暂无修读的课程。
+      暂无修读的课程。请前往课程页面加入课程。
     </b-card-body>
   </b-card>
 </template>
