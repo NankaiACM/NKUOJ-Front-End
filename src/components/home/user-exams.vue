@@ -1,23 +1,25 @@
 <template>
   <b-card no-body>
     <template #header>
-      <h6 class="m-1"><b-icon icon="card-checklist" class="mr-2"></b-icon>我的考试</h6>
+      <h6 class="m-1">
+        <b-icon icon="card-checklist" class="mr-2"></b-icon>
+        我的考试
+      </h6>
     </template>
 
-    <b-overlay :show="loading" rounded="sm">
-      <b-list-group flush>
-      </b-list-group>
+    <b-list-group flush>
+    </b-list-group>
 
-      <b-card-body v-if="loading" class="m-4">
-        正在加载
-      </b-card-body>
-      <b-card-body v-else-if="statusCode !== 200">
-        [{{statusCode}}] 网络请求出错，内容获取失败。
-      </b-card-body>
-      <b-card-body v-else-if="contests.length === 0">
-        您没有报名的考试。
-      </b-card-body>
-    </b-overlay>
+    <b-card-body v-if="loading">
+      <b-skeleton width="85%"></b-skeleton>
+      <b-skeleton width="55%"></b-skeleton>
+    </b-card-body>
+    <b-card-body v-else-if="statusCode !== 200">
+      [{{ statusCode }}] 网络请求出错，内容获取失败。
+    </b-card-body>
+    <b-card-body v-else-if="exams.length === 0">
+      您没有报名的考试。
+    </b-card-body>
   </b-card>
 </template>
 
@@ -26,7 +28,7 @@ export default {
   name: 'user-exams',
   data: function () {
     return {
-      contests: [],
+      exams: [],
       loading: false,
       statusCode: 200
     }
@@ -43,10 +45,11 @@ export default {
 
     }
   },
-  mounted () {
-    // this.$http.get(`${window.backendOrigin}/api/user/contests`).then(res => {
-    //   this.contests = res.data.contests
-    // })
+  mounted() {
+    this.$http.get(`${window.backendOrigin}/api/user/exams`).then(res => {
+      this.exams = res.data
+      this.loading = false
+    })
   }
 }
 </script>
