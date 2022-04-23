@@ -4,7 +4,8 @@
       <h1 class="display-4">评测记录</h1>
       <p class="lead">在此查看评测记录。
         <b-link @click="showFilterModal" class="text-decoration-none text-muted">筛选</b-link> |
-        <b-link @click="showJumpModal" class="text-decoration-none text-muted">跳转</b-link>
+        <b-link @click="showJumpModal" class="text-decoration-none text-muted">跳转</b-link> |
+        <b-link @click="reloadStatusTable" class="text-decoration-none text-muted">刷新</b-link>
       </p>
     </div>
 
@@ -93,6 +94,14 @@ export default {
     changePage: function (number) {
       this.currentPage = number
       this.loadRowsCount()
+      this.loadStatusData()
+    },
+    loadRowsCount: function () {
+      this.$http.get(`${window.backendOrigin}/api/solutions/total${this.filtersToString(false)}`, ).then(res => {
+        this.totalRows = res.data
+      })
+    },
+    loadStatusData: function () {
       this.$http.get(`${window.backendOrigin}/api/solutions?page=${this.currentPage}&item=20${this.filtersToString(true)}`, ).then(res => {
         this.items = []
         for(const item of res.data) {
@@ -100,17 +109,9 @@ export default {
             status: item.statusId, user: {uid: item.uid, nickname: item.nickname} })
         }
         this.isLoading = false
-      }, e => {
-        console.log(e)
+      }, () => {
         this.isLoading = true
         this.items = []
-      })
-    },
-    loadRowsCount: function () {
-      this.$http.get(`${window.backendOrigin}/api/solutions/total${this.filtersToString(false)}`, ).then(res => {
-        this.totalRows = res.data
-      }, e => {
-        console.log(e)
       })
     },
     getStatusText: function (status) {
@@ -166,6 +167,15 @@ export default {
     },
     jumpToSubmission: function () {
       this.$router.push(`/submission/${this.jumpID}`)
+    },
+    reloadStatusTable: function () {
+      this.loadRowsCount()
+      this.loadStatusData()
+      this.$bvToast.toast(`刷新成功！`, {
+        title: '提示',
+        autoHideDelay: 5000,
+        appendToast: true
+      })
     }
   }, mounted() {
     this.loadFilterPreferences()
