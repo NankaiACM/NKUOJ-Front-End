@@ -175,7 +175,8 @@ export default {
       this.$bvToast.toast(`刷新成功！`, {
         title: '提示',
         autoHideDelay: 5000,
-        appendToast: true
+        appendToast: true,
+        variant: 'success'
       })
     }
   }, mounted() {
