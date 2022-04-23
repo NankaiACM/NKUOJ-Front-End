@@ -21,7 +21,7 @@
               </template>
               <b-dropdown-item @click="$router.push('/profile')">用户中心</b-dropdown-item>
               <b-dropdown-item @click="$router.push('/admin/home')" v-if="$store.getters.isAdministrator">管理面板</b-dropdown-item>
-              <b-dropdown-item @click="$router.push('/logout')">退出</b-dropdown-item>
+              <b-dropdown-item @click="confirmLogout">退出</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -32,7 +32,16 @@
 
 <script>
 export default {
-  name: 'head-bar-administrator'
+  name: 'head-bar-administrator',
+  methods: {
+    confirmLogout: function () {
+      this.$bvModal.msgBoxConfirm("真的要退出登录吗？", {title: '提示', centered: true, okTitle: '退出登录', cancelTitle: '取消'}).then(value => {
+        if (value) {
+          this.$router.push('/logout')
+        }
+      })
+    }
+  }
 }
 </script>
 

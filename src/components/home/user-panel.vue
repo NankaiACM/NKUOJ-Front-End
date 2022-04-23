@@ -9,7 +9,7 @@
     <b-list-group flush>
       <b-list-group-item button @click="$router.push('/profile')" class="text-center">用户中心</b-list-group-item>
       <b-list-group-item button @click="$router.push('/admin/home')" v-if="$store.getters.isAdministrator" class="text-center">管理面板</b-list-group-item>
-      <b-list-group-item button @click="$router.push('/logout')" class="text-center text-danger">退出</b-list-group-item>
+      <b-list-group-item button @click="confirmLogout" class="text-center text-danger">退出</b-list-group-item>
     </b-list-group>
   </b-card>
 </div>
@@ -23,6 +23,13 @@ export default {
   methods: {
     uidToStr: function (uid) {
       return uid2Str(uid)
+    },
+    confirmLogout: function () {
+      this.$bvModal.msgBoxConfirm("真的要退出登录吗？", {title: '提示', centered: true, okTitle: '退出登录', cancelTitle: '取消'}).then(value => {
+        if (value) {
+          this.$router.push('/logout')
+        }
+      })
     }
   }
 }
