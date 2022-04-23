@@ -5,13 +5,13 @@
     </template>
 
       <b-list-group flush>
-        <b-list-group-item v-bind:href="'/announcement/' + announcement.id" class="d-flex justify-content-between align-items-center"
+        <b-list-group-item button @click="$router.push('/announcement/' + announcement.id)" class="d-flex justify-content-between align-items-center"
                            v-for="announcement in announcements" v-bind:key="announcement.id">
           {{announcement.title}}
         </b-list-group-item>
 
-        <b-list-group-item v-if="announcements.length > 0">
-          <b-link class="text-muted text-decoration-none" href="/announcements">查看全部...</b-link>
+        <b-list-group-item button @click="$router.push('/announcements')" v-if="announcements.length > 0">
+          查看全部...
         </b-list-group-item>
       </b-list-group>
 

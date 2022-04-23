@@ -15,7 +15,7 @@
             </b-row>
             <b-row class="mb-2">
               <b-col sm="3" class="text-sm-left"><b>题目：</b></b-col>
-              <b-col><b-link :href="`/problem/${data.pid}`" class="text-decoration-none">{{data.name}}</b-link> #{{data.pid}}</b-col>
+              <b-col><b-link @click="$router.push(`/problem/${data.pid}`)" class="text-decoration-none">{{data.name}}</b-link> #{{data.pid}}</b-col>
             </b-row>
             <b-row class="mb-2">
               <b-col sm="3" class="text-sm-left"><b>时间：</b></b-col>

@@ -5,8 +5,8 @@
       <h4><span class="badge bg-secondary text-light">题目</span></h4>
     </div>
     <problem-header :problem-info="problemInfo" :loading="loading" class="mb-3" :pid="problemInfo.pid"></problem-header>
-    <problem-navigator :psid="problemInfo.psid" v-if="problemInfo.psid" :loading="loading" :pid="problemInfo.pid" class="mb-3">
-    </problem-navigator>
+    <problem-navigator :psid="problemInfo.psid" v-if="problemInfo.psid" :loading="loading" :pid="problemInfo.pid" class="mb-3"
+                       @switchToProblem="switchToProblem"></problem-navigator>
     <problem-content :type="extension" :content="content" :loading="loading" class="mb-4"></problem-content>
     <submit-modal ref="submit-modal" :pid="problemInfo.pid"></submit-modal>
     <status-list-modal ref="status-list-modal" :pid="problemInfo.pid" :uid="$store.getters.getUID"></status-list-modal>
@@ -47,6 +47,7 @@ export default {
   },
   methods: {
     loadProblemData: function () {
+      this.loading = true
       this.$http.get(`${window.backendOrigin}/api/problem/id/${this.$route.params.problemId}`).then(
         res => {
           this.problemInfo = res.data
@@ -60,6 +61,15 @@ export default {
     },
     toSubmitStatus: function () {
       this.$refs['status-list-modal'].show()
+    },
+    switchToProblem: function (event, pid) {
+      if (`${pid}` !== `${this.$route.params.problemId}`) {
+        this.$router.push('/problem/' + pid)
+      }
+    }
+  }, watch: {
+    '$route': function () {
+      this.loadProblemData()
     }
   }
 }

@@ -11,7 +11,7 @@
             <div class="card-body">
               <h5 class="card-title">(っ╥╯﹏╰╥c)</h5>
               <p class="text-muted mt-4">您要访问的网页不存在，或者您没有权限</p>
-              <a class="btn btn-info mt-5" type="button" href="/">返回首页</a>
+              <b-link class="btn btn-info mt-5" type="button" @click="$router.push('/')">返回首页</b-link>
             </div>
           </div>
         </div>

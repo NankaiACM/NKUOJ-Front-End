@@ -5,7 +5,7 @@
     </template>
 
     <b-list-group flush v-if="assignments && assignments.length > 0">
-      <b-list-group-item v-bind:href="'/assignment/' + assignment.id" v-for="assignment in assignments" v-bind:key="assignment.id">
+      <b-list-group-item button @click="$router.push('/assignment/' + assignment.id)" v-for="assignment in assignments" v-bind:key="assignment.id">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{assignment.name}}</h5>
           <small>{{getLocaleDate(assignment.end)}} 截止</small>

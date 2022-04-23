@@ -45,7 +45,7 @@
             </template>
 
             <b-list-group>
-              <b-list-group-item :href="'/problem/' + problem.pid" class="flex-column align-items-start"
+              <b-list-group-item button @click="$router.push('/problem/' + problem.pid)" class="flex-column align-items-start"
                                  v-for="problem in problemsData" v-bind:key="problem.pid">
                 <div class="d-flex w-100 justify-content-between">
                   <h5 class="mb-1">{{ problem.name }}</h5>

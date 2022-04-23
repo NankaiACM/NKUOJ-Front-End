@@ -17,7 +17,7 @@
           </template>
 
           <b-list-group v-if="myCourses && myCourses.length > 0">
-            <b-list-group-item v-bind:href="'/course/' + course.id"
+            <b-list-group-item button @click="$router.push(`/course/${course.id}`)"
                                class="d-flex justify-content-between align-items-center pt-4 pb-3 pl-4"
                                v-for="course in myCourses" v-bind:key="course.id">
               <h5>{{ course.name }}</h5>

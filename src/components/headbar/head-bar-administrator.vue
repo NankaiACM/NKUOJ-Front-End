@@ -2,9 +2,9 @@
   <div class="container-fluid bg-light shadow-sm">
     <div class="container">
       <b-navbar class="navbar-expand-lg" toggleable="lg" type="light" variant="light">
-        <a href="/">
+        <b-link href="/">
           <img class="slogan" src="../../assets/nkuoj-slogan.svg" alt="Nankai University Online Judge">
-        </a>
+        </b-link>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -19,9 +19,9 @@
               <template #button-content>
                 <em>{{$store.getters.getUserData.nickname}}</em>
               </template>
-              <b-dropdown-item href="/profile">用户中心</b-dropdown-item>
-              <b-dropdown-item href="/admin/home" v-if="$store.getters.isAdministrator">管理面板</b-dropdown-item>
-              <b-dropdown-item href="/logout">退出</b-dropdown-item>
+              <b-dropdown-item @click="$router.push('/profile')">用户中心</b-dropdown-item>
+              <b-dropdown-item @click="$router.push('/admin/home')" v-if="$store.getters.isAdministrator">管理面板</b-dropdown-item>
+              <b-dropdown-item @click="$router.push('/logout')">退出</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>

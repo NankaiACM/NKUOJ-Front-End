@@ -4,14 +4,14 @@
       <h1 class="display-4">管理中心</h1>
       <p class="lead">管理题目、作业、比赛、考试、用户等。</p>
       <hr class="my-4">
-      <b-button variant="info" href="/">返回主站</b-button>
+      <b-button variant="info" @click="$router.push('/')">返回主站</b-button>
     </div>
 
     <div class="row">
-      <div class="col-md-4 p-3 d-flex" v-for="route in routes" :key="route">
+      <div class="col-md-4 p-3 d-flex" v-for="route in routes" :key="route.href">
         <div class="card flex-fill">
           <div class="card-header text-center">
-            <a :href="route.href" class="card-link text-dark stretched-link">{{ route.title }}</a>
+            <b-link @click="$router.push(route.href)" class="card-link text-dark stretched-link">{{ route.title }}</b-link>
           </div>
           <div class="card-body">
             <p class="card-text text-center">{{ route.description }}</p>
