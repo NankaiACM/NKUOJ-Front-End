@@ -102,6 +102,7 @@ export default {
       })
     },
     loadStatusData: function () {
+      this.isLoading = true
       this.$http.get(`${window.backendOrigin}/api/solutions?page=${this.currentPage}&item=20${this.filtersToString(true)}`, ).then(res => {
         this.items = []
         for(const item of res.data) {
