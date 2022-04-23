@@ -87,6 +87,7 @@ export default function (uid) {
     {title: '创高', summary: '记录失效', day: 0},
     {title: '求签', summary: '不是大吉', day: 0},
     {title: '学数据结构', summary: '不会红黑树', day: 0},
+    {title: '学算法导论', summary: '被卡常', day: 0},
     {title: '△', summary: '手机没信号', day: 0},
     {title: 'Codeforces', summary: '掉了100分', day: 0},
     {title: '摸鱼', summary: '可是你还有DDL', day: 0},
@@ -119,7 +120,7 @@ export default function (uid) {
   const primaryState = {title: resultTitles[primaryKey].title, type: resultTitles[primaryKey].type}
   // Obtain secondary state
   let key1 = rand() % secondaryTitlesGood.length
-  let key2 = rand() % secondaryTitlesGood.length
+  let key2 = rand() % secondaryTitlesBad.length
   while (secondaryTitlesGood[key1].day !== 0 && secondaryTitlesGood[key1].day !== day)
     key1 = rand() % secondaryTitlesGood.length
   while (key2 === key1 || (secondaryTitlesBad[key2].day !== 0 && secondaryTitlesBad[key2].day !== day))
