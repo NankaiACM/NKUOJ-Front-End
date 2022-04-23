@@ -1,5 +1,5 @@
 <template>
-  <b-skeleton-wrapper :loading="loading || problemsListLoading" rounded="sm" >
+  <b-skeleton-wrapper :loading="loading || problemsListLoading" rounded="sm" v-if="problems.length > 1">
     <template #loading>
       <b-card>
         <b-skeleton width="85%"></b-skeleton>
@@ -8,7 +8,7 @@
       </b-card>
     </template>
 
-    <b-card class="container-fluid" v-if="problems.length > 1">
+    <b-card class="container-fluid">
       <h6 class="text-center">题目列表</h6>
       <div class="container-fluid d-flex justify-content-center pt-4">
         <b-button-group>
