@@ -4,7 +4,7 @@
       <h1 class="display-4">管理中心</h1>
       <p class="lead">管理题目、作业、比赛、考试、用户等。</p>
       <hr class="my-4">
-      <b-button variant="info" @click="$router.push('/')">返回主站</b-button>
+      <b-button variant="info" @click="$router.push('/home')">返回主站</b-button>
     </div>
 
     <div class="row">

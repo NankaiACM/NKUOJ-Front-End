@@ -1,5 +1,5 @@
 <template>
-  <div id="problem">
+  <div id="problems">
     <div class="container">
       <div class="jumbotron">
         <div class="container">
