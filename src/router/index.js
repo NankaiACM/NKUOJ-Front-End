@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const appUniversal = () => import('../templates/app-universal.vue')
-const appContest = () => import('../templates/app-contest')
 const appAdministrator = () => import('../templates/app-administrator')
 
 const loginPage = () => import('../pages/login')
@@ -12,27 +11,21 @@ const problemsPage = () => import('../pages/tabs/tab-problems')
 const coursesPage = () => import('../pages/tabs/tab-courses')
 const examsPage = () => import('../pages/tabs/tab-exams')
 const contestsPage = () => import('../pages/tabs/tab-contests')
-const statusPage = () => import('../pages/tabs/status')
+const statusPage = () => import('../pages/tabs/tab-status')
 const submissionPage = () => import('../pages/entities/entity-page-submission')
 const problemPage = () => import('../pages/entities/entity-page-problem')
 const notFoundPage = () => import('../pages/404')
 const profilePage = () => import('../pages/profile')
-const contestAuthorizePage = () => import('../pages/authorize')
 const assignmentPage = () => import('../pages/entities/entity-page-assignment')
 const examPage = () => import('../pages/entities/entity-page-exam')
 const contestPage = () => import('../pages/entities/entity-page-contest')
 const assignmentsPage = () => import('../pages/tabs/tab-assignments')
 const announcementsPage = () => import('../pages/tabs/tab-announcements')
 const announcementPage = () => import('../pages/entities/entity-page-announcement')
-const administratorHomePage = () => import('../pages/admin/admin-home')
-const administratorProblemPage = () => import('../pages/admin/problem-page')
-const administratorRejudgePage = () => import('../pages/admin/rejudge-page')
-const administratorStatisticsPage = () => import('../pages/admin/statistics-page')
-const administratorContestPage = () => import('../pages/admin/contest-page')
-const administratorAssignmentPage = () => import('../pages/admin/assignment-page')
-const administratorCoursePage = () => import('../pages/admin/course-page')
-const administratorAnnouncementPage = () => import('../pages/admin/announcement-page')
-const administratorUserPage = () => import('../pages/admin/user-page')
+const administratorHomePage = () => import('../pages/admin/admin-home-page')
+const administratorProblemPage = () => import('../pages/admin/admin-problem-page')
+const administratorRejudgePage = () => import('../pages/admin/admin-rejudge-page')
+const administratorStatisticsPage = () => import('../pages/admin/admin-statistics-page')
 
 Vue.use(Router)
 const router = new Router({
@@ -65,16 +58,6 @@ const router = new Router({
     component: loginPage,
     meta: { isLoginPage: true }
   }, {
-    path: '/contest',
-    component: appContest,
-    children: [
-      {
-        path: '/contest/:contestId/authorize',
-        component: contestAuthorizePage,
-        meta: { isContestPage: true }
-      }
-    ]
-  }, {
     path: '/admin',
     component: appAdministrator,
     children: [
@@ -86,11 +69,6 @@ const router = new Router({
       { path: '/admin', redirect: '/admin/home', meta: { isAdministrator: true } },
       { path: '/admin/problem', component: administratorProblemPage, meta: { isAdministrator: true } },
       { path: '/admin/statistics', component: administratorStatisticsPage, meta: { isAdministrator: true } },
-      { path: '/admin/contest', component: administratorContestPage, meta: { isAdministrator: true } },
-      { path: '/admin/assignment', component: administratorAssignmentPage, meta: { isAdministrator: true } },
-      { path: '/admin/course', component: administratorCoursePage, meta: { isAdministrator: true } },
-      { path: '/admin/announcement', component: administratorAnnouncementPage, meta: { isAdministrator: true } },
-      { path: '/admin/user', component: administratorUserPage, meta: { isAdministrator: true } },
       { path: '/admin/rejudge', component: administratorRejudgePage, meta: { isAdministrator: true } },
     ]
   }, {

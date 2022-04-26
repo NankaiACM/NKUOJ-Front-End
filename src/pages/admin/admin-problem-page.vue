@@ -138,7 +138,7 @@ import AdminProblemUploadDataModal from "@/components/admin/admin-problem-upload
 import AdminMarkdownPreviewModal from "@/components/admin/admin-markdown-preview-modal";
 
 export default {
-  name: 'problem-page',
+  name: 'admin-problem-page',
   components: {
     AdminMarkdownPreviewModal,
     AdminProblemUploadDataModal,

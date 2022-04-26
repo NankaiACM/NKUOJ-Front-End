@@ -80,7 +80,7 @@
 import code2str from "@/util/code";
 
 export default {
-  name: "rejudge-page",
+  name: "admin-rejudge-page",
   data: function () {
     return {
       pid: null,

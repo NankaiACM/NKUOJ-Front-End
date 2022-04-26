@@ -50,7 +50,7 @@ import code2str from "@/util/code";
 import uid2Str from "@/util/uidToStr";
 
 export default {
-  name: "statistics-page",
+  name: "admin-statistics-page",
   components: {
     itemSelectCard
   },
