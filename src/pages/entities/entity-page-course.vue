@@ -83,7 +83,7 @@
 import date2Text from "@/util/date";
 
 export default {
-  name: 'course',
+  name: 'entity-page-course',
   data: function () {
     return {
       isLoading: true,

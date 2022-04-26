@@ -1,5 +1,5 @@
 <template>
-  <div id="problem">
+  <div id="entity-page-problem">
     <div class="container">
       <div class="jumbotron text-center">
         <h1 class="display-6">{{ problemInfo.name ? problemInfo.name : '加载中...' }}</h1>
@@ -28,7 +28,7 @@ import ProblemHeader from "@/components/problem/problem-header";
 import StatusListModal from "@/components/status/status-list-modal";
 
 export default {
-  name: 'problem-page',
+  name: 'entity-page-problem',
   components: {
     StatusListModal,
     ProblemHeader,

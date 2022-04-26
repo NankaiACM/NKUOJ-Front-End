@@ -106,7 +106,7 @@ import date2Text from "@/util/date";
 import StatusDetails from "@/components/status/status-details";
 
 export default {
-  name: "submission",
+  name: "entity-page-submission",
   components: {StatusDetails},
   data: function () {
     return {

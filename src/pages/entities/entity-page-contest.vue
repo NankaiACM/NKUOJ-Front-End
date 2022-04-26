@@ -72,7 +72,7 @@ import date2Text from "@/util/date";
 import Countdown from "@/components/contest/countdown";
 
 export default {
-  name: 'contest',
+  name: 'entity-page-contest',
   components: {Countdown},
   data: function () {
     return {

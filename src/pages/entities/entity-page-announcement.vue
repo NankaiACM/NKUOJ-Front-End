@@ -1,5 +1,5 @@
 <template>
-  <div id="announcement">
+  <div id="entity-page-announcement">
     <div class="container">
       <div class="jumbotron">
         <div class="container">
@@ -31,7 +31,7 @@
 import date2Text from "@/util/date";
 
 export default {
-  name: "announcement",
+  name: "entity-page-announcement",
   data: function () {
     return {
       loading: true,

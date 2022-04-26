@@ -1,14 +1,14 @@
 <template>
   <div class="container">
     <div class="jumbotron text-center">
-      <h1 class="display-4">{{ examData.name }}</h1>
-      <h4><span class="badge bg-danger text-light">考试</span></h4>
+      <h1 class="display-4">{{ assignmentData.name }}</h1>
+      <h4><span class="badge bg-info text-light">作业</span></h4>
     </div>
 
-    <div class="row">
-      <div class="col-md-4 mb-4 order-md-last order-first">
-        <countdown :begin="examData.begin" :end="examData.end" class="mb-2"></countdown>
-        <b-card title="考试详情" class="mb-2">
+    <div class="card">
+      <div class="card-body">
+        <div class="container">
+          <h5 class="card-title mt-4">作业详情</h5>
           <b-skeleton-wrapper :loading="isDetailsLoading">
             <template #loading>
               <b-skeleton :width="`${Math.floor(Math.random() * 80 + 20)}%`"
@@ -16,27 +16,26 @@
             </template>
 
             <p>
-              <span class="h6" v-if="examData.courseName">课程：</span>
-              {{ examData.courseName }}
+              <span class="h6" v-if="assignmentData.courseName">课程：</span>
+              {{ assignmentData.courseName }}
             </p>
             <p>
               <span class="h6">介绍：</span>
-              {{ examData.description }}
+              {{ assignmentData.description }}
             </p>
             <p>
               <span class="h6">时间：</span>
-              {{ getLocaleDate(examData.begin) }} 开始，至 {{ getLocaleDate(examData.end) }} 截止
+              {{ getLocaleDate(assignmentData.begin) }} 开始，至 {{ getLocaleDate(assignmentData.end) }} 截止
             </p>
             <p>
               <span class="h6">状态：</span>
-              <span v-if="examData.open" class="text-success">正在进行</span>
+              <span v-if="assignmentData.open" class="text-success">可提交</span>
               <span v-else class="text-danger">无法提交</span>
             </p>
           </b-skeleton-wrapper>
-        </b-card>
-      </div>
-      <div class="col-md-8 order-md-first order-last">
-        <b-card title="试题">
+        </div>
+        <div class="container">
+          <h5 class="card-title mt-4">完成题目</h5>
           <b-skeleton-wrapper :loading="isProblemsLoading">
             <template #loading>
               <b-card>
@@ -57,11 +56,11 @@
                 <small class="text-success" v-else>已通过</small>
               </b-list-group-item>
               <b-list-group-item v-if="problemsData.length === 0" class="pt-4 pb-4">
-                本次考试暂无题目。
+                本次作业暂无题目。
               </b-list-group-item>
             </b-list-group>
           </b-skeleton-wrapper>
-        </b-card>
+        </div>
       </div>
     </div>
   </div>
@@ -69,15 +68,13 @@
 
 <script>
 import date2Text from "@/util/date";
-import Countdown from "@/components/contest/countdown";
 
 export default {
-  name: 'exam',
-  components: {Countdown},
+  name: 'entity-page-assignment',
   data: function () {
     return {
-      examId: '',
-      examData: {},
+      assignmentId: '',
+      assignmentData: {},
       problemsData: [],
       isDetailsLoading: true,
       isProblemsLoading: true
@@ -85,11 +82,11 @@ export default {
   },
   methods: {
     loadAssignmentData: function () {
-      this.$http.get(`${window.backendOrigin}/api/exam/id/${this.examId}`).then(res => {
-        this.examData = res.data
+      this.$http.get(`${window.backendOrigin}/api/assignment/id/${this.assignmentId}`).then(res => {
+        this.assignmentData = res.data
         this.isDetailsLoading = false
       })
-      this.$http.get(`${window.backendOrigin}/api/problem/problemset/${this.examId}`).then(res => {
+      this.$http.get(`${window.backendOrigin}/api/problem/assignment/${this.assignmentId}`).then(res => {
         this.problemsData = res.data
         this.isProblemsLoading = false
       })
@@ -99,7 +96,7 @@ export default {
     }
   },
   mounted() {
-    this.examId = this.$route.params.examId
+    this.assignmentId = this.$route.params.assignmentId
     this.loadAssignmentData()
   }
 }
