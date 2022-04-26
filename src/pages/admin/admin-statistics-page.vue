@@ -15,7 +15,7 @@
         </template>
 
         <template #cell(status_id)="data">
-          <h6><b-link class="text-decoration-none" @click="$router.push(`/submission/${data.value}`)">#{{data.value}}</b-link></h6>
+          <h6><b-link class="text-decoration-none" :href="`/submission/${data.value}`">#{{data.value}}</b-link></h6>
         </template>
         <template #cell(status)="data">
           <h6 :class="`text-dark`">{{data.value}}</h6>
