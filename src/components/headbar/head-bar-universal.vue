@@ -32,15 +32,15 @@
       </b-navbar>
     </div>
 
-    <draw-stick ref="draw-stick-modal"></draw-stick>
+    <fortune-stick-modal ref="draw-stick-modal"></fortune-stick-modal>
   </div>
 </template>
 
 <script>
-import DrawStick from "@/components/others/draw-stick";
+import FortuneStickModal from "@/components/others/fortune-stick-modal";
 export default {
   name: 'head-bar-universal',
-  components: {DrawStick},
+  components: {FortuneStickModal},
   methods: {
     showDrawStick: function () {
       this.$refs['draw-stick-modal'].show()
