@@ -67,7 +67,7 @@ import status2variant from "@/util/status-variant";
 import uid2Str from "@/util/uidToStr";
 
 export default {
-  name: "status",
+  name: "tab-status",
   data: function () {
     return {
       items: [],

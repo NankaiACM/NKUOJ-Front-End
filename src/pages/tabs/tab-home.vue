@@ -1,5 +1,5 @@
 <template>
-<div id="home">
+<div id="tab-home">
   <div id="home-content" class="container">
     <div class="row">
       <div class="col-md-8">
@@ -20,18 +20,18 @@
 </div>
 </template>
 <script>
-import userPanel from '../components/home/user-panel'
-import userCourses from '../components/home/user-courses'
-import userAssignments from '../components/home/user-assignments'
-import userContests from '../components/home/user-contests'
-import userExams from '../components/home/user-exams'
+import userPanel from '../../components/home/user-panel'
+import userCourses from '../../components/home/user-courses'
+import userAssignments from '../../components/home/user-assignments'
+import userContests from '../../components/home/user-contests'
+import userExams from '../../components/home/user-exams'
 import associationPoster from "@/components/home/association-poster";
 import AnnouncementsPanel from "@/components/home/announcements-panel";
 import Hitokoto from "@/components/home/hitokoto";
 import JumpPanel from "@/components/home/jump-panel";
 
 export default {
-  name: 'component-home',
+  name: 'tab-home',
   components: {
     JumpPanel,
     Hitokoto,

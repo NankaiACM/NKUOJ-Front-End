@@ -1,10 +1,10 @@
 <template>
-  <div id="contests">
+  <div id="tab-assignments">
     <div class="container">
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-4">我的竞赛</h1>
-          <p class="lead">查看我报名的竞赛。</p>
+          <h1 class="display-4">我的作业</h1>
+          <p class="lead">查看和浏览可完成的作业。</p>
         </div>
       </div>
       <div class="container">
@@ -14,13 +14,13 @@
                         v-for="i in Array(42).keys()" :key="i"></b-skeleton>
           </template>
 
-          <b-list-group v-if="contests && contests.length > 0">
-            <b-list-group-item button @click="$router.push('/contest/' + contest.id)" v-for="contest in contests" v-bind:key="contest.id">
+          <b-list-group v-if="assignments && assignments.length > 0">
+            <b-list-group-item button @click="$router.push('/assignment/' + assignment.id)" v-for="assignment in assignments" v-bind:key="assignment.id">
               <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{contest.name}}</h5>
-                <small>{{getLocaleDate(contest.end)}} 截止</small>
+                <h5 class="mb-1">{{assignment.name}}</h5>
+                <small>{{getLocaleDate(assignment.end)}} 截止</small>
               </div>
-              <p class="mb-1">{{contest.courseName ? contest.courseName : '无所属课程'}}</p>
+              <p class="mb-1">{{assignment.courseName ? assignment.courseName : '无所属课程'}}</p>
             </b-list-group-item>
           </b-list-group>
           <h5 v-if="loading" class="m-5 text-center">
@@ -29,8 +29,8 @@
           <h5 v-else-if="statusCode !== 200" class="m-5 text-center">
             [{{statusCode}}] 网络请求出错，内容获取失败。
           </h5>
-          <h5 v-else-if="contests.length === 0" class="m-5 text-center">
-            暂无已报名的竞赛。
+          <h5 v-else-if="assignments.length === 0" class="m-5 text-center">
+            暂无作业。
           </h5>
 
         </b-skeleton-wrapper>
@@ -44,10 +44,10 @@
 import date2Text from "@/util/date";
 
 export default {
-  name: "contests",
+  name: "tab-assignments",
   data: function () {
     return {
-      contests: [],
+      assignments: [],
       loading: true,
       statusCode: 200
     }
@@ -58,8 +58,8 @@ export default {
     }
   },
   mounted () {
-    this.$http.get(`${window.backendOrigin}/api/contest`).then(res => {
-      this.contests = res.data
+    this.$http.get(`${window.backendOrigin}/api/assignment/open`).then(res => {
+      this.assignments = res.data
       this.loading = false
     }, e => {
       this.statusCode = e.status

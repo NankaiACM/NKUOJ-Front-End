@@ -1,5 +1,5 @@
 <template>
-  <div id="courses">
+  <div id="tab-courses">
     <div class="container">
       <div class="jumbotron">
         <div class="container">
@@ -68,7 +68,7 @@
 import code2str from '@/util/code'
 
 export default {
-  name: 'courses',
+  name: 'tab-courses',
   components: {},
   data: function () {
     return {

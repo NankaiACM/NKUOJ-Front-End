@@ -1,5 +1,5 @@
 <template>
-  <div id="problems">
+  <div id="tab-problems">
     <div class="container">
       <div class="jumbotron">
         <div class="container">
@@ -31,7 +31,7 @@
 </template>
 <script>
 export default {
-  name: 'problems-page',
+  name: 'tab-problems',
   components: {
   },
   data: function () {
