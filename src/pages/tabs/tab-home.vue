@@ -21,13 +21,13 @@
 </template>
 <script>
 import userPanel from '../../components/home/user-panel'
-import userCourses from '../../components/home/user-courses'
-import userAssignments from '../../components/home/user-assignments'
-import userContests from '../../components/home/user-contests'
-import userExams from '../../components/home/user-exams'
-import associationPoster from "@/components/home/association-poster";
+import userCourses from '../../components/home/user-courses-panel'
+import userAssignments from '../../components/home/user-assignments-panel'
+import userContests from '../../components/home/user-contests-panel'
+import userExams from '../../components/home/user-exams-panel'
+import associationPoster from "@/components/home/association-poster-panel";
 import AnnouncementsPanel from "@/components/home/announcements-panel";
-import Hitokoto from "@/components/home/hitokoto";
+import Hitokoto from "@/components/home/hitokoto-panel";
 import JumpPanel from "@/components/home/jump-panel";
 
 export default {

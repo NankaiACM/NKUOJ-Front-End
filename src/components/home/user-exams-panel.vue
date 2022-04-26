@@ -34,7 +34,7 @@
 import date2Text from "@/util/date";
 
 export default {
-  name: 'user-exams',
+  name: 'user-exams-panel',
   data: function () {
     return {
       exams: [],

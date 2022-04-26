@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "association-poster"
+  name: "association-poster-panel"
 }
 </script>
 

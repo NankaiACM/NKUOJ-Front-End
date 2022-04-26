@@ -69,7 +69,7 @@
 
 <script>
 import date2Text from "@/util/date";
-import Countdown from "@/components/contest/countdown";
+import Countdown from "@/components/contest/countdown-card";
 
 export default {
   name: 'entity-page-contest',

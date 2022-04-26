@@ -24,7 +24,7 @@
 import code2str from '../../util/code'
 
 export default {
-  name: "hitokoto",
+  name: "hitokoto-panel",
   data() {
     return {
       hitokotoData: {},

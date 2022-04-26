@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: 'user-courses',
+  name: 'user-courses-panel',
   data: function () {
     return {
       courses: [],

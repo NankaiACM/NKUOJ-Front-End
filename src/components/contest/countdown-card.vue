@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "countdown",
+  name: "countdown-card",
   props: {
     begin: String,
     end: String

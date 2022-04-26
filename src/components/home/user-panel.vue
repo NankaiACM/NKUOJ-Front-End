@@ -1,5 +1,5 @@
 <template>
-<div id="home-user-panel">
+<div id="user-panel">
   <b-card no-body>
     <div class="d-flex align-items-center m-3">
       <b-avatar class="mr-3"></b-avatar>
