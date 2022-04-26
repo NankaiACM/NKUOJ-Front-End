@@ -91,7 +91,7 @@
 import code2str from "../util/code";
 
 export default {
-  name: "profile",
+  name: "profile-page",
   data() {
     return {
       profileData: {},

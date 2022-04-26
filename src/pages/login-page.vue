@@ -50,7 +50,7 @@ import signupModal from "@/components/login/signup-modal";
 import resetPwdModal from "@/components/login/reset-pwd-modal";
 
 export default {
-  name: 'login',
+  name: 'login-page',
   components: {
     loginModal,
     signupModal,

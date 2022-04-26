@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: '404',
+  name: '404-page',
   computed: {
     stickerIndex: function () {
       const min = Math.ceil(0)
