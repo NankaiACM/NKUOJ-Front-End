@@ -61,7 +61,7 @@
             </b-card>
           </template>
 
-          <status-details :details="data.detail" v-if="data.detail" class="mb-4"></status-details>
+          <status-details-button :details="data.detail" v-if="data.detail" class="mb-4"></status-details-button>
           <b-alert show variant="info" v-else class="mb-4">
             <h4 class="alert-heading">无法查看测试点详情</h4>
             <hr>
@@ -103,11 +103,11 @@ import status2text from "@/util/status-text";
 import status2variant from "@/util/status-variant";
 import langId2Text from "@/util/lang-code-text";
 import date2Text from "@/util/date";
-import StatusDetails from "@/components/status/status-details";
+import StatusDetailsButton from "@/components/status/status-details-button";
 
 export default {
   name: "entity-page-submission",
-  components: {StatusDetails},
+  components: {StatusDetailsButton},
   data: function () {
     return {
       sid: 0,

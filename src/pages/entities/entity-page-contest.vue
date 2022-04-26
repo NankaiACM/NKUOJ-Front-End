@@ -7,7 +7,7 @@
 
     <div class="row">
       <div class="col-md-4 mb-4 order-md-last order-first">
-        <countdown :begin="contestData.begin" :end="contestData.end" class="mb-2"></countdown>
+        <countdown-card :begin="contestData.begin" :end="contestData.end" class="mb-2"></countdown-card>
         <b-card title="竞赛详情" class="mb-2">
           <b-skeleton-wrapper :loading="isDetailsLoading">
             <template #loading>
@@ -69,11 +69,11 @@
 
 <script>
 import date2Text from "@/util/date";
-import Countdown from "@/components/contest/countdown-card";
+import CountdownCard from "@/components/contest/countdown-card";
 
 export default {
   name: 'entity-page-contest',
-  components: {Countdown},
+  components: {CountdownCard},
   data: function () {
     return {
       contestId: '',

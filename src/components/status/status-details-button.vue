@@ -13,7 +13,7 @@ import status2code from '@/util/status-code'
 import status2variant from '@/util/status-variant'
 
 export default {
-  name: "status-details",
+  name: "status-details-button",
   props: {
     details: Array
   },

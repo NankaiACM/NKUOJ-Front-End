@@ -4,16 +4,16 @@
     <div class="row">
       <div class="col-md-8">
         <announcements-panel class="mb-2"></announcements-panel>
-        <user-courses class="mb-2"></user-courses>
-        <user-assignments class="mb-2"></user-assignments>
-        <user-exams class="mb-2"></user-exams>
-        <user-contests class="mb-2"></user-contests>
+        <user-courses-panel class="mb-2"></user-courses-panel>
+        <user-assignments-panel class="mb-2"></user-assignments-panel>
+        <user-exams-panel class="mb-2"></user-exams-panel>
+        <user-contests-panel class="mb-2"></user-contests-panel>
       </div>
       <div class="col-md-4">
         <user-panel class="mb-2"></user-panel>
-        <hitokoto class="mb-2"></hitokoto>
+        <hitokoto-panel class="mb-2"></hitokoto-panel>
         <jump-panel class="mb-2"></jump-panel>
-        <association-poster class="mb-2"></association-poster>
+        <association-poster-panel class="mb-2"></association-poster-panel>
       </div>
     </div>
   </div>
@@ -21,27 +21,27 @@
 </template>
 <script>
 import userPanel from '../../components/home/user-panel'
-import userCourses from '../../components/home/user-courses-panel'
-import userAssignments from '../../components/home/user-assignments-panel'
-import userContests from '../../components/home/user-contests-panel'
-import userExams from '../../components/home/user-exams-panel'
-import associationPoster from "@/components/home/association-poster-panel";
+import userCoursesPanel from '../../components/home/user-courses-panel'
+import userAssignmentsPanel from '../../components/home/user-assignments-panel'
+import userContestsPanel from '../../components/home/user-contests-panel'
+import userExamsPanel from '../../components/home/user-exams-panel'
+import associationPosterPanel from "@/components/home/association-poster-panel";
 import AnnouncementsPanel from "@/components/home/announcements-panel";
-import Hitokoto from "@/components/home/hitokoto-panel";
+import HitokotoPanel from "@/components/home/hitokoto-panel";
 import JumpPanel from "@/components/home/jump-panel";
 
 export default {
   name: 'tab-home',
   components: {
     JumpPanel,
-    Hitokoto,
+    HitokotoPanel,
     AnnouncementsPanel,
     userPanel,
-    userCourses,
-    userAssignments,
-    userExams,
-    userContests,
-    associationPoster
+    userCoursesPanel,
+    userAssignmentsPanel,
+    userExamsPanel,
+    userContestsPanel,
+    associationPosterPanel
   },
   methods: {
   },
