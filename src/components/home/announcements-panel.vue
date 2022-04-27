@@ -1,7 +1,7 @@
 <template>
   <b-card no-body>
     <template #header>
-      <h6 class="m-1"><b-icon icon="patch-exclamation" class="mr-2"></b-icon>全站公告</h6>
+      <h6 class="m-1"><b-icon icon="bell" class="mr-2"></b-icon>全站公告</h6>
     </template>
 
       <b-list-group flush>
