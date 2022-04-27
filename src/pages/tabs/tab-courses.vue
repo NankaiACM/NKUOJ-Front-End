@@ -32,7 +32,7 @@
           </h5>
           <h5 v-else-if="myCourses.length === 0" class="m-5 text-center">
             暂无修读的课程。
-            <b-link class="text-decoration-none text-muted" @click="electCourse">加入课程</b-link>
+            <b-link class="text-decoration-none text-muted" @click="electCourse"><b-icon icon="person-plus"></b-icon>加入课程</b-link>
           </h5>
         </b-skeleton-wrapper>
       </div>
