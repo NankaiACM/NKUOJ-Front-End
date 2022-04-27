@@ -25,7 +25,7 @@
               <b-dropdown-item @click="$router.push('/profile')"><b-icon icon="person"></b-icon>用户中心</b-dropdown-item>
               <b-dropdown-item @click="showDrawStick"><b-icon icon="dice5"></b-icon>每日签到</b-dropdown-item>
               <b-dropdown-item @click="$router.push('/admin/home')" v-if="$store.getters.isAdministrator"><b-icon icon="gear"></b-icon>管理面板</b-dropdown-item>
-              <b-dropdown-item @click="confirmLogout"><b-icon icon="person-x"></b-icon>退出</b-dropdown-item>
+              <b-dropdown-item @click="confirmLogout"><b-icon icon="person-x"></b-icon>退出登录</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>

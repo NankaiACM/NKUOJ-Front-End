@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="jumbotron">
-      <h1 class="display-4">评测记录</h1>
+      <h1 class="display-4"><b-icon icon="bar-chart"></b-icon>评测记录</h1>
       <p class="lead">在此查看评测记录。
         <b-link @click="showFilterModal" class="text-decoration-none text-muted"><b-icon icon="funnel"></b-icon>筛选</b-link> |
         <b-link @click="showJumpModal" class="text-decoration-none text-muted"><b-icon icon="reply"></b-icon>跳转</b-link> |

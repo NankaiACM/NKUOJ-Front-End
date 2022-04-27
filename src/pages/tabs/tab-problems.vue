@@ -3,7 +3,7 @@
     <div class="container">
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-4">公开题库</h1>
+          <h1 class="display-4"><b-icon icon="collection"></b-icon>公开题库</h1>
           <p class="lead">您可以在此挑选题目练习。此处题目不会计入课程成绩。</p>
         </div>
       </div>

@@ -7,9 +7,9 @@
       <span class="text-secondary">#{{uidToStr($store.getters.getUID)}}</span>
     </div>
     <b-list-group flush>
-      <b-list-group-item button @click="$router.push('/profile')" class="text-center">用户中心</b-list-group-item>
-      <b-list-group-item button @click="$router.push('/admin/home')" v-if="$store.getters.isAdministrator" class="text-center">管理面板</b-list-group-item>
-      <b-list-group-item button @click="confirmLogout" class="text-center text-danger">退出</b-list-group-item>
+      <b-list-group-item button @click="$router.push('/profile')" class="text-center"><b-icon icon="person"></b-icon>用户中心</b-list-group-item>
+      <b-list-group-item button @click="$router.push('/admin/home')" v-if="$store.getters.isAdministrator" class="text-center"><b-icon icon="gear"></b-icon>管理面板</b-list-group-item>
+      <b-list-group-item button @click="confirmLogout" class="text-center text-danger"><b-icon icon="person-x"></b-icon>退出登录</b-list-group-item>
     </b-list-group>
   </b-card>
 </div>

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-4">我的课程</h1>
+          <h1 class="display-4"><b-icon icon="journals"></b-icon>我的课程</h1>
           <p class="lead">查看我修读的课程。
             <b-link class="text-decoration-none text-muted" @click="electCourse"><b-icon icon="person-plus"></b-icon>加入课程</b-link>
           </p>
