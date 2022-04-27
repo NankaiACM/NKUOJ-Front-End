@@ -3,9 +3,9 @@
     <div class="jumbotron">
       <h1 class="display-4">评测记录</h1>
       <p class="lead">在此查看评测记录。
-        <b-link @click="showFilterModal" class="text-decoration-none text-muted">筛选</b-link> |
-        <b-link @click="showJumpModal" class="text-decoration-none text-muted">跳转</b-link> |
-        <b-link @click="reloadStatusTable" class="text-decoration-none text-muted">刷新</b-link>
+        <b-link @click="showFilterModal" class="text-decoration-none text-muted"><b-icon icon="funnel"></b-icon>筛选</b-link> |
+        <b-link @click="showJumpModal" class="text-decoration-none text-muted"><b-icon icon="reply"></b-icon>跳转</b-link> |
+        <b-link @click="reloadStatusTable" class="text-decoration-none text-muted"><b-icon icon="arrow-clockwise"></b-icon>刷新</b-link>
       </p>
     </div>
 
