@@ -10,8 +10,8 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item @click="$emit('toAdministrator')"><b-icon icon="gear"></b-icon>管理中心</b-nav-item>
-            <b-nav-item @click="$emit('toHome')"><b-icon icon="house"></b-icon>主站</b-nav-item>
+            <b-nav-item @click="$emit('toAdministrator')"><b-icon icon="gear" class="mr-1"></b-icon>管理中心</b-nav-item>
+            <b-nav-item @click="$emit('toHome')"><b-icon icon="house" class="mr-1"></b-icon>主站</b-nav-item>
           </b-navbar-nav>
 
           <b-navbar-nav class="ml-auto">
@@ -19,9 +19,9 @@
               <template #button-content>
                 <em>{{$store.getters.getUserData.nickname}}</em>
               </template>
-              <b-dropdown-item @click="$router.push('/profile')"><b-icon icon="person"></b-icon>用户中心</b-dropdown-item>
-              <b-dropdown-item @click="$router.push('/admin/home')" v-if="$store.getters.isAdministrator"><b-icon icon="gear"></b-icon>管理面板</b-dropdown-item>
-              <b-dropdown-item @click="confirmLogout"><b-icon icon="person-x"></b-icon>退出登录</b-dropdown-item>
+              <b-dropdown-item @click="$router.push('/profile')"><b-icon icon="person" class="mr-1"></b-icon>用户中心</b-dropdown-item>
+              <b-dropdown-item @click="$router.push('/admin/home')" v-if="$store.getters.isAdministrator"><b-icon icon="gear" class="mr-1"></b-icon>管理面板</b-dropdown-item>
+              <b-dropdown-item @click="confirmLogout"><b-icon icon="person-x" class="mr-1"></b-icon>退出登录</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
