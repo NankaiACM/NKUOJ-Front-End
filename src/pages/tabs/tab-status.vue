@@ -3,7 +3,7 @@
     <div class="jumbotron">
       <h1 class="display-4"><b-icon icon="bar-chart"></b-icon>评测记录</h1>
       <p class="lead">在此查看评测记录。
-        <b-link @click="showFilterModal" class="text-decoration-none text-muted"><b-icon icon="funnel"></b-icon>筛选</b-link> |
+        <b-link @click="showFilterModal" class="text-decoration-none text-muted"><b-icon :icon="hasFilters ? 'funnel-fill' : 'funnel'"></b-icon>筛选</b-link> |
         <b-link @click="showJumpModal" class="text-decoration-none text-muted"><b-icon icon="reply"></b-icon>跳转</b-link> |
         <b-link @click="reloadStatusTable" class="text-decoration-none text-muted"><b-icon icon="arrow-clockwise"></b-icon>刷新</b-link>
       </p>
@@ -40,7 +40,7 @@
     <b-pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" v-if="totalRows > 20"
                   @change="changePage" align="center" class="m-4" first-number last-number></b-pagination>
 
-    <b-modal id="filter-modal" title="筛选" ok-title="确定" ok-only centered @ok="updateFilters">
+    <b-modal id="filter-modal" title="筛选" ok-title="确定" ok-only centered @ok="updateFilters" @cancel="updateFilters" @close="updateFilters" @hide="updateFilters">
       <label>筛选用户：<span class="text-muted">您的UID: {{uid}}</span></label>
       <b-form-group label="用户 UID:" label-for="input-uid" label-cols-sm="3" label-align-sm="right" label-size="sm">
         <b-form-input id="input-uid" type="number" size="sm" placeholder="所有用户" min="1" v-model="filters.uid" no-wheel @keydown.enter.native="updateFilters"></b-form-input>
@@ -183,6 +183,10 @@ export default {
     this.loadFilterPreferences()
     this.loadRowsCount()
     this.changePage(1)
+  }, computed: {
+    hasFilters: function () {
+      return this.filters.uid || this.filters.pid || this.filters.nickname
+    }
   }
 }
 </script>
