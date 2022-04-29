@@ -22,6 +22,8 @@ const contestPage = () => import('../pages/entities/entity-page-contest')
 const assignmentsPage = () => import('../pages/tabs/tab-assignments')
 const announcementsPage = () => import('../pages/tabs/tab-announcements')
 const announcementPage = () => import('../pages/entities/entity-page-announcement')
+const rankingContestPage = () => import('../pages/entities/entity-page-ranking-contest')
+const rankingExamPage = () => import('../pages/entities/entity-page-ranking-exam')
 const administratorHomePage = () => import('../pages/admin/admin-home-page')
 const administratorProblemPage = () => import('../pages/admin/admin-problem-page')
 const administratorRejudgePage = () => import('../pages/admin/admin-rejudge-page')
@@ -49,6 +51,8 @@ const router = new Router({
       { path: '/course/:courseId', component: coursePage },
       { path: '/submission/:submissionId', component: submissionPage },
       { path: '/assignment/:assignmentId', component: assignmentPage },
+      { path: '/ranking/contest/:contestId', component: rankingContestPage },
+      { path: '/ranking/exam/:examId', component: rankingExamPage },
       { path: '/contest/:contestId', component: contestPage },
       { path: '/exam/:examId', component: examPage },
       { path: '/', redirect: '/login', meta: { isLoginPage: true } },
