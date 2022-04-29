@@ -3,7 +3,7 @@
     <div class="container">
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-4"><b-icon icon="bell"></b-icon>全站公告</h1>
+          <h1 class="display-4"><b-icon icon="bell" class="mr-1"></b-icon>全站公告</h1>
           <p class="lead">查看和浏览全站公告。</p>
         </div>
       </div>

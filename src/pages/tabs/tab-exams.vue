@@ -3,7 +3,7 @@
     <div class="container">
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-4"><b-icon icon="card-checklist"></b-icon>我的考试</h1>
+          <h1 class="display-4"><b-icon icon="card-checklist" class="mr-1"></b-icon>我的考试</h1>
           <p class="lead">查看我报名的考试。</p>
         </div>
       </div>

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-4"><b-icon icon="vector-pen"></b-icon>我的作业</h1>
+          <h1 class="display-4"><b-icon icon="vector-pen" class="mr-1"></b-icon>我的作业</h1>
           <p class="lead">查看和浏览可完成的作业。</p>
         </div>
       </div>

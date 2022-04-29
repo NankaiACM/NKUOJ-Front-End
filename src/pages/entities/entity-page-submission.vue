@@ -63,7 +63,7 @@
 
           <status-details-button :details="data.detail" v-if="data.detail" class="mb-4"></status-details-button>
           <b-alert show variant="info" v-else class="mb-4">
-            <h4 class="alert-heading"><b-icon icon="emoji-frown"></b-icon>无法查看测试点详情</h4>
+            <h4 class="alert-heading"><b-icon icon="emoji-frown" class="mr-1"></b-icon>无法查看测试点详情</h4>
             <hr>
             <p class="mb-0">
               无法查看测试点详情，可能是由于以下原因：对于编译失败的题目，代码未进行测试，您无法查看测试点通过详情；非公开的提交不会向您提供测试点详情；通过制的题目不会计分，亦不会提供测试点详情。
@@ -82,7 +82,7 @@
           </b-skeleton-wrapper>
         </b-card>
         <b-alert show variant="warning" v-else class="mb-4">
-          <h4 class="alert-heading"><b-icon icon="emoji-frown"></b-icon>没有权限查看该代码</h4>
+          <h4 class="alert-heading"><b-icon icon="emoji-frown" class="mr-1"></b-icon>没有权限查看该代码</h4>
           <hr>
           <p class="mb-0">
             您没有权限查看该代码，可能是由于以下原因：只有代码的提交者将其设为公开后才能被查看；为了防止抄袭代码，作业、考试、竞赛的提交在其截止之前不会向他人公开；若您正在参加考试，您无法查看先前提交过的代码。

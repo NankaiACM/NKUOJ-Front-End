@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="jumbotron">
-      <h1 class="display-4"><b-icon icon="gear"></b-icon>管理中心</h1>
+      <h1 class="display-4"><b-icon icon="gear" class="mr-1"></b-icon>管理中心</h1>
       <p class="lead">管理题目、作业、比赛、考试、用户等。</p>
       <hr class="my-4">
       <b-button variant="info" @click="$router.push('/home')"><b-icon icon="house" class="mr-1"></b-icon>返回主站</b-button>
