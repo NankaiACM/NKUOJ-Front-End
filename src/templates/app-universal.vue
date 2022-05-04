@@ -13,17 +13,17 @@
     <div class="subview-container">
       <router-view></router-view>
     </div>
-    <foot></foot>
+    <oj-footer></oj-footer>
   </div>
 </div>
 </template>
 
 <script>
 import headBar from '../components/headbar/head-bar-universal'
-import foot from '../components/others/footer.vue'
+import ojFooter from '../components/others/oj-footer.vue'
 
 export default {
-  components: {headBar, foot},
+  components: {headBar, ojFooter},
   name: 'app-universal',
   data: function () {
     return {
