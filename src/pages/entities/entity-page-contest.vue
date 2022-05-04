@@ -63,8 +63,8 @@
           </b-skeleton-wrapper>
         </b-card>
         <b-card title="榜单">
-          <ranking-table-contest :id="this.$route.params.contestId" :limit="20" auto-refresh-enabled :auto-refresh-interval="60000"></ranking-table-contest>
-          <p class="text-muted">本榜单只显示前20名，每60秒自动刷新。<b-link class="text-decoration-none" :href="`/ranking/contest/${this.$route.params.contestId}`">查看完整榜单</b-link></p>
+          <ranking-table-contest :id="this.$route.params.contestId" :limit="20"></ranking-table-contest>
+          <p class="text-muted">本榜单只显示前20名，不会自动刷新。<b-link class="text-decoration-none" :href="`/ranking/contest/${this.$route.params.contestId}`">查看完整榜单</b-link></p>
         </b-card>
       </div>
     </div>

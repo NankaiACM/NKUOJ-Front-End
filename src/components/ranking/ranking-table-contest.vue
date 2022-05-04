@@ -14,6 +14,9 @@
     <template #cell(user)="data">
       <h6 v-b-popover.hover.top="data.value.nickname">{{data.value.uid === $store.getters.getUID ? '您' : `#${uid2Str(data.value.uid)}`}}</h6>
     </template>
+    <template #cell(penalty)="data">
+      <h6 v-b-popover.hover.top="`${Math.floor(data.value / 60)}:${data.value % 60}`">{{data.value}}</h6>
+    </template>
     <template #cell(A)="data"><small v-if="data.value" v-b-popover.hover.top="getLocaleDate(data.value.time)"><b-link class="text-decoration-none text-dark" :href="`/submission/${data.value.sid}`">{{data.value.elapse}}<span>{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
     <template #cell(B)="data"><small v-if="data.value" v-b-popover.hover.top="getLocaleDate(data.value.time)"><b-link class="text-decoration-none text-dark" :href="`/submission/${data.value.sid}`">{{data.value.elapse}}<span>{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
     <template #cell(C)="data"><small v-if="data.value" v-b-popover.hover.top="getLocaleDate(data.value.time)"><b-link class="text-decoration-none text-dark" :href="`/submission/${data.value.sid}`">{{data.value.elapse}}<span>{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
@@ -85,6 +88,8 @@ export default {
         }
         this.items = []
         for (const [i, obj] of res.data.tab.entries()) {
+          if (this.limit && i >= this.limit)
+            break
           let row = {
             user: {uid: obj.uid, nickname: obj.nickname},
             ranking: i + 1,
@@ -107,13 +112,9 @@ export default {
         this.loading = true
       })
     },
-    startRefreshingEvent: function () {
-      let refreshEvent = () => {
-        if (this.autoRefreshEnabled)
-          this.loadData()
-        setTimeout(refreshEvent, this.autoRefreshInterval)
-      }
-      setTimeout(refreshEvent, this.autoRefreshInterval)
+    refresh: function () {
+      this.loading = true
+      this.loadData()
     },
     uid2Str: function (val) {
       return uid2Str(val)
@@ -124,7 +125,6 @@ export default {
   },
   mounted() {
     this.loadData()
-    this.startRefreshingEvent()
   }
 }
 </script>
