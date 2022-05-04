@@ -14,8 +14,8 @@
         <b-button-group>
           <b-button :variant="['outline-secondary', 'outline-warning', 'outline-success'][problem.status]"
                     v-b-popover.hover.top="['未提交', '未通过', '已通过'][problem.status]"
-                    :title="problem.name" v-for="problem in problems" :key="problem.pid" :pressed="problem.pid === pid"
-                    @click="$emit('switchToProblem', $event, problem.pid)">{{problem.name[0]}}</b-button>
+                    :title="problem.name" v-for="(problem, index) in problems" :key="problem.pid" :pressed="problem.pid === pid"
+                    @click="$emit('switchToProblem', $event, problem.pid)">{{ordinalNumber2Str(index + 1)}}</b-button>
         </b-button-group>
       </div>
     </b-card>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import ordinalNumber2Str from "@/util/ordinal-number-to-string";
+
 export default {
   name: "problem-navigator",
   data: function () {
@@ -42,6 +44,9 @@ export default {
           this.problems = res.data
           this.problemsListLoading = false
       })
+    },
+    ordinalNumber2Str: function (val) {
+      return ordinalNumber2Str(val)
     }
   },
   mounted() {
