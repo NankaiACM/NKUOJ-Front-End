@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import status2text from "@/util/status-text";
-import status2variant from "@/util/status-variant";
+import status2text from "@/util/status-code-to-str";
+import status2variant from "@/util/status-code-to-variant-str";
 
 export default {
   name: "status-list-modal",

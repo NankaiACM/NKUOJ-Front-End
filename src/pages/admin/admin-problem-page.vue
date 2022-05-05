@@ -133,7 +133,7 @@
 
 <script>
 import itemSelectCard from '../../components/admin/admin-problem-select-card'
-import code2str from '@/util/code'
+import code2str from '@/util/http-code-to-str'
 import AdminProblemUploadDataModal from "@/components/admin/admin-problem-upload-data-modal";
 import AdminMarkdownPreviewModal from "@/components/admin/admin-markdown-preview-modal";
 

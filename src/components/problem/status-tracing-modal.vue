@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import code2str from '@/util/code'
-import status2text from "@/util/status-text";
-import status2variant from "@/util/status-variant";
+import code2str from '@/util/http-code-to-str'
+import status2text from "@/util/status-code-to-str";
+import status2variant from "@/util/status-code-to-variant-str";
 
 export default {
   name: "status-tracing-modal",

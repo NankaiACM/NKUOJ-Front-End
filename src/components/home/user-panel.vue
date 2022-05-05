@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import uid2Str from '@/util/uidToStr'
+import uid2Str from '@/util/uid-to-str'
 
 export default {
   name: 'user-panel',

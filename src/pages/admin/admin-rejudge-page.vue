@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import code2str from "@/util/code";
+import code2str from "@/util/http-code-to-str";
 
 export default {
   name: "admin-rejudge-page",

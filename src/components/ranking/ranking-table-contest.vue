@@ -49,9 +49,9 @@
 </template>
 
 <script>
-import ordinalNumber2Str from "@/util/ordinal-number-to-string";
-import uid2Str from "@/util/uidToStr";
-import date2Text from "@/util/date";
+import ordinalNumber2Str from "@/util/ordinal-number-to-str";
+import uid2Str from "@/util/uid-to-str";
+import date2Text from "@/util/date-to-str";
 
 export default {
   name: "ranking-table-contest",

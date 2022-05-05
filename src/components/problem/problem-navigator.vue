@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import ordinalNumber2Str from "@/util/ordinal-number-to-string";
+import ordinalNumber2Str from "@/util/ordinal-number-to-str";
 
 export default {
   name: "problem-navigator",

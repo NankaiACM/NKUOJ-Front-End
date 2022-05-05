@@ -28,7 +28,7 @@
 
 <script>
 import StatusTracingModal from "@/components/problem/status-tracing-modal";
-import code2str from '@/util/code'
+import code2str from '@/util/http-code-to-str'
 
 export default {
   name: "submit-modal",

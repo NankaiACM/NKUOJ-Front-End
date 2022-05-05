@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import date2Text from "@/util/date";
+import date2Text from "@/util/date-to-str";
 
 export default {
   name: 'entity-page-assignment',

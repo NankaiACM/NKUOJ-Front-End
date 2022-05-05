@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import status2code from '@/util/status-code'
-import status2variant from '@/util/status-variant'
+import status2code from '@/util/status-code-to-str-short'
+import status2variant from '@/util/status-code-to-variant-str'
 
 export default {
   name: "status-details-button",

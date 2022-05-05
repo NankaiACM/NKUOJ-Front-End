@@ -44,7 +44,7 @@
 
 <script>
 import encryptMsg from "@/encrypt/encryptMsg";
-import code2str from "@/util/code";
+import code2str from "@/util/http-code-to-str";
 
 export default {
   name: "signup-modal",

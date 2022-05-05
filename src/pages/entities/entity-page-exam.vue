@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import date2Text from "@/util/date";
+import date2Text from "@/util/date-to-str";
 import CountdownCard from "@/components/contest/countdown-card";
 
 export default {

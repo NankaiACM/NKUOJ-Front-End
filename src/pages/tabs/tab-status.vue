@@ -62,9 +62,9 @@
 
 <script>
 
-import status2text from "@/util/status-text";
-import status2variant from "@/util/status-variant";
-import uid2Str from "@/util/uidToStr";
+import status2text from "@/util/status-code-to-str";
+import status2variant from "@/util/status-code-to-variant-str";
+import uid2Str from "@/util/uid-to-str";
 
 export default {
   name: "tab-status",
