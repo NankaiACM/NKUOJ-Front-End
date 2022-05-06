@@ -76,7 +76,7 @@ export default {
           { key: 'user', label: '用户' },
           { key: 'ranking', label: '排名' },
           { key: 'passed', label: '通过' },
-          { key: 'penalty', label: '罚时' },
+          { key: 'penalty', label: '用时' },
         ]
         this.problems = []
         this.firstUsers = []
