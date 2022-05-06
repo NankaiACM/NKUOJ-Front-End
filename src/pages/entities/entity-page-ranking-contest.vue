@@ -21,11 +21,11 @@ export default {
   }, methods: {
     refresh: function () {
       this.$refs['rankTable'].refresh()
-      this.$bvToast.toast(`正在刷新...`, {
+      this.$bvToast.toast(`刷新完成`, {
         title: '提示',
         autoHideDelay: 5000,
         appendToast: true,
-        variant: 'info'
+        variant: 'success'
       })
     },
     backToProblemSet: function () {

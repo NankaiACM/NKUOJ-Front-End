@@ -63,8 +63,11 @@
           </b-skeleton-wrapper>
         </b-card>
         <b-card title="榜单">
-          <ranking-table-contest :id="this.$route.params.contestId" :limit="20"></ranking-table-contest>
-          <p class="text-muted">本榜单只显示前20名，不会自动刷新。<b-link class="text-decoration-none" :href="`/ranking/contest/${this.$route.params.contestId}`">查看完整榜单</b-link></p>
+          <ranking-table-contest :id="this.$route.params.contestId" :limit="20" ref="ranking-table"></ranking-table-contest>
+          <p class="text-muted">本榜单只显示前20名。
+            <b-link class="text-decoration-none" :href="`/ranking/contest/${this.$route.params.contestId}`">查看完整榜单</b-link> |
+            <b-link class="text-decoration-none" @click="refreshRanking">刷新榜单</b-link>
+          </p>
         </b-card>
       </div>
     </div>
@@ -101,6 +104,15 @@ export default {
     },
     getLocaleDate: function (string) {
       return date2Text(string)
+    },
+    refreshRanking: function () {
+      this.$refs['ranking-table'].refresh()
+      this.$bvToast.toast(`刷新完成`, {
+        title: '提示',
+        autoHideDelay: 5000,
+        appendToast: true,
+        variant: 'success'
+      })
     }
   },
   mounted() {
