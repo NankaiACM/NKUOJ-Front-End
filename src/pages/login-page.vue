@@ -14,7 +14,7 @@
           </b-alert>
 
           <div class="card text-center m-3 shadow-sm" v-else>
-            <img src="../assets/login-img.jpg" class="card-img-top" alt="...">
+            <img src="../assets/login-img-icpc.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">南开大学计算机课程辅助评测系统</h5>
               <p>本站由 ACM 算法协会开发、维护，旨在为南开的计算机程序设计类课程提供评判系统。</p>
