@@ -57,7 +57,7 @@
                 <small class="text-success" v-else>已通过</small>
               </b-list-group-item>
               <b-list-group-item v-if="problemsData.length === 0" class="pt-4 pb-4">
-                本次考试暂无题目。
+                本次竞赛暂无题目。
               </b-list-group-item>
             </b-list-group>
           </b-skeleton-wrapper>
