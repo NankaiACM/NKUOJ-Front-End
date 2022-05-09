@@ -64,10 +64,10 @@
         </b-card>
         <b-card title="榜单">
           <ranking-table-contest :id="this.$route.params.contestId" :limit="20" ref="ranking-table"></ranking-table-contest>
-          <p class="text-muted">本榜单只显示前20名。
+          <h6 class="card-subtitle mb-2 text-muted">本榜单只显示前20名。
             <b-link class="text-decoration-none" :href="`/ranking/contest/${this.$route.params.contestId}`">查看完整榜单</b-link> |
             <b-link class="text-decoration-none" @click="refreshRanking">刷新榜单</b-link>
-          </p>
+          </h6>
         </b-card>
       </div>
     </div>
