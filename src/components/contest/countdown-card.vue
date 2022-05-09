@@ -35,10 +35,10 @@ export default {
       return 100 - (this.currentDate - new Date(Date.parse(this.begin))) / (new Date(Date.parse(this.end)) - new Date(Date.parse(this.begin))) * 100
     },
     started: function () {
-      return new Date() > new Date(Date.parse(this.begin))
+      return this.currentDate > new Date(Date.parse(this.begin))
     },
     ended: function () {
-      return new Date() > new Date(Date.parse(this.end))
+      return this.currentDate > new Date(Date.parse(this.end))
     },
     variant: function () {
       if (this.hours === 0 && this.minutes < 5) {
