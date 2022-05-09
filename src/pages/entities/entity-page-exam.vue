@@ -36,7 +36,7 @@
         </b-card>
       </div>
       <div class="col-md-8 order-md-first order-last">
-        <b-card title="试题">
+        <b-card title="试题" class="mb-2">
           <b-skeleton-wrapper :loading="isProblemsLoading">
             <template #loading>
               <b-card>
@@ -62,6 +62,30 @@
             </b-list-group>
           </b-skeleton-wrapper>
         </b-card>
+        <b-card title="我的提交">
+          <b-table hover :items="mySubmissionsItems" :fields="mySubmissionsFields" striped class="text-center" :busy="isMySubmissionsLoading" responsive show-empty>
+            <template #table-busy>
+              <div class="text-center my-2">
+                <b-spinner class="align-middle"></b-spinner>
+                <strong class="ml-4">加载中...</strong>
+              </div>
+            </template>
+            <template #empty>
+              <strong class="text-muted"> 没有相关记录 </strong>
+            </template>
+
+            <template #cell(status_id)="data">
+              <h6><b-link class="text-decoration-none text-dark" :href="`/submission/${data.value}`">#{{data.value}}</b-link></h6>
+            </template>
+            <template #cell(status)="data">
+              <h6 :class="`text-${getStatusVariant(data.value)}`">{{getStatusText(data.value)}}</h6>
+            </template>
+            <template #cell(problem_info)="data">
+              <h6><b-link class="text-decoration-none text-dark" :href="`/problem/${data.value.pid}`">{{data.value.name}}</b-link> #{{data.value.pid}}</h6>
+            </template>
+          </b-table>
+          <h6 class="card-subtitle mb-2 text-muted"><b-link class="text-decoration-none text-muted" @click="loadSubmissionsData"><b-icon icon="arrow-clockwise"></b-icon>刷新</b-link></h6>
+        </b-card>
       </div>
     </div>
   </div>
@@ -70,6 +94,8 @@
 <script>
 import date2Text from "@/util/date-to-str";
 import CountdownCard from "@/components/contest/countdown-card";
+import status2text from "@/util/status-code-to-str";
+import status2variant from "@/util/status-code-to-variant-str";
 
 export default {
   name: 'entity-page-exam',
@@ -80,27 +106,59 @@ export default {
       examData: {},
       problemsData: [],
       isDetailsLoading: true,
-      isProblemsLoading: true
+      isProblemsLoading: true,
+      isMySubmissionsLoading: true,
+      mySubmissionsItems: [],
+      mySubmissionsFields: [
+        { key: 'status_id', label: '记录ID' },
+        { key: 'problem_info', label: '题目' },
+        { key: 'status', label: '状态' }
+      ]
     }
   },
   methods: {
-    loadAssignmentData: function () {
-      this.$http.get(`${window.backendOrigin}/api/exam/id/${this.examId}`).then(res => {
+    loadExamData: async function () {
+      await this.$http.get(`${window.backendOrigin}/api/exam/id/${this.examId}`).then(res => {
         this.examData = res.data
         this.isDetailsLoading = false
       })
-      this.$http.get(`${window.backendOrigin}/api/problem/problemset/${this.examId}`).then(res => {
+      await this.$http.get(`${window.backendOrigin}/api/problem/problemset/${this.examId}`).then(res => {
         this.problemsData = res.data
         this.isProblemsLoading = false
       })
     },
     getLocaleDate: function (string) {
       return date2Text(string)
+    },
+    getStatusText: function (status) {
+      return status2text(status)
+    },
+    getStatusVariant: function (status) {
+      return status2variant(status)
+    },
+    loadSubmissionsData: async function () {
+      this.isMySubmissionsLoading = true
+      this.mySubmissionsItems = []
+      let respondedRequests = 0
+      for (const problem of this.problemsData) {
+        await this.$http.get(`${window.backendOrigin}/api/solutions?uid=${this.$store.getters.getUID}&pid=${problem.pid}`, ).then(res => {
+          for(const item of res.data) {
+            this.mySubmissionsItems.push({ status_id: item.sid, problem_info: {pid: item.pid, name: item.name},
+              status: item.statusId })
+          }
+          respondedRequests += 1
+        })
+      }
+      this.isMySubmissionsLoading = respondedRequests !== this.problemsData.length
+    },
+    loadData: async function () {
+      this.examId = this.$route.params.examId
+      await this.loadExamData()
+      await this.loadSubmissionsData()
     }
   },
   mounted() {
-    this.examId = this.$route.params.examId
-    this.loadAssignmentData()
+    this.loadData()
   }
 }
 </script>
