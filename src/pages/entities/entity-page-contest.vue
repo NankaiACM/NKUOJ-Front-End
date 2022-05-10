@@ -6,7 +6,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-4 mb-4 order-md-last order-first">
+      <div class="col-md-4 order-md-last order-first">
         <countdown-card :begin="contestData.begin" :end="contestData.end" class="mb-2"></countdown-card>
         <b-card title="竞赛详情" class="mb-2">
           <b-skeleton-wrapper :loading="isDetailsLoading">
