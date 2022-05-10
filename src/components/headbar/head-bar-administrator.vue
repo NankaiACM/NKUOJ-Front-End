@@ -3,7 +3,7 @@
     <div class="container">
       <b-navbar class="navbar-expand-lg" toggleable="lg" type="light" variant="light">
         <b-link href="/">
-          <img class="slogan" src="../../assets/nkuoj-slogan.svg" alt="Nankai University Online Judge">
+          <img class="head-bar-slogan" src="../../assets/nkuoj-slogan.svg" alt="Nankai University Online Judge">
         </b-link>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style scoped>
-.slogan {
+.head-bar-slogan {
   height: 50px;
   margin: 10px;
 }

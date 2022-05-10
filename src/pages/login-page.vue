@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="container d-flex justify-content-center">
-      <img src="../assets/nkuoj-slogan.svg" alt="slogan" class="slogan m-5">
+      <img src="../assets/nkuoj-slogan.svg" alt="slogan" class="page-slogan m-5">
     </div>
 
     <div class="container">
@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style scoped>
-.slogan {
+.page-slogan {
   height: 100px;
 }
 .buttons-wrapper {
