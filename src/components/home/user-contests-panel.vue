@@ -38,7 +38,7 @@ export default {
   data: function () {
     return {
       contests: [],
-      loading: false,
+      loading: true,
       statusCode: 200
     }
   },
@@ -51,6 +51,8 @@ export default {
     this.$http.get(`${window.backendOrigin}/api/contest/open`).then(res => {
       this.contests = res.data
       this.loading = false
+    }, e => {
+      this.statusCode = e.status
     })
   }
 }
