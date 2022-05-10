@@ -1,30 +1,25 @@
 <template>
-<div id="app">
-  <div class="custom-header">
-    <head-bar @toHome="switchTo('home')"
-              @toProblem="switchTo('problems')" @toStatus="switchTo('status')"
-              @toContest="switchTo('contest')" @toDiscuss="switchTo('discuss')"
-              @toAnnouncements="switchTo('announcements')" @toCourses="switchTo('courses')"
-              @toAssignments="switchTo('assignments')" @toExams="switchTo('exams')"
-              @toContests="switchTo('contests')">
-    </head-bar>
-  </div>
-  <div>
-    <div class="subview-container">
-      <router-view></router-view>
+  <div id="app">
+    <div class="custom-header">
+      <head-bar @toHome="switchTo('strict/home')">
+      </head-bar>
     </div>
-    <oj-footer></oj-footer>
+    <div>
+      <div class="subview-container">
+        <router-view></router-view>
+      </div>
+      <strict-footer></strict-footer>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-import headBar from '../components/headbar/head-bar-universal'
-import ojFooter from '../components/footer/oj-footer.vue'
+import headBar from '../components/headbar/head-bar-strict'
+import strictFooter from '../components/footer/strict-footer.vue'
 
 export default {
-  components: {headBar, ojFooter},
-  name: 'app-universal',
+  components: {headBar, strictFooter},
+  name: 'app-strict',
   data: function () {
     return {
     }

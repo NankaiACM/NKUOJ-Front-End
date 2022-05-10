@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 const appUniversal = () => import('../templates/app-universal.vue')
 const appAdministrator = () => import('../templates/app-administrator')
+const appStrict = () => import('../templates/app-strict')
 
 const loginPage = () => import('../pages/login-page')
 const coursePage = () => import('../pages/entities/entity-page-course')
@@ -24,6 +25,7 @@ const announcementsPage = () => import('../pages/tabs/tab-announcements')
 const announcementPage = () => import('../pages/entities/entity-page-announcement')
 const rankingContestPage = () => import('../pages/entities/entity-page-ranking-contest')
 const rankingExamPage = () => import('../pages/entities/entity-page-ranking-exam')
+const strictHomePage = () => import('../pages/strict/strict-home-page')
 const administratorHomePage = () => import('../pages/admin/admin-home-page')
 const administratorProblemPage = () => import('../pages/admin/admin-problem-page')
 const administratorRejudgePage = () => import('../pages/admin/admin-rejudge-page')
@@ -65,15 +67,18 @@ const router = new Router({
     path: '/admin',
     component: appAdministrator,
     children: [
-      {
-        path: '/admin/home',
-        component: administratorHomePage,
-        meta: { isAdministrator: true }
-      },
+      { path: '/admin/home', component: administratorHomePage, meta: { isAdministrator: true }},
       { path: '/admin', redirect: '/admin/home', meta: { isAdministrator: true } },
       { path: '/admin/problem', component: administratorProblemPage, meta: { isAdministrator: true } },
       { path: '/admin/statistics', component: administratorStatisticsPage, meta: { isAdministrator: true } },
       { path: '/admin/rejudge', component: administratorRejudgePage, meta: { isAdministrator: true } },
+    ]
+  }, {
+    path: '/strict',
+    component: appStrict,
+    children: [
+      { path: '/strict/home', component: strictHomePage, meta: { isStrict: true } },
+      { path: '/strict', redirect: '/strict/home', meta: { isStrict: true } },
     ]
   }, {
     path: '/logout',
