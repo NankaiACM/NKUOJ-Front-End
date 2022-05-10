@@ -1,6 +1,6 @@
 <template>
 <div>
-  <b-table hover :items="items" :fields="fields" striped class="text-center mt-4" :busy="loading" responsive show-empty>
+  <b-table hover :items="items" :fields="fields" striped class="text-center mt-4" :busy="loading" responsive show-empty bordered>
     <template #table-busy>
       <div class="text-center my-2">
         <b-spinner class="align-middle"></b-spinner>
