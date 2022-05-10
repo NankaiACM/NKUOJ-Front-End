@@ -34,6 +34,8 @@ export default {
   },
   computed: {
     studentID: function () {
+      if (!this.userData.username)
+        return null
       const i = this.userData.username.indexOf('@mail.nankai.edu.cn')
       if (i === -1) {
         return '非学生'
