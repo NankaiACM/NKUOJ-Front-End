@@ -110,7 +110,9 @@ router.beforeEach((to, from, next) => {
     next('/login')
   } else if (isLoginPage && store.getters.isUserLogin) {
     next('/home')
-  } else if (!store.getters.isUserLogin) {
+  } else if (isLoginPage && !store.getters.isUserLogin) {
+    next()
+  } else if (!isLoginPage && !store.getters.isUserLogin) {
     next('/login')
   } else if (isAdminPage && !store.getters.isAdministrator) {
     next('/notFound')
