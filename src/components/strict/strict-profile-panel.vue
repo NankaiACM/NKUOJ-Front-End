@@ -14,7 +14,7 @@
     </b-row>
     <b-row class="mb-2">
       <b-col sm="3" class="text-sm-left"><b>实名：</b></b-col>
-      <b-col>{{ userData.realname }}</b-col>
+      <b-col>{{ realname }}</b-col>
     </b-row>
     <b-row class="mb-2">
       <b-col sm="3" class="text-sm-left"><b>用户名：</b></b-col>
