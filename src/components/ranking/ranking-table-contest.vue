@@ -137,7 +137,7 @@ export default {
         return '50px'
       else if (key === 'penalty')
         return '90px'
-      return '130px'
+      return '110px'
     }
   },
   mounted() {
