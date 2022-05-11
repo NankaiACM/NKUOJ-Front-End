@@ -61,7 +61,7 @@ export default {
         return 4
       } else if (this.loginForm.passwordRaw.length < 6) {
         return 7
-      } else if (this.loginForm.examKeyRaw === '') {
+      } else if (this.loginForm.examKeyRaw === '' && this.isStrict) {
         return 8
       }
       return 0
