@@ -32,9 +32,10 @@ export default {
         path: '/' + path
       })
     },
-    updateUserData: function () {
+    updateSiteData: async function () {
+      // check user cookies validity
       if (this.$store.getters.isUserLogin) {
-        this.$http.get(`${window.backendOrigin}/api/user`).then(res => {
+        await this.$http.get(`${window.backendOrigin}/api/user`).then(res => {
           this.$store.commit('setUserData', {
             isUserLogin: true,
             uid: res.data.uid,
@@ -46,14 +47,27 @@ export default {
         }, error => {
           if (error.status === 401) {
             this.$store.commit('clearUserData')
-            this.$router.push('/login')
+            this.$router.replace('/login')
           }
         })
       }
+      // check strict mode enabled
+      await this.$http.get(`${window.backendOrigin}/api/version/strict-mode`).then(res => {
+        const strictModeBefore = this.$store.getters.isStrictMode
+        const strictModeAfter = res.data.enable
+        if (strictModeBefore !== strictModeAfter) {
+          this.$store.commit('setVersion', {
+            strictMode: strictModeAfter
+          })
+          if (!strictModeAfter && !this.$store.getters.isAdministrator) {
+            this.$router.replace('/home')
+          }
+        }
+      })
     }
   },
   mounted () {
-    this.updateUserData()
+    this.updateSiteData()
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <b-card no-body>
     <b-list-group flush v-if="exams && exams.length > 0">
-      <b-list-group-item button @click="$router.push('/strict/exam/' + exam.id)" v-for="exam in exams" v-bind:key="exam.id">
+      <b-list-group-item button @click="$router.push('/exam/' + exam.id)" v-for="exam in exams" v-bind:key="exam.id">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{exam.name}}</h5>
           <small>{{getLocaleDate(exam.end)}} 截止</small>

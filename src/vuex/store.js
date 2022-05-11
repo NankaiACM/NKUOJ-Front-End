@@ -29,6 +29,9 @@ export default new Vuex.Store({
       statusFilterUID: null,
       statusFilterPID: null,
       statusFilterNickname: null,
+    },
+    version: {
+      strictMode: false
     }
   },
   getters: {
@@ -37,6 +40,9 @@ export default new Vuex.Store({
     },
     isAdministrator: function (state) {
       return state.userData.permission >= 1
+    },
+    isStrictMode: function (state) {
+      return state.version.strictMode
     },
     getUserData: function (state) {
       return state.userData
@@ -61,13 +67,15 @@ export default new Vuex.Store({
       state.userData.nickname = ''
       sessionStorage.clear()
     },
+    setVersion (state, payload) {
+      state.version.strictMode = payload.strictMode
+    },
     setPreferences (state, payload) {
       state.preferences = payload
     },
     setPreferencesItem (state, payload) {
       for (const [key, val] of Object.entries(payload)) {
         state.preferences[key] = val
-        console.log(key, val)
       }
     }
   }

@@ -38,7 +38,7 @@ const router = new Router({
     path: '/',
     component: appUniversal,
     children: [
-      { path: '/home', component: homePage },
+      { path: '/home', component: homePage, meta: { strictRedirect: 'strictHome' } },
       { path: '/problems', component: problemsPage },
       { path: '/courses', component: coursesPage },
       { path: '/status', component: statusPage },
@@ -46,23 +46,26 @@ const router = new Router({
       { path: '/assignments', component: assignmentsPage },
       { path: '/exams', component: examsPage },
       { path: '/contests', component: contestsPage },
-      { path: '/notFound', component: notFoundPage },
       { path: '/profile', component: profilePage },
-      { path: '/problem/:problemId', component: problemPage },
+      { path: '/problem/:problemId', component: problemPage, meta: { strictRedirect: 'strictProblem' } },
       { path: '/announcement/:announcementId', component: announcementPage },
       { path: '/course/:courseId', component: coursePage },
-      { path: '/submission/:submissionId', component: submissionPage },
+      { path: '/submission/:submissionId', component: submissionPage, meta: { strictRedirect: 'strictSubmission' }},
       { path: '/assignment/:assignmentId', component: assignmentPage },
       { path: '/ranking/contest/:contestId', component: rankingContestPage },
       { path: '/ranking/exam/:examId', component: rankingExamPage },
       { path: '/contest/:contestId', component: contestPage },
-      { path: '/exam/:examId', component: examPage },
-      { path: '/', redirect: '/login', meta: { isLoginPage: true } },
+      { path: '/exam/:examId', component: examPage, meta: { strictRedirect: 'strictExam' } },
+      { path: '/', redirect: '/login', meta: { isLogin: true } },
     ]
   }, {
     path: '/login',
     component: loginPage,
-    meta: { isLoginPage: true }
+    meta: { isLogin: true }
+  }, {
+    path: '/notFound',
+    component: notFoundPage,
+    meta: { isNotFound: true }
   }, {
     path: '/admin',
     component: appAdministrator,
@@ -77,22 +80,31 @@ const router = new Router({
     path: '/strict',
     component: appStrict,
     children: [
-      { path: '/strict/home', component: strictHomePage, meta: { isStrict: true } },
-      { path: '/strict', redirect: '/strict/home', meta: { isStrict: true } },
+      { path: '/strict/home', component: strictHomePage, name: 'strictHome', meta: { isStrict: true } },
+      { path: '/strict', redirect: '/strict/home', name: 'strictRoot', meta: { isStrict: true } },
+      { path: '/strict/problem/:problemId', component: problemPage, name: 'strictProblem', meta: { isStrict: true } },
+      { path: '/strict/exam/:examId', name: 'strictExam', component: examPage, meta: { isStrict: true } },
+      { path: '/strict/submission/:submissionId', name: 'strictSubmission', component: submissionPage, meta: { isStrict: true } },
     ]
   }, {
     path: '/logout',
     meta: {isLogout: true}
   }, {
     path: '*',
-    component: notFoundPage
+    component: notFoundPage,
+    meta: { isNotFound: true }
   }]
 })
 router.beforeEach((to, from, next) => {
   let store = router.app.$options.store
-  const isLogout = to.matched.some((record) => record.meta.isLogout)
-  const isLoginPage = to.matched.some((record) => record.meta.isLoginPage)
-  if (isLogout) {
+  const isLogoutPage = to.meta.isLogout
+  const isLoginPage = to.meta.isLogin
+  const isAdminPage = to.meta.isAdministrator
+  const isStrictPage = to.meta.isStrict
+  const isNotFoundPage = to.meta.isNotFound
+  if (isNotFoundPage) {
+    next()
+  } else if (isLogoutPage) {
     Vue.http.get(`${window.backendOrigin}/api/logout`)
     store.commit('clearUserData')
     next('/login')
@@ -100,6 +112,14 @@ router.beforeEach((to, from, next) => {
     next('/home')
   } else if (!isLoginPage && !store.getters.isUserLogin) {
     next('/login')
+  } else if (isAdminPage && !store.getters.isAdministrator) {
+    next('/notFound')
+  } else if (!isStrictPage && store.getters.isStrictMode && !store.getters.isAdministrator) {
+    if (to.meta.strictRedirect) {
+      next({name: to.meta.strictRedirect, params: to.params})
+    } else {
+      next('/notFound')
+    }
   } else {
     next()
   }
