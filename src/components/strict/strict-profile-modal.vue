@@ -28,7 +28,8 @@ export default {
   name: "strict-profile-modal",
   data: function () {
     return {
-      userData: {}
+      userData: {},
+      realname: ''
     }
   },
   methods: {
