@@ -117,8 +117,6 @@ export default {
           qq: this.profileData.qq,
           nickname: this.profileData.nickname
         }
-      }, e => {
-        console.log(e)
       })
     }, submitProfileData: function () {
       this.$http.post(`${window.backendOrigin}/api/reset/profile`, this.updateForm).then(res => {
@@ -128,7 +126,6 @@ export default {
           this.$bvModal.msgBoxOk(code2str(res.status), {title: '提示', centered: true})
         }
       }, e => {
-        console.log(e)
         this.$bvModal.msgBoxOk(code2str(e.status), {title: '提示', centered: true})
       })
     }, showUpdateModal: function () {
