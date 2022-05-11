@@ -24,10 +24,11 @@
               <div class="container d-flex justify-content-center">
                 <div class="buttons-wrapper">
                   <b-button pill variant="outline-info" class="btn-block" @click="showLoginModal">登录</b-button>
-                  <b-button pill variant="outline-success" class="btn-block" @click="showSignupModal">注册</b-button>
+                  <b-button pill variant="outline-success" class="btn-block" @click="showSignupModal" v-if="!isStrictMode">注册</b-button>
                 </div>
               </div>
-              <p class="m-2 text-secondary">忘记密码或者帐号已被注册？<b-link @click="showResetModal" class="link-info">点击重置</b-link>。</p>
+              <p class="m-2 text-secondary" v-if="!isStrictMode">忘记密码或者帐号已被注册？<b-link @click="showResetModal" class="link-info">点击重置</b-link>。</p>
+              <p class="m-2 text-secondary" v-else>考试模式已开启，只允许登录。</p>
               <b-form-checkbox id="checkbox-student" v-model="isStudent" name="i-am-student"
                                value="true" unchecked-value="false" class="text-muted">
                 我是学生
@@ -58,7 +59,8 @@ export default {
   },
   data: function () {
     return {
-      isStudent: 'true'
+      isStudent: 'true',
+      isStrictMode: false
     }
   },
   methods: {
@@ -71,11 +73,26 @@ export default {
     showSignupModal: function () {
       this.$refs['signup-modal'].show()
     },
+    checkStrictMode: function () {
+      this.$http.get(`${window.backendOrigin}/api/version/strict-mode`).then(res => {
+        const strictModeBefore = this.$store.getters.isStrictMode
+        const strictModeAfter = res.data.enable
+        if (strictModeBefore !== strictModeAfter) {
+          this.$store.commit('setVersion', {
+            strictMode: strictModeAfter
+          })
+        }
+        this.isStrictMode = strictModeAfter
+      })
+    }
   },
   computed: {
     checkIfUsingIP: function () {
       return window.location.href.indexOf('222.30.51.68:8080') > -1
     }
+  },
+  mounted() {
+    this.checkStrictMode()
   }
 }
 </script>
