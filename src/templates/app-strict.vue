@@ -59,9 +59,6 @@ export default {
           this.$store.commit('setVersion', {
             strictMode: strictModeAfter
           })
-          if (!strictModeAfter && !this.$store.getters.isAdministrator) {
-            this.$router.replace('/home')
-          }
         }
       })
     }
