@@ -17,6 +17,12 @@
             <b-input type="password" id="loginPasswordInput" class="form-control" v-model="loginForm.passwordRaw" @keydown.enter.native="loginSubmit"></b-input>
           </div>
         </div>
+        <div class="container" v-if="isStrict">
+          <label>考试码</label>
+          <div class="input-group mb-2">
+            <b-input type="text" id="loginPasscodeInput" class="form-control" v-model="loginForm.examKeyRaw" @keydown.enter.native="loginSubmit"></b-input>
+          </div>
+        </div>
       </div>
     </div>
   </b-modal>
@@ -32,14 +38,16 @@ export default {
     return {
       loginForm: {
         email: '',
-        passwordRaw: ''
+        passwordRaw: '',
+        examKeyRaw: ''
       },
-      validateResults: ['', '邮箱不合法', '未填写邮箱', '密码不一致', '未填写密码', '未填写邮件验证码', '未填写昵称', '密码长度不足6位'],
+      validateResults: ['', '邮箱不合法', '未填写邮箱', '密码不一致', '未填写密码', '未填写邮件验证码', '未填写昵称', '密码长度不足6位', '未填写考试码'],
       emailRegex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     }
   },
   props: {
-    isStudent: Boolean
+    isStudent: Boolean,
+    isStrict: Boolean
   },
   methods: {
     validateLoginForm: function () {
@@ -53,6 +61,8 @@ export default {
         return 4
       } else if (this.loginForm.passwordRaw.length < 6) {
         return 7
+      } else if (this.loginForm.examKeyRaw === '') {
+        return 8
       }
       return 0
     },
@@ -65,7 +75,8 @@ export default {
       }
       const postPackage = {
         username: this.loginForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''),
-        password: encryptMsg(this.loginForm.passwordRaw)
+        password: encryptMsg(this.loginForm.passwordRaw),
+        passcode: encryptMsg(this.loginForm.examKeyRaw),
       }
       this.$http.post(`${window.backendOrigin}/api/login`, postPackage).then(res => {
         if (res.data.ok) {
@@ -77,7 +88,6 @@ export default {
           this.$bvModal.msgBoxOk(code2str(res.status), {title: '提示', centered: true})
         }
       }, e => {
-        console.log(e)
         this.$store.commit('clearUserData')
         this.$bvModal.msgBoxOk(code2str(e.status), {title: '提示', centered: true})
       })

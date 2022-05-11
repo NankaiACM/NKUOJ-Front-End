@@ -28,7 +28,7 @@
                 </div>
               </div>
               <p class="m-2 text-secondary" v-if="!isStrictMode">忘记密码或者帐号已被注册？<b-link @click="showResetModal" class="link-info">点击重置</b-link>。</p>
-              <p class="m-2 text-secondary" v-else>考试模式已开启，只允许登录。</p>
+              <p class="m-2 text-secondary" v-else>考试模式已开启，只允许登录。如若忘记密码请联系监考。</p>
               <b-form-checkbox id="checkbox-student" v-model="isStudent" name="i-am-student"
                                value="true" unchecked-value="false" class="text-muted">
                 我是学生
@@ -39,9 +39,9 @@
       </div>
     </div>
 
-    <login-modal ref="login-modal" :is-student="isStudent === 'true'"></login-modal>
-    <signup-modal ref="signup-modal" :is-student="isStudent === 'true'"></signup-modal>
-    <reset-pwd-modal ref="reset-pwd-modal" :is-student="isStudent === 'true'"></reset-pwd-modal>
+    <login-modal ref="login-modal" :is-student="isStudent === 'true'" :is-strict="isStrictMode"></login-modal>
+    <signup-modal ref="signup-modal" :is-student="isStudent === 'true'" :is-strict="isStrictMode"></signup-modal>
+    <reset-pwd-modal ref="reset-pwd-modal" :is-student="isStudent === 'true'" :is-strict="isStrictMode"></reset-pwd-modal>
   </div>
 </template>
 
