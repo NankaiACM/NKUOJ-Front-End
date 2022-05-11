@@ -1,6 +1,6 @@
 <template>
 <div>
-  <b-table hover :items="items" :fields="fields" striped class="text-center mt-4" :busy="loading" responsive show-empty bordered>
+  <b-table hover :items="items" :fields="fields" striped class="text-center mt-4" :busy="loading" responsive show-empty bordered fixed>
     <template #table-busy>
       <div class="text-center my-2">
         <b-spinner class="align-middle"></b-spinner>
@@ -10,39 +10,43 @@
     <template #empty>
       <strong class="text-muted"> 没有相关记录 </strong>
     </template>
-
+    <template #table-colgroup="scope">
+      <col v-for="field in scope.fields" :key="field.key" :style="{ width: getColumnWidth(field.key) }">
+    </template>
+    <template #head(user)="data">
+      <span>{{ data.label }}</span>
+    </template>
+    <template #head(penalty)="data">
+      <span>{{ data.label }}</span>
+    </template>
+    <template #head(ranking)="data">
+      <span>{{ data.label }}</span>
+    </template>
+    <template #head(passed)="data">
+      <span>{{ data.label }}</span>
+    </template>
+    <template #head()="data">
+      <span v-b-popover.hover.bottom="problemsInfos[data.field.key]"><b-link class="text-decoration-none text-muted" :href="`/problem/${problems[data.field.key]}`">{{ data.label }}</b-link></span>
+    </template>
     <template #cell(user)="data">
       <h6 v-b-popover.hover.top="data.value.nickname">{{data.value.uid === $store.getters.getUID ? '您' : `#${uid2Str(data.value.uid)}`}}</h6>
     </template>
     <template #cell(penalty)="data">
       <h6 v-b-popover.hover.top="`${Math.floor(data.value / 60)}:${data.value % 60}`">{{data.value}}</h6>
     </template>
-    <template v-slot:cell(A)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(B)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(C)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(D)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(E)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(F)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(G)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(H)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(I)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(J)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(K)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(L)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(M)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(N)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(O)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(P)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(Q)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(R)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(S)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(T)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(U)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(V)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(W)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(X)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(Y)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
-    <template v-slot:cell(Z)="data"><small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined"><b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}<span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span></b-link></small></template>
+    <template #cell(ranking)="data">
+      <h6>{{data.value}}</h6>
+    </template>
+    <template #cell(passed)="data">
+      <h6>{{data.value}}</h6>
+    </template>
+    <template v-slot:cell()="data">
+      <small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined">
+        <b-link class="text-decoration-none text-dark" :href="data.value.sid ? `/submission/${data.value.sid}` : '#'">{{data.value.passed ? data.value.elapse : ''}}
+          <span class="text-muted">{{data.value.tries ? `(-${data.value.tries})`: ''}}</span>
+        </b-link>
+      </small>
+    </template>
   </b-table>
 </div>
 </template>
@@ -66,7 +70,8 @@ export default {
       items: [],
       fields: [],
       problems: [],
-      firstUsers: []
+      firstUsers: [],
+      problemsInfos: []
     }
   },
   methods: {
@@ -80,9 +85,11 @@ export default {
         ]
         this.problems = []
         this.firstUsers = []
+        this.problemsInfos = []
         for (const [i, obj] of res.data.meta.entries()) {
-          this.fields.push({ key: `${ordinalNumber2Str(i + 1)}`, label: `${ordinalNumber2Str(i + 1)}`})
+          this.fields.push({ key: `${i}`, label: `${ordinalNumber2Str(i + 1)}`})
           this.problems.push(obj.pid)
+          this.problemsInfos.push(obj)
           this.firstUsers.push(obj.firstUser)
         }
         this.items = []
@@ -97,11 +104,11 @@ export default {
           }
           let cellVariants = {}
           for (const d of obj.detail) {
-            row[`${ordinalNumber2Str(this.problems.indexOf(d.pid) + 1)}`] = {pid: d.pid, passed: d.pass, sid: d.sid, time: d.when, tries: d.tryCount, elapse: Math.ceil(d.elapse / 60000)}
+            row[`${this.problems.indexOf(d.pid)}`] = {pid: d.pid, passed: d.pass, sid: d.sid, time: d.when, tries: d.tryCount, elapse: Math.ceil(d.elapse / 60000)}
             let variant = 'info'
             if (this.firstUsers[this.problems.indexOf(d.pid)] !== obj.uid)
               variant = d.pass ? 'success' : 'warning'
-            cellVariants[`${ordinalNumber2Str(this.problems.indexOf(d.pid) + 1)}`] = variant
+            cellVariants[`${this.problems.indexOf(d.pid)}`] = variant
           }
           row['_cellVariants'] = cellVariants
           this.items.push(row)
@@ -120,6 +127,17 @@ export default {
     },
     getLocaleDate: function (string) {
       return date2Text(string)
+    },
+    getColumnWidth: function (key) {
+      if (key === 'user')
+        return '80px'
+      else if (key === 'ranking')
+        return '50px'
+      else if (key === 'passed')
+        return '50px'
+      else if (key === 'penalty')
+        return '90px'
+      return '130px'
     }
   },
   mounted() {
