@@ -14,31 +14,31 @@
       <col v-for="field in scope.fields" :key="field.key" :style="{ width: getColumnWidth(field.key) }">
     </template>
     <template #head(user)="data">
-      <span>{{ data.label }}</span>
+      <span><b-icon icon="person" v-b-popover.hover.bottom="data.label"></b-icon></span>
     </template>
     <template #head(penalty)="data">
-      <span>{{ data.label }}</span>
+      <span><b-icon icon="clock" v-b-popover.hover.bottom="data.label"></b-icon></span>
     </template>
     <template #head(ranking)="data">
-      <span>{{ data.label }}</span>
+      <span><b-icon icon="bar-chart" v-b-popover.hover.bottom="data.label"></b-icon></span>
     </template>
     <template #head(passed)="data">
-      <span>{{ data.label }}</span>
+      <span><b-icon icon="check2-circle" v-b-popover.hover.bottom="data.label"></b-icon></span>
     </template>
     <template #head()="data">
       <span v-b-popover.hover.bottom="problemsInfos[data.field.key]"><b-link class="text-decoration-none text-muted" :href="`/problem/${problems[data.field.key]}`">{{ data.label }}</b-link></span>
     </template>
     <template #cell(user)="data">
-      <h6 v-b-popover.hover.top="data.value.nickname">{{data.value.uid === $store.getters.getUID ? '您' : `#${uid2Str(data.value.uid)}`}}</h6>
+      <small v-b-popover.hover.top="data.value.nickname">{{data.value.uid === $store.getters.getUID ? '您' : `#${uid2Str(data.value.uid)}`}}</small>
     </template>
     <template #cell(penalty)="data">
-      <h6 v-b-popover.hover.top="`${Math.floor(data.value / 60)}:${data.value % 60}`">{{data.value}}</h6>
+      <small v-b-popover.hover.top="`${Math.floor(data.value / 60)}:${data.value % 60}`">{{data.value}}</small>
     </template>
     <template #cell(ranking)="data">
-      <h6>{{data.value}}</h6>
+      <small>{{data.value}}</small>
     </template>
     <template #cell(passed)="data">
-      <h6>{{data.value}}</h6>
+      <small>{{data.value}}</small>
     </template>
     <template v-slot:cell()="data">
       <small v-if="data.value" v-b-popover.hover.top="data.value.time ? getLocaleDate(data.value.time) : undefined">
@@ -137,7 +137,7 @@ export default {
         return '50px'
       else if (key === 'penalty')
         return '90px'
-      return '110px'
+      return '95px'
     }
   },
   mounted() {
