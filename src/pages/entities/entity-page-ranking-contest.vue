@@ -6,6 +6,7 @@
       <b-link @click="refresh" class="text-decoration-none text-muted"><b-icon icon="arrow-clockwise" class="mr-1"></b-icon>刷新榜单</b-link>
     </div>
     <ranking-table-contest :id="this.$route.params.contestId" ref="rankTable"></ranking-table-contest>
+    <h6 class="card-subtitle mb-2 text-muted">提示：点击本表格后，使用左右方向键可以实现水平滚动。</h6>
   </div>
 </template>
 
