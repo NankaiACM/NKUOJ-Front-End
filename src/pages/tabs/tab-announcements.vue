@@ -16,8 +16,10 @@
             </b-card>
           </template>
 
-          <b-card :title="announcement.title" :sub-title="`${getLocaleDate(announcement.time)}`" v-for="announcement in announcements"
+          <b-card  v-for="announcement in announcements"
                   :key="announcement.id" class="mb-3">
+            <h4><b-badge v-if="announcement.top" class="mr-2">置顶</b-badge>{{announcement.title}}</h4>
+            <h6 class="text-muted">{{`${getLocaleDate(announcement.time)}`}}</h6>
             <b-card-text>
               <pre>{{announcement.content}}</pre>
             </b-card-text>
