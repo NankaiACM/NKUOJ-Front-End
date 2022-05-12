@@ -14,7 +14,8 @@ export default {
   name: "countdown-card",
   props: {
     begin: String,
-    end: String
+    end: String,
+    warningTime: Number
   },
   data: function () {
     return {
@@ -41,13 +42,13 @@ export default {
       return this.currentDate > new Date(Date.parse(this.end))
     },
     variant: function () {
-      if (this.hours === 0 && this.minutes < 5) {
+      if (this.hours === 0 && this.minutes < this.warningTime) {
         return this.seconds % 2 ? "text-dark" : "text-danger"
       }
       return "text-dark"
     },
     progressVariant: function () {
-      if (this.hours === 0 && this.minutes < 5) {
+      if (this.hours === 0 && this.minutes < this.warningTime) {
         return "danger"
       }
       return "info"
