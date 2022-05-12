@@ -6,6 +6,7 @@
     </div>
     <h1 class="text-center" v-else-if="!started">暂未开始</h1>
     <h1 class="text-center text-danger" v-else-if="ended">已经结束</h1>
+    <h6 class="text-muted">本倒计时基于您的计算机的时间。</h6>
   </b-card>
 </template>
 
