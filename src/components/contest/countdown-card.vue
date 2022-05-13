@@ -1,12 +1,11 @@
 <template>
-  <b-card title="倒计时">
+  <b-card title="倒计时" sub-title="本倒计时基于您计算机的时间">
     <div v-if="started && !ended">
       <h1 :class="`text-center ${variant}`">{{hours}}:{{String(minutes).padStart(2, '0')}}:{{String(seconds).padStart(2, '0')}}</h1>
       <b-progress :value="progress" :variant="progressVariant" striped animated class="mt-2"></b-progress>
     </div>
     <h1 class="text-center" v-else-if="!started">暂未开始</h1>
     <h1 class="text-center text-danger" v-else-if="ended">已经结束</h1>
-    <h6 class="text-muted">本倒计时基于您的计算机的时间。</h6>
   </b-card>
 </template>
 
