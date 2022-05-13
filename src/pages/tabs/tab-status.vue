@@ -136,7 +136,7 @@ export default {
       this.filters.pid = this.$store.state.preferences.statusFilterPID
     },
     saveFilterPreferences: function () {
-      this.$store.commit('setPreferencesItem', {
+      this.$store.commit('setPreferences', {
         statusFilterNickname: this.filters.nickname,
         statusFilterUID: this.filters.uid,
         statusFilterPID: this.filters.pid,

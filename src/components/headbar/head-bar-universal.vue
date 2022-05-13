@@ -24,7 +24,7 @@
               </template>
               <b-dropdown-item @click="$router.push('/profile')"><b-icon icon="person" class="mr-1"></b-icon>用户中心</b-dropdown-item>
               <b-dropdown-item @click="showDrawStick"><b-icon icon="dice5" class="mr-1"></b-icon>每日签到</b-dropdown-item>
-              <b-dropdown-item @click="$router.push('/strict/home')" v-if="$store.getters.isAdministrator"><b-icon icon="signpost2" class="mr-1"></b-icon>进入考试</b-dropdown-item>
+              <b-dropdown-item @click="enableClientStrictModeAndRedirect"><b-icon icon="signpost2" class="mr-1"></b-icon>进入考试</b-dropdown-item>
               <b-dropdown-item @click="$router.push('/admin/home')" v-if="$store.getters.isAdministrator"><b-icon icon="gear" class="mr-1"></b-icon>管理面板</b-dropdown-item>
               <b-dropdown-item @click="confirmLogout"><b-icon icon="person-x" class="mr-1"></b-icon>退出登录</b-dropdown-item>
             </b-nav-item-dropdown>
@@ -52,6 +52,12 @@ export default {
           this.$router.push('/logout')
         }
       })
+    },
+    enableClientStrictModeAndRedirect: function () {
+      this.$store.commit('setVersion', {
+        clientStrictMode: true
+      })
+      this.$router.push('/strict/home')
     }
   }
 }

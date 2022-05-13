@@ -116,8 +116,12 @@ router.beforeEach((to, from, next) => {
     next('/login')
   } else if (isAdminPage && !store.getters.isAdministrator) {
     next('/notFound')
-  } else if (!isStrictPage && store.getters.isStrictMode && !store.getters.isAdministrator) {
-    if (to.meta.strictRedirect) {
+  } else if (isAdminPage && store.getters.isAdministrator) {
+    next()
+  } else if (!isStrictPage && (store.getters.isClientStrictMode || store.getters.isServerStrictMode)) {
+    if (store.getters.isServerStrictMode && !store.getters.isClientStrictMode && store.getters.isAdministrator) {
+      next()
+    } else if (to.meta.strictRedirect) {
       next({name: to.meta.strictRedirect, params: to.params})
     } else {
       next('/notFound')

@@ -4,7 +4,9 @@
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4"><b-icon icon="card-checklist" class="mr-1"></b-icon>我的考试</h1>
-          <p class="lead">查看我报名的考试。</p>
+          <p class="lead">查看我报名的考试。
+            <b-link class="text-decoration-none text-muted" @click="enableClientStrictModeAndRedirect"><b-icon icon="shield-lock"></b-icon>进入考试模式</b-link>
+          </p>
         </div>
       </div>
       <div class="container">
@@ -55,6 +57,16 @@ export default {
   methods: {
     getLocaleDate: function (string) {
       return date2Text(string)
+    },
+    enableClientStrictModeAndRedirect: function () {
+      this.$bvModal.msgBoxConfirm("真的要进入考试模式吗？在服务器未强制启用考试模式的情况下，您可以随意进出考试模式。", {title: '提示', centered: true, okTitle: '进入', cancelTitle: '取消'}).then(value => {
+        if (value) {
+          this.$store.commit('setVersion', {
+            clientStrictMode: true
+          })
+          this.$router.push('/strict/home')
+        }
+      })
     }
   },
   mounted () {

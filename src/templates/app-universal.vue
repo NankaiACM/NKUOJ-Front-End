@@ -58,15 +58,18 @@ export default {
       }
       // check strict mode enabled
       await this.$http.get(`${window.backendOrigin}/api/version/strict-mode`).then(res => {
-        const strictModeBefore = this.$store.getters.isStrictMode
+        const strictModeBefore = this.$store.getters.isServerStrictMode
         const strictModeAfter = res.data.enable
         if (strictModeBefore !== strictModeAfter) {
           this.$store.commit('setVersion', {
-            strictMode: strictModeAfter
+            serverStrictMode: strictModeAfter
           })
-          if (strictModeAfter && !this.$store.getters.isAdministrator) {
-            this.$router.replace('/strict')
-          }
+        }
+        if (strictModeAfter && !this.$store.getters.isAdministrator && !this.$store.getters.isClientStrictMode) {
+          this.$store.commit('setVersion', {
+            clientStrictMode: strictModeAfter
+          })
+          this.$router.replace('/strict')
         }
       })
     }

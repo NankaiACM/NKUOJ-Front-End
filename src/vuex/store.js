@@ -31,7 +31,8 @@ export default new Vuex.Store({
       statusFilterNickname: null,
     },
     version: {
-      strictMode: false
+      serverStrictMode: false,
+      clientStrictMode: false
     }
   },
   getters: {
@@ -41,8 +42,11 @@ export default new Vuex.Store({
     isAdministrator: function (state) {
       return state.userData.permission >= 1
     },
-    isStrictMode: function (state) {
-      return state.version.strictMode
+    isServerStrictMode: function (state) {
+      return state.version.serverStrictMode
+    },
+    isClientStrictMode: function (state) {
+      return state.version.clientStrictMode
     },
     getUserData: function (state) {
       return state.userData
@@ -54,10 +58,9 @@ export default new Vuex.Store({
   mutations: {
     setUserData (state, payload) {
       state.userData.isUserLogin = true
-      state.userData.uid = ('uid' in payload ? payload.uid : state.userData.uid)
-      state.userData.permission = ('permission' in payload ? payload.permission : state.userData.permission)
-      state.userData.username = ('username' in payload ? payload.username : state.userData.username)
-      state.userData.nickname = ('nickname' in payload ? payload.nickname : state.userData.nickname)
+      for (const [key, val] of Object.entries(payload)) {
+        state.userData[key] = val
+      }
     },
     clearUserData (state) {
       state.userData.isUserLogin = false
@@ -68,12 +71,11 @@ export default new Vuex.Store({
       sessionStorage.clear()
     },
     setVersion (state, payload) {
-      state.version.strictMode = payload.strictMode
+      for (const [key, val] of Object.entries(payload)) {
+        state.version[key] = val
+      }
     },
     setPreferences (state, payload) {
-      state.preferences = payload
-    },
-    setPreferencesItem (state, payload) {
       for (const [key, val] of Object.entries(payload)) {
         state.preferences[key] = val
       }
