@@ -16,7 +16,7 @@
                 <em>{{$store.getters.getUserData.nickname}}</em>
               </template>
               <b-dropdown-item @click="showProfile"><b-icon icon="info-circle" class="mr-1"></b-icon>考生信息</b-dropdown-item>
-              <b-dropdown-item @click="disableClientStrictModeAndRedirect" v-if="$store.getters.isAdministrator || !$store.getters.isServerStrictMode"><b-icon icon="signpost2" class="mr-1"></b-icon>退出考试</b-dropdown-item>
+              <b-dropdown-item @click="disableClientStrictModeAndRedirect" v-if="$store.getters.isAdministrator || !$store.getters.isServerStrictMode"><b-icon icon="shield-lock" class="mr-1"></b-icon>退出考试</b-dropdown-item>
               <b-dropdown-item @click="$router.push('/admin/home')" v-if="$store.getters.isAdministrator"><b-icon icon="gear" class="mr-1"></b-icon>管理面板</b-dropdown-item>
               <b-dropdown-item @click="confirmLogout"><b-icon icon="person-x" class="mr-1"></b-icon>退出登录</b-dropdown-item>
             </b-nav-item-dropdown>
