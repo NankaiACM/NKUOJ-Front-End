@@ -5,9 +5,9 @@
         <h1 class="display-6">{{ problemInfo.name ? problemInfo.name : '加载中...' }}</h1>
         <h4><span class="badge bg-secondary text-light">题目</span></h4>
       </div>
-      <problem-header :problem-info="problemInfo" :loading="loading" class="mb-3" :pid="problemInfo.pid"></problem-header>
       <problem-navigator :psid="problemInfo.psid" v-if="problemInfo.psid" :loading="loading" :pid="problemInfo.pid" class="mb-3"
                          @switchToProblem="switchToProblem"></problem-navigator>
+      <problem-header :problem-info="problemInfo" :loading="loading" class="mb-3" :pid="problemInfo.pid"></problem-header>
       <problem-content :type="extension" :content="content" :loading="loading" class="mb-4"></problem-content>
       <submit-modal ref="submit-modal" :pid="problemInfo.pid"></submit-modal>
       <status-list-modal ref="status-list-modal" :pid="problemInfo.pid" :uid="$store.getters.getUID"></status-list-modal>
