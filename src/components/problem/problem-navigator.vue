@@ -5,7 +5,7 @@
       <b-skeleton width="55%"></b-skeleton>
     </template>
 
-    <div class="container-fluid d-flex justify-content-center pt-4">
+    <div class="container-fluid d-flex justify-content-center">
       <b-button-group>
         <b-button :variant="['outline-secondary', 'outline-warning', 'outline-success'][problem.status]"
                   v-b-popover.hover.top="['未提交', '未通过', '已通过'][problem.status]"
