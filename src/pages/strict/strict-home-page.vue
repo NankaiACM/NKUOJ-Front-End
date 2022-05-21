@@ -2,7 +2,7 @@
 <div class="container">
   <h1 class="display-3 text-center pt-4 pb-4 text-muted">考试模式</h1>
   <h6 class="text-center text-muted" v-if="this.$store.getters.isServerStrictMode">NKUOJ 处于考试模式，除考试外其他功能不可用。请遵守考场纪律，专心完成考试。</h6>
-  <h6 class="text-center text-muted" v-else>NKUOJ 服务器暂未启用考试模式。您可以点此<b-link class="text-decoration-none" @click="exitStrictMode">退出</b-link></h6>
+  <h6 class="text-center text-muted" v-else>NKUOJ 服务器暂未启用考试模式。您可以<b-link class="text-decoration-none" @click="exitStrictMode">点此退出</b-link>。</h6>
   <hr>
   <div class="container d-flex justify-content-center pb-1 mt-4">
     <div class="col-md-8">
