@@ -57,7 +57,7 @@ export default {
         const strictModeAfter = res.data.enable
         if (strictModeBefore !== strictModeAfter) {
           this.$store.commit('setVersion', {
-            strictMode: strictModeAfter
+            serverStrictMode: strictModeAfter
           })
         }
       })
