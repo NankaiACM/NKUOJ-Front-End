@@ -52,9 +52,9 @@ const router = new Router({
       { path: '/course/:courseId', component: coursePage },
       { path: '/submission/:submissionId', component: submissionPage, meta: { strictRedirect: 'strictSubmission' }},
       { path: '/assignment/:assignmentId', component: assignmentPage },
-      { path: '/ranking/contest/:contestId', component: rankingContestPage },
-      { path: '/ranking/exam/:examId', component: rankingExamPage },
-      { path: '/contest/:contestId', component: contestPage },
+      { path: '/ranking/contest/:contestId', component: rankingContestPage, meta: { strictRedirect: 'strictRankingContest' } },
+      { path: '/ranking/exam/:examId', component: rankingExamPage, meta: { strictRedirect: 'strictRankingExam' } },
+      { path: '/contest/:contestId', component: contestPage, meta: { strictRedirect: 'strictContest' } },
       { path: '/exam/:examId', component: examPage, meta: { strictRedirect: 'strictExam' } },
       { path: '/', redirect: '/login', meta: { isLogin: true } },
     ]
@@ -84,6 +84,9 @@ const router = new Router({
       { path: '/strict', redirect: '/strict/home', name: 'strictRoot', meta: { isStrict: true } },
       { path: '/strict/problem/:problemId', component: problemPage, name: 'strictProblem', meta: { isStrict: true } },
       { path: '/strict/exam/:examId', name: 'strictExam', component: examPage, meta: { isStrict: true } },
+      { path: '/strict/ranking/exam/:examId', name: 'strictRankingExam', component: rankingExamPage, meta: { isStrict: true } },
+      { path: '/strict/contest/:contestId', name: 'strictContest', component: contestPage, meta: { isStrict: true } },
+      { path: '/strict/ranking/contest/:contestId', name: 'strictRankingContest', component: rankingContestPage, meta: { isStrict: true } },
       { path: '/strict/submission/:submissionId', name: 'strictSubmission', component: submissionPage, meta: { isStrict: true } },
     ]
   }, {

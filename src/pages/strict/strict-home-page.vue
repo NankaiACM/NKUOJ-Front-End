@@ -15,18 +15,26 @@
       <strict-exams-panel></strict-exams-panel>
     </div>
   </div>
+  <div class="container d-flex justify-content-center pb-1 mt-4">
+    <div class="col-md-8">
+      <h5 class="text-center text-muted m-2"><b-icon icon="trophy" class="mr-2"></b-icon>竞赛列表</h5>
+      <strict-contests-panel></strict-contests-panel>
+    </div>
+  </div>
 </div>
 </template>
 
 <script>
 import strictExamsPanel from '../../components/strict/strict-exams-panel'
+import strictContestsPanel from '../../components/strict/strict-contests-panel'
 import StrictProfilePanel from "@/components/strict/strict-profile-panel";
 
 export default {
   name: "strict-home-page",
   components: {
     StrictProfilePanel,
-    strictExamsPanel
+    strictExamsPanel,
+    strictContestsPanel
   }
 }
 </script>
