@@ -82,7 +82,7 @@ export default {
         if (res.data.ok) {
           console.log('Successfully logged in.')
           this.$store.commit('setUserData', res.data.userData)
-          this.$router.push('/home')
+          this.$emit('next')
         } else {
           this.$store.commit('clearUserData')
           this.$bvModal.msgBoxOk(code2str(res.status), {title: '提示', centered: true})

@@ -116,7 +116,7 @@ router.beforeEach((to, from, next) => {
   } else if (isLoginPage && !store.getters.isUserLogin) {
     next()
   } else if (!isLoginPage && !store.getters.isUserLogin) {
-    next('/login')
+    next({path: '/login', query: { redirect: to.fullPath }})
   } else if (isAdminPage && !store.getters.isAdministrator) {
     next('/notFound')
   } else if (isAdminPage && store.getters.isAdministrator) {

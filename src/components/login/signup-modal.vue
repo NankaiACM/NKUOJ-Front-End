@@ -82,13 +82,12 @@ export default {
       this.$http.post(`${window.backendOrigin}/api/signup`, postPackage).then(res => {
         if (res.data.ok) {
           this.$store.commit('setUserData', res.data.userData)
-          this.$router.push('/home')
+          this.$emit('next')
         } else {
           this.$store.commit('clearUserData')
           this.$bvModal.msgBoxOk(code2str(res.status), {title: '提示', centered: true})
         }
       }, e => {
-        console.log(e)
         this.$store.commit('clearUserData')
         this.$bvModal.msgBoxOk(code2str(e.status), {title: '提示', centered: true})
       })
@@ -104,8 +103,7 @@ export default {
       const postPackage = {
         email: this.signupForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : '')
       }
-      // eslint-disable-next-line no-unused-vars
-      this.$http.post(`${window.backendOrigin}/api/email-captcha`, postPackage).then(_ => {
+      this.$http.post(`${window.backendOrigin}/api/email-captcha`, postPackage).then(() => {
         this.emailCaptchaSendTimer = 60
       }, e => {
         console.log(e)

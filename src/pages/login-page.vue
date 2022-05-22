@@ -39,9 +39,9 @@
       </div>
     </div>
 
-    <login-modal ref="login-modal" :is-student="isStudent === 'true'" :is-strict="isStrictMode"></login-modal>
-    <signup-modal ref="signup-modal" :is-student="isStudent === 'true'" :is-strict="isStrictMode"></signup-modal>
-    <reset-pwd-modal ref="reset-pwd-modal" :is-student="isStudent === 'true'" :is-strict="isStrictMode"></reset-pwd-modal>
+    <login-modal @next="handleNextEvent" ref="login-modal" :is-student="isStudent === 'true'" :is-strict="isStrictMode"></login-modal>
+    <signup-modal @next="handleNextEvent" ref="signup-modal" :is-student="isStudent === 'true'" :is-strict="isStrictMode"></signup-modal>
+    <reset-pwd-modal @next="handleNextEvent" ref="reset-pwd-modal" :is-student="isStudent === 'true'" :is-strict="isStrictMode"></reset-pwd-modal>
   </div>
 </template>
 
@@ -84,6 +84,12 @@ export default {
         }
         this.isStrictMode = strictModeAfter
       })
+    },
+    handleNextEvent: function () {
+      let searchParams = new URLSearchParams(window.location.search);
+      if (searchParams.has("redirect")) {
+        this.$router.push({ path: `${searchParams.get("redirect")}` });
+      } else this.$router.push({ path: "/dashboard" });
     }
   },
   computed: {
