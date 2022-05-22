@@ -7,7 +7,7 @@
     <div class="container">
       <div class="row d-flex justify-content-center">
         <div class="col-md-6">
-          <b-alert variant="info" show class="text-center mt-5 md-5 p-5" v-if="checkIfUsingIP">
+          <b-alert variant="info" show class="text-center mt-5 md-5 p-5" v-if="clientUsingIP">
             <h4>网站域名已经可用！</h4>
             <hr>
             <p class="mt-5 md-5">请使用<b-link href="https://acm.nankai.edu.cn/">acm.nankai.edu.cn</b-link>访问我们的网页～</p>
@@ -20,7 +20,8 @@
               <p>本站由 ACM 算法协会开发、维护，旨在为南开的计算机程序设计类课程提供评判系统。</p>
             </div>
             <div class="card-body">
-              <h5 class="card-title">登录以继续</h5>
+              <h5 class="card-title" v-if="hasRedirectPath">登录以继续访问</h5>
+              <h5 class="card-title" v-else>进入本系统</h5>
               <div class="container d-flex justify-content-center">
                 <div class="buttons-wrapper">
                   <b-button pill variant="outline-info" class="btn-block" @click="showLoginModal">登录</b-button>
@@ -93,8 +94,12 @@ export default {
     }
   },
   computed: {
-    checkIfUsingIP: function () {
+    clientUsingIP: function () {
       return window.location.href.indexOf('222.30.51.68:8080') > -1
+    },
+    hasRedirectPath: function () {
+      let searchParams = new URLSearchParams(window.location.search);
+      return searchParams.has("redirect")
     }
   },
   mounted() {
