@@ -116,6 +116,12 @@ export default {
   width: 16rem;
 }
 .pattern-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
   background: url("../assets/pattern.svg");
 }
 </style>
