@@ -89,8 +89,8 @@ export default {
     handleNextEvent: function () {
       let searchParams = new URLSearchParams(window.location.search);
       if (searchParams.has("redirect")) {
-        this.$router.push({ path: `${searchParams.get("redirect")}` });
-      } else this.$router.push({ path: "/home" });
+        this.$router.replace({ path: `${searchParams.get("redirect")}` });
+      } else this.$router.replace({ path: "/home" });
     }
   },
   computed: {
