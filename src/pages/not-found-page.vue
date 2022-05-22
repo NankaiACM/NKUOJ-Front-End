@@ -18,6 +18,7 @@
               <h5 class="card-title">继续</h5>
               <div class="container d-flex justify-content-center">
                 <div class="buttons-wrapper">
+                  <b-button pill variant="outline-warning" class="btn-block" @click="toPreviousPage()">返回前页</b-button>
                   <b-button pill variant="outline-success" class="btn-block" @click="$router.replace('/')">返回首页</b-button>
                 </div>
               </div>
@@ -35,6 +36,11 @@ export default {
   computed: {
     imageIndex: function () {
       return Math.random() < 0.5 ? 0 : 1
+    }
+  },
+  methods: {
+    toPreviousPage: function () {
+      this.$router.go(-1)
     }
   }
 }
