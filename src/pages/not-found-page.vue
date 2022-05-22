@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid pattern-background">
+  <div class="container-fluid">
     <div class="container d-flex justify-content-center">
       <img src="../assets/nkuoj-slogan.svg" alt="slogan" class="page-slogan m-5">
     </div>
@@ -52,8 +52,5 @@ export default {
 }
 .buttons-wrapper {
   width: 16rem;
-}
-.pattern-background {
-  background: url("../assets/pattern.svg");
 }
 </style>
