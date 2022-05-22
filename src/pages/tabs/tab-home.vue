@@ -1,5 +1,5 @@
 <template>
-<div id="tab-home">
+<div>
   <div id="home-content" class="container">
     <div class="row">
       <div class="col-md-8">
