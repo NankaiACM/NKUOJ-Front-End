@@ -90,7 +90,7 @@ export default {
       let searchParams = new URLSearchParams(window.location.search);
       if (searchParams.has("redirect")) {
         this.$router.push({ path: `${searchParams.get("redirect")}` });
-      } else this.$router.push({ path: "/dashboard" });
+      } else this.$router.push({ path: "/" });
     }
   },
   computed: {
