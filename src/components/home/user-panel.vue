@@ -2,7 +2,9 @@
 <div id="user-panel">
   <b-card no-body>
     <div class="d-flex align-items-center m-3">
-      <b-avatar class="mr-3"></b-avatar>
+      <b-avatar class="mr-3">{{$store.getters.getUserData.nickname}}
+        <template #badge v-if="$store.getters.isAdministrator"><b-icon icon="star-fill"></b-icon></template>
+      </b-avatar>
       <span class="mr-auto">{{$store.getters.getUserData.nickname}}</span>
       <span class="text-secondary">#{{uidToStr($store.getters.getUID)}}</span>
     </div>
