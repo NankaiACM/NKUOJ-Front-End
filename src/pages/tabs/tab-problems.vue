@@ -38,12 +38,22 @@ export default {
     return {
       problemList: [],
       totalRows: 0,
-      currentPage: 1
     }
   },
   mounted: function () {
     this.loadProblemsTotalData()
     this.loadDataOfPage(this.currentPage)
+  },
+  computed: {
+    currentPage: {
+      get: function () {
+        return this.$route.query.page || 1;
+      },
+      set(newPage) {
+        this.$router
+          .replace({query: {...this.$route.query, page: newPage}}).catch(() => {});
+      }
+    }
   },
   methods: {
     loadProblemsTotalData: function () {
