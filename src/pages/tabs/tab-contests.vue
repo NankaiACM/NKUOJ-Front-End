@@ -41,7 +41,7 @@
 
     <b-modal id="register-modal" title="报名竞赛" centered ok-title="关闭" ok-only>
       <div class="container">
-        <b-list-group>
+        <b-list-group v-if="registrableContestsList.length !== 0">
           <b-list-group-item button @click="subscribeContest(contest)"
                              v-for="contest in registrableContestsList" v-bind:key="contest.id">
             <div class="d-flex w-100 justify-content-between">
@@ -50,6 +50,7 @@
             <small> 竞赛 </small>
           </b-list-group-item>
         </b-list-group>
+        <h5 class="text-muted text-center" v-else>没有可报名的竞赛</h5>
       </div>
     </b-modal>
   </div>
