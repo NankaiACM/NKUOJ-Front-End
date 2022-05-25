@@ -33,9 +33,7 @@ export default {
     switchTo: function (path) {
       if (this.$route.path === `/${path}`)
         return
-      this.$router.push({
-        path: '/' + path
-      })
+      this.$router.replace({path: '/' + path})
     },
     updateSiteData: async function () {
       // check user cookies validity

@@ -28,9 +28,7 @@ export default {
     switchTo: function (path) {
       if (this.$route.path === `/${path}`)
         return
-      this.$router.push({
-        path: path
-      })
+      this.$router.replace({path: path})
     },
     updateUserData: function () {
       if (this.$store.getters.isUserLogin) {
@@ -46,7 +44,7 @@ export default {
         }, error => {
           if (error.status === 401) {
             this.$store.commit('clearUserData')
-            this.$router.push('/login')
+            this.$router.replace('/login')
           }
         })
       }
