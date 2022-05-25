@@ -5,7 +5,7 @@
         <div class="container">
           <h1 class="display-4"><b-icon icon="trophy" class="mr-1"></b-icon>我的竞赛</h1>
           <p class="lead">查看我报名的竞赛。
-            <b-link class="text-decoration-none text-muted" @click="registerContest"><b-icon icon="person-plus"></b-icon>报名竞赛</b-link></p>
+            <b-link class="text-decoration-none text-muted" @click="openRegisterContestModal"><b-icon icon="person-plus"></b-icon>报名竞赛</b-link></p>
         </div>
       </div>
       <div class="container">
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <b-modal id="register-modal" title="报名竞赛" centered ok-title="关闭" ok-only>
+    <b-modal id="register-modal" title="报名公开竞赛" centered ok-title="关闭" ok-only>
       <div class="container">
         <b-list-group v-if="registrableContestsList.length !== 0">
           <b-list-group-item button @click="subscribeContest(contest)"
@@ -74,7 +74,8 @@ export default {
     getLocaleDate: function (string) {
       return date2Text(string)
     },
-    registerContest: function () {
+    openRegisterContestModal: function () {
+      this.loadRegistrableContestsData()
       this.$bvModal.show('register-modal')
     },
     loadRegistrableContestsData: function () {
@@ -115,7 +116,6 @@ export default {
   },
   mounted () {
     this.loadMyContestsData()
-    this.loadRegistrableContestsData()
   }
 }
 </script>
