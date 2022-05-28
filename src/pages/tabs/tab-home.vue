@@ -11,7 +11,6 @@
       </div>
       <div class="col-md-4">
         <user-panel class="mb-2"></user-panel>
-        <hitokoto-panel class="mb-2"></hitokoto-panel>
         <jump-panel class="mb-2"></jump-panel>
         <association-poster-panel class="mb-2"></association-poster-panel>
       </div>
@@ -27,14 +26,12 @@ import userContestsPanel from '../../components/home/user-contests-panel'
 import userExamsPanel from '../../components/home/user-exams-panel'
 import associationPosterPanel from "@/components/home/association-poster-panel";
 import AnnouncementsPanel from "@/components/home/announcements-panel";
-import HitokotoPanel from "@/components/home/hitokoto-panel";
 import JumpPanel from "@/components/home/jump-panel";
 
 export default {
   name: 'tab-home',
   components: {
     JumpPanel,
-    HitokotoPanel,
     AnnouncementsPanel,
     userPanel,
     userCoursesPanel,
@@ -45,16 +42,5 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
-
-#home {
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  left: 0;
-  top: 0;
-}
+<style lang="less">
 </style>
