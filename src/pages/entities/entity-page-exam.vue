@@ -41,7 +41,7 @@
                           v-for="i in Array(4).keys()" :key="i"></b-skeleton>
             </template>
 
-            <h2 class="text-center"> {{ myScore }} / {{ problemsData.length * 100 }} </h2>
+            <h2 class="text-center"> {{ myScore === -1 ? '未作答' : myScore }} / {{ problemsData.length * 100 }} </h2>
             <h6 class="card-subtitle mb-2 text-muted"><b-link class="text-decoration-none text-muted" @click="loadScoreData"><b-icon icon="arrow-clockwise"></b-icon>刷新</b-link></h6>
           </b-skeleton-wrapper>
         </b-card>
@@ -126,7 +126,7 @@ export default {
         { key: 'problem_info', label: '题目' },
         { key: 'status', label: '状态' }
       ],
-      myScore: 0
+      myScore: -1
     }
   },
   methods: {
