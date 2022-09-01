@@ -28,8 +28,8 @@
                   <b-button pill variant="outline-success" class="btn-block" @click="showSignupModal" v-if="!isStrictMode">注册</b-button>
                 </div>
               </div>
-              <p class="m-2 text-secondary" v-if="!isStrictMode">忘记密码或者帐号已被注册？<b-link @click="showResetModal" class="text-decoration-none">点击重置</b-link>。</p>
-              <p class="m-2 text-secondary" v-else>考试模式已开启，只允许登录。如若忘记密码请联系监考。</p>
+              <p class="m-2 text-secondary" v-if="isStrictMode">考试模式已开启，您需要输入考试码进入本系统</p>
+              <p class="m-2 text-secondary" >忘记密码或者帐号已被注册？<b-link @click="showResetModal" class="text-decoration-none">点击重置</b-link></p>
               <b-form-checkbox id="checkbox-student" v-model="isStudent" name="i-am-student"
                                value="true" unchecked-value="false" class="text-muted">
                 我是学生

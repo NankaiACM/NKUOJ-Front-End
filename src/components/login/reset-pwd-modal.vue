@@ -31,6 +31,12 @@
             </b-input-group-append>
           </b-input-group>
         </div>
+        <div class="container" v-if="isStrict">
+          <label>考试码</label>
+          <div class="input-group mb-2">
+            <b-input type="text" id="loginPasscodeInput" class="form-control" v-model="resetForm.examKeyRaw" @keydown.enter.native="resetSubmit"></b-input>
+          </div>
+        </div>
       </div>
     </div>
   </b-modal>
@@ -48,15 +54,17 @@ export default {
         email: '',
         passwordRaw1: '',
         passwordRaw2: '',
-        emailCaptcha: ''
+        emailCaptcha: '',
+        examKeyRaw: ''
       },
       emailCaptchaSendTimer: 0,
-      validateResults: ['', '邮箱不合法', '未填写邮箱', '密码不一致', '未填写密码', '未填写邮件验证码', '未填写昵称', '密码长度不足6位'],
+      validateResults: ['', '邮箱不合法', '未填写邮箱', '密码不一致', '未填写密码', '未填写邮件验证码', '未填写昵称', '密码长度不足6位', '未填写考试码'],
       emailRegex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     }
   },
   props: {
-    isStudent: Boolean
+    isStudent: Boolean,
+    isStrict: Boolean
   },
   methods: {
     show: function () {
@@ -76,7 +84,6 @@ export default {
       this.$http.post(`${window.backendOrigin}/api/email-captcha`, postPackage).then(() => {
         this.emailCaptchaSendTimer = 60
       }, e => {
-        console.log(e)
         this.$bvModal.msgBoxOk(code2str(e.status), {title: '邮件验证码发送失败', centered: true})
       })
     },
@@ -93,7 +100,8 @@ export default {
       const postPackage = {
         username: this.resetForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''),
         password: encryptMsg(this.resetForm.passwordRaw1),
-        emailCaptcha: this.resetForm.emailCaptcha
+        emailCaptcha: this.resetForm.emailCaptcha,
+        passcode: encryptMsg(this.resetForm.examKeyRaw),
       }
       this.$http.post(`${window.backendOrigin}/api/reset/password`, postPackage).then(res => {
         if (res.data.ok) {
@@ -121,6 +129,8 @@ export default {
         return 7
       } else if (this.resetForm.emailCaptcha === '') {
         return 5
+      } else if (this.resetForm.examKeyRaw === '' && this.isStrict) {
+        return 8
       }
       return 0
     },
