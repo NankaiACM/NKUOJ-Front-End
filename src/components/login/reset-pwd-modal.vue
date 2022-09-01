@@ -77,9 +77,13 @@ export default {
       } else if (!this.emailRegex.test(this.resetForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''))) {
         this.$bvModal.msgBoxOk(this.validateResults[1], {title: '提示', centered: true})
         return
+      } else if (this.isStrict && this.resetForm.examKeyRaw === '') {
+        this.$bvModal.msgBoxOk(this.validateResults[8], {title: '提示', centered: true})
+        return
       }
       const postPackage = {
-        email: this.resetForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : '')
+        email: this.resetForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''),
+        passcode: encryptMsg(this.resetForm.examKeyRaw),
       }
       this.$http.post(`${window.backendOrigin}/api/email-captcha`, postPackage).then(() => {
         this.emailCaptchaSendTimer = 60
