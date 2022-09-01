@@ -9,7 +9,7 @@
       <div class="col-md-4 order-md-last order-first">
         <countdown-card :begin="examData.begin" :end="examData.end" class="mb-2" :warning-time="30"></countdown-card>
         <b-card title="考试详情" class="mb-2">
-          <b-skeleton-wrapper :loading="isDetailsLoading">
+          <b-skeleton-wrapper :loading="isMyScoreLoading">
             <template #loading>
               <b-skeleton :width="`${Math.floor(Math.random() * 80 + 20)}%`"
                           v-for="i in Array(5).keys()" :key="i"></b-skeleton>
