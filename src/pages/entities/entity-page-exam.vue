@@ -165,7 +165,7 @@ export default {
       this.isMySubmissionsLoading = respondedRequests !== this.problemsData.length
     },
     loadScoreData: async function () {
-      this.$http.get(`${window.backendOrigin}/api/exam/id/${this.id}/rank`).then(res => {
+      this.$http.get(`${window.backendOrigin}/api/exam/id/${this.examId}/rank`).then(res => {
         for (const obj of res.data.tab) {
           if (obj.uid === this.$store.getters.getUID) {
             this.myScore = obj.totScore
