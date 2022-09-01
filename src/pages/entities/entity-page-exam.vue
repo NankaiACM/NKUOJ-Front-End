@@ -34,6 +34,17 @@
             </p>
           </b-skeleton-wrapper>
         </b-card>
+        <b-card title="我的成绩" sub-title="当前成绩仅供参考" class="mb-2">
+          <b-skeleton-wrapper :loading="isDetailsLoading">
+            <template #loading>
+              <b-skeleton :width="`${Math.floor(Math.random() * 80 + 20)}%`"
+                          v-for="i in Array(4).keys()" :key="i"></b-skeleton>
+            </template>
+
+            <h2 class="text-center"> {{ myScore }} / {{ problemsData.length * 100 }} </h2>
+            <h6 class="card-subtitle mb-2 text-muted"><b-link class="text-decoration-none text-muted" @click="loadScoreData"><b-icon icon="arrow-clockwise"></b-icon>刷新</b-link></h6>
+          </b-skeleton-wrapper>
+        </b-card>
       </div>
       <div class="col-md-8 order-md-first order-last">
         <b-card title="试题" class="mb-2">
@@ -108,12 +119,14 @@ export default {
       isDetailsLoading: true,
       isProblemsLoading: true,
       isMySubmissionsLoading: true,
+      isMyScoreLoading: true,
       mySubmissionsItems: [],
       mySubmissionsFields: [
         { key: 'status_id', label: '记录ID' },
         { key: 'problem_info', label: '题目' },
         { key: 'status', label: '状态' }
-      ]
+      ],
+      myScore: 0
     }
   },
   methods: {
@@ -151,10 +164,23 @@ export default {
       }
       this.isMySubmissionsLoading = respondedRequests !== this.problemsData.length
     },
+    loadScoreData: async function () {
+      this.$http.get(`${window.backendOrigin}/api/exam/id/${this.id}/rank`).then(res => {
+        for (const obj of res.data.tab) {
+          if (obj.uid === this.$store.getters.getUID) {
+            this.myScore = obj.totScore
+            this.isMyScoreLoading = false
+          }
+        }
+      }, () => {
+        this.isMyScoreLoading = true
+      })
+    },
     loadData: async function () {
       this.examId = this.$route.params.examId
       await this.loadExamData()
       await this.loadSubmissionsData()
+      await this.loadScoreData()
     }
   },
   mounted() {
