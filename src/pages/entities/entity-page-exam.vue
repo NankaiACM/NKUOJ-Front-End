@@ -9,7 +9,7 @@
       <div class="col-md-4 order-md-last order-first">
         <countdown-card :begin="examData.begin" :end="examData.end" class="mb-2" :warning-time="30"></countdown-card>
         <b-card title="考试详情" class="mb-2">
-          <b-skeleton-wrapper :loading="isMyScoreLoading">
+          <b-skeleton-wrapper :loading="isDetailsLoading">
             <template #loading>
               <b-skeleton :width="`${Math.floor(Math.random() * 80 + 20)}%`"
                           v-for="i in Array(5).keys()" :key="i"></b-skeleton>
@@ -35,13 +35,13 @@
           </b-skeleton-wrapper>
         </b-card>
         <b-card title="我的成绩" sub-title="当前成绩仅供参考" class="mb-2">
-          <b-skeleton-wrapper :loading="isDetailsLoading">
+          <b-skeleton-wrapper :loading="isMyScoreLoading">
             <template #loading>
               <b-skeleton :width="`${Math.floor(Math.random() * 80 + 20)}%`"
                           v-for="i in Array(4).keys()" :key="i"></b-skeleton>
             </template>
 
-            <h2 class="text-center"> {{ myScore === -1 ? '未作答' : myScore }} / {{ problemsData.length * 100 }} </h2>
+            <h2 class="text-center">{{ myScore === -1 ? '未作答' : myScore }} / {{ problemsData.length * 100 }}</h2>
             <h6 class="card-subtitle mb-2 text-muted"><b-link class="text-decoration-none text-muted" @click="loadScoreData"><b-icon icon="arrow-clockwise"></b-icon>刷新</b-link></h6>
           </b-skeleton-wrapper>
         </b-card>
