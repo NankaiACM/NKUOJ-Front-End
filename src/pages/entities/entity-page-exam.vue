@@ -169,9 +169,9 @@ export default {
         for (const obj of res.data.tab) {
           if (obj.uid === this.$store.getters.getUID) {
             this.myScore = obj.totScore
-            this.isMyScoreLoading = false
           }
         }
+        this.isMyScoreLoading = false
       }, () => {
         this.isMyScoreLoading = true
       })
