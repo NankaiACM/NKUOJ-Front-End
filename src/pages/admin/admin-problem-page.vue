@@ -241,7 +241,7 @@ export default {
       this.$http.get(`${window.backendOrigin}/api/admin/problem/id/${this.selectedId}/content`)
         .then(response => {
           if (response.data.extension === 'md') {
-            const blob = new Blob([response.data.content.data], {type: 'text/plain'});
+            const blob = new Blob([Buffer.from(response.data.content.data)], {type: 'text/plain'});
             const link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
             link.download = `problem-content-${this.selectedId}.md`;
