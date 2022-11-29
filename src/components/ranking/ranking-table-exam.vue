@@ -13,7 +13,10 @@
       <template #table-colgroup="scope">
         <col v-for="field in scope.fields" :key="field.key" :style="{ width: getColumnWidth(field.key) }">
       </template>
-      <template #head(user)="data">
+      <template #head(uid)="data">
+        <span><b-icon icon="person" v-b-popover.hover.bottom="data.label"></b-icon></span>
+      </template>
+      <template #head(username)="data">
         <span><b-icon icon="person" v-b-popover.hover.bottom="data.label"></b-icon></span>
       </template>
       <template #head(ranking)="data">
@@ -25,8 +28,11 @@
       <template #head()="data">
         <span v-b-popover.hover.bottom="problemsInfos[data.field.key]"><b-link class="text-decoration-none text-muted" :href="`/problem/${problems[data.field.key]}`">{{ data.label }}</b-link></span>
       </template>
-      <template #cell(user)="data">
-        <small v-b-popover.hover.top="data.value.nickname">{{data.value.uid === $store.getters.getUID ? '您' : `#${uid2Str(data.value.uid)}`}}</small>
+      <template #cell(uid)="data">
+        <small v-b-popover.hover.bottom="data.value.nickname" :class="data.value.uid === $store.getters.getUID ? 'text-info' : ''">{{`#${uid2Str(data.value.uid)}`}}</small>
+      </template>
+      <template #cell(username)="data">
+        <div class="text-truncate"><small :class="data.value.uid === $store.getters.getUID ? 'font-weight-bold' : ''">{{data.value.nickname}}</small></div>
       </template>
       <template #cell(ranking)="data">
         <small>{{data.value}}</small>
@@ -70,7 +76,8 @@ export default {
     loadData: function () {
       this.$http.get(`${window.backendOrigin}/api/exam/id/${this.id}/rank`).then(res => {
         this.fields = [
-          { key: 'user', label: '用户' },
+          { key: 'uid', label: '用户' },
+          { key: 'username', label: '用户名' },
           { key: 'ranking', label: '排名' },
           { key: 'score', label: '得分' },
         ]
@@ -114,8 +121,10 @@ export default {
       return date2Text(string)
     },
     getColumnWidth: function (key) {
-      if (key === 'user')
+      if (key === 'uid')
         return '80px'
+      else if (key === 'username')
+        return '100px'
       else if (key === 'ranking')
         return '50px'
       else if (key === 'score')

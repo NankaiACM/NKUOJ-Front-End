@@ -13,7 +13,10 @@
     <template #table-colgroup="scope">
       <col v-for="field in scope.fields" :key="field.key" :style="{ width: getColumnWidth(field.key) }">
     </template>
-    <template #head(user)="data">
+    <template #head(uid)="data">
+      <span><b-icon icon="person" v-b-popover.hover.bottom="data.label"></b-icon></span>
+    </template>
+    <template #head(username)="data">
       <span><b-icon icon="person" v-b-popover.hover.bottom="data.label"></b-icon></span>
     </template>
     <template #head(penalty)="data">
@@ -28,8 +31,11 @@
     <template #head()="data">
       <span v-b-popover.hover.bottom="problemsInfos[data.field.key]"><b-link class="text-decoration-none text-muted" :href="`/problem/${problems[data.field.key]}`">{{ data.label }}</b-link></span>
     </template>
-    <template #cell(user)="data">
-      <small v-b-popover.hover.top="data.value.nickname">{{data.value.uid === $store.getters.getUID ? '您' : `#${uid2Str(data.value.uid)}`}}</small>
+    <template #cell(uid)="data">
+      <small v-b-popover.hover.bottom="data.value.nickname" :class="data.value.uid === $store.getters.getUID ? 'font-weight-bold' : ''">{{`#${uid2Str(data.value.uid)}`}}</small>
+    </template>
+    <template #cell(username)="data">
+      <div class="text-truncate"><small :class="data.value.uid === $store.getters.getUID ? 'font-weight-bold' : ''">{{data.value.nickname}}</small></div>
     </template>
     <template #cell(penalty)="data">
       <small v-b-popover.hover.top="`${Math.floor(data.value / 60)}:${data.value % 60}`">{{data.value}}</small>
@@ -78,7 +84,8 @@ export default {
     loadData: function () {
       this.$http.get(`${window.backendOrigin}/api/contest/id/${this.id}/rank`).then(res => {
         this.fields = [
-          { key: 'user', label: '用户' },
+          { key: 'uid', label: '用户' },
+          { key: 'username', label: '用户名' },
           { key: 'ranking', label: '排名' },
           { key: 'passed', label: '通过' },
           { key: 'penalty', label: '用时' },
@@ -97,7 +104,8 @@ export default {
           if (this.limit && i >= this.limit)
             break
           let row = {
-            user: {uid: obj.uid, nickname: obj.nickname},
+            uid: {uid: obj.uid, nickname: obj.nickname},
+            username: {uid: obj.uid, nickname: obj.nickname},
             ranking: i + 1,
             passed: obj.passCount,
             penalty: Math.ceil(obj.virtTime / 60000)
@@ -129,8 +137,10 @@ export default {
       return date2Text(string)
     },
     getColumnWidth: function (key) {
-      if (key === 'user')
+      if (key === 'uid')
         return '80px'
+      else if (key === 'username')
+        return '100px'
       else if (key === 'ranking')
         return '50px'
       else if (key === 'passed')
