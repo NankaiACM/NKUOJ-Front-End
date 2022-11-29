@@ -1,0 +1,18 @@
+.table-success-stripped {
+  background: repeating-linear-gradient(
+    135deg,
+    #54b36a,
+    #54b36a 10px,
+    #b1dfbb 10px,
+    #b1dfbb 20px
+  );
+}
+.bg-success-stripped {
+  background: repeating-linear-gradient(
+    135deg,
+    #54b36a,
+    #54b36a 10px,
+    #b1dfbb 10px,
+    #b1dfbb 20px
+  );
+}

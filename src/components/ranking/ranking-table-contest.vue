@@ -30,6 +30,7 @@
     </template>
     <template #head()="data">
       <span v-b-popover.hover.bottom="problemsInfos[data.field.key]"><b-link class="text-decoration-none text-muted" :href="`/problem/${problems[data.field.key]}`">{{ data.label }}</b-link></span>
+      <br><small class="text-muted">{{ data.field.passed }} / {{ data.field.submitted }}</small>
     </template>
     <template #cell(uid)="data">
       <small v-b-popover.hover.bottom="data.value.nickname" :class="data.value.uid === $store.getters.getUID ? 'font-weight-bold' : ''">{{`#${uid2Str(data.value.uid)}`}}</small>
@@ -93,11 +94,14 @@ export default {
         this.problems = []
         this.firstUsers = []
         this.problemsInfos = []
-        for (const [i, obj] of res.data.meta.entries()) {
-          this.fields.push({ key: `${i}`, label: `${ordinalNumber2Str(i + 1)}`})
+        let problemSubmittedCount = []
+        let problemPassedCount = []
+        for (const [, obj] of res.data.meta.entries()) {
           this.problems.push(obj.pid)
           this.problemsInfos.push(obj)
           this.firstUsers.push(obj.firstUser)
+          problemSubmittedCount.push(0)
+          problemPassedCount.push(0)
         }
         this.items = []
         for (const [i, obj] of res.data.tab.entries()) {
@@ -117,9 +121,14 @@ export default {
             if (this.firstUsers[this.problems.indexOf(d.pid)] !== obj.uid)
               variant = d.pass ? 'success' : 'danger'
             cellVariants[`${this.problems.indexOf(d.pid)}`] = variant
+            problemSubmittedCount[this.problems.indexOf(d.pid)] += d.tryCount + (d.pass ? 1 : 0)
+            problemPassedCount[this.problems.indexOf(d.pid)] += (d.pass ? 1 : 0)
           }
           row['_cellVariants'] = cellVariants
           this.items.push(row)
+        }
+        for (const [i, ] of res.data.meta.entries()) {
+          this.fields.push({ key: `${i}`, label: `${ordinalNumber2Str(i + 1)}`, passed: problemPassedCount[i], submitted: problemSubmittedCount[i]})
         }
         this.loading = false
       }, () => {
@@ -157,22 +166,7 @@ export default {
 </script>
 
 <style>
-.table-success-stripped {
-  background: repeating-linear-gradient(
-    135deg,
-    #54b36a,
-    #54b36a 10px,
-    #b1dfbb 10px,
-    #b1dfbb 20px
-  );
-}
-.bg-success-stripped {
-  background: repeating-linear-gradient(
-    135deg,
-    #54b36a,
-    #54b36a 10px,
-    #b1dfbb 10px,
-    #b1dfbb 20px
-  );
+.table thead th {
+  vertical-align: middle;
 }
 </style>
