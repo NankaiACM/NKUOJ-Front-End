@@ -93,7 +93,7 @@ export default {
           let cellVariants = {}
           for (const d of obj.detail) {
             row[`${this.problems.indexOf(d.pid)}`] = {pid: d.pid, score: d.score, sid: d.sid, time: d.time, when: d.when, memory: d.memory}
-            cellVariants[`${this.problems.indexOf(d.pid)}`] = d.score === 100 ? 'success' : 'warning'
+            cellVariants[`${this.problems.indexOf(d.pid)}`] = d.score === 100 ? 'success' : 'danger'
           }
           row['_cellVariants'] = cellVariants
           this.items.push(row)
@@ -129,6 +129,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>

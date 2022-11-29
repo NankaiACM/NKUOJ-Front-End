@@ -105,9 +105,9 @@ export default {
           let cellVariants = {}
           for (const d of obj.detail) {
             row[`${this.problems.indexOf(d.pid)}`] = {pid: d.pid, passed: d.pass, sid: d.sid, time: d.when, tries: d.tryCount, elapse: Math.ceil(d.elapse / 60000)}
-            let variant = 'info'
+            let variant = 'success-stripped'
             if (this.firstUsers[this.problems.indexOf(d.pid)] !== obj.uid)
-              variant = d.pass ? 'success' : 'warning'
+              variant = d.pass ? 'success' : 'danger'
             cellVariants[`${this.problems.indexOf(d.pid)}`] = variant
           }
           row['_cellVariants'] = cellVariants
@@ -146,6 +146,23 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+.table-success-stripped {
+  background: repeating-linear-gradient(
+    135deg,
+    #54b36a,
+    #54b36a 10px,
+    #b1dfbb 10px,
+    #b1dfbb 20px
+  );
+}
+.bg-success-stripped {
+  background: repeating-linear-gradient(
+    135deg,
+    #54b36a,
+    #54b36a 10px,
+    #b1dfbb 10px,
+    #b1dfbb 20px
+  );
+}
 </style>
