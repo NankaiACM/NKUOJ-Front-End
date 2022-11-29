@@ -3,15 +3,15 @@
     135deg,
     #54b36a,
     #54b36a 10px,
-    #b1dfbb 10px,
-    #b1dfbb 20px
+    #c3e6cb 10px,
+    #c3e6cb 20px
   );
 }
-.bg-success-stripped {
+.table-success-stripped:hover {
   background: repeating-linear-gradient(
     135deg,
-    #54b36a,
-    #54b36a 10px,
+    #4fa763,
+    #4fa763 10px,
     #b1dfbb 10px,
     #b1dfbb 20px
   );
