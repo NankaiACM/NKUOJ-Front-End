@@ -105,8 +105,12 @@ export default {
         }
         this.items = []
         for (const [i, obj] of res.data.tab.entries()) {
+          for (const d of obj.detail) {
+            problemSubmittedCount[this.problems.indexOf(d.pid)] += d.tryCount + (d.pass ? 1 : 0)
+            problemPassedCount[this.problems.indexOf(d.pid)] += (d.pass ? 1 : 0)
+          }
           if (this.limit && i >= this.limit)
-            break
+            continue;
           let row = {
             uid: {uid: obj.uid, nickname: obj.nickname},
             username: {uid: obj.uid, nickname: obj.nickname},
@@ -121,8 +125,6 @@ export default {
             if (this.firstUsers[this.problems.indexOf(d.pid)] !== obj.uid)
               variant = d.pass ? 'success' : 'danger'
             cellVariants[`${this.problems.indexOf(d.pid)}`] = variant
-            problemSubmittedCount[this.problems.indexOf(d.pid)] += d.tryCount + (d.pass ? 1 : 0)
-            problemPassedCount[this.problems.indexOf(d.pid)] += (d.pass ? 1 : 0)
           }
           row['_cellVariants'] = cellVariants
           this.items.push(row)
