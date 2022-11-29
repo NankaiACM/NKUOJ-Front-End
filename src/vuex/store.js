@@ -33,6 +33,9 @@ export default new Vuex.Store({
     version: {
       serverStrictMode: false,
       clientStrictMode: false
+    },
+    warnings: {
+      strictModeWarnings: false
     }
   },
   getters: {
@@ -53,6 +56,9 @@ export default new Vuex.Store({
     },
     getUID: function (state) {
       return state.userData.uid
+    },
+    isStrictModeWarningsRead: function (state) {
+      return state.warnings.strictModeWarnings
     }
   },
   mutations: {
@@ -78,6 +84,11 @@ export default new Vuex.Store({
     setPreferences (state, payload) {
       for (const [key, val] of Object.entries(payload)) {
         state.preferences[key] = val
+      }
+    },
+    setWarningRead (state, payload) {
+      for (const [key, val] of Object.entries(payload)) {
+        state.warnings[key] = val
       }
     }
   }

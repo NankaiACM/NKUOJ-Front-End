@@ -15,10 +15,10 @@
       <b-skeleton width="55%"></b-skeleton>
     </b-card-body>
     <b-card-body v-else-if="statusCode !== 200" class="text-center">
-      [{{ statusCode }}] 网络请求出错，内容获取失败。
+      [{{ statusCode }}] 网络请求出错，内容获取失败。<b-link @click="reloadData" class="text-decoration-none text-muted"><b-icon icon="arrow-clockwise"></b-icon>刷新</b-link>
     </b-card-body>
     <b-card-body v-else-if="exams.length === 0" class="text-center">
-      没有正在进行中的考试，请等待考试开始。
+      没有正在进行中的考试，请等待考试开始。<b-link @click="reloadData" class="text-decoration-none text-muted"><b-icon icon="arrow-clockwise"></b-icon>刷新</b-link>
     </b-card-body>
   </b-card>
 </template>
@@ -38,15 +38,19 @@ export default {
   methods: {
     getLocaleDate: function (string) {
       return date2Text(string)
+    },
+    reloadData: function () {
+      this.loading = true
+      this.$http.get(`${window.backendOrigin}/api/exam/open`).then(res => {
+        this.exams = res.data
+        this.loading = false
+      }, e => {
+        this.statusCode = e.status
+      })
     }
   },
   mounted() {
-    this.$http.get(`${window.backendOrigin}/api/exam/open`).then(res => {
-      this.exams = res.data
-      this.loading = false
-    }, e => {
-      this.statusCode = e.status
-    })
+    this.reloadData()
   }
 }
 </script>

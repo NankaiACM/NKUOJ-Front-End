@@ -22,6 +22,7 @@
       <strict-contests-panel></strict-contests-panel>
     </div>
   </div>
+  <strict-warning-modal ref="warning_modal"></strict-warning-modal>
 </div>
 </template>
 
@@ -29,10 +30,12 @@
 import strictExamsPanel from '../../components/strict/strict-exams-panel'
 import strictContestsPanel from '../../components/strict/strict-contests-panel'
 import StrictProfilePanel from "@/components/strict/strict-profile-panel";
+import StrictWarningModal from "@/components/strict/strict-warning-modal";
 
 export default {
   name: "strict-home-page",
   components: {
+    StrictWarningModal,
     StrictProfilePanel,
     strictExamsPanel,
     strictContestsPanel
@@ -43,7 +46,15 @@ export default {
         clientStrictMode: false
       })
       this.$router.push('/home')
+    },
+    showWarningModal: function () {
+      if (!this.$store.getters.isStrictModeWarningsRead) {
+        this.$refs.warning_modal.show()
+      }
     }
+  },
+  mounted() {
+    setTimeout(this.showWarningModal, 300)
   }
 }
 </script>
