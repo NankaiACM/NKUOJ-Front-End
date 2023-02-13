@@ -1,29 +1,36 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import './global.js'
-import Vue from 'vue'
-import VueResource from 'vue-resource'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import { createVfm } from 'vue-final-modal'
+
+import App from './App.vue'
 import router from './router'
-import store from './vuex/store'
 
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-vue/dist/bootstrap-vue.min.css'
-import './styles/index.css'
+import 'vue-final-modal/style.css'
+import './assets/main.css'
 
-Vue.config.productionTip = false
-Vue.use(VueResource)
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
-/*
- * data of notify should be post
- * title, message, count
- */
+const app = createApp(App)
+const pinia = createPinia()
+const vfm = createVfm()
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<router-view></router-view>'
+// configure persistent storage with localstorage
+pinia.use((context) => {
+    const storeId = context.store.$id
+    const serializer = {
+        serialize: JSON.stringify,
+        deserialize: JSON.parse
+    }
+    const fromStorage = serializer.deserialize(window.localStorage.getItem(storeId))
+    if (fromStorage) {
+        context.store.$patch(fromStorage)
+    }
+    context.store.$subscribe((mutation, state) => {
+        window.localStorage.setItem(storeId, serializer.serialize(state))
+    })
 })
+
+app.use(pinia)
+app.use(vfm)
+app.use(router)
+
+app.mount('#app')

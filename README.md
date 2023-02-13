@@ -1,39 +1,35 @@
-# NKUOJ Front End
+# NKUOJ-Front-End
 
-![Screenshot of the Login Page](assets/readme-resources/login.png?raw=true "Login Page")
-![Screenshot of the Home Page](assets/readme-resources/home.png?raw=true "Home Page")
+This template should help get you started developing with Vue 3 in Vite.
 
-NKUOJ Front End is a website designed for the Online Judge System of Nankai University (NKUOJ) with vue.js.
+## Recommended IDE Setup
 
-## Features
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-+ Access control with all pages requiring user logged in;
-+ An Embedded administrator dashboard (Under development);
-+ Allowing users to list and view public problems;
-+ Supporting users to subscribe courses, assignments, exams and contests;
-+ Pages to view problems, courses, assignments, exams and contests in detail;
-+ A profile page to view and edit user info;
-+ Rank lists for exam and contest;
-+ Multiple tabs and links on home page;
-+ Supporting in-site announcements;
-+ A page to view submissions with details of every test case and the submitted code;
-+ All submissions on this site is visible in status page with a filter supported, if strict mode is disabled;
-+ A strict mode user interface blocking every other pages except exam and contest.
+## Customize configuration
 
-## Project setup and deployment
-Install node.js packages:
-```
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
 npm install
 ```
-Compiles and hot-reloads for development:
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
 ```
-npm run serve
-```
-Compiles and minifies for production:
-```
+
+### Compile and Minify for Production
+
+```sh
 npm run build
 ```
 
-## Compatible Back End
+### Lint with [ESLint](https://eslint.org/)
 
-[ArcOJ-BackEnd](https://github.com/ArcanusNEO/ArcOJ-BackEnd)
+```sh
+npm run lint
+```

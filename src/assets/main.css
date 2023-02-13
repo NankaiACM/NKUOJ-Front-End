@@ -1,0 +1,37 @@
+.table-success-stripped {
+    background: repeating-linear-gradient(
+            135deg,
+            #54b36a,
+            #54b36a 10px,
+            #c3e6cb 10px,
+            #c3e6cb 20px
+    );
+}
+.table-success-stripped:hover {
+    background: repeating-linear-gradient(
+            135deg,
+            #4fa763,
+            #4fa763 10px,
+            #b1dfbb 10px,
+            #b1dfbb 20px
+    );
+}
+.btn-outline-purple {
+    --bs-btn-color: #923262;
+    --bs-btn-border-color: #923262;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #923262;
+    --bs-btn-hover-border-color: #923262;
+    --bs-btn-focus-shadow-rgb: 25,135,84;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #923262;
+    --bs-btn-active-border-color: #923262;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #923262;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #923262;
+    --bs-gradient: none;
+}
+.text-purple {
+    color: #923262 !important;
+}
