@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import {computed, ref} from 'vue'
 import { defineStore } from 'pinia'
 
 export const useUserDataStore = defineStore('user-data', () => {
@@ -36,5 +36,7 @@ export const useUserDataStore = defineStore('user-data', () => {
     permission.value = 0
   }
 
-  return { uid, username, nickname, valid, permission, setUID, setUsername, setNickname, setPermission, setValid, clear }
+  const isAdministrator = computed(() => permission.value > 0)
+
+  return { uid, username, nickname, valid, permission, setUID, setUsername, setNickname, setPermission, setValid, clear, isAdministrator }
 })

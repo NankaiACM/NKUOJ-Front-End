@@ -6,6 +6,7 @@ import App from './App.vue'
 import router from './router'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min'
 import 'vue-final-modal/style.css'
 import './assets/main.css'
 

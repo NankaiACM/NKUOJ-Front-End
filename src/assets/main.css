@@ -35,3 +35,45 @@
 .text-purple {
     color: #923262 !important;
 }
+.btn-rounded-purple {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  --bs-btn-color: #923262;
+  --bs-btn-border-color: none;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #923262;
+  --bs-btn-hover-border-color: #923262;
+  --bs-btn-focus-shadow-rgb: 25,135,84;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #923262;
+  --bs-btn-active-border-color: #923262;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #923262;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #923262;
+  --bs-gradient: none;
+  transition: width 0.3s;
+  text-align: center;
+}
+.btn-rounded-purple:hover {
+  width: 100px;
+}
+.btn-rounded-purple:hover span ::after {
+  display: inline;
+}
+.btn-rounded-purple span ::after {
+  display: none;
+}
+.oj-pattern-background {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  background: url("/pattern-light.svg");
+}
+.list-group-item-transparent {
+  background: transparent;
+}
