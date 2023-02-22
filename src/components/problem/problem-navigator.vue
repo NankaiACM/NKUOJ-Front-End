@@ -37,7 +37,7 @@ export default {
       this.$http.get(`${window.backendOrigin}/api/problem/problemset/${this.psid}`).then(res => {
           this.problems = res.data
           this.problemsListLoading = false
-      })
+      }, () => {})
     },
     ordinalNumber2Str: function (val) {
       return ordinalNumber2Str(val)
