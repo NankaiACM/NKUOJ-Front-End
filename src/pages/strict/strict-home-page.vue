@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import strictExamsPanel from '../../components/strict/strict-exams-panel'
-import strictContestsPanel from '../../components/strict/strict-contests-panel'
-import StrictProfilePanel from "@/components/strict/strict-profile-panel";
-import StrictWarningModal from "@/components/strict/strict-warning-modal";
+const strictExamsPanel = () => import('../../components/strict/strict-exams-panel')
+const strictContestsPanel = () => import('../../components/strict/strict-contests-panel')
+const StrictProfilePanel = () => import('@/components/strict/strict-profile-panel')
+const StrictWarningModal = () => import('@/components/strict/strict-warning-modal')
 
 export default {
   name: "strict-home-page",

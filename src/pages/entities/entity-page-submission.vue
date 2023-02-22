@@ -103,7 +103,7 @@ import status2text from "@/util/status-code-to-str";
 import status2variant from "@/util/status-code-to-variant-str";
 import langId2Text from "@/util/lang-code-to-text";
 import date2Text from "@/util/date-to-str";
-import StatusDetailsButton from "@/components/status/status-details-button";
+const StatusDetailsButton = () => import("@/components/status/status-details-button");
 
 export default {
   name: "entity-page-submission",

@@ -21,11 +21,11 @@
   </div>
 </template>
 <script>
-import ProblemNavigator from "@/components/problem/problem-navigator";
-import SubmitModal from "@/components/problem/submit-modal";
-import ProblemContent from "@/components/problem/problem-content";
-import ProblemHeader from "@/components/problem/problem-header";
-import StatusListModal from "@/components/status/status-list-modal";
+const ProblemNavigator = () => import("@/components/problem/problem-navigator");
+const SubmitModal = () => import("@/components/problem/submit-modal");
+const ProblemContent = () => import("@/components/problem/problem-content");
+const ProblemHeader = () => import("@/components/problem/problem-header");
+const StatusListModal = () => import("@/components/status/status-list-modal");
 
 export default {
   name: 'entity-page-problem',

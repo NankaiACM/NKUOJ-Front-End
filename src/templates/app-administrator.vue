@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import headBar from '../components/headbar/head-bar-administrator'
+const headBar = () => import( '../components/headbar/head-bar-administrator')
 
 export default {
   components: {headBar},

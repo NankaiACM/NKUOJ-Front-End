@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import RankingTableContest from "@/components/ranking/ranking-table-contest";
+const RankingTableContest = () => import("@/components/ranking/ranking-table-contest");
 export default {
   name: "entity-page-ranking-contest",
   components: {RankingTableContest},

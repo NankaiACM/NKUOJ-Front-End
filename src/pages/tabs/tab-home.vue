@@ -19,14 +19,14 @@
 </div>
 </template>
 <script>
-import userPanel from '../../components/home/user-panel'
-import userCoursesPanel from '../../components/home/user-courses-panel'
-import userAssignmentsPanel from '../../components/home/user-assignments-panel'
-import userContestsPanel from '../../components/home/user-contests-panel'
-import userExamsPanel from '../../components/home/user-exams-panel'
-import associationPosterPanel from "@/components/home/association-poster-panel";
-import AnnouncementsPanel from "@/components/home/announcements-panel";
-import JumpPanel from "@/components/home/jump-panel";
+const userPanel = () => import('../../components/home/user-panel')
+const userCoursesPanel = () => import('../../components/home/user-courses-panel')
+const userAssignmentsPanel = () => import('../../components/home/user-assignments-panel')
+const userContestsPanel = () => import('../../components/home/user-contests-panel')
+const userExamsPanel = () => import('../../components/home/user-exams-panel')
+const associationPosterPanel = () => import('@/components/home/association-poster-panel')
+const AnnouncementsPanel = () => import('@/components/home/announcements-panel')
+const JumpPanel = () => import('@/components/home/jump-panel')
 
 export default {
   name: 'tab-home',

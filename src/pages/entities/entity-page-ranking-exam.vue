@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import RankingTableExam from "@/components/ranking/ranking-table-exam";
+const RankingTableExam = () => import("@/components/ranking/ranking-table-exam");
 
 export default {
 name: "entity-page-ranking-exam",

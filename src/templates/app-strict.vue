@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import headBar from '../components/headbar/head-bar-strict'
-import strictFooter from '../components/footer/strict-footer.vue'
+const headBar = () => import('../components/headbar/head-bar-strict')
+const strictFooter = () => import('../components/footer/strict-footer.vue')
 
 export default {
   components: {headBar, strictFooter},

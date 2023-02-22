@@ -132,10 +132,10 @@
 </template>
 
 <script>
-import itemSelectCard from '../../components/admin/admin-problem-select-card'
+const itemSelectCard = () => import("../../components/admin/admin-problem-select-card")
 import code2str from '@/util/http-code-to-str'
-import AdminProblemUploadDataModal from "@/components/admin/admin-problem-upload-data-modal";
-import AdminMarkdownPreviewModal from "@/components/admin/admin-markdown-preview-modal";
+const AdminProblemUploadDataModal = () => import("@/components/admin/admin-problem-upload-data-modal");
+const AdminMarkdownPreviewModal = () => import("@/components/admin/admin-markdown-preview-modal");
 
 export default {
   name: 'admin-problem-page',

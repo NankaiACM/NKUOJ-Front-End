@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import headBar from '../components/headbar/head-bar-universal'
-import ojFooter from '../components/footer/oj-footer.vue'
+const headBar = () => import('../components/headbar/head-bar-universal')
+const ojFooter = () => import('../components/footer/oj-footer.vue')
 
 export default {
   components: {headBar, ojFooter},

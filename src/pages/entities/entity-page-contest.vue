@@ -76,8 +76,8 @@
 
 <script>
 import date2Text from "@/util/date-to-str";
-import CountdownCard from "@/components/contest/countdown-card";
-import RankingTableContest from "@/components/ranking/ranking-table-contest";
+const CountdownCard = () => import('@/components/contest/countdown-card')
+const RankingTableContest = () => import('@/components/ranking/ranking-table-contest')
 
 export default {
   name: 'entity-page-contest',

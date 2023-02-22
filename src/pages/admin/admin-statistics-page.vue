@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import itemSelectCard from '../../components/admin/admin-problem-select-card'
+const itemSelectCard = () => import('../../components/admin/admin-problem-select-card')
 import code2str from "@/util/http-code-to-str";
 import uid2Str from "@/util/uid-to-str";
 

@@ -6,7 +6,7 @@ import VueResource from 'vue-resource'
 import router from './router'
 import store from './vuex/store'
 
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import { BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.min.css'
 import './styles/index.css'
@@ -14,7 +14,7 @@ import './styles/index.css'
 Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+// Vue.use(IconsPlugin)
 /*
  * data of notify should be post
  * title, message, count

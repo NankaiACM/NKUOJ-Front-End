@@ -104,7 +104,7 @@
 
 <script>
 import date2Text from "@/util/date-to-str";
-import CountdownCard from "@/components/contest/countdown-card";
+const CountdownCard = () => import('@/components/contest/countdown-card')
 import status2text from "@/util/status-code-to-str";
 import status2variant from "@/util/status-code-to-variant-str";
 
