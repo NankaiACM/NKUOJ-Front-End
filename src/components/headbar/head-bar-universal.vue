@@ -23,7 +23,6 @@
                 <em>{{$store.getters.getUserData.nickname}}</em>
               </template>
               <b-dropdown-item @click="$router.push('/profile')"><b-icon icon="person" class="mr-1"></b-icon>用户中心</b-dropdown-item>
-              <b-dropdown-item @click="showDrawStick"><b-icon icon="dice5" class="mr-1"></b-icon>每日签到</b-dropdown-item>
               <b-dropdown-item @click="enableClientStrictModeAndRedirect"><b-icon icon="shield-lock" class="mr-1"></b-icon>进入考试</b-dropdown-item>
               <b-dropdown-item @click="$router.push('/admin/home')" v-if="$store.getters.isAdministrator"><b-icon icon="gear" class="mr-1"></b-icon>管理面板</b-dropdown-item>
               <b-dropdown-item @click="confirmLogout"><b-icon icon="person-x" class="mr-1"></b-icon>退出登录</b-dropdown-item>
@@ -32,20 +31,13 @@
         </b-collapse>
       </b-navbar>
     </div>
-
-    <fortune-stick-modal ref="draw-stick-modal"></fortune-stick-modal>
   </div>
 </template>
 
 <script>
-import FortuneStickModal from "@/components/others/fortune-stick-modal";
 export default {
   name: 'head-bar-universal',
-  components: {FortuneStickModal},
   methods: {
-    showDrawStick: function () {
-      this.$refs['draw-stick-modal'].show()
-    },
     confirmLogout: function () {
       this.$bvModal.msgBoxConfirm("真的要退出登录吗？", {title: '提示', centered: true, okTitle: '退出登录', cancelTitle: '取消'}).then(value => {
         if (value) {
