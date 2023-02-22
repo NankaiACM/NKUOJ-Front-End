@@ -9,7 +9,7 @@
     <b-card class="p-3">
       <div v-html="markdownView" v-if="type === 'md'"></div>
 <!--      <vue-pdf-embed :source="`data:application/pdf;base64,${content}`" v-else-if="type === 'pdf'"/>-->
-      对不起，PDF显示功能暂时被禁用。
+      <div v-else-if="type === 'pdf'">对不起，PDF显示功能暂时被禁用。</div>
     </b-card>
   </b-skeleton-wrapper>
 </template>
