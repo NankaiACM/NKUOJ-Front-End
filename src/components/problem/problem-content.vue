@@ -8,8 +8,8 @@
     </template>
     <b-card class="p-3">
       <div v-html="markdownView" v-if="type === 'md'"></div>
-<!--      <vue-pdf-embed :source="`data:application/pdf;base64,${content}`" v-else-if="type === 'pdf'"/>-->
-      <div v-else-if="type === 'pdf'">对不起，PDF显示功能暂时被禁用。</div>
+      <vue-pdf-embed :source="`data:application/pdf;base64,${content}`" v-else-if="type === 'pdf'"/>
+<!--      <div v-else-if="type === 'pdf'">对不起，PDF显示功能暂时被禁用。</div>-->
     </b-card>
   </b-skeleton-wrapper>
 </template>
@@ -19,7 +19,7 @@ import markdownIt from 'markdown-it'
 import markdownItMathjax from 'markdown-it-mathjax'
 import markdownItLatex from 'markdown-it-latex'
 import 'markdown-it-latex/dist/index.css'
-// import VuePdfEmbed from 'vue-pdf-embed/dist/vue2-pdf-embed'
+import VuePdfEmbed from 'vue-pdf-embed/dist/vue2-pdf-embed'
 
 const markdownItObject = markdownIt({
   html: true,
@@ -34,7 +34,7 @@ window.markdownit = markdownItObject
 export default {
   name: "problem-content",
   components: {
-    // VuePdfEmbed: VuePdfEmbed
+    VuePdfEmbed: VuePdfEmbed
   },
   props: {
     content: String,
