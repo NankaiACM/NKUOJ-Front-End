@@ -29,7 +29,7 @@
         <span v-b-popover.hover.bottom="problemsInfos[data.field.key]"><b-link class="text-decoration-none text-muted" :href="`/problem/${problems[data.field.key]}`">{{ data.label }}</b-link></span>
       </template>
       <template #cell(uid)="data">
-        <small v-b-popover.hover.bottom="data.value.nickname" :class="data.value.uid === $store.getters.getUID ? 'text-info' : ''">{{`#${uid2Str(data.value.uid)}`}}</small>
+        <small v-b-popover.hover.bottom="data.value.nickname" :class="data.value.uid === $store.getters.getUID ? 'font-weight-bold' : ''">{{`#${uid2Str(data.value.uid)}`}}</small>
       </template>
       <template #cell(username)="data">
         <div class="text-truncate"><small :class="data.value.uid === $store.getters.getUID ? 'font-weight-bold' : ''">{{data.value.nickname}}</small></div>
@@ -93,7 +93,8 @@ export default {
           if (this.limit && i >= this.limit)
             break
           let row = {
-            user: {uid: obj.uid, nickname: obj.nickname},
+            uid: {uid: obj.uid, nickname: obj.nickname},
+            username: {uid: obj.uid, nickname: obj.nickname},
             ranking: i + 1,
             score: obj.totScore,
           }
