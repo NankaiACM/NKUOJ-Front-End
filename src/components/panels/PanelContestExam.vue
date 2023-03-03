@@ -54,17 +54,30 @@ export default {
   },
   methods: {
     getLocaleDate: function (string) {
-      return dateToStr(string)
+      return dateToStr(string);
     }
   },
   mounted() {
+    let loadingIdentifier = 2;
+    const onLoaded = () => {
+      loadingIdentifier -= 1;
+      if (loadingIdentifier === 0)
+        this.loading = false;
+    };
     axios.get(`/api/exam/open`).then(res => {
-      this.exams = res.data
-      this.loading = false
+      this.exams = res.data;
+      onLoaded();
     }, e => {
-      this.statusCode = e.status
-      this.loading = false
-    })
+      this.statusCode = e.status;
+      onLoaded();
+    });
+    axios.get(`/api/contest/open`).then(res => {
+      this.contests = res.data;
+      onLoaded();
+    }, e => {
+      this.statusCode = e.status;
+      onLoaded();
+    });
   }
 }
 </script>
