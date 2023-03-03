@@ -140,7 +140,7 @@
 
 <script>
 import { useUserDataStore } from '@/stores/user-data'
-import IconLightBulb from "@/components/icons/IconLightBulb.vue";
+import IconLightBulb from "@/components/icons/IconLightBulbSmall.vue";
 import ModalLogin from "@/components/modal/ModalLogin.vue";
 import axios from "axios";
 import ModalSignup from "@/components/modal/ModalSignup.vue";

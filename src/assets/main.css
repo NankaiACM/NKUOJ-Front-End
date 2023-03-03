@@ -77,3 +77,12 @@
 .list-group-item-transparent {
   background: transparent;
 }
+.clickable-card {
+  height: 100px;
+  background-color: #f8f9fa;
+  transition: box-shadow 0.3s, background-color 0.3s;
+}
+.clickable-card:hover {
+  background-color: #eff0f1;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .05) !important;
+}
