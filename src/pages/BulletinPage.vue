@@ -14,7 +14,7 @@
             <h5 class="card-title"><span class="badge rounded-pill text-bg-secondary me-2" v-if="announcement.top">置顶</span>{{announcement.title}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{getLocaleDate(announcement.time)}}</h6>
           </div>
-          <div class="card-footer text-muted bg-transparent">
+          <div class="card-footer text-muted bg-transparent border-top-0">
             <a :href="`/announcement/${announcement.id}`" class="card-link text-decoration-none text-purple">查看详情</a>
           </div>
         </div>
