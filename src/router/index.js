@@ -17,6 +17,10 @@ const router = createRouter({
         {
           path: '/problem-list',
           component: () => import('../pages/ProblemListPage.vue')
+        },
+        {
+          path: '/submissions',
+          component: () => import('../pages/SiteSubmissionPage.vue')
         }
       ]
     },

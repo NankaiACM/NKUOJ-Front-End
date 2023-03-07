@@ -1,10 +1,19 @@
 <template>
 <div class="container">
-  <div class="d-flex justify-content-center align-items-center mb-3">
+  <div class="d-flex justify-content-start align-items-center ms-3 mb-3 me-3">
     <IconJournalCode class="text-purple me-2"/>
     <span class="text-purple page-title">公开题库</span>
   </div>
-  <div class="list-group">
+  <p class="text-purple ms-3">
+    您可以在此挑选题目练习。此处题目不会计入课程成绩。
+  </p>
+  <div class="list-group" v-if="loading">
+    <div class="list-group-item list-group-item-action placeholder-glow" v-for="i in 20" :key="i">
+      <h5 class="mb-1 placeholder col-4"></h5>
+      <p><small class="placeholder col-3"></small></p>
+    </div>
+  </div>
+  <div class="list-group" v-else>
     <router-link :to="{path:'/problem/' + problem.pid}" class="list-group-item list-group-item-action"
                  v-for="problem in problemList" v-bind:key="problem.pid">
       <div class="d-flex w-100 justify-content-between">
@@ -35,6 +44,7 @@ export default {
     return {
       problemList: [],
       totalRows: 0,
+      loading: true,
     }
   },
   mounted() {
@@ -55,14 +65,16 @@ export default {
   methods: {
     loadProblemsTotalData: function () {
       axios.get(`/api/problems/global/total`).then(res => {
-          this.totalRows = res.data
+          this.totalRows = res.data;
         });
     },
     loadDataOfPage: function (pageNumber) {
+      this.loading = true;
       this.currentPage = pageNumber;
       axios.get(`/api/problems/global?page=${pageNumber}&item=20`).then(res => {
           this.problemList = res.data;
-        });
+          this.loading = false;
+      });
     }
   }
 }

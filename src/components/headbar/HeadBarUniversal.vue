@@ -23,10 +23,10 @@
           {{ userDataStore.nickname }}
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">用户中心</a></li>
-          <li><a class="dropdown-item" href="#">进入考试</a></li>
-          <li><a class="dropdown-item" href="#">管理面板</a></li>
-          <li><a class="dropdown-item" href="#">退出登录</a></li>
+          <li><a class="dropdown-item" href="#" @click="navigateTo('/profile')">用户中心</a></li>
+          <li><a class="dropdown-item" href="#" @click=";">进入考试</a></li>
+          <li><a class="dropdown-item" href="#" @click=";">管理面板</a></li>
+          <li><a class="dropdown-item" href="#" @click="navigateTo('/logout')">退出登录</a></li>
         </ul>
       </div>
       <div class="nav-item dropstart d-block d-sm-none">
@@ -34,17 +34,17 @@
           菜单
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">主页</a></li>
-          <li><a class="dropdown-item" href="#">题库</a></li>
-          <li><a class="dropdown-item" href="#">记录</a></li>
-          <li><a class="dropdown-item" href="#">公告</a></li>
+          <li><a class="dropdown-item" href="#" @click="navigateTo('/home')">主页</a></li>
+          <li><a class="dropdown-item" href="#" @click="navigateTo('/problem-list')">题库</a></li>
+          <li><a class="dropdown-item" href="#" @click="navigateTo('/submissions')">记录</a></li>
+          <li><a class="dropdown-item" href="#" @click="navigateTo('/bulletin')">公告</a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li><a class="dropdown-item" href="#">用户中心</a></li>
-          <li><a class="dropdown-item" href="#">进入考试</a></li>
-          <li><a class="dropdown-item" href="#">管理面板</a></li>
-          <li><a class="dropdown-item" href="#">退出登录</a></li>
+          <li><a class="dropdown-item" href="#" @click="navigateTo('/profile')">用户中心</a></li>
+          <li><a class="dropdown-item" href="#" @click=";">进入考试</a></li>
+          <li><a class="dropdown-item" href="#" @click=";">管理面板</a></li>
+          <li><a class="dropdown-item" href="#" @click="navigateTo('/logout')">退出登录</a></li>
         </ul>
       </div>
     </div>
@@ -60,7 +60,6 @@ import IconJournalCode from "@/components/icons/IconJournalCode.vue";
 import IconMegaphone from "@/components/icons/IconMegaphone.vue";
 import IconClipboardCheck from "@/components/icons/IconClipboardCheck.vue";
 import router from "@/router";
-
 export default {
   name: 'HeadBarUniversal',
   components: {IconClipboardCheck, IconMegaphone, IconJournalCode, IconHouse},
@@ -73,20 +72,20 @@ export default {
   },
   methods: {
     confirmLogout: function () {
-      this.$bvModal.msgBoxConfirm("真的要退出登录吗？", {
-        title: '提示',
-        centered: true,
-        okTitle: '退出登录',
-        cancelTitle: '取消'
-      }).then(value => {
-        if (value) {
-          window.location.push('/logout')
-        }
-      })
+      // this.$bvModal.msgBoxConfirm("真的要退出登录吗？", {
+      //   title: '提示',
+      //   centered: true,
+      //   okTitle: '退出登录',
+      //   cancelTitle: '取消'
+      // }).then(value => {
+      //   if (value) {
+      //     window.location.push('/logout');
+      //   }
+      // });
     },
     enableClientStrictModeAndRedirect: function () {
-      this.strictModeStore.setClientStrictMode(true)
-      window.location.push('/strict/home')
+      this.strictModeStore.setClientStrictMode(true);
+      window.location.push('/strict/home');
     },
     navigateTo: function (path) {
       router.push(path);
