@@ -14,7 +14,8 @@
         <thead>
         <tr>
           <th scope="col" class=" text-center text-purple">记录</th>
-          <th scope="col" class="text-center">用户</th>
+          <th scope="col" class="text-center text-muted">UID</th>
+          <th scope="col" class="text-center text-muted">用户</th>
           <th scope="col" class="text-center text-purple">题目</th>
           <th scope="col" class="text-center">状态</th>
         </tr>
@@ -23,6 +24,7 @@
         <tr v-for="i in 50" :key="i">
           <th scope="row" class="text-center placeholder-glow"><span class="placeholder col-3"></span></th>
           <td class="text-center col-3"><span class="placeholder col-5"></span></td>
+          <td class="text-center col-3"><span class="placeholder col-2"></span></td>
           <td class="text-center col-3"><span class="placeholder col-5"></span></td>
           <td class="text-center col-3"><span class="placeholder col-4"></span></td>
         </tr>
@@ -34,7 +36,8 @@
         <thead>
         <tr>
           <th scope="col" class=" text-center text-purple">记录</th>
-          <th scope="col" class="text-center">用户</th>
+          <th scope="col" class="text-center text-muted">UID</th>
+          <th scope="col" class="text-center text-muted">用户</th>
           <th scope="col" class="text-center text-purple">题目</th>
           <th scope="col" class="text-center">状态</th>
         </tr>
@@ -42,7 +45,8 @@
         <tbody>
         <tr v-for="item in items" :key="item.submission_id">
           <th scope="row" class="text-center"><a :href="`/submission/${item.submission_id}`" class="text-decoration-none text-purple">#{{ item.submission_id }}</a></th>
-          <td class="text-center">@{{ item.user.nickname }}</td>
+          <td class="text-center text-muted">u:{{ uidToStr(item.user.uid) }}</td>
+          <td class="text-center text-muted">@{{ item.user.nickname }}</td>
           <td class="text-center"><a :href="`/problem/${item.problem_info.pid}`" class="text-decoration-none text-purple">{{item.problem_info.name}}</a></td>
           <td :class="`text-center text-${getStatusVariant(item.status)}`">{{getStatusText(item.status)}}</td>
         </tr>
