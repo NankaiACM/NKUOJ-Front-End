@@ -20,7 +20,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="i in 30" :key="i">
+        <tr v-for="i in 50" :key="i">
           <th scope="row" class="text-center placeholder-glow"><span class="placeholder col-3"></span></th>
           <td class="text-center col-3"><span class="placeholder col-5"></span></td>
           <td class="text-center col-3"><span class="placeholder col-5"></span></td>
@@ -50,7 +50,7 @@
       </table>
     </div>
     <div class="m-4 d-flex justify-content-center">
-      <Pagination v-model="currentPage" :per-page="30" :total-rows="totalRows" v-if="totalRows > 20"
+      <Pagination v-model="currentPage" :per-page="50" :total-rows="totalRows" v-if="totalRows > 20"
                   @update:modelValue="changePage"></Pagination>
     </div>
   <ModalFilter ref="filter_modal" v-model:uid="filters.uid" v-model:pid="filters.pid" v-model:nickname="filters.nickname" @change="updateFilters" :self_uid="userDataStore.uid"/>
@@ -117,7 +117,7 @@ export default {
     },
     loadStatusData: function () {
       this.isLoading = true
-      axios.get(`/api/solutions?page=${this.currentPage}&item=30${this.filtersToString(true)}`, ).then(res => {
+      axios.get(`/api/solutions?page=${this.currentPage}&item=50${this.filtersToString(true)}`, ).then(res => {
         this.items = [];
         for(const item of res.data) {
           this.items.push({ submission_id: item.sid, problem_info: {pid: item.pid, name: item.name},
