@@ -106,7 +106,7 @@
             <ul>
               <li><a class="text-decoration-none text-light" href="https://www.nankai.edu.cn/">南开大学</a></li>
               <li><a class="text-decoration-none text-light" href="https://cc.nankai.edu.cn/">计算机学院</a></li>
-              <li><a>算法协会</a></li>
+              <li><a class="text-decoration-none text-light" href="/association">算法协会</a></li>
             </ul>
           </div>
           <div class="col-md-3">
