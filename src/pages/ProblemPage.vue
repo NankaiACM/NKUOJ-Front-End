@@ -8,7 +8,7 @@
     </p>
     <div class="row">
       <div class="col-md-8 col-12 order-last order-md-first">
-        <CardProblemContent :loading="loading" ref="problem_content"/>
+        <CardProblemContent :loading="loading" ref="problem_content" :pid="$route.params.id"/>
         <ButtonSubmit class="mb-2 d-md-none d-grid" :pid="$route.params.id"/>
       </div>
       <div class="col-md-4 col-12 order-first order-md-last">

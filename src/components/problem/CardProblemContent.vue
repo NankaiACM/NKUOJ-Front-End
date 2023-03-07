@@ -1,6 +1,11 @@
 <template>
-<div class="card rounded-4 bg-light border-0 p-4 mb-2">
+<div class="card rounded-4 bg-light border-0 p-4 mb-2 h-100">
   <div v-html="markdownView" v-if="type === 'md'"></div>
+  <div v-else-if="type === 'pdf'" class="d-flex flex-column justify-content-center align-items-center h-100">
+    <IconPDFLarge class="text-purple mb-3"/>
+    <h5 class="text-purple mb-3">PDF 题面，请下载查看</h5>
+    <a class="btn btn-outline-purple" :download="`problem-${this.pid}.pdf`" :href="`data:application/pdf;base64,${this.content}`">下载</a>
+  </div>
 </div>
 </template>
 
@@ -9,11 +14,14 @@ import markdownIt from 'markdown-it';
 import markdownItMathjax from 'markdown-it-mathjax';
 import markdownItLatex from 'markdown-it-latex';
 import 'markdown-it-latex/dist/index.css';
+import IconPDFLarge from "@/components/icons/IconPDFLarge.vue";
 
 export default {
   name: "CardProblemContent",
+  components: {IconPDFLarge},
   props: {
     loading: Boolean,
+    pid: Number
   },
   data: function () {
     return {
@@ -43,7 +51,7 @@ export default {
     load: function (content, type) {
       this.type = type;
       if (type === 'pdf') {
-        // this.loadPDFView()
+        this.content = content;
       } else if (type === 'md') {
         this.loadMarkdownView(content);
       }
