@@ -1,6 +1,6 @@
 <template>
   <div v-if="assignments && assignments.length > 0">
-    <h5 class="ms-3 d-inline-flex align-items-center justify-content-between">
+    <h5 class="ms-3 d-inline-flex align-items-center">
       <IconPencilSquare/>
       <span class="ms-2 me-1">我的作业</span>
       <IconChevronDoubleRightSmall/>

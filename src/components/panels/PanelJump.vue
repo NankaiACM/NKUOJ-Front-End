@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h5 class="ms-3 d-inline-flex align-items-center justify-content-between">
+    <h5 class="ms-3 d-inline-flex align-items-center">
       <IconJump/>
       <span class="ms-2 me-1">跳转题目</span>
       <IconChevronDoubleRightSmall/>

@@ -1,11 +1,10 @@
 <template>
-<div v-if="contests && exams && contests.length + exams.length > 0">
-  <h5 class="ms-3 d-inline-flex align-items-center justify-content-between">
+<div>
+  <h5 class="ms-3 d-inline-flex align-items-center">
     <IconTrophy/>
     <span class="ms-2 me-1">竞赛考试</span>
     <IconChevronDoubleRightSmall/>
   </h5>
-
   <div class="row row-cols-lg-2">
     <div class="col-lg-6 col-12" v-for="exam in exams" :key="exam.id">
       <a
@@ -32,6 +31,15 @@
       </a>
     </div>
   </div>
+  <div class="row row-cols-lg-2">
+    <div class="col-lg-6 col-12" v-if="!loading">
+      <a class="card clickable-card border-0 m-2 rounded-4 text-muted text-decoration-none" href="#" @click="showAddModal">
+          <span class="d-inline-flex justify-content-center h-100 w-100 align-items-center h6"><IconJournalPlus
+            class="me-2"/>报名竞赛考试</span>
+      </a>
+    </div>
+  </div>
+  <ModalAddContestExam ref="add_contest_exam_modal"/>
 </div>
 </template>
 
@@ -40,10 +48,12 @@ import IconChevronDoubleRightSmall from "@/components/icons/IconChevronDoubleRig
 import IconTrophy from "@/components/icons/IconTrophy.vue";
 import axios from "axios";
 import dateToStr from "@/util/date-to-str";
+import IconJournalPlus from "@/components/icons/IconJournalPlus.vue";
+import ModalAddContestExam from "@/components/modal/ModalAddContestExam.vue";
 
 export default {
   name: "PanelContestExam",
-  components: {IconTrophy, IconChevronDoubleRightSmall},
+  components: {ModalAddContestExam, IconJournalPlus, IconTrophy, IconChevronDoubleRightSmall},
   data: function () {
     return {
       exams: [],
@@ -55,6 +65,9 @@ export default {
   methods: {
     getLocaleDate: function (string) {
       return dateToStr(string);
+    },
+    showAddModal: function () {
+      this.$refs.add_contest_exam_modal.show();
     }
   },
   mounted() {
