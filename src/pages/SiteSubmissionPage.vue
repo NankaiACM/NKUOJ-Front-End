@@ -5,6 +5,7 @@
       <span class="text-purple page-title">评测记录</span>
     </div>
     <p class="text-purple ms-3">
+      您可以点击记录ID或题目名跳转。
       <a @click="showFilterModal" class="text-decoration-none text-purple" href="#"><IconFunnelFillSmall v-if="hasFilters"/><IconFunnelSmall v-else/>筛选</a> |
       <a @click="showJumpModal" class="text-decoration-none text-purple" href="#"><IconReplySmall/>跳转</a> |
       <a @click="reloadStatusTable" class="text-decoration-none text-purple" href="#"><IconArrowClockwiseSmall/>刷新</a>

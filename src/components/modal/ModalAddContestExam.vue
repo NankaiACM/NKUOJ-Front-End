@@ -1,5 +1,5 @@
 <template>
-  <ModalBase v-model="internalShow" title="加入竞赛考试"
+  <ModalBase v-model="internalShow" title="报名竞赛考试"
              :ok-button="true" ok-class="btn-outline-purple" ok-text="关闭"
              :cancel-button="false" @ok="dismiss()" @close="dismiss()" @cancel="dismiss()">
     <div class="container" v-if="!error">
