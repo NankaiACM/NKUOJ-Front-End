@@ -24,8 +24,8 @@
         <p><span class="h6">时间：</span>{{ getLocaleDate(data.when) }}</p>
         <p><span class="h6">公开：</span>{{ data.share ? '是' : '否' }}</p>
         <p><span class="h6">语言：</span>{{ getLangText(data.langId) }}</p>
-        <p><span class="h6">用时：</span>{{ data.runTime }}</p>
-        <p><span class="h6">内存：</span>{{ data.runMemory }}</p>
+        <p><span class="h6">用时：</span>{{ data.runTime }} ms</p>
+        <p><span class="h6">内存：</span>{{ data.runMemory }} KiB</p>
         <p v-if="data.compileInfo"><span class="h6">编译：</span><a @click=";" href="#" class="text-purple text-decoration-none">查看编译信息</a></p>
         <p><span class="h6">判定：</span><span :class="`text-${getStatusVariant(data.statusId)}`">{{getStatusText(data.statusId)}}</span></p>
         <p v-if="data.score !== null"><span class="h6">分数：</span><span :class="`ml-4 text-${getVariantForScore(data.score)}`">{{data.score}}分</span></p>

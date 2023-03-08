@@ -33,6 +33,10 @@ const router = createRouter({
         {
           path: '/submission/:id',
           component: () => import('../pages/SubmissionPage.vue')
+        },
+        {
+          path: '/announcement/:id',
+          component: () => import('../pages/BulletinContentPage.vue')
         }
       ]
     },
