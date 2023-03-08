@@ -13,7 +13,7 @@
          v-for="announcement in announcements" v-bind:key="announcement.id" v-else>{{announcement.title}}
       </a>
       <a class="list-group-item list-group-item-action list-group-item-transparent text-muted"
-         href="/announcements">查看全部公告<IconChevronDoubleRightSmall/></a>
+         href="/bulletin">查看全部公告<IconChevronDoubleRightSmall/></a>
     </div>
   </div>
 </template>
