@@ -26,12 +26,13 @@
         <p><span class="h6">语言：</span>{{ getLangText(data.langId) }}</p>
         <p><span class="h6">用时：</span>{{ data.runTime }} ms</p>
         <p><span class="h6">内存：</span>{{ data.runMemory }} KiB</p>
-        <p v-if="data.compileInfo"><span class="h6">编译：</span><a @click=";" href="#" class="text-purple text-decoration-none">查看编译信息</a></p>
+        <p v-if="data.compileInfo"><span class="h6">编译：</span><a @click="showCompilationInfo()" href="#" class="text-purple text-decoration-none">查看编译信息</a></p>
         <p><span class="h6">判定：</span><span :class="`text-${getStatusVariant(data.statusId)}`">{{getStatusText(data.statusId)}}</span></p>
         <p v-if="data.score !== null"><span class="h6">分数：</span><span :class="`ml-4 text-${getVariantForScore(data.score)}`">{{data.score}}分</span></p>
       </div>
     </div>
   </div>
+  <ModalCompilationOutput ref="modal_compilation_output"/>
 </div>
 </template>
 
@@ -47,10 +48,12 @@ import IconBoxArrowInUpRightSmall from "@/components/icons/IconBoxArrowInUpRight
 import uidToStr from "@/util/uid-to-str";
 import CardTestCase from "@/components/submission/CardTestCase.vue";
 import CardCode from "@/components/submission/CardCode.vue";
+import ModalCompilationOutput from "@/components/modal/ModalCompilationOutput.vue";
 
 export default {
   name: "SubmissionPage",
   components: {
+    ModalCompilationOutput,
     CardCode,
     CardTestCase, IconBoxArrowInUpRightSmall, IconChevronDoubleRightSmall, IconListColumnsReverse},
   data: function () {
@@ -103,8 +106,8 @@ export default {
       }
       return 'warning'
     },
-    viewCompilationInfo: function () {
-      this.$bvModal.show('compile-info-modal')
+    showCompilationInfo: function () {
+      this.$refs.modal_compilation_output.show(this.data.compileInfo);
     }
   },
   mounted() {
