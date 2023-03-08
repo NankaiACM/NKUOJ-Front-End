@@ -1,0 +1,134 @@
+<template>
+  <div class="container mb-2">
+    <div class="d-flex justify-content-start align-items-center ms-3 mb-3 me-3">
+      <span class="text-purple page-title">{{ assignmentData.name }}</span>
+    </div>
+    <p class="text-purple ms-3">
+      作业 | #{{ this.$route.params.id }}
+    </p>
+    <div class="row">
+      <div class="col-md-8 col-12 order-last order-md-first">
+        <div class="card rounded-4 bg-light border-0 p-4 mb-2">
+          <h5 class="d-inline-flex align-items-center mb-3">
+            <IconListOL/>
+            <span class="ms-2 me-1">作业题目</span>
+            <IconChevronDoubleRightSmall/>
+          </h5>
+          <div v-if="isProblemsLoading">
+            <p class="card-text placeholder-glow">
+              <span class="placeholder col-7 me-2"></span>
+              <span class="placeholder col-4 me-2"></span>
+              <span class="placeholder col-4 me-2"></span>
+              <span class="placeholder col-6 me-2"></span>
+              <span class="placeholder col-8 me-2"></span>
+              <span class="placeholder col-5 me-2"></span>
+              <span class="placeholder col-12 me-2"></span>
+              <span class="placeholder col-4 me-2"></span>
+            </p>
+          </div>
+          <h6 v-else-if="problemsData.length === 0" class="text-center m-4">
+            本次作业暂无题目。
+          </h6>
+          <div class="list-group" v-else>
+            <div class="list-group-item list-group-item-action border-0 flex-column align-items-start"
+                 v-for="problem in problemsData" v-bind:key="problem.pid" @click="$router.push('/problem/' + problem.pid)">
+            <span class="d-flex w-100 justify-content-between flex-column">
+              <span class="h5 mb-1">{{ problem.name }}</span>
+            </span>
+              <small class="text-muted" v-if="problem.status === 0">未提交</small>
+              <small class="text-warning" v-else-if="problem.status === 1">未通过</small>
+              <small class="text-success" v-else>已通过</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12 order-first order-md-last">
+        <div class="card rounded-4 bg-light border-0 p-4 mb-2">
+          <h5 class="d-inline-flex align-items-center mb-3">
+            <IconListColumnsReverse/>
+            <span class="ms-2 me-1">作业信息</span>
+            <IconChevronDoubleRightSmall/>
+          </h5>
+          <div v-if="isDetailsLoading">
+            <p class="card-text placeholder-glow">
+              <span class="placeholder col-4 me-2"></span>
+              <span class="placeholder col-4 me-2"></span>
+              <span class="placeholder col-5 me-2"></span>
+              <span class="placeholder col-4 me-2"></span>
+            </p>
+          </div>
+          <div v-else>
+            <p><span class="h6" v-if="assignmentData.courseName">课程：</span>{{ assignmentData.courseName }}</p>
+            <p><span class="h6">介绍：</span>{{ assignmentData.description }}</p>
+            <p><span class="h6">时间：</span>{{ getLocaleDate(assignmentData.begin) }} 开始，至 {{ getLocaleDate(assignmentData.end) }} 截止</p>
+            <p><span class="h6">状态：</span><span v-if="assignmentData.open" class="text-success">正在进行</span><span v-else class="text-danger">无法提交</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import statusCodeToStr from "@/util/status-code-to-str";
+import statusCodeToVariantStr from "@/util/status-code-to-variant-str";
+import dateToStr from "@/util/date-to-str";
+import {useUserDataStore} from "@/stores/user-data";
+import IconChevronDoubleRightSmall from "@/components/icons/IconChevronDoubleRightSmall.vue";
+import IconListColumnsReverse from "@/components/icons/IconListColumnsReverse.vue";
+import IconListOL from "@/components/icons/IconListOL.vue";
+import IconClipboardCheck from "@/components/icons/IconClipboardCheck.vue";
+
+export default {
+  name: "AssignmentPage",
+  components: {
+    IconClipboardCheck, IconListOL, IconListColumnsReverse, IconChevronDoubleRightSmall},
+  data: function () {
+    return {
+      assignmentData: {},
+      problemsData: [],
+      isDetailsLoading: true,
+      isProblemsLoading: true,
+    }
+  },
+  setup() {
+    const userDataStore = useUserDataStore();
+    return {
+      userDataStore
+    }
+  },
+  methods: {
+    loadAssignmentData: async function () {
+      await axios.get(`/api/assignment/id/${this.$route.params.id}`).then(res => {
+        this.assignmentData = res.data;
+        this.isDetailsLoading = false;
+      })
+      await axios.get(`/api/problem/problemset/${this.$route.params.id}`).then(res => {
+        this.problemsData = res.data;
+        this.isProblemsLoading = false;
+      })
+    },
+    getLocaleDate: function (string) {
+      return dateToStr(string);
+    },
+    getStatusText: function (status) {
+      return statusCodeToStr(status);
+    },
+    getStatusVariant: function (status) {
+      return statusCodeToVariantStr(status);
+    },
+    loadData: async function () {
+      await this.loadAssignmentData();
+      await this.loadScoreData();
+    }
+  },
+  mounted() {
+    this.loadData();
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
