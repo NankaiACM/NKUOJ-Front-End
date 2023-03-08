@@ -8,7 +8,7 @@
     </p>
     <div class="row">
       <div class="col-md-8 col-12 order-last order-md-first">
-        <div class="card rounded-4 bg-light border-0 p-4 mb-2">
+        <div class="card card-assignment-min-height  rounded-4 bg-light border-0 p-4 mb-2">
           <h5 class="d-inline-flex align-items-center mb-3">
             <IconListOL/>
             <span class="ms-2 me-1">作业题目</span>
@@ -130,5 +130,7 @@ export default {
 </script>
 
 <style scoped>
-
+.card-assignment-min-height {
+  min-height: 20rem;
+}
 </style>

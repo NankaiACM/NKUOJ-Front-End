@@ -42,21 +42,21 @@
               <p class="mb-1 text-muted">
                 {{getLocaleDate(activity.object.begin)}} 发布，{{getLocaleDate(activity.object.end)}} 截止
               </p>
-              <a class="text-decoration-none text-muted stretched-link pe-auto" href="#" @click="$router.push('/assignment/' + activity.object.id)">查看作业</a>
+              <a class="text-decoration-none text-muted stretched-link pe-auto" :href="'/assignment/' + activity.object.id">查看作业</a>
             </div>
             <div class="card rounded-3 p-3 border-0 flex-column align-items-start" v-else-if="activity.type === 2">
               <h5 class="mb-1"><span class="badge bg-danger text-light me-2">考试</span>{{activity.object.name}}</h5>
               <p class="mb-1 text-muted">
                 {{getLocaleDate(activity.object.begin)}} 发布，{{getLocaleDate(activity.object.end)}} 截止
               </p>
-              <a class="text-decoration-none text-muted stretched-link pe-auto" href="#" @click="$router.push('/exam/' + activity.object.id)">查看考试</a>
+              <a class="text-decoration-none text-muted stretched-link pe-auto" :href="'/exam/' + activity.object.id">查看考试</a>
             </div>
             <div class="card rounded-3 p-3 border-0 flex-column align-items-start" v-else-if="activity.type === 3">
               <h5 class="mb-1"><span class="badge bg-primary text-light me-2">竞赛</span>{{activity.object.name}}</h5>
               <p class="mb-1 text-muted">
                 {{getLocaleDate(activity.object.begin)}} 发布，{{getLocaleDate(activity.object.end)}} 截止
               </p>
-              <a class="text-decoration-none text-muted stretched-link pe-auto" href="#" @click="$router.push('/contest/' + activity.object.id)">查看竞赛</a>
+              <a class="text-decoration-none text-muted stretched-link pe-auto" :href="'/contest/' + activity.object.id">查看竞赛</a>
             </div>
           </div>
         </div>
