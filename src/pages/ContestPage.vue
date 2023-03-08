@@ -50,7 +50,7 @@
           <RankingTableContest :id="this.$route.params.id" :limit="20" ref="ranking_table"/>
           <h6 class="card-subtitle mb-2 text-muted">
             <a class="text-decoration-none text-muted me-1" href="#" @click="loadRankingList()">
-              <IconArrowClockwiseSmall/>刷新</a></h6>
+              本榜单只显示前20名。<IconArrowClockwiseSmall/>刷新</a> | <a class="text-decoration-none text-muted me-1" :href="`/ranking/contest/${this.$route.params.id}`"><IconReplySmall/>完整榜单</a></h6>
         </div>
       </div>
       <div class="col-md-4 col-12 order-first order-md-last">
@@ -95,10 +95,12 @@ import IconArrowClockwiseSmall from "@/components/icons/IconArrowClockwiseSmall.
 import CardProgressBar from "@/components/wrapper/CardProgressBar.vue";
 import IconReception from "@/components/icons/IconReception.vue";
 import RankingTableContest from "@/components/ranking/RankingTableContest.vue";
+import IconReplySmall from "@/components/icons/IconReplySmall.vue";
 
 export default {
   name: "ContestPage",
   components: {
+    IconReplySmall,
     RankingTableContest,
     IconReception,
     CardProgressBar,
