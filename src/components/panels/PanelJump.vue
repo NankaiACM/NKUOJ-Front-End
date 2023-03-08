@@ -30,10 +30,10 @@ export default {
   methods: {
     jumpTo: function () {
       if (isNaN(this.pid) || this.pid === null) {
-        this.state = false
+        this.state = false;
       } else {
-        window.location.push(`/problem/${this.pid}`)
-        this.state = null
+        this.$router.push(`/problem/${this.pid}`)
+        this.state = null;
       }
     }
   }
