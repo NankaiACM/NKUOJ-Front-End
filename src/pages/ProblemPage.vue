@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-md-8 col-12 order-last order-md-first">
         <CardProblemContent :loading="loading" ref="problem_content" :pid="$route.params.id" :error="error"/>
-        <ButtonSubmit class="mb-2 d-md-none d-grid" :pid="$route.params.id"/>
+        <ButtonSubmit class="mb-2 d-md-none d-grid" :pid="$route.params.id" @submit="showSubmitModal()" @list="showMySubmissions()"/>
       </div>
       <div class="col-md-4 col-12 order-first order-md-last">
         <div class="card rounded-4 bg-light border-0 p-4 mb-2">
@@ -29,9 +29,11 @@
           <p><span class="h6">非文本比对评测：</span>{{ problemInfo.specialJudge ? '启用' : '未启用' }}</p>
         </div>
         <DropdownNavigator class="mb-2" :psid="problemInfo.psid" v-if="problemInfo.psid" :pid="$route.params.id"/>
-        <ButtonSubmit class="mb-2 d-md-grid d-none" :pid="$route.params.id"/>
+        <ButtonSubmit class="mb-2 d-md-grid d-none" :pid="$route.params.id" @submit="showSubmitModal()" @list="showMySubmissions()"/>
       </div>
     </div>
+    <ModalSubmitProblem ref="modal_submit_problem" :pid="$route.params.id"/>
+    <ModalMySubmissions ref="modal_my_submissions" :pid="$route.params.id" :uid="userDataStore.uid"/>
   </div>
 </template>
 
@@ -42,10 +44,16 @@ import ButtonSubmit from "@/components/problem/ButtonSubmit.vue";
 import IconListColumnsReverse from "@/components/icons/IconListColumnsReverse.vue";
 import IconChevronDoubleRightSmall from "@/components/icons/IconChevronDoubleRightSmall.vue";
 import DropdownNavigator from "@/components/problem/DropdownNavigator.vue";
+import ModalSubmitProblem from "@/components/modal/ModalSubmitProblem.vue";
+import ModalMySubmissions from "@/components/modal/ModalMySubmissions.vue";
+import {useUserDataStore} from "@/stores/user-data";
 
 export default {
   name: "ProblemPage",
-  components: {DropdownNavigator, IconChevronDoubleRightSmall, IconListColumnsReverse, ButtonSubmit, CardProblemContent},
+  components: {
+    ModalMySubmissions,
+    ModalSubmitProblem,
+    DropdownNavigator, IconChevronDoubleRightSmall, IconListColumnsReverse, ButtonSubmit, CardProblemContent},
   data: function () {
     return {
       problemInfo: {},
@@ -57,6 +65,12 @@ export default {
   },
   mounted() {
     this.loadProblemData()
+  },
+  setup() {
+    const userDataStore = useUserDataStore()
+    return {
+      userDataStore
+    }
   },
   methods: {
     loadProblemData: function () {
@@ -75,15 +89,10 @@ export default {
       });
     },
     showSubmitModal: function () {
-      this.$refs['submit-modal'].show()
+      this.$refs.modal_submit_problem.show();
     },
-    toSubmitStatus: function () {
-      this.$refs['status-list-modal'].show()
-    },
-    switchToProblem: function (event, pid) {
-      if (`${pid}` !== `${this.$route.params.id}`) {
-        this.$router.push('/problem/' + pid)
-      }
+    showMySubmissions: function () {
+      this.$refs.modal_my_submissions.show();
     },
     Uint8ToBase64: function (u8a) {
       const CHUNK_SZ = 0x8000;

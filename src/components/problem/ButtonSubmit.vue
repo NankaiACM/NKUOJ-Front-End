@@ -1,7 +1,7 @@
 <template>
   <div class="d-grid gap-2">
-    <button class="btn btn-outline-purple p-3 rounded-4"><span class="h5"><IconSend class="me-3"/>提  交   题   目</span></button>
-    <button class="btn btn-outline-success p-3 rounded-4"><span class="h5"><IconSendCheck class="me-3"/>提  交   记   录</span></button>
+    <button class="btn btn-outline-purple p-3 rounded-4" @click="submitClicked"><span class="h5"><IconSend class="me-3"/>提  交   题   目</span></button>
+    <button class="btn btn-outline-success p-3 rounded-4" @click="mySubmissionsClicked"><span class="h5"><IconSendCheck class="me-3"/>提  交   记   录</span></button>
   </div>
 </template>
 
@@ -16,7 +16,12 @@ export default {
     pid: Number
   },
   methods: {
-
+    submitClicked: function () {
+      this.$emit('submit');
+    },
+    mySubmissionsClicked: function () {
+      this.$emit('list');
+    }
   }
 }
 </script>

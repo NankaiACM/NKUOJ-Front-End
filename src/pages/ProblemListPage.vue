@@ -28,7 +28,7 @@
 
   <div class="d-flex justify-content-center">
     <Pagination v-model="currentPage" :per-page="20" :total-rows="totalRows" v-if="totalRows > 20"
-                class="m-4" first-number last-number @update:modelValue="loadDataOfPage"></Pagination>
+                class="m-4" @update:modelValue="loadDataOfPage"></Pagination>
   </div>
 </div>
 </template>

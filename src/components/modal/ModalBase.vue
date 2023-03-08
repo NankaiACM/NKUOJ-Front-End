@@ -1,6 +1,6 @@
 <template>
   <VueFinalModal class="d-flex justify-content-center align-items-center h-100 w-100" overlayTransition="vfm-fade" contentTransition="vfm-fade">
-    <div class="modal">
+    <div :class="`modal${large ? ' modal-lg' : ''}${small ? ' modal-sm' : ''}`">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -33,7 +33,9 @@ export default {
     cancelText: String,
     escToClose: Boolean,
     okClass: String,
-    cancelClass: String
+    cancelClass: String,
+    large: {type: Boolean, default: false},
+    small: {type: Boolean, default: false}
   },
   components: {VueFinalModal}
 }
