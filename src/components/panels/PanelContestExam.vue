@@ -17,8 +17,6 @@
         </div>
       </a>
     </div>
-  </div>
-  <div class="row row-cols-lg-2">
     <div class="col-lg-6 col-12" v-for="contest in contests" :key="contest.id">
       <a
         class="card clickable-card border-0 m-2 rounded-4 text-dark text-decoration-none p-3 d-flex flex-column justify-content-between"
@@ -30,8 +28,6 @@
         </div>
       </a>
     </div>
-  </div>
-  <div class="row row-cols-lg-2">
     <div class="col-lg-6 col-12" v-if="!loading">
       <a class="card clickable-card border-0 m-2 rounded-4 text-muted text-decoration-none" href="#" @click="showAddModal">
           <span class="d-inline-flex justify-content-center h-100 w-100 align-items-center h6"><IconJournalPlus
@@ -77,14 +73,14 @@ export default {
       if (loadingIdentifier === 0)
         this.loading = false;
     };
-    axios.get(`/api/exam/open`).then(res => {
+    axios.get(`/api/exam`).then(res => {
       this.exams = res.data;
       onLoaded();
     }, e => {
       this.statusCode = e.status;
       onLoaded();
     });
-    axios.get(`/api/contest/open`).then(res => {
+    axios.get(`/api/contest`).then(res => {
       this.contests = res.data;
       onLoaded();
     }, e => {
