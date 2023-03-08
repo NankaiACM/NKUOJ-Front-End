@@ -53,6 +53,14 @@ const router = createRouter({
         {
           path: '/assignment/:id',
           component: () => import('../pages/AssignmentPage.vue')
+        },
+        {
+          path: '/ranking/contest/:id',
+          component: () => import('../pages/ContestRankingPage.vue')
+        },
+        {
+          path: '/ranking/exam/:id',
+          component: () => import('../pages/ExamRankingPage.vue')
         }
       ]
     },

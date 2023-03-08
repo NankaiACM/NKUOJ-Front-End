@@ -47,27 +47,10 @@
             <span class="ms-2 me-1">竞赛榜单</span>
             <IconChevronDoubleRightSmall/>
           </h5>
-          <div class="table-responsive">
-            <table class="table">
-<!--              <thead>-->
-<!--              <tr>-->
-<!--                <th scope="col" class=" text-center text-purple">记录</th>-->
-<!--                <th scope="col" class="text-center">题目</th>-->
-<!--                <th scope="col" class="text-center">状态</th>-->
-<!--              </tr>-->
-<!--              </thead>-->
-<!--              <tbody>-->
-<!--              <tr v-for="item in mySubmissionsItems" :key="item.submission_id">-->
-<!--                <th scope="row" class="text-center"><a :href="`/submission/${item.submission_id}`" class="text-decoration-none text-purple">#{{ item.submission_id }}</a></th>-->
-<!--                <td class="text-center"><a :href="`/problem/${item.problem_info.pid}`" class="text-decoration-none text-dark">{{item.problem_info.name}}</a></td>-->
-<!--                <td :class="`text-center text-${getStatusVariant(item.status)}`">{{getStatusText(item.status)}}</td>-->
-<!--              </tr>-->
-<!--              </tbody>-->
-            </table>
-            <h6 class="card-subtitle mb-2 text-muted">
-              <a class="text-decoration-none text-muted me-1" href="#" @click="loadRankingList()">
-                <IconArrowClockwiseSmall/>刷新</a></h6>
-          </div>
+          <RankingTableContest :id="this.$route.params.id" :limit="20" ref="ranking_table"/>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <a class="text-decoration-none text-muted me-1" href="#" @click="loadRankingList()">
+              <IconArrowClockwiseSmall/>刷新</a></h6>
         </div>
       </div>
       <div class="col-md-4 col-12 order-first order-md-last">
@@ -111,10 +94,12 @@ import IconClipboardCheck from "@/components/icons/IconClipboardCheck.vue";
 import IconArrowClockwiseSmall from "@/components/icons/IconArrowClockwiseSmall.vue";
 import CardProgressBar from "@/components/wrapper/CardProgressBar.vue";
 import IconReception from "@/components/icons/IconReception.vue";
+import RankingTableContest from "@/components/ranking/RankingTableContest.vue";
 
 export default {
   name: "ContestPage",
   components: {
+    RankingTableContest,
     IconReception,
     CardProgressBar,
     IconArrowClockwiseSmall,
@@ -145,7 +130,7 @@ export default {
       })
     },
     loadRankingList: function () {
-
+      this.$refs.ranking_table.refresh();
     },
     getLocaleDate: function (string) {
       return dateToStr(string);
@@ -158,7 +143,6 @@ export default {
     },
     loadData: async function () {
       await this.loadContestData();
-      await this.loadScoreData();
     }
   },
   mounted() {
