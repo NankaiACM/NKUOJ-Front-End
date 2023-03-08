@@ -8,7 +8,7 @@
     </p>
     <div class="row">
       <div class="col-md-8 col-12 order-last order-md-first">
-        <CardProblemContent :loading="loading" ref="problem_content" :pid="$route.params.id"/>
+        <CardProblemContent :loading="loading" ref="problem_content" :pid="$route.params.id" :error="error"/>
         <ButtonSubmit class="mb-2 d-md-none d-grid" :pid="$route.params.id"/>
       </div>
       <div class="col-md-4 col-12 order-first order-md-last">
@@ -51,7 +51,8 @@ export default {
       problemInfo: {},
       loading: true,
       content: '',
-      extension: ''
+      extension: '',
+      error: false,
     }
   },
   mounted() {
@@ -59,14 +60,19 @@ export default {
   },
   methods: {
     loadProblemData: function () {
-      this.loading = true
+      this.loading = true;
+      this.error = false;
       axios.get(`/api/problem/id/${this.$route.params.id}`).then(
         res => {
           this.problemInfo = res.data;
           this.content = btoa(this.Uint8ToBase64(new Uint8Array(this.problemInfo.content.data)));
           this.loading = false;
+          this.error = false;
           this.$refs.problem_content.load(this.content, this.problemInfo.extension);
-        });
+        }).catch(() => {
+          this.error = true;
+          this.loading = false;
+      });
     },
     showSubmitModal: function () {
       this.$refs['submit-modal'].show()
