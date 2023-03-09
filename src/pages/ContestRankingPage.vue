@@ -17,10 +17,12 @@
 
 <script>
 import RankingTableContest from "@/components/ranking/RankingTableContest.vue";
+import IconArrowClockwiseSmall from "@/components/icons/IconArrowClockwiseSmall.vue";
+import IconReplySmall from "@/components/icons/IconReplySmall.vue";
 
 export default {
   name: "ContestRankingPage",
-  components: {RankingTableContest},
+  components: {IconReplySmall, IconArrowClockwiseSmall, RankingTableContest},
   methods: {
     refresh : function () {
       this.$refs.ranking_table.refresh();
