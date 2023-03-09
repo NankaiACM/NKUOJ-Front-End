@@ -20,7 +20,7 @@
         <PanelStrictContest class="mb-2"/>
       </div>
       <div class="col-md-4 col-12 order-first order-md-last">
-        <div class="card border-0 bg-light p-4 rounded-4">
+        <div class="card border-0 bg-light p-4 rounded-4 mb-2">
           <h5 class="d-inline-flex align-items-center mb-3">
             <IconPerson/>
             <span class="ms-2 me-1">个人信息</span>
