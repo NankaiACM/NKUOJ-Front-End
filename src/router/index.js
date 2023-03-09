@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import AppUniversal from "@/templates/AppUniversal.vue";
 import AppStrict from "@/templates/AppStrict.vue";
+import AppAdmin from "@/templates/AppAdmin.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -77,6 +78,49 @@ const router = createRouter({
         {
           path: '/strict/home',
           component: () => import('../pages/StrictHomePage.vue')
+        },
+        {
+          path: '/strict/profile',
+          component: () => import('../pages/ProfilePage.vue')
+        },
+        {
+          path: '/strict/problem/:id',
+          component: () => import('../pages/ProblemPage.vue')
+        },
+        {
+          path: '/strict/submission/:id',
+          component: () => import('../pages/SubmissionPage.vue')
+        },
+        {
+          path: '/strict/announcement/:id',
+          component: () => import('../pages/BulletinContentPage.vue')
+        },
+        {
+          path: '/strict/exam/:id',
+          component: () => import('../pages/ExamPage.vue')
+        },
+        {
+          path: '/strict/contest/:id',
+          component: () => import('../pages/ContestPage.vue')
+        },
+        {
+          path: '/strict/ranking/contest/:id',
+          component: () => import('../pages/ContestRankingPage.vue')
+        },
+        {
+          path: '/strict/ranking/exam/:id',
+          component: () => import('../pages/ExamRankingPage.vue')
+        }
+      ]
+    },
+    {
+      path: '/admin',
+      redirect: '/admin/home',
+      component: AppAdmin,
+      children: [
+        {
+          path: '/admin/home',
+          component: () => import('../pages/AdminHomePage.vue')
         },
       ]
     },

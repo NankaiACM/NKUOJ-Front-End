@@ -6,7 +6,7 @@
       </a>
       <div class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-sm-block h-100">
         <div class="d-inline-flex align-items-center">
-          <span class="text-purple" style="font-size: x-large;">考试模式</span>
+          <span class="text-purple" style="font-size: x-large;">管理面板</span>
         </div>
       </div>
       <div class="nav-item dropdown d-none d-sm-block">
@@ -15,8 +15,7 @@
         </a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="/profile">用户中心</a></li>
-          <li><a class="dropdown-item" href="#" @click="disableClientStrictModeAndRedirect()" v-if="userDataStore.isAdministrator || !strictModeStore.serverStrictMode">退出考试</a></li>
-          <li><a class="dropdown-item" href="/admin" v-if="userDataStore.isAdministrator">管理面板</a></li>
+          <li><a class="dropdown-item" href="/home">返回主站</a></li>
           <li><a class="dropdown-item" href="#" @click="confirmLogout()">退出登录</a></li>
         </ul>
       </div>
@@ -26,14 +25,12 @@
         </a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="/profile">用户中心</a></li>
-          <li><a class="dropdown-item" href="#" @click="disableClientStrictModeAndRedirect()" v-if="userDataStore.isAdministrator || !strictModeStore.serverStrictMode">退出考试</a></li>
-          <li><a class="dropdown-item" href="/admin" v-if="userDataStore.isAdministrator">管理面板</a></li>
+          <li><a class="dropdown-item" href="/home">返回主站</a></li>
           <li><a class="dropdown-item" href="#" @click="confirmLogout()">退出登录</a></li>
         </ul>
       </div>
     </div>
     <ModalConfirmBox ref="confirm_logout"/>
-    <ModalMsgBox ref="quit_strict_msg_modal"/>
   </nav>
 </template>
 
@@ -44,9 +41,8 @@ import {useUserDataStore} from "@/stores/user-data";
 import router from "@/router";
 import ModalConfirmBox from "@/components/modal/ModalConfirmBox.vue";
 import ModalMsgBox from "@/components/modal/ModalMsgBox.vue";
-
 export default {
-  name: 'HeadBarStrict',
+  name: 'HeadBarAdmin',
   components: {ModalMsgBox, ModalConfirmBox},
   setup() {
     const strictModeStore = useStrictModeStore()
@@ -58,14 +54,6 @@ export default {
   methods: {
     confirmLogout: function () {
       this.$refs.confirm_logout.show('提示', '真的要退出登录吗？', () => {window.location.push('/logout');});
-    },
-    disableClientStrictModeAndRedirect: function () {
-      if (this.userDataStore.isAdministrator || !this.strictModeStore.serverStrictMode) {
-        this.strictModeStore.setClientStrictMode(false);
-        router.push('/home');
-      } else {
-        this.$refs.quit_strict_msg_modal.show('操作失败', '没有权限');
-      }
     },
     navigateTo: function (path) {
       router.push(path);
