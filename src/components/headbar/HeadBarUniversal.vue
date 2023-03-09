@@ -74,11 +74,11 @@ export default {
   },
   methods: {
     confirmLogout: function () {
-      this.$refs.confirm_logout.show('提示', '真的要退出登录吗？', () => {window.location.push('/logout');});
+      this.$refs.confirm_logout.show('提示', '真的要退出登录吗？', () => {router.push('/logout');});
     },
     enableClientStrictModeAndRedirect: function () {
       this.strictModeStore.setClientStrictMode(true);
-      window.location.push('/strict/home');
+      router.push('/strict/home');
     },
     navigateTo: function (path) {
       router.push(path);

@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-8 col-12 order-last order-md-first">
         <div class="card rounded-4 p-4 border-0 bg-light mb-4">
-          <div v-if="!this.strictModeStore.serverStrictMode">
+          <div v-if="this.strictModeStore.serverStrictMode">
             <h5 class="text-dark">NKU-OJ 已启用考试模式：</h5>
             <ul>
               <li>您现在已经进入考试模式，请遵守考试或竞赛的规则与秩序；</li>

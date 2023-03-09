@@ -15,7 +15,7 @@
         </a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="/profile">用户中心</a></li>
-          <li><a class="dropdown-item" href="#" @click="disableClientStrictModeAndRedirect()" v-if="userDataStore.isAdministrator || !strictModeStore.serverStrictMode">退出考试</a></li>
+          <li><a class="dropdown-item" href="/home" @click="disableClientStrictModeAndRedirect()" v-if="userDataStore.isAdministrator || !strictModeStore.serverStrictMode">退出考试</a></li>
           <li><a class="dropdown-item" href="/admin" v-if="userDataStore.isAdministrator">管理面板</a></li>
           <li><a class="dropdown-item" href="#" @click="confirmLogout()">退出登录</a></li>
         </ul>
@@ -26,7 +26,7 @@
         </a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="/profile">用户中心</a></li>
-          <li><a class="dropdown-item" href="#" @click="disableClientStrictModeAndRedirect()" v-if="userDataStore.isAdministrator || !strictModeStore.serverStrictMode">退出考试</a></li>
+          <li><a class="dropdown-item" href="/home" @click="disableClientStrictModeAndRedirect()" v-if="userDataStore.isAdministrator || !strictModeStore.serverStrictMode">退出考试</a></li>
           <li><a class="dropdown-item" href="/admin" v-if="userDataStore.isAdministrator">管理面板</a></li>
           <li><a class="dropdown-item" href="#" @click="confirmLogout()">退出登录</a></li>
         </ul>
@@ -49,15 +49,15 @@ export default {
   name: 'HeadBarStrict',
   components: {ModalMsgBox, ModalConfirmBox},
   setup() {
-    const strictModeStore = useStrictModeStore()
-    const userDataStore = useUserDataStore()
+    const strictModeStore = useStrictModeStore();
+    const userDataStore = useUserDataStore();
     return {
       userDataStore, strictModeStore
     }
   },
   methods: {
     confirmLogout: function () {
-      this.$refs.confirm_logout.show('提示', '真的要退出登录吗？', () => {window.location.push('/logout');});
+      this.$refs.confirm_logout.show('提示', '真的要退出登录吗？', () => {router.push('/logout');});
     },
     disableClientStrictModeAndRedirect: function () {
       if (this.userDataStore.isAdministrator || !this.strictModeStore.serverStrictMode) {

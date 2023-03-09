@@ -47,10 +47,16 @@ export default {
     },
     cancel: function () {
       this.internalShow = false;
+      if (this.fail) {
+        this.fail();
+      }
       this.$emit('cancel');
     },
     ok: function () {
       this.internalShow = false;
+      if (this.then) {
+        this.then();
+      }
       this.$emit('ok');
     },
     dismiss: function () {
