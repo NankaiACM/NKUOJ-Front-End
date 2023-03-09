@@ -74,7 +74,7 @@
           <h1 class="m-2 text-purple">在线评测平台</h1>
           <div class="mt-5">
             <h6 class="m-2 text-purple" v-if="hasRedirectPath">请您登录后继续访问：</h6>
-            <h6 class="m-2 text-purple" v-if="this.strictModeStore">考试模式已开启，您需要输入考试码进入本系统</h6>
+            <h6 class="m-2 text-purple" v-if="this.isStrictMode">考试模式已开启，您需要输入考试码进入本系统</h6>
             <div class="d-flex align-items-baseline mt-2">
               <button class="btn btn-outline-purple ms-2" @click="this.showStudentLoginModal()">
                 <IconLightBulb/>
@@ -91,7 +91,7 @@
         <h1 class="m-2 text-purple">在线评测平台</h1>
         <div class="mt-5">
           <h6 class="m-2 text-purple" v-if="hasRedirectPath">请您登录后继续访问：</h6>
-          <h6 class="m-2 text-purple" v-if="this.strictModeStore">考试模式已开启，您需要输入考试码进入本系统</h6>
+          <h6 class="m-2 text-purple" v-if="this.isStrictMode">考试模式已开启，您需要输入考试码进入本系统</h6>
           <div class="d-flex align-items-baseline mt-2">
             <button class="btn btn-outline-purple ms-2" @click="this.showStudentLoginModal()">
               <IconLightBulb/>
