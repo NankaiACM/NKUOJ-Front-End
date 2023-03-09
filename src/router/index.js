@@ -86,6 +86,11 @@ const router = createRouter({
       component: () => import('../pages/LoginPage.vue')
     },
     {
+      path: '/404',
+      name: '404',
+      component: () => import('../pages/NotFoundPage.vue')
+    },
+    {
       path: '/association',
       name: 'association',
       component: () => import('../pages/AlgoAssociationPage.vue')
