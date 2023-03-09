@@ -3,9 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AppUniversal from "@/templates/AppUniversal.vue";
 import AppStrict from "@/templates/AppStrict.vue";
 import AppAdmin from "@/templates/AppAdmin.vue";
-import axios from "axios";
 import {useUserDataStore} from "@/stores/user-data";
 import {useStrictModeStore} from "@/stores/strict-mode";
+import AppPublic from "@/templates/AppPublic.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -72,12 +72,12 @@ const router = createRouter({
         {
           path: '/ranking/contest/:id',
           component: () => import('../pages/ContestRankingPage.vue'),
-          meta: { strictRedirect: 'strictRankingContest' }
+          meta: { strictRedirect: 'strictRankingContest', publicRedirect: 'publicRankingContest' }
         },
         {
           path: '/ranking/exam/:id',
           component: () => import('../pages/ExamRankingPage.vue'),
-          meta: { strictRedirect: 'strictRankingExam' }
+          meta: { strictRedirect: 'strictRankingExam', publicRedirect: 'publicRankingExam' }
         },
         {
           path: '/',
@@ -157,6 +157,28 @@ const router = createRouter({
           meta: { isAdministrator: true }
         },
       ]
+    },{
+      path: '/public',
+      redirect: '/404',
+      component: AppPublic,
+      children: [
+        {
+          path: '/public/ranking/exam/:id',
+          name: 'publicRankingExam',
+          component: () => import('../pages/ExamRankingPage.vue'),
+          meta: { isPublic: true }
+        },
+        {
+          path: '/public/ranking/contest/:id',
+          name: 'publicRankingContest',
+          component: () => import('../pages/ContestRankingPage.vue'),
+          meta: { isPublic: true }
+        },
+        {
+          path: '/public',
+          redirect: '/404',
+        },
+      ]
     },
     {
       path: '/login',
@@ -192,15 +214,20 @@ router.beforeEach((to, from, next) => {
   const isAdminPage = to.meta.isAdministrator;
   const isStrictPage = to.meta.isStrict;
   const isNotFoundPage = to.meta.isNotFound;
+  const isPublicPage = to.meta.isPublic;
   const authNotRequired = to.meta.authNotRequired;
-  if (isNotFoundPage || authNotRequired) {
+  if (isNotFoundPage || authNotRequired || isPublicPage) {
     next();
   } else if (isLoginPage && userDataStore.valid) {
     next('/home');
   } else if (isLoginPage && !userDataStore.valid) {
     next();
   } else if (!isLoginPage && !userDataStore.valid) {
-    next({path: '/login', query: { redirect: to.fullPath }});
+    if (to.meta.publicRedirect) {
+      next({name: to.meta.publicRedirect, params: to.params});
+    } else {
+      next({path: '/login', query: { redirect: to.fullPath }});
+    }
   } else if (isAdminPage && !userDataStore.isAdministrator) {
     next('/404');
   } else if (isAdminPage && userDataStore.isAdministrator) {

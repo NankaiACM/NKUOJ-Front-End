@@ -9,9 +9,7 @@
                       @toContests="switchTo('contests')">
     </HeadBarUniversal>
     <div>
-      <div>
-        <RouterView/>
-      </div>
+      <RouterView/>
     </div>
   </div>
 </template>

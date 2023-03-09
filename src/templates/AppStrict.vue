@@ -3,9 +3,7 @@
     <HeadBarStrict class="w-100">
     </HeadBarStrict>
     <div>
-      <div>
-        <RouterView/>
-      </div>
+      <RouterView/>
     </div>
   </div>
 </template>

@@ -3,9 +3,7 @@
     <HeadBarAdmin class="w-100">
     </HeadBarAdmin>
     <div>
-      <div>
-        <RouterView/>
-      </div>
+      <RouterView/>
     </div>
   </div>
 </template>
