@@ -3,9 +3,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AppUniversal from "@/templates/AppUniversal.vue";
 import AppStrict from "@/templates/AppStrict.vue";
 import AppAdmin from "@/templates/AppAdmin.vue";
+import AppPublic from "@/templates/AppPublic.vue";
+
 import {useUserDataStore} from "@/stores/user-data";
 import {useStrictModeStore} from "@/stores/strict-mode";
-import AppPublic from "@/templates/AppPublic.vue";
+import {config} from "@/config";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -223,7 +225,7 @@ router.beforeEach((to, from, next) => {
   } else if (isLoginPage && !userDataStore.valid) {
     next();
   } else if (!isLoginPage && !userDataStore.valid) {
-    if (to.meta.publicRedirect) {
+    if (to.meta.publicRedirect && config.publicPageEnabled) {
       next({name: to.meta.publicRedirect, params: to.params});
     } else {
       next({path: '/login', query: { redirect: to.fullPath }});
