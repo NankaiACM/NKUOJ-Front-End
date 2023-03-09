@@ -34,10 +34,6 @@
     </div>
   </ModalBase>
   <ModalMsgBox ref="modal-msg-login"></ModalMsgBox>
-  <ModalSignup ref="modal-signup-student" @success="this.$emit('success')" :is-student="true"></ModalSignup>
-  <ModalSignup ref="modal-signup-guest" @success="this.$emit('success')" :is-student="false"></ModalSignup>
-  <ModalResetPwd ref="modal-reset-pwd-student" @success="this.$emit('success')" :is-student="true"></ModalResetPwd>
-  <ModalResetPwd ref="modal-reset-pwd-guest" @success="this.$emit('success')" :is-student="false"></ModalResetPwd>
 </template>
 
 <script>
@@ -129,18 +125,10 @@ export default {
       this.internalShow = true;
     },
     showRegisterModal: function () {
-      if (this.isStudent) {
-        this.$refs["modal-signup-student"].show()
-      } else {
-        this.$refs["modal-signup-guest"].show()
-      }
+      this.$emit('signup', this.isStudent)
     },
     showResetModal: function () {
-      if (this.isStudent) {
-        this.$refs["modal-reset-pwd-student"].show()
-      } else {
-        this.$refs["modal-reset-pwd-guest"].show()
-      }
+      this.$emit('reset', this.isStudent)
     }
   }
 }

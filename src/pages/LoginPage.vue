@@ -72,12 +72,15 @@
           <img src="../assets/nkuoj-slogan.svg" alt="slogan" class="page-slogan">
           <h5 class="m-2 text-purple">南开大学计算机课程</h5>
           <h1 class="m-2 text-purple">在线评测平台</h1>
-          <div class="d-flex align-items-baseline mt-5">
-            <button class="btn btn-outline-purple ms-2" @click="this.showStudentLoginModal()">
-              <IconLightBulb/>
-              进入平台
-            </button>
-            <h6><a class="text-decoration-none text-purple ms-3" @click="this.showGuestLoginModal()" href="#"> 我是访客 &gt;</a></h6>
+          <div class="mt-5">
+            <h6 class="m-2 text-purple" v-if="hasRedirectPath">请您登录后继续访问：</h6>
+            <div class="d-flex align-items-baseline mt-2">
+              <button class="btn btn-outline-purple ms-2" @click="this.showStudentLoginModal()">
+                <IconLightBulb/>
+                进入平台
+              </button>
+              <h6><a class="text-decoration-none text-purple ms-3" @click="this.showGuestLoginModal()" href="#"> 我是教师/访客 &gt;</a></h6>
+            </div>
           </div>
         </div>
       </div>
@@ -85,12 +88,15 @@
         <img src="../assets/nkuoj-slogan.svg" alt="slogan" class="page-slogan">
         <h5 class="m-2 text-purple">南开大学计算机课程</h5>
         <h1 class="m-2 text-purple">在线评测平台</h1>
-        <div class="d-flex align-items-baseline mt-5">
-          <button class="btn btn-outline-purple ms-2" @click="this.showStudentLoginModal()">
-            <IconLightBulb/>
-            进入平台
-          </button>
-          <h6><a class="text-decoration-none text-purple ms-3" @click="this.showGuestLoginModal()" href="#"> 我是访客 &gt;</a></h6>
+        <div class="mt-5">
+          <h6 class="m-2 text-purple" v-if="hasRedirectPath">请您登录后继续访问：</h6>
+          <div class="d-flex align-items-baseline mt-2">
+            <button class="btn btn-outline-purple ms-2" @click="this.showStudentLoginModal()">
+              <IconLightBulb/>
+              进入平台
+            </button>
+            <h6><a class="text-decoration-none text-purple ms-3" @click="this.showGuestLoginModal()" href="#"> 我是教师/访客 &gt;</a></h6>
+          </div>
         </div>
       </div>
     </div>
@@ -122,7 +128,7 @@
             <ul>
               <li><a class="text-decoration-none text-light" href="https://github.com/NankaiACM/NKUOJ-Front-End">前端仓库</a></li>
               <li><a class="text-decoration-none text-light" href="https://github.com/ArcanusNEO/ArcOJ-BackEnd">后端仓库</a></li>
-              <li><a class="text-decoration-none text-light" href="https://google.com">平台管理</a></li>
+              <li><a class="text-decoration-none text-light" href="#" @click="showAdminModal">平台管理</a></li>
             </ul>
           </div>
         </div>
@@ -130,12 +136,13 @@
       </div>
     </div>
   </div>
-  <ModalLogin ref="modal-student-login" :is-student="true" :is-strict="false" @success="handleSuccessEvent"></ModalLogin>
+  <ModalLogin ref="modal-student-login" :is-student="true" :is-strict="false" @success="handleSuccessEvent" @reset="handleResetEvent" @signup="handleSignupEvent"></ModalLogin>
   <ModalLogin ref="modal-guest-login" :is-student="false" :is-strict="false" @success="handleSuccessEvent"></ModalLogin>
   <ModalSignup ref="modal-signup-student-in-page" @success="handleSuccessEvent" :is-student="true"></ModalSignup>
   <ModalSignup ref="modal-signup-guest-in-page" @success="handleSuccessEvent" :is-student="false"></ModalSignup>
   <ModalResetPwd ref="modal-reset-pwd-student-in-page" @success="handleSuccessEvent" :is-student="true"></ModalResetPwd>
   <ModalResetPwd ref="modal-reset-pwd-guest-in-page" @success="handleSuccessEvent" :is-student="false"></ModalResetPwd>
+  <ModalConfirmBox ref="modal-msg-box-admin"/>
 </template>
 
 <script>
@@ -145,25 +152,31 @@ import ModalLogin from "@/components/modal/ModalLogin.vue";
 import axios from "axios";
 import ModalSignup from "@/components/modal/ModalSignup.vue";
 import ModalResetPwd from "@/components/modal/ModalResetPwd.vue";
+import {useStrictModeStore} from "@/stores/strict-mode";
+import ModalConfirmBox from "@/components/modal/ModalConfirmBox.vue";
+import router from "@/router";
 export default {
   name: 'login-page',
   components: {
+    ModalConfirmBox,
     ModalResetPwd,
     ModalSignup,
     ModalLogin,
     IconLightBulb
   },
   setup() {
-    const store = useUserDataStore()
+    const store = useUserDataStore();
+    const strictModeStore = useStrictModeStore();
     return {
-      store
+      store, strictModeStore
     }
   },
   data: function () {
     return {
       show: true,
       isStudent: 'true',
-      isStrictMode: false
+      isStrictMode: false,
+      searchParams: new URLSearchParams(window.location.search)
     }
   },
   methods: {
@@ -185,33 +198,51 @@ export default {
     showGuestSignupModal: function () {
       this.$refs['modal-signup-guest-in-page'].show()
     },
+    showAdminModal: function () {
+      this.$refs['modal-msg-box-admin'].show('平台管理', '点击确定，您登录后将会直接跳转到管理页面。', () => {
+        router.push('/login?redirect=/admin/home');
+      });
+    },
     checkStrictMode: function () {
       axios.get(`/api/version/strict-mode`).then(res => {
-        const strictModeBefore = this.$store.getters.isStrictMode
-        const strictModeAfter = res.data.enable
-        if (strictModeBefore !== strictModeAfter) {
-          this.$store.commit('setVersion', {
-            strictMode: strictModeAfter
-          })
-        }
-        this.isStrictMode = strictModeAfter
-      })
+        const strictMode = res.data.enable;
+        this.strictModeStore.serverStrictMode = strictMode;
+        this.strictModeStore.clientStrictMode = strictMode;
+        this.isStrictMode = strictMode;
+      });
+    },
+    handleResetEvent: function (isStudent) {
+      if (isStudent) {
+        this.showStudentResetModal();
+      } else {
+        this.showGuestResetModal();
+      }
+    },
+    handleSignupEvent: function (isStudent) {
+      if (isStudent) {
+        this.showStudentSignupModal();
+      } else {
+        this.showGuestSignupModal();
+      }
     },
     handleSuccessEvent: function () {
-      let searchParams = new URLSearchParams(window.location.search);
-      if (searchParams.has("redirect")) {
-        window.location.replace(`${searchParams.get("redirect")}`);
+      if (this.searchParams.has("redirect")) {
+        window.location.replace(`${this.searchParams.get("redirect")}`);
       } else window.location.replace("/home" );
     }
   },
   computed: {
     hasRedirectPath: function () {
-      let searchParams = new URLSearchParams(window.location.search);
-      return searchParams.has("redirect")
+      return this.searchParams.has("redirect");
     }
   },
   mounted() {
-    // this.checkStrictMode()
+    this.checkStrictMode();
+  },
+  watch: {
+    '$route': function () {
+      this.searchParams = new URLSearchParams(window.location.search);
+    }
   }
 }
 </script>
