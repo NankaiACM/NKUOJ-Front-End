@@ -9,8 +9,8 @@
   </p>
   <div class="list-group" v-if="loading">
     <div class="list-group-item list-group-item-action placeholder-glow" v-for="i in 20" :key="i">
-      <h5 class="mb-1 placeholder col-4"></h5>
-      <p><small class="placeholder col-3"></small></p>
+      <h5 class="mb-1 placeholder col-4"></h5><br>
+      <span><small class="placeholder col-3"></small></span>
     </div>
   </div>
   <div class="list-group" v-else>
