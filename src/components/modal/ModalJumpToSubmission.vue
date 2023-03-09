@@ -18,6 +18,7 @@
 
 <script>
 import ModalBase from "@/components/modal/ModalBase.vue";
+import router from "@/router";
 
 export default {
   name: "ModalJumpToSubmission",
@@ -36,7 +37,7 @@ export default {
       this.internalShow = true;
     },
     ok: function () {
-      this.$router.push(`/submission/${this.submissionId}`);
+      router.push(`/submission/${this.submissionId}`);
     }
   }
 }

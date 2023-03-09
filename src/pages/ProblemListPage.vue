@@ -36,6 +36,7 @@
 import axios from "axios";
 import Pagination from "@/components/wrapper/Pagination.vue";
 import IconJournalCode from "@/components/icons/IconJournalCode.vue";
+import router from "@/router";
 
 export default {
   name: 'ProblemListPage',
@@ -57,7 +58,7 @@ export default {
         return this.$route.query.page || 1;
       },
       set(newPage) {
-        this.$router.replace({query: {...this.$route.query, page: newPage}}).catch(() => {
+        router.replace({query: {...this.$route.query, page: newPage}}).catch(() => {
         });
       }
     }

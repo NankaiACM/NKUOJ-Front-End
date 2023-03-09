@@ -27,7 +27,7 @@
         <IconChevronDoubleRightSmall/>
       </h5>
       <div class="list-group mt-2 mb-2" v-if="registrableContestsList && registrableContestsList.length > 0">
-        <a class="list-group-item list-group-item-action" @click="subscribeExam(contest)"
+        <a class="list-group-item list-group-item-action" @click="subscribeContest(contest)"
            v-for="contest in registrableContestsList" v-bind:key="contest.id">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"> {{ contest.name }}</h5>
@@ -89,6 +89,7 @@ export default {
         .then(res => {
           if (res.status === 200) {
             this.$refs.msg_box_modal.show('提示', '成功加入该考试');
+            this.$emit('success');
           } else if (res.status === 295) {
             this.$refs.msg_box_modal.show('提示', '已经加入过该考试');
           } else {
@@ -107,6 +108,7 @@ export default {
         .then(res => {
           if (res.status === 200) {
             this.$refs.msg_box_modal.show('提示', '成功加入该竞赛');
+            this.$emit('success');
           } else if (res.status === 295) {
             this.$refs.msg_box_modal.show('提示', '已经加入过该竞赛');
           } else {

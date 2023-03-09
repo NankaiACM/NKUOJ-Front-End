@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import AppUniversal from "@/templates/AppUniversal.vue";
+import AppStrict from "@/templates/AppStrict.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,6 +26,10 @@ const router = createRouter({
         {
           path: '/bulletin',
           component: () => import('../pages/BulletinPage.vue')
+        },
+        {
+          path: '/profile',
+          component: () => import('../pages/ProfilePage.vue')
         },
         {
           path: '/problem/:id',
@@ -62,6 +67,17 @@ const router = createRouter({
           path: '/ranking/exam/:id',
           component: () => import('../pages/ExamRankingPage.vue')
         }
+      ]
+    },
+    {
+      path: '/strict',
+      redirect: '/strict/home',
+      component: AppStrict,
+      children: [
+        {
+          path: '/strict/home',
+          component: () => import('../pages/StrictHomePage.vue')
+        },
       ]
     },
     {

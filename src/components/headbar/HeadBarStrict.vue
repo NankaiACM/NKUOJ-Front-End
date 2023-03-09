@@ -4,19 +4,10 @@
       <a href="/">
         <img class="head-bar-slogan" src="../../assets/nkuoj-slogan.svg" alt="Nankai University Online Judge">
       </a>
-      <div class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-sm-block">
-        <button type="button" class="btn btn-rounded-purple ms-2" @click="navigateTo('/home')"><span
-          class="d-flex align-items-center flex-shrink-0 overflow-hidden"><span><IconHouse/></span><span
-          class="ms-2 text-truncate">主页</span></span></button>
-        <button type="button" class="btn btn-rounded-purple ms-2" @click="navigateTo('/problem-list')"><span
-          class="d-flex align-items-center flex-shrink-0 overflow-hidden"><span><IconJournalCode/></span><span
-          class="ms-2 text-truncate">题库</span></span></button>
-        <button type="button" class="btn btn-rounded-purple ms-2" @click="navigateTo('/submissions')"><span
-          class="d-flex align-items-center flex-shrink-0 overflow-hidden"><span><IconClipboardCheck/></span><span
-          class="ms-2 text-truncate">记录</span></span></button>
-        <button type="button" class="btn btn-rounded-purple ms-2" @click="navigateTo('/bulletin')"><span
-          class="d-flex align-items-center flex-shrink-0 overflow-hidden"><span><IconMegaphone/></span><span
-          class="ms-2 text-truncate">公告</span></span></button>
+      <div class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-sm-block h-100">
+        <div class="d-inline-flex align-items-center">
+          <span class="text-purple" style="font-size: x-large;">考试模式</span>
+        </div>
       </div>
       <div class="nav-item dropdown d-none d-sm-block">
         <a class="nav-link dropdown-toggle text-purple" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -24,7 +15,7 @@
         </a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="/profile">用户中心</a></li>
-          <li><a class="dropdown-item" href="#" @click="enableClientStrictModeAndRedirect();">进入考试</a></li>
+          <li><a class="dropdown-item" href="#" @click="disableClientStrictModeAndRedirect()" v-if="userDataStore.isAdministrator || !strictModeStore.serverStrictMode">退出考试</a></li>
           <li><a class="dropdown-item" href="/admin" v-if="userDataStore.isAdministrator">管理面板</a></li>
           <li><a class="dropdown-item" href="#" @click="confirmLogout()">退出登录</a></li>
         </ul>
@@ -34,21 +25,15 @@
           菜单
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="/home">主页</a></li>
-          <li><a class="dropdown-item" href="/problem-list">题库</a></li>
-          <li><a class="dropdown-item" href="/submissions">记录</a></li>
-          <li><a class="dropdown-item" href="/bulletin">公告</a></li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
           <li><a class="dropdown-item" href="/profile">用户中心</a></li>
-          <li><a class="dropdown-item" href="#" @click="enableClientStrictModeAndRedirect();">进入考试</a></li>
+          <li><a class="dropdown-item" href="#" @click="disableClientStrictModeAndRedirect()" v-if="userDataStore.isAdministrator || !strictModeStore.serverStrictMode">退出考试</a></li>
           <li><a class="dropdown-item" href="/admin" v-if="userDataStore.isAdministrator">管理面板</a></li>
           <li><a class="dropdown-item" href="#" @click="confirmLogout()">退出登录</a></li>
         </ul>
       </div>
     </div>
     <ModalConfirmBox ref="confirm_logout"/>
+    <ModalMsgBox ref="quit_strict_msg_modal"/>
   </nav>
 </template>
 
@@ -62,9 +47,11 @@ import IconMegaphone from "@/components/icons/IconMegaphone.vue";
 import IconClipboardCheck from "@/components/icons/IconClipboardCheck.vue";
 import router from "@/router";
 import ModalConfirmBox from "@/components/modal/ModalConfirmBox.vue";
+import ModalMsgBox from "@/components/modal/ModalMsgBox.vue";
+import strictHomePage from "@/pages/StrictHomePage.vue";
 export default {
-  name: 'HeadBarUniversal',
-  components: {ModalConfirmBox, IconClipboardCheck, IconMegaphone, IconJournalCode, IconHouse},
+  name: 'HeadBarStrict',
+  components: {ModalMsgBox, ModalConfirmBox, IconClipboardCheck, IconMegaphone, IconJournalCode, IconHouse},
   setup() {
     const strictModeStore = useStrictModeStore()
     const userDataStore = useUserDataStore()
@@ -76,9 +63,13 @@ export default {
     confirmLogout: function () {
       this.$refs.confirm_logout.show('提示', '真的要退出登录吗？', () => {window.location.push('/logout');});
     },
-    enableClientStrictModeAndRedirect: function () {
-      this.strictModeStore.setClientStrictMode(true);
-      window.location.push('/strict/home');
+    disableClientStrictModeAndRedirect: function () {
+      if (this.userDataStore.isAdministrator || !this.strictModeStore.serverStrictMode) {
+        this.strictModeStore.setClientStrictMode(false);
+        router.push('/home');
+      } else {
+        this.$refs.quit_strict_msg_modal.show('操作失败', '没有权限');
+      }
     },
     navigateTo: function (path) {
       router.push(path);

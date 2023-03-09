@@ -27,6 +27,7 @@ import statusCodeToStr from "@/util/status-code-to-str";
 import statusCodeToVariantStr from "@/util/status-code-to-variant-str";
 import ModalBase from "@/components/modal/ModalBase.vue";
 import Pagination from "@/components/wrapper/Pagination.vue";
+import router from "@/router";
 
 export default {
   name: "ModalMySubmissions",
@@ -63,7 +64,7 @@ export default {
     },
     selectItem: function (item) {
       this.dismiss();
-      this.$router.push(`/submission/${item}`)
+      router.push(`/submission/${item}`)
     },
     getStatusText: function (status) {
       return statusCodeToStr(status)

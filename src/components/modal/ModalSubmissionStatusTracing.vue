@@ -28,6 +28,7 @@ import statusCodeToStr from "@/util/status-code-to-str";
 import statusCodeToVariantStr from "@/util/status-code-to-variant-str";
 import httpCodeToStr from "@/util/http-code-to-str";
 import ModalMsgBox from "@/components/modal/ModalMsgBox.vue";
+import router from "@/router";
 
 export default {
   name: "ModalSubmissionStatusTracing",
@@ -78,7 +79,7 @@ export default {
       })
     },
     viewSubmission: function () {
-      this.$router.push(`/submission/${this.id}`);
+      router.push(`/submission/${this.id}`);
     },
     statusText: function (s) {
       return statusCodeToStr(s);

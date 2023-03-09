@@ -1,13 +1,7 @@
 <template>
-  <div class="oj-pattern-background">
-    <HeadBarUniversal class="w-100"
-                      @toHome="switchTo('home')"
-                      @toProblem="switchTo('problems')" @toStatus="switchTo('status')"
-                      @toContest="switchTo('contest')" @toDiscuss="switchTo('discuss')"
-                      @toAnnouncements="switchTo('announcements')" @toCourses="switchTo('courses')"
-                      @toAssignments="switchTo('assignments')" @toExams="switchTo('exams')"
-                      @toContests="switchTo('contests')">
-    </HeadBarUniversal>
+  <div>
+    <HeadBarStrict class="w-100">
+    </HeadBarStrict>
     <div>
       <div>
         <RouterView/>
@@ -17,14 +11,15 @@
 </template>
 
 <script>
-import HeadBarUniversal from "@/components/headbar/HeadBarUniversal.vue";
+import HeadBarStrict from "@/components/headbar/HeadBarStrict.vue";
 import {useStrictModeStore} from "@/stores/strict-mode";
 import {useUserDataStore} from "@/stores/user-data";
 import axios from "axios";
+import router from "@/router";
 
 export default {
-  components: {HeadBarUniversal},
-  name: 'AppUniversal',
+  components: {HeadBarStrict},
+  name: 'AppStrict',
   data: function () {
     return {
     }
@@ -39,10 +34,11 @@ export default {
   methods: {
     switchTo: function (path) {
       if (this.$route.path === `/${path}`)
-        return;
-      window.location.replace('/' + path);
+        return
+      window.location.replace('/' + path)
     },
     updateSiteData: async function () {
+      // check user cookies validity
       if (this.userDataStore.valid) {
         await axios.get(`/api/user`).then(res => {
           this.userDataStore.setUID(res.data.uid);
@@ -53,7 +49,7 @@ export default {
         }, error => {
           if (error.status === 401) {
             this.userDataStore.clear();
-            window.location.replace('/login');
+            router.replace('/login');
           }
         });
       }
@@ -62,11 +58,7 @@ export default {
         const strictModeBefore = this.strictModeStore.serverStrictMode;
         const strictModeAfter = res.data.enable;
         if (strictModeBefore !== strictModeAfter) {
-          this.strictModeStore.setServerStrictMode(strictModeAfter)
-        }
-        if (strictModeAfter && !this.userDataStore.isAdministrator && !this.strictModeStore.clientStrictMode) {
-          this.strictModeStore.setClientStrictMode(strictModeAfter);
-          window.location.replace('/strict');
+          this.strictModeStore.setServerStrictMode(strictModeAfter);
         }
       });
     }

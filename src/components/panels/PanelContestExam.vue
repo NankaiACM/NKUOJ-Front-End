@@ -6,7 +6,16 @@
     <IconChevronDoubleRightSmall/>
   </h5>
   <div class="row row-cols-lg-2">
-    <div class="col-lg-6 col-12" v-for="exam in exams" :key="exam.id">
+    <div class="col-lg-6 col-12" v-if="loading">
+      <a
+        class="card clickable-card border-0 m-2 rounded-4 text-dark text-decoration-none h5 text-wrap text-center"
+        href="#">
+          <span class="d-inline-flex justify-content-center align-items-center h-100 w-100">
+            <span class="spinner-grow text-secondary" role="status"><span class="visually-hidden">Loading...</span></span>
+          </span>
+      </a>
+    </div>
+    <div class="col-lg-6 col-12" v-for="exam in exams" :key="exam.id" v-if="exams && exams.length > 0 && !loading">
       <a
         class="card clickable-card border-0 m-2 rounded-4 text-dark text-decoration-none p-3 d-flex flex-column justify-content-between"
         :href="`/exam/${exam.id}`">
@@ -17,7 +26,7 @@
         </div>
       </a>
     </div>
-    <div class="col-lg-6 col-12" v-for="contest in contests" :key="contest.id">
+    <div class="col-lg-6 col-12" v-for="contest in contests" :key="contest.id" v-if="contests && contests.length > 0 && !loading">
       <a
         class="card clickable-card border-0 m-2 rounded-4 text-dark text-decoration-none p-3 d-flex flex-column justify-content-between"
         :href="`/contest/${contest.id}`">
@@ -35,7 +44,7 @@
       </a>
     </div>
   </div>
-  <ModalAddContestExam ref="add_contest_exam_modal"/>
+  <ModalAddContestExam ref="add_contest_exam_modal" @success="loadData()"/>
 </div>
 </template>
 
@@ -64,29 +73,33 @@ export default {
     },
     showAddModal: function () {
       this.$refs.add_contest_exam_modal.show();
+    },
+    loadData: function () {
+      this.loading = true;
+      this.exams = [];
+      this.contests = [];
+      let loadingIdentifier = 2;
+      const onLoaded = () => {
+        loadingIdentifier -= 1;
+        if (loadingIdentifier === 0)
+          this.loading = false;
+      };
+      axios.get(`/api/exam`).then(res => {
+        this.exams = res.data;
+        onLoaded();
+      }, e => {
+        this.statusCode = e.status;
+      });
+      axios.get(`/api/contest`).then(res => {
+        this.contests = res.data;
+        onLoaded();
+      }, e => {
+        this.statusCode = e.status;
+      });
     }
   },
   mounted() {
-    let loadingIdentifier = 2;
-    const onLoaded = () => {
-      loadingIdentifier -= 1;
-      if (loadingIdentifier === 0)
-        this.loading = false;
-    };
-    axios.get(`/api/exam`).then(res => {
-      this.exams = res.data;
-      onLoaded();
-    }, e => {
-      this.statusCode = e.status;
-      onLoaded();
-    });
-    axios.get(`/api/contest`).then(res => {
-      this.contests = res.data;
-      onLoaded();
-    }, e => {
-      this.statusCode = e.status;
-      onLoaded();
-    });
+    this.loadData();
   }
 }
 </script>

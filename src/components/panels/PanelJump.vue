@@ -17,6 +17,7 @@
 <script>
 import IconJump from "@/components/icons/IconJump.vue";
 import IconChevronDoubleRightSmall from "@/components/icons/IconChevronDoubleRightSmall.vue";
+import router from "@/router";
 
 export default {
   name: "PanelJump",
@@ -32,7 +33,7 @@ export default {
       if (isNaN(this.pid) || this.pid === null) {
         this.state = false;
       } else {
-        this.$router.push(`/problem/${this.pid}`)
+        router.push(`/problem/${this.pid}`)
         this.state = null;
       }
     }

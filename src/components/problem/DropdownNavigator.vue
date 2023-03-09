@@ -16,6 +16,7 @@ import IconChevronDoubleRightSmall from "@/components/icons/IconChevronDoubleRig
 import IconListOL from "@/components/icons/IconListOL.vue";
 import ordinalNumberToStr from "@/util/ordinal-number-to-str";
 import axios from "axios";
+import router from "@/router";
 
 export default {
   name: "DropdownNavigator",
@@ -44,7 +45,7 @@ export default {
     },
     redirectToProblem: function () {
       if (Number(this.pid) !== this.problems[this.sel].pid) {
-        this.$router.push(`/problem/${this.problems[this.sel].pid}`);
+        router.push(`/problem/${this.problems[this.sel].pid}`);
       }
     }
   },
