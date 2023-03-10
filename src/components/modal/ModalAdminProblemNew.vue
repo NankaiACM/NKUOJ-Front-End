@@ -59,9 +59,9 @@ export default {
       this.internalShow = true;
     },
     validateSubmitForm: function () {
-      if (this.type === -1) {
+      if (Number(this.type) === -1) {
         return 1;
-      } else if (this.type === 1 && this.psid === '') {
+      } else if (Number(this.type) === 1 && !this.psid) {
         return 2;
       }
       return 0;
