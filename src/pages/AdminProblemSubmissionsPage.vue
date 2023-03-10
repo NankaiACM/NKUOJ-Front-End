@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container mb-2">
   <div class="d-flex justify-content-start align-items-center ms-3 mb-3 me-3">
     <IconSliders class="text-purple me-2"/>
     <span class="text-purple page-title">题目完成数据</span>
