@@ -1,5 +1,12 @@
 <template>
 <div class="container">
+  <div class="d-flex justify-content-start align-items-center ms-3 mb-3 me-3">
+    <IconSliders class="text-purple me-2"/>
+    <span class="text-purple page-title">重测</span>
+  </div>
+  <p class="text-purple ms-3">
+    重测题目、提交。
+  </p>
   <div class="card bg-light rounded-4 p-4 mb-4 border-0">
     <h4 class="text-danger">警告：请慎重使用重测！</h4>
     <ul>
@@ -54,10 +61,11 @@ import axios from "axios";
 import ModalMsgBox from "@/components/modal/ModalMsgBox.vue";
 import httpCodeToStr from "@/util/http-code-to-str";
 import ModalRejudgeProgressing from "@/components/modal/ModalRejudgeProgressing.vue";
+import IconSliders from "@/components/icons/IconSliders.vue";
 
 export default {
   name: "AdminRejudgePage",
-  components: {ModalRejudgeProgressing, ModalMsgBox, ModalConfirmBox},
+  components: {IconSliders, ModalRejudgeProgressing, ModalMsgBox, ModalConfirmBox},
   data: function () {
     return {
       pid: null,
