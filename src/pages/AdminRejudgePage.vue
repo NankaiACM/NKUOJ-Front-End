@@ -22,7 +22,7 @@
     </ul>
   </div>
   <div class="row">
-    <div class="col-md-6 col-12 order-last order-md-first">
+    <div class="col-md-6 col-12 order-first">
       <div class="card h-100 border-0 rounded-4 p-2 bg-light mb-2">
         <div class="card-body bg-transparent">
           <h4>重测提交</h4>
@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 col-12 order-first order-md-last">
+    <div class="col-md-6 col-12 order-last">
       <div class="card h-100 border-0 p-2 rounded-4 bg-light mb-2">
         <div class="card-body bg-transparent">
           <h4>重测题目</h4>
