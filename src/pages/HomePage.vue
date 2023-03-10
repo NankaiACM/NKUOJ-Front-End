@@ -1,7 +1,7 @@
 <template>
 <div class="container mb-2">
   <div class="row">
-    <div class="col-md-8 col-12 order-last order-md-first ">
+    <div class="col-md-8 col-12 order-last order-md-first">
       <PanelCourse class="mb-4"/>
       <PanelAssignment class="mb-4"/>
       <PanelContestExam class="mb-4"/>
