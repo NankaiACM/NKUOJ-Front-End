@@ -1,12 +1,6 @@
 <template>
   <div class="oj-pattern-background">
-    <HeadBarUniversal class="w-100"
-                      @toHome="switchTo('home')"
-                      @toProblem="switchTo('problems')" @toStatus="switchTo('status')"
-                      @toContest="switchTo('contest')" @toDiscuss="switchTo('discuss')"
-                      @toAnnouncements="switchTo('announcements')" @toCourses="switchTo('courses')"
-                      @toAssignments="switchTo('assignments')" @toExams="switchTo('exams')"
-                      @toContests="switchTo('contests')">
+    <HeadBarUniversal class="w-100">
     </HeadBarUniversal>
     <div>
       <RouterView/>
