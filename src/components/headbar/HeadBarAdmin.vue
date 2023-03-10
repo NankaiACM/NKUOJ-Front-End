@@ -6,7 +6,7 @@
       </a>
       <div class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-sm-block h-100">
         <div class="d-inline-flex align-items-center">
-          <span class="text-purple" style="font-size: x-large;">管理面板</span>
+          <a class="text-purple text-decoration-none" style="font-size: x-large;" href="/admin/home">管理面板</a>
         </div>
       </div>
       <div class="nav-item dropdown d-none d-sm-block">
