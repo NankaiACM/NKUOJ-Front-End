@@ -88,13 +88,13 @@ export default {
         this.exams = res.data;
         onLoaded();
       }, e => {
-        this.statusCode = e.status;
+        this.statusCode = e.response.status;
       });
       axios.get(`/api/contest`).then(res => {
         this.contests = res.data;
         onLoaded();
       }, e => {
-        this.statusCode = e.status;
+        this.statusCode = e.response.status;
       });
     }
   },

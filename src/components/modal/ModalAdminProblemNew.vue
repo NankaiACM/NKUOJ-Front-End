@@ -78,7 +78,7 @@ export default {
       axios.post(createUrl, this.createDummy).then(res => {
         this.$emit('then', res.data);
       }, e => {
-        this.$refs.modal_create_problem_msg.show('新建失败', httpCodeToStr(e.status));
+        this.$refs.modal_create_problem_msg.show('新建失败', httpCodeToStr(e.response.status));
       });
     },
   }

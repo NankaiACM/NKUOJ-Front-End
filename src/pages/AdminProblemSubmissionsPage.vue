@@ -93,7 +93,7 @@ export default {
         }
         this.isLoading = false;
       }, e => {
-        this.$refs.modal_msg_box.show('载入信息失败', httpCodeToStr(e.status));
+        this.$refs.modal_msg_box.show('载入信息失败', httpCodeToStr(e.response.status));
       });
     },
     uidToStr: function (uid) {

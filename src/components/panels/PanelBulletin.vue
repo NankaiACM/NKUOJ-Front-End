@@ -40,7 +40,7 @@ export default {
       this.announcements = res.data
       this.loading = false
     }, e => {
-      this.statusCode = e.status
+      this.statusCode = e.response.status
       this.loading = false
     })
   }

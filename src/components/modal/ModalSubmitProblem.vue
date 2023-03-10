@@ -84,7 +84,7 @@ export default {
           this.$refs.modal_submission_tracing.show(res.data);
         }
       }, e => {
-        this.$refs.submit_problem_msg_box.show('提交失败', httpCodeToStr(e.status));
+        this.$refs.submit_problem_msg_box.show('提交失败', httpCodeToStr(e.response.status));
       });
     },
     validateSubmitForm: function () {

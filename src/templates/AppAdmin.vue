@@ -44,7 +44,7 @@ export default {
           this.userDataStore.setPermission(res.data.permission);
           this.userDataStore.setValid();
         }, error => {
-          if (error.status === 401) {
+          if (error.response.status === 401) {
             this.userDataStore.clear();
             window.location.replace('/login');
           }

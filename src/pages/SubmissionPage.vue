@@ -74,7 +74,7 @@ export default {
         this.loading = false;
         this.error = false;
       }, e => {
-        if (e.status === 403) {
+        if (e.response.status === 403) {
           this.loading = false;
           this.error = false;
         } else {

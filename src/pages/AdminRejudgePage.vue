@@ -90,7 +90,7 @@ export default {
             this.$refs.modal_msg_box_rejudge.show('提示', httpCodeToStr(res.status));
           }
         }, e => {
-          this.$refs.modal_msg_box_rejudge.show('提示', httpCodeToStr(e.status));
+          this.$refs.modal_msg_box_rejudge.show('提示', httpCodeToStr(e.response.status));
         });
       });
     },
@@ -142,7 +142,7 @@ export default {
           this.$refs.modal_msg_box_rejudge.show('获取题目的提交列表失败', httpCodeToStr(res.status));
         }
       }, e => {
-        this.$refs.modal_msg_box_rejudge.show('获取题目的提交列表失败', httpCodeToStr(e.status));
+        this.$refs.modal_msg_box_rejudge.show('获取题目的提交列表失败', httpCodeToStr(e.response.status));
       });
     }
   }

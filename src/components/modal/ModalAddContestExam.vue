@@ -96,7 +96,7 @@ export default {
             this.$refs.msg_box_modal.show('其他消息', httpCodeToStr(res.status));
           }
         }, e => {
-          this.$refs.msg_box_modal.show('错误', httpCodeToStr(e.status));
+          this.$refs.msg_box_modal.show('错误', httpCodeToStr(e.response.status));
         });
     },
     subscribeContest: function (contest) {
@@ -115,7 +115,7 @@ export default {
             this.$refs.msg_box_modal.show('其他消息', httpCodeToStr(res.status));
           }
         }, e => {
-          this.$refs.msg_box_modal.show('错误', httpCodeToStr(e.status));
+          this.$refs.msg_box_modal.show('错误', httpCodeToStr(e.response.status));
         });
     },
     loadRegistrableData: function () {

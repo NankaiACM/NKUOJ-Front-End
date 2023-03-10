@@ -47,7 +47,7 @@ export default {
       this.assignments = res.data
       this.loading = false
     }, e => {
-      this.statusCode = e.status
+      this.statusCode = e.response.status
       this.loading = false
     })
   }

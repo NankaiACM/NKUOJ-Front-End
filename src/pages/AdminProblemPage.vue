@@ -217,7 +217,7 @@ export default {
         this.$refs.modal_msg_box.show('提示', '保存成功！');
       }, e => {
         this.submittingButton1 = false;
-        this.$refs.modal_msg_box.show('保存失败', httpCodeToStr(e.status));
+        this.$refs.modal_msg_box.show('保存失败', httpCodeToStr(e.response.status));
       });
     },
     submitAndEditContent: function () {
@@ -227,7 +227,7 @@ export default {
         router.push(`/admin/problem/content/${this.$route.params.id}`);
       }, e => {
         this.submittingButton2 = false;
-        this.$refs.modal_msg_box.show('保存失败', httpCodeToStr(e.status));
+        this.$refs.modal_msg_box.show('保存失败', httpCodeToStr(e.response.status));
       });
     },
     submitAndUploadData: function () {
@@ -237,7 +237,7 @@ export default {
         router.push(`/admin/problem/data/${this.$route.params.id}`);
       }, e => {
         this.submittingButton3 = false;
-        this.$refs.modal_msg_box.show('保存失败', httpCodeToStr(e.status));
+        this.$refs.modal_msg_box.show('保存失败', httpCodeToStr(e.response.status));
       });
     },
     validateCloneForm: function () {
@@ -271,7 +271,7 @@ export default {
         this.$refs.modal_msg_box.show('提示', `克隆成功，新题目ID为#${res.data}`);
       }, e => {
         this.cloningButton = false;
-        this.$refs.modal_msg_box.show('克隆失败', httpCodeToStr(e.status));
+        this.$refs.modal_msg_box.show('克隆失败', httpCodeToStr(e.response.status));
       });
     },
     submitTransfer: function () {
@@ -290,7 +290,7 @@ export default {
         this.loadSelectedItem();
       }, e => {
         this.transferringButton = false;
-        this.$refs.modal_msg_box.show('转移失败', httpCodeToStr(e.status));
+        this.$refs.modal_msg_box.show('转移失败', httpCodeToStr(e.response.status));
       });
     }
   },

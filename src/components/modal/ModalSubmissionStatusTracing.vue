@@ -72,7 +72,7 @@ export default {
         this.statusShouldUpdate = this.statusCode <= 100;
         this.judgeFinished = !this.statusShouldUpdate;
       }, e => {
-        this.$refs.modal_msg_box_status_tracing.show('同步评测记录失败', `${httpCodeToStr(e.status)}：与服务器之间的网络通信出现问题，无法继续获知评测结果。但您的提交已经被服务器接受，结果仍会计入到考试或竞赛中。`);
+        this.$refs.modal_msg_box_status_tracing.show('同步评测记录失败', `${httpCodeToStr(e.response.status)}：与服务器之间的网络通信出现问题，无法继续获知评测结果。但您的提交已经被服务器接受，结果仍会计入到考试或竞赛中。`);
         this.internalShow = false;
         this.statusShouldUpdate = false;
         this.judgeFinished = true;

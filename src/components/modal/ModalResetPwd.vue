@@ -96,7 +96,7 @@ export default {
       axios.post(`/api/email-captcha`, postPackage).then(() => {
         this.emailCaptchaSendTimer = 60
       }, e => {
-        this.$refs["modal-msg-reset"].show('邮件验证码发送失败', httpCodeToStr(e.status))
+        this.$refs["modal-msg-reset"].show('邮件验证码发送失败', httpCodeToStr(e.response.status))
       })
     },
     gotoEmailBox: function () {
@@ -128,7 +128,7 @@ export default {
         }
       }, e => {
         this.store.clear()
-        this.$refs["modal-msg-reset"].show('提示', httpCodeToStr(e.status))
+        this.$refs["modal-msg-reset"].show('提示', httpCodeToStr(e.response.status))
       })
     },
     validateResetForm: function () {

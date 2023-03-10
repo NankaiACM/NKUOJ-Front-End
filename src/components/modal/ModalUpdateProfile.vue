@@ -79,7 +79,7 @@ export default {
           this.$refs.modal_msg_box_submit_profile.show('提示', httpCodeToStr(res.status));
         }
       }, e => {
-        this.$refs.modal_msg_box_submit_profile.show('提交失败', httpCodeToStr(e.status));
+        this.$refs.modal_msg_box_submit_profile.show('提交失败', httpCodeToStr(e.response.status));
       })
     },
     dismiss: function () {

@@ -66,7 +66,7 @@ export default {
     }
   },
   setup() {
-    const store = useUserDataStore()
+    const store = useUserDataStore();
     return {
       store
     }
@@ -74,28 +74,28 @@ export default {
   methods: {
     validateLoginForm: function () {
       if (this.loginForm.email === '') {
-        return 2
+        return 2;
       } else if (!this.emailRegex.test(this.loginForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''))) {
-        return 1
+        return 1;
       } else if (this.loginForm.nickname === '') {
-        return 6
+        return 6;
       } else if (this.loginForm.passwordRaw === '') {
-        return 4
+        return 4;
       } else if (this.loginForm.passwordRaw.length < 6) {
-        return 7
+        return 7;
       } else if (this.loginForm.examKeyRaw === '' && this.isStrict) {
-        return 8
+        return 8;
       }
-      return 0
+      return 0;
     },
     loginSubmit: async function () {
       const validateResult = this.validateLoginForm()
       if (validateResult !== 0) {
-        this.$refs["modal-msg-login"].show('提示', this.validateResults[validateResult])
-        return
+        this.$refs["modal-msg-login"].show('提示', this.validateResults[validateResult]);
+        return;
       }
-      const encryptedPassword = encryptor.encrypt(this.loginForm.passwordRaw)
-      const encryptedPasscode = encryptor.encrypt(this.loginForm.examKeyRaw)
+      const encryptedPassword = encryptor.encrypt(this.loginForm.passwordRaw);
+      const encryptedPasscode = encryptor.encrypt(this.loginForm.examKeyRaw);
 
       console.log(encryptedPassword)
       const postPackage = {
@@ -105,30 +105,29 @@ export default {
       }
       axios.post(`/api/login`, postPackage).then(res => {
         if (res.data.ok) {
-          console.log('Successfully logged in.')
-          this.store.setUID(res.data.userData.uid)
-          this.store.setUsername(res.data.userData.username)
-          this.store.setNickname(res.data.userData.nickname)
-          this.store.setPermission(res.data.userData.permission)
-          this.store.setValid()
-          this.$emit('success')
+          this.store.setUID(res.data.userData.uid);
+          this.store.setUsername(res.data.userData.username);
+          this.store.setNickname(res.data.userData.nickname);
+          this.store.setPermission(res.data.userData.permission);
+          this.store.setValid();
+          this.$emit('success');
         } else {
-          this.store.clear()
-          this.$refs["modal-msg-login"].show('提示', httpCodeToStr(res.status))
+          this.store.clear();
+          this.$refs["modal-msg-login"].show('提示', httpCodeToStr(res.status));
         }
       }, e => {
-        this.store.clear()
-        this.$refs["modal-msg-login"].show('提示', httpCodeToStr(e.status))
+        this.store.clear();
+        this.$refs["modal-msg-login"].show('提示', httpCodeToStr(e.response.status));
       })
     },
     show: function () {
       this.internalShow = true;
     },
     showRegisterModal: function () {
-      this.$emit('signup', this.isStudent)
+      this.$emit('signup', this.isStudent);
     },
     showResetModal: function () {
-      this.$emit('reset', this.isStudent)
+      this.$emit('reset', this.isStudent);
     }
   }
 }
