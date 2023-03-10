@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mb-2">
     <div class="d-flex justify-content-start align-items-center ms-3 mb-3 me-3">
       <IconSliders class="text-purple me-2"/>
       <span class="text-purple page-title">配置题目</span>
@@ -85,8 +85,19 @@
                   启用 Detail Judge
                 </label>
               </div>
-              <small class="form-text text-muted">Detail
-                Judge会对所有测试点进行评测。如不启用该功能，则评测机遇到第一个非正确测试点就会停止评测，导致分数偏低。</small>
+              <small class="form-text text-muted">
+                Detail Judge会对所有测试点进行评测。如不启用该功能，则评测机遇到第一个非正确测试点就会停止评测，导致分数偏低。</small>
+            </div>
+            <div class="form-group mb-2">
+              <label>Special Judge：</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="specialJudgeCheck" v-model="dataObject.specialJudge" :true-value="1" :false-value="0">
+                <label class="form-check-label" for="specialJudgeCheck">
+                  启用 Special Judge
+                </label>
+              </div>
+              <small class="form-text text-muted">
+                Special Judge 会采用自定义程序评测用户提交的程序生成的输出。</small>
             </div>
             <div class="container d-flex justify-content-center">
               <button class="btn btn-outline-purple m-2" @click="submit" :disabled="submittingButton1">
@@ -100,6 +111,10 @@
               <button class="btn btn-outline-primary m-2" @click="submitAndUploadData" :disabled="submittingButton3">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" v-if="submittingButton3"></span>
                 保存提交并编辑数据
+              </button>
+              <button class="btn btn-outline-danger m-2" @click="submitAndConfigureSpecialJudge" :disabled="submittingButton4" v-if="dataObject.specialJudge">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" v-if="submittingButton4"></span>
+                保存提交并配置 Special Judge
               </button>
             </div>
           </div>
@@ -183,6 +198,7 @@ export default {
       submittingButton1: false,
       submittingButton2: false,
       submittingButton3: false,
+      submittingButton4: false,
       cloningButton: false,
       transferringButton: false,
       cloning: {
@@ -240,6 +256,16 @@ export default {
         this.$refs.modal_msg_box.show('保存失败', httpCodeToStr(e.response.status));
       });
     },
+    submitAndConfigureSpecialJudge: function () {
+      this.submittingButton4 = true;
+      axios.post(`/api/admin/problem/update/${this.$route.params.id}`, this.dataObject).then(() => {
+        this.submittingButton4 = false;
+        router.push(`/admin/problem/special-judge/${this.$route.params.id}`);
+      }, e => {
+        this.submittingButton4 = false;
+        this.$refs.modal_msg_box.show('保存失败', httpCodeToStr(e.response.status));
+      });
+    },
     validateCloneForm: function () {
       if (Number(this.cloning.type) === -1) {
         return 1;
@@ -250,7 +276,7 @@ export default {
     },
     validateTransferForm: function () {
       if (Number(this.transfer.type) === -1) {
-        return 1
+        return 1;
       } else if (Number(this.transfer.type) === 1 && !this.transfer.psid) {
         return 2;
       }

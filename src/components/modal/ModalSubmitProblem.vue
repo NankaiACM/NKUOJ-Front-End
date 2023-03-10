@@ -65,10 +65,10 @@ export default {
   },
   methods: {
     submit: function (view) {
-      const validateCode = this.validateSubmitForm()
+      const validateCode = this.validateSubmitForm();
       if (validateCode !== 0) {
         this.$refs.submit_problem_msg_box.show('提示', this.validateResults[validateCode]);
-        return view.preventDefault()
+        return;
       }
       const requestPackage = {
         pid: this.pid,
