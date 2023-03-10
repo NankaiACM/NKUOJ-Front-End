@@ -45,7 +45,7 @@
         </thead>
         <tbody>
         <tr v-for="item in items" :key="item.submission_id">
-          <th scope="row" class="text-center"><a :href="`/submission/${item.submission_id}`" class="text-decoration-none text-purple">#{{ item.submission_id }}</a></th>
+          <th scope="row" class="text-center"><a :href="`/submission/${item.submission_id}`" class="text-decoration-none text-purple">#{{ item.submission_id }}<IconBoxArrowInUpRightSmall/></a></th>
           <td class="text-center text-muted">u:{{ uidToStr(item.user.uid) }}</td>
           <td class="text-center text-muted">@{{ item.user.nickname }}</td>
           <td class="text-center"><a :href="`/problem/${item.problem_info.pid}`" class="text-decoration-none text-purple">{{item.problem_info.name}}</a></td>
@@ -79,10 +79,12 @@ import {useFilterDataStore} from "@/stores/filter-data";
 import IconClipboardCheck from "@/components/icons/IconClipboardCheck.vue";
 import ModalFilter from "@/components/modal/ModalFilter.vue";
 import ModalJumpToSubmission from "@/components/modal/ModalJumpToSubmission.vue";
+import IconBoxArrowInUpRightSmall from "@/components/icons/IconBoxArrowInUpRightSmall.vue";
 
 export default {
   name: "SiteSubmissionPage",
   components: {
+    IconBoxArrowInUpRightSmall,
     ModalJumpToSubmission,
     ModalFilter,
     IconClipboardCheck,
