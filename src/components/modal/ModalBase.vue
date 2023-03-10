@@ -5,7 +5,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">{{ title }}</h5>
-            <button type="button" class="btn-close" @click="this.$emit('close')"></button>
+            <button type="button" class="btn-close" @click="this.$emit('close')" v-if="closeButton"></button>
           </div>
           <div class="modal-body">
             <slot/>
@@ -27,8 +27,9 @@ export default {
   name: "ModalBase",
   props: {
     title: String,
-    okButton: Boolean,
-    cancelButton: Boolean,
+    okButton: { type: Boolean, default: true },
+    closeButton: { type: Boolean, default: true },
+    cancelButton: { type: Boolean, default: true },
     okText: String,
     cancelText: String,
     escToClose: Boolean,
