@@ -154,6 +154,20 @@ const router = createRouter({
           meta: { isAdministrator: true }
         },
         {
+          path: '/admin/problem/:id',
+          component: () => import('../pages/AdminProblemPage.vue'),
+          meta: { isAdministrator: true }
+        },
+        {
+          path: '/admin/problem/submissions/:id',
+          component: () => import('../pages/AdminProblemSubmissionsPage.vue'),
+          meta: { isAdministrator: true }
+        },{
+          path: '/admin/rejudge',
+          component: () => import('../pages/AdminRejudgePage.vue'),
+          meta: { isAdministrator: true }
+        },
+        {
           path: '/admin',
           redirect: '/admin/home',
           meta: { isAdministrator: true }
