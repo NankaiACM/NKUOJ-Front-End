@@ -91,9 +91,21 @@
             <div class="form-group mb-2">
               <label>Special Judge：</label>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="specialJudgeCheck" v-model="dataObject.specialJudge" :true-value="1" :false-value="0">
-                <label class="form-check-label" for="specialJudgeCheck">
-                  启用 Special Judge
+                <input class="form-check-input" type="radio" :value="0" id="radio-spj-disabled" v-model="dataObject.specialJudge">
+                <label class="form-check-label" for="radio-spj-disabled">
+                  不启用
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" :value="1" id="radio-spj-compare" v-model="dataObject.specialJudge">
+                <label class="form-check-label" for="radio-spj-compare">
+                  Special Judge （比较模式）
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" :value="2" id="radio-spj-interactive" v-model="dataObject.specialJudge">
+                <label class="form-check-label" for="radio-spj-interactive">
+                  Special Judge （交互模式）
                 </label>
               </div>
               <small class="form-text text-muted">

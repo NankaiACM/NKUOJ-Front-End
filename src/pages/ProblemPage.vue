@@ -26,7 +26,7 @@
           <p><span class="h6">完成状态：</span><span :class="['text-dark', 'text-warning', 'text-success'][problemInfo.status]">{{['未提交', '未通过', '已通过'][problemInfo.status]}}</span></p>
           <p><span class="h6">通过率：</span>{{ problemInfo.submitAc }} / {{ problemInfo.submitAll }}</p>
           <p><span class="h6">评测全部测试点：</span>{{ problemInfo.detailJudge ? '是' : '否' }}</p>
-          <p><span class="h6">非文本比对评测：</span>{{ problemInfo.specialJudge ? '启用' : '未启用' }}</p>
+          <p><span class="h6">Special Judge：</span>{{ ['未启用', '比较模式', '交互模式'][problemInfo.specialJudge] }}</p>
         </div>
         <DropdownNavigator class="mb-2" :psid="problemInfo.psid" v-if="problemInfo.psid" :pid="$route.params.id"/>
         <ButtonSubmit class="mb-2 d-md-grid d-none" :pid="$route.params.id" @submit="showSubmitModal()" @list="showMySubmissions()"/>
@@ -83,8 +83,7 @@ export default {
           this.loading = false;
           this.error = false;
           this.$refs.problem_content.load(this.content, this.problemInfo.extension);
-        }).catch(e => {
-          console.log(e);
+        }).catch(() => {
           this.error = true;
           this.loading = false;
       });

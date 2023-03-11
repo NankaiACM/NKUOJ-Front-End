@@ -8,7 +8,24 @@
       题目：#{{ this.$route.params.id }} |
       <a class="text-decoration-none text-purple" :href="`/admin/problem/${this.$route.params.id}`"><IconReplySmall/>返回题目配置</a>
     </p>
-    <div class="card bg-light p-4 border-0 rounded-4">
+    <div class="card bg-light p-4 border-0 rounded-4 mb-2">
+      <h4> Special Judge 配置指南 </h4>
+      <p> Special Judge 分为比较和交互两种模式。对于比较模式，Special Judge 程序将在用户程序执行结束后运行。</p>
+      <p> 参数为：</p>
+      <ul>
+        <li> argv[1]：测试数据输入</li>
+        <li> argv[2]：测试数据输出</li>
+        <li> argv[3]：用户程序输出</li>
+        <li> argv[4]：用户程序写在磁盘的文件所在的文件夹</li>
+      </ul>
+      <p> 评测结果：</p>
+      <ul>
+        <li> 0: 答案正确</li>
+        <li> 1: 格式错误（答案正确*）</li>
+        <li> 2: 答案错误</li>
+      </ul>
+    </div>
+    <div class="card bg-light p-4 border-0 rounded-4 mb-2">
       <form>
         <div class="mb-3">
           <label class="form-label">选择语言</label>
