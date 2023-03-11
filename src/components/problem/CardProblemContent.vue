@@ -29,10 +29,6 @@
 </template>
 
 <script>
-import markdownIt from 'markdown-it';
-import markdownItMathjax from 'markdown-it-mathjax';
-import markdownItLatex from 'markdown-it-latex';
-import 'markdown-it-latex/dist/index.css';
 import IconPDFLarge from "@/components/icons/IconPDFLarge.vue";
 import IconFileXLarge from "@/components/icons/IconFileXLarge.vue";
 
@@ -47,27 +43,22 @@ export default {
   data: function () {
     return {
       markdownView: '',
-      markdownItObject: null,
       content: '',
       type: ''
     }
   },
   methods: {
-    getMarkMathjaxLatex: function (content) {
-      if (this.markdownItObject === null) {
-        this.markdownItObject = markdownIt({
-          html: true,
-          linkify: true,
-          typographer: true
-        });
-        this.markdownItObject.use(markdownItMathjax);
-        this.markdownItObject.use(markdownItLatex);
-      }
-      let markdown = this.b64DecodeUnicode(content);
-      return this.markdownItObject.render(markdown);
-    },
     loadMarkdownView: function (content) {
-      this.markdownView = this.getMarkMathjaxLatex(content);
+      const json = this.b64DecodeUnicode(content);
+      try {
+        const jsonObject = JSON.parse(json);
+        if (jsonObject['html'])
+          this.markdownView = jsonObject['html'];
+        else
+          this.markdownView = json;
+      } catch (e) {
+        this.markdownView = json;
+      }
     },
     load: function (content, type) {
       this.type = type;

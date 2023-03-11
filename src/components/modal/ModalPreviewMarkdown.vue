@@ -1,17 +1,15 @@
 <template>
-  <VueFinalModal class="d-flex justify-content-center align-items-center h-100 w-100" v-model="internalShow" overlayTransition="vfm-fade" contentTransition="vfm-fade">
+  <VueFinalModal class="d-flex justify-content-center align-items-center h-100 w-100"
+                 v-model="internalShow" overlayTransition="vfm-fade" contentTransition="vfm-fade">
     <div class="modal">
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title"> 编译器输出 </h5>
+            <h5 class="modal-title"> 预览 Markdown </h5>
             <button type="button" class="btn-close" @click="this.dismiss()"></button>
           </div>
           <div class="modal-body">
-            <pre>{{ message }}</pre>
-          </div>
-          <div class="modal-footer">
-            <button type="button" :class="`btn btn-outline-purple`" @click="this.dismiss()"> 关闭 </button>
+            <div v-html="compiledHtml"></div>
           </div>
         </div>
       </div>
@@ -23,17 +21,17 @@
 import {VueFinalModal} from "vue-final-modal";
 
 export default {
-  name: "ModalCompilationOutput",
+  name: "ModalPreviewMarkdown",
+  components: {VueFinalModal},
   data: function () {
     return {
-      message: '',
-      internalShow: false
+      internalShow: false,
+      compiledHtml: ''
     }
   },
-  components: {VueFinalModal},
   methods: {
-    show: function (message) {
-      this.message = message;
+    show: function (compiledHtml) {
+      this.compiledHtml = compiledHtml;
       this.internalShow = true;
     },
     dismiss: function () {
@@ -50,8 +48,5 @@ export default {
 }
 .modal-header {
   border-bottom: none;
-}
-.modal-footer {
-  border-top: none;
 }
 </style>

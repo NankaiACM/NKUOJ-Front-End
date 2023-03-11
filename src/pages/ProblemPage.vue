@@ -83,7 +83,8 @@ export default {
           this.loading = false;
           this.error = false;
           this.$refs.problem_content.load(this.content, this.problemInfo.extension);
-        }).catch(() => {
+        }).catch(e => {
+          console.log(e);
           this.error = true;
           this.loading = false;
       });
