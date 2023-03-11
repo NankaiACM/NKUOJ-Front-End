@@ -1,3 +1,5 @@
+# Front End of NKU-OJ
+
 ![Screenshot of the Login Page](assets/readme-resources/login.png?raw=true "Login Page")
 ![Screenshot of the Home Page](assets/readme-resources/home.png?raw=true "Home Page")
 ![Screenshot of the Submission Page](assets/readme-resources/submission.png?raw=true "Submission Page")
