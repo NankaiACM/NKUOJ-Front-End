@@ -52,7 +52,7 @@ export default {
       const json = this.b64DecodeUnicode(content);
       try {
         const jsonObject = JSON.parse(json);
-        if (jsonObject['html'])
+        if (jsonObject.hasOwnProperty('html'))
           this.markdownView = jsonObject['html'];
         else
           this.markdownView = json;

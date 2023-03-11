@@ -153,7 +153,7 @@ export default {
           const jsonText = this.b64DecodeUnicode(btoa(this.Uint8ToBase64(new Uint8Array(response.data.content.data))));;
           try {
             const jsonObj = JSON.parse(jsonText);
-            if (jsonObj['md'])
+            if (jsonObj.hasOwnProperty('md'))
               this.edit.markdownText = jsonObj['md'];
             else
               this.edit.markdownText = jsonText;
