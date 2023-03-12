@@ -1,5 +1,5 @@
 <template>
-<div class="card rounded-4 bg-light border-0 p-4 h-100">
+<div class="card rounded-4 bg-light border-0 p-4">
   <div v-if="loading">
     <h5 class="card-title placeholder-glow">
       <span class="placeholder col-6"></span>
@@ -15,12 +15,16 @@
       <span class="placeholder col-4 me-2"></span>
     </p>
   </div>
-  <div v-else-if="error" class="d-flex flex-column justify-content-center align-items-center h-100">
+  <div v-else-if="error" class="problem-content-min-height d-flex flex-column justify-content-center align-items-center h-100">
     <IconFileXLarge class="text-purple mb-3"/>
     <h5 class="text-purple mb-3">加载题目数据出现错误</h5>
   </div>
-  <div v-html="markdownView" v-else-if="type === 'md'"></div>
-  <div v-else-if="type === 'pdf'" class="d-flex flex-column justify-content-center align-items-center h-100">
+  <div v-else-if="type === 'md' && !markdownView" class="problem-content-min-height d-flex flex-column justify-content-center align-items-center h-100">
+    <IconFileXLarge class="text-purple mb-3"/>
+    <h5 class="text-purple mb-3">暂无题面</h5>
+  </div>
+  <div v-html="markdownView" v-else-if="type === 'md'" class="problem-content-min-height"></div>
+  <div v-else-if="type === 'pdf'" class="problem-content-min-height d-flex flex-column justify-content-center align-items-center h-100">
     <IconPDFLarge class="text-purple mb-3"/>
     <h5 class="text-purple mb-3">PDF 题面，请下载查看</h5>
     <a class="btn btn-outline-purple" :download="`problem-${this.pid}.pdf`" :href="`data:application/pdf;base64,${this.content}`">下载</a>
@@ -78,5 +82,7 @@ export default {
 </script>
 
 <style scoped>
-
+.problem-content-min-height {
+  min-height: 35rem;
+}
 </style>
