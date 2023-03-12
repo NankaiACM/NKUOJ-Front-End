@@ -19,10 +19,10 @@
         <a
           class="card clickable-card border-0 m-2 rounded-4 text-dark text-decoration-none p-3 d-flex flex-column justify-content-between"
           :href="`/contest/${contest.id}`">
-          <h5 class="mb-1">{{contest.name}}</h5>
-          <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1 text-nowrap text-truncate">{{contest.name}}</h5>
+          <div class="d-flex w-100 justify-content-between text-nowrap text-truncate">
             <small>{{getLocaleDate(contest.end)}} 截止</small>
-            <p class="mb-1">{{contest.courseName ? contest.courseName : '无所属课程'}}</p>
+            <small>{{contest.courseName ? contest.courseName : '无所属课程'}}</small>
           </div>
         </a>
       </div>

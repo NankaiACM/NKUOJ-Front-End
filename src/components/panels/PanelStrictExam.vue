@@ -19,10 +19,10 @@
         <a
           class="card clickable-card border-0 m-2 rounded-4 text-dark text-decoration-none p-3 d-flex flex-column justify-content-between"
           :href="`/exam/${exam.id}`">
-          <h5 class="mb-1">{{exam.name}}</h5>
-          <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1 text-nowrap text-truncate">{{exam.name}}</h5>
+          <div class="d-flex w-100 justify-content-between text-nowrap text-truncate">
             <small>{{getLocaleDate(exam.end)}} 截止</small>
-            <p class="mb-1">{{exam.courseName ? exam.courseName : '无所属课程'}}</p>
+            <small>{{exam.courseName ? exam.courseName : '无所属课程'}}</small>
           </div>
         </a>
       </div>
