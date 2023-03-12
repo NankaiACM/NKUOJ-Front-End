@@ -184,6 +184,16 @@ const router = createRouter({
           meta: { isAdministrator: true }
         },
         {
+          path: '/admin/ranking/contest/:id',
+          component: () => import('../pages/ContestRankingPage.vue'),
+          meta: { isAdministrator: true }
+        },
+        {
+          path: '/admin/ranking/exam/:id',
+          component: () => import('../pages/ExamRankingPage.vue'),
+          meta: { isAdministrator: true }
+        },
+        {
           path: '/admin',
           redirect: '/admin/home',
           meta: { isAdministrator: true }

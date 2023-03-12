@@ -28,7 +28,7 @@
       <tr v-for="item in this.items" :key="item.uid">
         <th class="text-center" scope="row">u:{{ uid2Str(item.user.uid) }}</th>
         <td class="text-center"><span class="d-inline-block text-truncate" style="max-width: 100px;">@{{ item.user.nickname }}</span></td>
-        <td class="text-center">{{ item.ranking }}</td>
+        <td class="text-center">{{ item.rankingEqual ? '=' : '' }}{{ item.ranking }}</td>
         <td class="text-center">{{ item.score }}</td>
         <td :class="`text-center${item[field.key] ? ' table-' + item.variants[field.key] : ''}`" v-for="field in fields" :key="field.key">
           <small v-if="item[field.key]">
@@ -84,14 +84,24 @@ export default {
           this.problemsInfos.push(obj);
         }
         this.items = [];
+        let prevRowScore = null;
+        let prevRow = null;
         for (const [i, obj] of res.data.tab.entries()) {
           if (this.limit && i >= this.limit)
             break;
           let row = {
             user: {uid: obj.uid, nickname: obj.nickname},
             ranking: i + 1,
+            rankingEqual: false,
             score: obj.totScore,
+          };
+          if (prevRowScore != null && prevRowScore.score === obj.totScore) {
+            row.ranking = prevRowScore.ranking;
+            row.rankingEqual = true;
+            prevRow.rankingEqual = true;
           }
+          prevRow = row;
+          prevRowScore = {score: row.score, ranking: row.ranking};
           let cellVariants = {};
           for (const d of obj.detail) {
             row[this.problems.indexOf(d.pid)] = {pid: d.pid, score: d.score, sid: d.sid, time: d.time, when: d.when, memory: d.memory};

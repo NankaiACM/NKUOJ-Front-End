@@ -29,7 +29,7 @@
       <tr v-for="item in this.items" :key="item.uid">
         <th class="text-center" scope="row">u:{{ uid2Str(item.user.uid) }}</th>
         <td class="text-center"><span class="d-inline-block text-truncate" style="max-width: 100px;">@{{ item.user.nickname }}</span></td>
-        <td class="text-center">{{ item.ranking }}</td>
+        <td class="text-center">{{ item.rankingEqual ? '=' : '' }}{{ item.ranking }}</td>
         <td class="text-center">{{ item.passed }}</td>
         <td class="text-center">{{ item.penalty }}</td>
         <td :class="`text-center${item[field.key] ? ' table-' + item.variants[field.key] : ''}`" v-for="field in fields" :key="field.key">
@@ -90,7 +90,9 @@ export default {
           problemSubmittedCount.push(0);
           problemPassedCount.push(0);
         }
-        this.items = []
+        this.items = [];
+        let prevRowScore = null;
+        let prevRow = null;
         for (const [i, obj] of res.data.tab.entries()) {
           for (const d of obj.detail) {
             problemSubmittedCount[this.problems.indexOf(d.pid)] += d.tryCount + (d.pass ? 1 : 0);
@@ -104,7 +106,14 @@ export default {
             passed: obj.passCount,
             penalty: Math.ceil(obj.virtTime / 60000),
             variants: {}
+          };
+          if (prevRowScore != null && prevRowScore.passed === row.passed && prevRowScore.penalty === row.penalty) {
+            row.ranking = prevRowScore.ranking;
+            row.rankingEqual = true;
+            prevRow.rankingEqual = true;
           }
+          prevRow = row;
+          prevRowScore = {passed: row.passed, penalty: row.penalty, ranking: row.ranking};
           let cellVariants = {};
           for (const d of obj.detail) {
             row[this.problems.indexOf(d.pid)] = {pid: d.pid, passed: d.pass, sid: d.sid, time: d.when, tries: d.tryCount, elapse: Math.ceil(d.elapse / 60000)}

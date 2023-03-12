@@ -6,7 +6,7 @@
   <p class="text-purple ms-3">
     竞赛 #{{ this.$route.params.id }} | <a
     @click="refresh()" class="text-decoration-none text-purple" href="#"><IconArrowClockwiseSmall/>刷新</a> | <a
-    class="text-decoration-none text-purple" :href="`/contest/${this.$route.params.id}`"><IconReplySmall/>返回</a>
+    class="text-decoration-none text-purple" :href="`/contest/${this.$route.params.id}`"><IconReplySmall/>跳转竞赛</a>
   </p>
   <p class="text-purple ms-3">
     您可以快速跳转到题目和提交记录。如需查看完整用户名，请选中后复制。

@@ -17,6 +17,9 @@
     <div class="col">
       <CardRejudge/>
     </div>
+    <div class="col">
+      <CardRanking/>
+    </div>
   </div>
 </div>
 </template>
@@ -26,10 +29,11 @@ import IconSliders from "@/components/icons/IconSliders.vue";
 import CardManageProblem from "@/components/admin/CardManageProblem.vue";
 import CardViewProblemSubmissions from "@/components/admin/CardViewProblemSubmissions.vue";
 import CardRejudge from "@/components/admin/CardRejudge.vue";
+import CardRanking from "@/components/admin/CardRanking.vue";
 
 export default {
   name: "AdminHomePage",
-  components: {CardRejudge, CardViewProblemSubmissions, CardManageProblem, IconSliders}
+  components: {CardRanking, CardRejudge, CardViewProblemSubmissions, CardManageProblem, IconSliders}
 }
 </script>
 
