@@ -1,5 +1,5 @@
 <template>
-<div class="card rounded-4 bg-light border-0 p-4 mb-2 h-100">
+<div class="card rounded-4 bg-light border-0 p-4 h-100">
   <div v-if="loading">
     <h5 class="card-title placeholder-glow">
       <span class="placeholder col-6"></span>

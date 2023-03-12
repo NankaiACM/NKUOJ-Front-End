@@ -1,5 +1,5 @@
 <template>
-  <div class="container mb-4">
+  <div class="container mb-2">
     <div class="d-flex justify-content-start align-items-center ms-3 mb-3 me-3">
       <span class="text-purple page-title">{{ problemInfo.name }}</span>
     </div>
@@ -8,8 +8,10 @@
     </p>
     <div class="row">
       <div class="col-md-8 col-12 order-last order-md-first">
-        <CardProblemContent :loading="loading" ref="problem_content" :pid="$route.params.id" :error="error"/>
-        <ButtonSubmit class="mb-2 d-md-none d-grid" :pid="$route.params.id" @submit="showSubmitModal()" @list="showMySubmissions()"/>
+        <div>
+          <CardProblemContent class="mb-2" :loading="loading" ref="problem_content" :pid="$route.params.id" :error="error"/>
+        </div>
+        <ButtonSubmit class="mb-2 d-grid d-md-none" :pid="$route.params.id" @submit="showSubmitModal()" @list="showMySubmissions()"/>
       </div>
       <div class="col-md-4 col-12 order-first order-md-last">
         <div class="card rounded-4 bg-light border-0 p-4 mb-2">
@@ -23,10 +25,11 @@
           <p><span class="h6">测试点：</span>{{ problemInfo.cases }}</p>
           <p><span class="h6">时间限制：</span>{{ problemInfo.timeLimit }} ms</p>
           <p><span class="h6">空间限制：</span>{{ problemInfo.memoryLimit }} KiB</p>
-          <p><span class="h6">完成状态：</span><span :class="['text-dark', 'text-warning', 'text-success'][problemInfo.status]">{{['未提交', '未通过', '已通过'][problemInfo.status]}}</span></p>
+          <p><span class="h6">完成状态：</span><span :class="['text-dark', 'text-warning', 'text-success'][problemInfo.status]">{{ ['未提交', '未通过', '已通过'][problemInfo.status] }}</span></p>
           <p><span class="h6">通过率：</span>{{ problemInfo.submitAc }} / {{ problemInfo.submitAll }}</p>
           <p><span class="h6">评测全部测试点：</span>{{ problemInfo.detailJudge ? '是' : '否' }}</p>
-          <p><span class="h6">Special Judge：</span>{{ ['未启用', '比较模式', '交互模式'][problemInfo.specialJudge] }}</p>
+          <p><span class="h6">Special Judge：</span>{{ ['未启用', '比较模式', '交互模式'][problemInfo.specialJudge] }}
+          </p>
         </div>
         <DropdownNavigator class="mb-2" :psid="problemInfo.psid" v-if="problemInfo.psid" :pid="$route.params.id"/>
         <ButtonSubmit class="mb-2 d-md-grid d-none" :pid="$route.params.id" @submit="showSubmitModal()" @list="showMySubmissions()"/>
@@ -53,7 +56,8 @@ export default {
   components: {
     ModalMySubmissions,
     ModalSubmitProblem,
-    DropdownNavigator, IconChevronDoubleRightSmall, IconListColumnsReverse, ButtonSubmit, CardProblemContent},
+    DropdownNavigator, IconChevronDoubleRightSmall, IconListColumnsReverse, ButtonSubmit, CardProblemContent
+  },
   data: function () {
     return {
       problemInfo: {},
@@ -67,7 +71,7 @@ export default {
     this.loadProblemData()
   },
   setup() {
-    const userDataStore = useUserDataStore()
+    const userDataStore = useUserDataStore();
     return {
       userDataStore
     }
@@ -84,8 +88,8 @@ export default {
           this.error = false;
           this.$refs.problem_content.load(this.content, this.problemInfo.extension);
         }).catch(() => {
-          this.error = true;
-          this.loading = false;
+        this.error = true;
+        this.loading = false;
       });
     },
     showSubmitModal: function () {
