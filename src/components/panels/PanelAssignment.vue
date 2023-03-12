@@ -10,11 +10,11 @@
         <a
           class="card clickable-card border-0 m-2 rounded-4 text-dark text-decoration-none"
           :href="`/assignment/${assignment.id}`">
-          <div class="d-flex w-100 justify-content-between">
+          <div class="d-flex w-100 justify-content-between text-nowrap text-truncate">
             <h5 class="mb-1">{{assignment.name}}</h5>
             <small>{{getLocaleDate(assignment.end)}} 截止</small>
           </div>
-          <p class="mb-1">{{assignment.courseName ? assignment.courseName : '无所属课程'}}</p>
+          <small class="text-nowrap text-truncate">{{assignment.courseName ? assignment.courseName : '无所属课程'}}</small>
         </a>
       </div>
     </div>

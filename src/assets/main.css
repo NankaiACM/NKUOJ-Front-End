@@ -73,7 +73,7 @@
   background: transparent;
 }
 .clickable-card {
-  height: 100px;
+  height: 120px;
   background-color: #f8f9fa;
   transition: box-shadow 0.3s, background-color 0.3s;
 }

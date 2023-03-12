@@ -19,10 +19,10 @@
       <a
         class="card clickable-card border-0 m-2 rounded-4 text-dark text-decoration-none p-3 d-flex flex-column justify-content-between"
         :href="`/exam/${exam.id}`">
-        <h5 class="mb-1"><span class="badge rounded-pill bg-danger me-2">考试</span>{{exam.name}}</h5>
-        <div class="d-flex w-100 justify-content-between">
-          <small>{{getLocaleDate(exam.end)}} 截止</small>
-          <p class="mb-1">{{exam.courseName ? exam.courseName : '无所属课程'}}</p>
+        <h5 class="mb-1 text-nowrap text-truncate"><span class="badge rounded-pill bg-danger me-2">考试</span>{{exam.name}}</h5>
+        <div class="d-flex w-100 justify-content-between text-nowrap text-truncate">
+          <small>{{getLocaleDate(exam.end)}}</small>
+          <small>{{exam.courseName ? exam.courseName : '无所属课程'}}</small>
         </div>
       </a>
     </div>
@@ -30,10 +30,10 @@
       <a
         class="card clickable-card border-0 m-2 rounded-4 text-dark text-decoration-none p-3 d-flex flex-column justify-content-between"
         :href="`/contest/${contest.id}`">
-        <h5 class="mb-1"><span class="badge rounded-pill bg-success me-2">竞赛</span>{{contest.name}}</h5>
-        <div class="d-flex w-100 justify-content-between">
-          <small>{{getLocaleDate(contest.end)}} 截止</small>
-          <p class="mb-1">{{contest.courseName ? contest.courseName : '无所属课程'}}</p>
+        <h5 class="mb-1 text-nowrap text-truncate"><span class="badge rounded-pill bg-success me-2">竞赛</span>{{contest.name}}</h5>
+        <div class="d-flex w-100 justify-content-between text-nowrap text-truncate">
+          <small>{{getLocaleDate(contest.end)}}</small>
+          <small>{{contest.courseName ? contest.courseName : '无所属课程'}}</small>
         </div>
       </a>
     </div>
