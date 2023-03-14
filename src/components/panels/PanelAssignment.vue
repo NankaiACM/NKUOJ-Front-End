@@ -8,7 +8,7 @@
     <div class="row row-cols-lg-2">
       <div class="col-lg-6 col-12" v-for="assignment in assignments" :key="assignment.id">
         <a
-          class="card clickable-card border-0 m-2 rounded-4 text-dark text-decoration-none"
+          class="card clickable-card border-0 m-2 rounded-4 text-dark text-decoration-none p-3 d-flex flex-column justify-content-between"
           :href="`/assignment/${assignment.id}`">
           <div class="d-flex w-100 justify-content-between text-nowrap text-truncate">
             <h5 class="mb-1">{{assignment.name}}</h5>
@@ -39,17 +39,17 @@ export default {
   },
   methods: {
     getLocaleDate: function (string) {
-      return dateToStr(string)
+      return dateToStr(string);
     }
   },
   mounted() {
     axios.get(`/api/assignment/open`).then(res => {
-      this.assignments = res.data
-      this.loading = false
+      this.assignments = res.data;
+      this.loading = false;
     }, e => {
-      this.statusCode = e.response.status
-      this.loading = false
-    })
+      this.statusCode = e.response.status;
+      this.loading = false;
+    });
   }
 }
 </script>
