@@ -139,7 +139,7 @@
     </div>
   </div>
   <ModalLogin ref="modal-student-login" :is-student="true" :is-strict="false" @success="handleSuccessEvent" @reset="handleResetEvent" @signup="handleSignupEvent"></ModalLogin>
-  <ModalLogin ref="modal-guest-login" :is-student="false" :is-strict="false" @success="handleSuccessEvent"></ModalLogin>
+  <ModalLogin ref="modal-guest-login" :is-student="false" :is-strict="false" @success="handleSuccessEvent" @reset="handleResetEvent" @signup="handleSignupEvent"></ModalLogin>
   <ModalSignup ref="modal-signup-student-in-page" @success="handleSuccessEvent" :is-student="true"></ModalSignup>
   <ModalSignup ref="modal-signup-guest-in-page" @success="handleSuccessEvent" :is-student="false"></ModalSignup>
   <ModalResetPwd ref="modal-reset-pwd-student-in-page" @success="handleSuccessEvent" :is-student="true"></ModalResetPwd>

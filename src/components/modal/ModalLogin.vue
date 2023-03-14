@@ -10,9 +10,7 @@
           <div class="input-group mb-2">
             <input type="text" class="form-control" id="loginUserNameInput" :placeholder="isStudent ? '学号' : '邮箱'"
                    v-model="loginForm.email">
-            <div class="input-group-prepend" v-if="isStudent">
-              <div class="input-group-text">@mail.nankai.edu.cn</div>
-            </div>
+            <span class="input-group-text" v-if="isStudent">@mail.nankai.edu.cn</span>
           </div>
         </div>
         <div class="container">
@@ -61,7 +59,7 @@ export default {
         passwordRaw: '',
         examKeyRaw: ''
       },
-      validateResults: ['', '邮箱不合法', '未填写邮箱', '密码不一致', '未填写密码', '未填写邮件验证码', '未填写昵称', '密码长度不足6位', '未填写考试码'],
+      validateResults: ['', '邮箱不合法', '未填写邮箱', '密码不一致', '未填写密码', '未填写邮件验证码', '未填写昵称', '密码长度不足6位', '未填写考试码', '学号不正确，请填写数字学号'],
       emailRegex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     }
   },
@@ -75,6 +73,8 @@ export default {
     validateLoginForm: function () {
       if (this.loginForm.email === '') {
         return 2;
+      } else if (this.isStudent && !/^\d+$/.test(this.loginForm.email)) {
+        return 9;
       } else if (!this.emailRegex.test(this.loginForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''))) {
         return 1;
       } else if (this.loginForm.nickname === '') {
@@ -97,12 +97,11 @@ export default {
       const encryptedPassword = encryptor.encrypt(this.loginForm.passwordRaw);
       const encryptedPasscode = encryptor.encrypt(this.loginForm.examKeyRaw);
 
-      console.log(encryptedPassword)
       const postPackage = {
         username: this.loginForm.email + (this.isStudent ? '@mail.nankai.edu.cn' : ''),
         password: encryptedPassword,
         passcode: encryptedPasscode,
-      }
+      };
       axios.post(`/api/login`, postPackage).then(res => {
         if (res.data.ok) {
           this.store.setUID(res.data.userData.uid);
