@@ -42,6 +42,7 @@
         <div class="mb-3">
           <label class="form-label">代码</label>
           <textarea class="form-control" rows="12" v-model="sourceCode" placeholder="粘贴您的代码"></textarea>
+          <small class="text-muted">请您妥善保管 Special Judge 源代码，系统不会为您存储源码。</small>
         </div>
       </form>
       <div class="container d-flex justify-content-center">
