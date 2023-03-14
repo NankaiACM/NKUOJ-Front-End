@@ -96,12 +96,12 @@ export default {
   computed: {
     studentID: function () {
       if (!this.userDataStore.username)
-        return null
-      const i = this.userDataStore.username.indexOf('@mail.nankai.edu.cn')
+        return null;
+      const i = this.userDataStore.username.indexOf('@mail.nankai.edu.cn');
       if (i === -1) {
-        return '非学生'
+        return '非学生';
       }
-      return this.userDataStore.username.substring(0, i)
+      return this.userDataStore.username.substring(0, i);
     },
   },
   mounted() {
