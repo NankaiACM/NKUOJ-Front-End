@@ -8,7 +8,7 @@
       题目：#{{ this.$route.params.id }} |
       <a class="text-decoration-none text-purple" :href="`/admin/problem/${this.$route.params.id}`"><IconReplySmall/>返回题目配置</a>
     </p>
-    <div class="card bg-light p-4 border-0 rounded-4 mb-2">
+    <div class="card bg-light p-4 border-0 rounded-4 mb-2" v-if="extension === 'md'">
       <h4>题面编辑指南</h4>
       <ul>
         <li>题面使用 Markdown 语法，可参考 <a href="https://www.markdownguide.org/cheat-sheet/" class="text-decoration-none text-purple">Markdown Cheat Sheet<IconBoxArrowInUpRightSmall/></a>；</li>
