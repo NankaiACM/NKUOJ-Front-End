@@ -1,7 +1,3 @@
-// WebVPN not available
-if (window.location.href.includes("webvpn.nankai.edu.cn"))
-  document.getElementById("webvpn-hints").style.visibility = "visible"
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createVfm } from 'vue-final-modal'
