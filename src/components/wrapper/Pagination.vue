@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <ul class="pagination">
+    <ul class="pagination pagination-purple">
       <li class="page-item">
         <button class="page-link" @click="this.prevPage()" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
