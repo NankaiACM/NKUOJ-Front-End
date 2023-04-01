@@ -120,7 +120,8 @@
             <ul>
               <li v-if="isFoolsDay"><a class="text-decoration-none text-light" href="http://www.tju.edu.cn/">天津大学</a></li>
               <li v-else><a class="text-decoration-none text-light" href="https://www.nankai.edu.cn/">南开大学</a></li>
-              <li><a class="text-decoration-none text-light" href="http://cic.tju.edu.cn/">智能与计算学部</a></li>
+              <li v-if="isFoolsDay"><a class="text-decoration-none text-light" href="http://cic.tju.edu.cn/">智能与计算学部</a></li>
+              <li v-else><a class="text-decoration-none text-light" href="https://cc.nankai.edu.cn/">计算机学院</a></li>
               <li><a class="text-decoration-none text-light" href="/association">算法协会</a></li>
             </ul>
           </div>
