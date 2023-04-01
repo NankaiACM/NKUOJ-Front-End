@@ -2,8 +2,8 @@
   <div class="container oj-pattern-background h-100 w-100">
     <div class="d-flex flex-column h-100 justify-content-center align-items-center">
       <div class="d-flex justify-content-center align-items-center">
-        <img class="slogan-logout" src="/public/tjuoj-slogan.svg" alt="Tianjin University Online Judge" v-if="isFoolsDay">
-        <img class="slogan-logout" src="../assets/nkuoj-slogan.svg" alt="Nankai University Online Judge" v-else>
+        <img class="slogan-logout" src="/tjuoj-slogan.svg" alt="Tianjin University Online Judge" v-if="isFoolsDay">
+        <img class="slogan-logout" src="/nkuoj-slogan.svg" alt="Nankai University Online Judge" v-else>
         <div class="vertical-separator-logout ms-3"></div>
         <span class="text-purple text-logout ms-3">登出</span>
       </div>

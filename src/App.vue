@@ -11,12 +11,12 @@ export default {
       const element = document.createElement("link");
       element.setAttribute("rel", "stylesheet");
       element.setAttribute("type", "text/css");
-      element.setAttribute("href", "/public/main.tju.css");
+      element.setAttribute("href", "/main.tju.css");
       document.getElementsByTagName("head")[0].appendChild(element);
       document.title = "TJU-OJ";
       const newFavicon = document.createElement('link');
       newFavicon.rel = 'icon';
-      newFavicon.href = '/public/favicon-tju.ico';
+      newFavicon.href = '/favicon-tju.ico';
       document.head.querySelector('link[rel="icon"]').remove(); // remove old favicon
       document.head.appendChild(newFavicon); // append new favicon
     }

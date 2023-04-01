@@ -2,7 +2,7 @@
 <div class="container oj-pattern-background h-100 w-100">
   <div class="d-flex flex-column h-100 justify-content-center align-items-center">
     <div class="d-flex justify-content-center align-items-center">
-      <img class="slogan-404" src="../assets/nkuoj-slogan.svg" alt="Nankai University Online Judge">
+      <img class="slogan-404" src="../../public/nkuoj-slogan.svg" alt="Nankai University Online Judge">
       <div class="vertical-separator-404 ms-3"></div>
       <span class="text-purple text-404 ms-3">404</span>
     </div>
