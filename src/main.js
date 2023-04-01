@@ -36,19 +36,19 @@ pinia.use((context) => {
     const serializer = {
         serialize: JSON.stringify,
         deserialize: JSON.parse
-    }
-    const fromStorage = serializer.deserialize(window.localStorage.getItem(storeId))
+    };
+    const fromStorage = serializer.deserialize(window.localStorage.getItem(storeId));
     if (fromStorage) {
-        context.store.$patch(fromStorage)
+        context.store.$patch(fromStorage);
     }
     context.store.$subscribe((mutation, state) => {
-        window.localStorage.setItem(storeId, serializer.serialize(state))
-    })
-})
+        window.localStorage.setItem(storeId, serializer.serialize(state));
+    });
+});
 
-app.use(pinia)
-app.use(vfm)
-app.use(router)
-app.use(hljsVuePlugin)
+app.use(pinia);
+app.use(vfm);
+app.use(router);
+app.use(hljsVuePlugin);
 
-app.mount('#app')
+app.mount('#app');

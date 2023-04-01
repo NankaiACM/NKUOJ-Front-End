@@ -69,8 +69,10 @@
           <span class="btn btn-success disabled card-accepted"> (≧∀≦)ゞAccepted! </span>
         </div>
         <div class="part-right">
-          <img src="../assets/nkuoj-slogan.svg" alt="slogan" class="page-slogan">
-          <h5 class="m-2 text-purple">南开大学计算机课程</h5>
+          <img src="/public/tjuoj-slogan.svg" alt="slogan" class="page-slogan" v-if="isFoolsDay">
+          <img src="../assets/nkuoj-slogan.svg" alt="slogan" class="page-slogan" v-else>
+          <h5 class="m-2 text-purple" v-if="isFoolsDay">天津大学计算机课程</h5>
+          <h5 class="m-2 text-purple" v-else>南开大学计算机课程</h5>
           <h1 class="m-2 text-purple">在线评测平台</h1>
           <div class="mt-5">
             <h6 class="m-2 text-purple" v-if="hasRedirectPath">请您登录后继续访问：</h6>
@@ -86,8 +88,10 @@
         </div>
       </div>
       <div class="d-flex flex-column align-items-center justify-content-center d-md-none d-block h-100 w-100 position-absolute">
-        <img src="../assets/nkuoj-slogan.svg" alt="slogan" class="page-slogan">
-        <h5 class="m-2 text-purple">南开大学计算机课程</h5>
+        <img src="/public/tjuoj-slogan.svg" alt="slogan" class="page-slogan" v-if="isFoolsDay">
+        <img src="../assets/nkuoj-slogan.svg" alt="slogan" class="page-slogan" v-else>
+        <h5 class="m-2 text-purple" v-if="isFoolsDay">天津大学计算机课程</h5>
+        <h5 class="m-2 text-purple" v-else>南开大学计算机课程</h5>
         <h1 class="m-2 text-purple">在线评测平台</h1>
         <div class="mt-5">
           <h6 class="m-2 text-purple" v-if="hasRedirectPath">请您登录后继续访问：</h6>
@@ -105,15 +109,18 @@
     <div class="bg-dark site-footer text-light">
       <div class="container">
         <div class="d-flex align-items-center mt-5 mb-5">
-          <img src="../assets/nkuoj-slogan-light.svg" alt="light slogan" class="slogan-footer">
-          <strong class="ms-5" style="font-size: 1.4rem">南开大学计算机课程在线评测平台</strong>
+          <img src="/public/tjuoj-slogan-light.svg" alt="light slogan" class="slogan-footer" v-if="isFoolsDay">
+          <img src="../assets/nkuoj-slogan-light.svg" alt="light slogan" class="slogan-footer" v-else>
+          <strong class="ms-5" style="font-size: 1.4rem" v-if="isFoolsDay">天津大学计算机课程在线评测平台</strong>
+          <strong class="ms-5" style="font-size: 1.4rem" v-else>南开大学计算机课程在线评测平台</strong>
         </div>
         <div class="row justify-content-between">
           <div class="col-md-3">
             <h5>外部链接</h5>
             <ul>
-              <li><a class="text-decoration-none text-light" href="https://www.nankai.edu.cn/">南开大学</a></li>
-              <li><a class="text-decoration-none text-light" href="https://cc.nankai.edu.cn/">计算机学院</a></li>
+              <li v-if="isFoolsDay"><a class="text-decoration-none text-light" href="http://www.tju.edu.cn/">天津大学</a></li>
+              <li v-else><a class="text-decoration-none text-light" href="https://www.nankai.edu.cn/">南开大学</a></li>
+              <li><a class="text-decoration-none text-light" href="http://cic.tju.edu.cn/">智能与计算学部</a></li>
               <li><a class="text-decoration-none text-light" href="/association">算法协会</a></li>
             </ul>
           </div>
@@ -134,7 +141,8 @@
             </ul>
           </div>
         </div>
-        <p class="h6 mt-4 mb-3">南开大学ACM算法协会 © 2022–2023</p>
+        <p class="h6 mt-4 mb-3" v-if="isFoolsDay">天津大学ACM算法协会 © 2022–2023</p>
+        <p class="h6 mt-4 mb-3" v-else>南开大学ACM算法协会 © 2022–2023</p>
       </div>
     </div>
   </div>
@@ -236,6 +244,12 @@ export default {
   computed: {
     hasRedirectPath: function () {
       return this.searchParams.has("redirect");
+    },
+    isFoolsDay: function () {
+      const today = new Date();
+      const month = today.getMonth() + 1;
+      const day = today.getDate();
+      return month === 4 && day === 1;
     }
   },
   mounted() {

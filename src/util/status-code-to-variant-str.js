@@ -1,13 +1,15 @@
 export default function (code) {
+  const today = new Date();
+  const isFoolsDay = today.getMonth() + 1 === 4 && today.getDate() === 1;
   const codeVariant = {
     99: 'secondary',
     100: 'secondary',
-    107: 'success',
-    0: 'success',
-    1: 'success',
-    102: 'danger',
-    2: 'danger',
-    108: 'success',
+    107: isFoolsDay ? 'danger' : 'success',
+    0: isFoolsDay ? 'danger' : 'success',
+    1: isFoolsDay ? 'danger' : 'success',
+    102: isFoolsDay ? 'success' : 'danger',
+    2: isFoolsDay ? 'success' : 'danger',
+    108: isFoolsDay ? 'danger' : 'success',
     101: 'warning',
     103: 'primary',
     105: 'info',

@@ -2,7 +2,8 @@
   <div class="container oj-pattern-background h-100 w-100">
     <div class="d-flex flex-column h-100 justify-content-center align-items-center">
       <div class="d-flex justify-content-center align-items-center">
-        <img class="slogan-logout" src="../assets/nkuoj-slogan.svg" alt="Nankai University Online Judge">
+        <img class="slogan-logout" src="/public/tjuoj-slogan.svg" alt="Tianjin University Online Judge" v-if="isFoolsDay">
+        <img class="slogan-logout" src="../assets/nkuoj-slogan.svg" alt="Nankai University Online Judge" v-else>
         <div class="vertical-separator-logout ms-3"></div>
         <span class="text-purple text-logout ms-3">登出</span>
       </div>
@@ -29,6 +30,14 @@ export default {
   mounted() {
     axios.get('/api/logout');
     this.userDataStore.clear();
+  },
+  computed: {
+    isFoolsDay: function () {
+      const today = new Date();
+      const month = today.getMonth() + 1;
+      const day = today.getDate();
+      return month === 4 && day === 1;
+    }
   }
 }
 </script>
@@ -39,10 +48,5 @@ export default {
 }
 .text-logout {
   font-size: xxx-large;
-}
-.vertical-separator-logout {
-  height: 100px;
-  width: 2px;
-  background-color: #923262;
 }
 </style>
