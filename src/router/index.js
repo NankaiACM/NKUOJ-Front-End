@@ -245,6 +245,10 @@ const router = createRouter({
       name: 'logout',
       component: () => import('../pages/LogoutPage.vue'),
       meta: { authNotRequired: true }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: "/404"
     }
   ]
 });

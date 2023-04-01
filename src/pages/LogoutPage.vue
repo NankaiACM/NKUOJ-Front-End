@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-center align-items-center">
         <img class="slogan-logout" src="/tjuoj-slogan.svg" alt="Tianjin University Online Judge" v-if="isFoolsDay">
         <img class="slogan-logout" src="/nkuoj-slogan.svg" alt="Nankai University Online Judge" v-else>
-        <div class="vertical-separator-logout ms-3"></div>
+        <div class="vertical-separator ms-3"></div>
         <span class="text-purple text-logout ms-3">登出</span>
       </div>
       <h4 class="text-center text-purple mt-4">您已经成功登出。</h4>
