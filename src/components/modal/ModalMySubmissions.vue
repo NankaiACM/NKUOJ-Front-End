@@ -2,7 +2,7 @@
   <ModalBase v-model="internalShow" title="我的提交记录"
              :ok-button="true" ok-class="btn-outline-purple" ok-text="关闭"
              :cancel-button="false"
-             @ok="dismiss()">
+             @ok="dismiss()" close-button @close="dismiss()">
     <div class="container" v-if="submissions.length > 0">
       <div class="list-group">
         <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" @click="selectItem(item.sid)" v-for="item in submissions" :key="item.sid">
