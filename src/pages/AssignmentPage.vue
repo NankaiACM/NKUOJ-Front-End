@@ -30,15 +30,15 @@
             本次作业暂无题目。
           </h6>
           <div class="list-group" v-else>
-            <div class="list-group-item list-group-item-action border-0 flex-column align-items-start"
-                 v-for="problem in problemsData" v-bind:key="problem.pid" @click="$router.push('/problem/' + problem.pid)">
+            <router-link class="list-group-item list-group-item-action border-0 flex-column align-items-start"
+                 v-for="problem in problemsData" v-bind:key="problem.pid" :to="{path:'/problem/' + problem.pid}">
             <span class="d-flex w-100 justify-content-between flex-column">
               <span class="h5 mb-1">{{ problem.name }}</span>
             </span>
               <small class="text-muted" v-if="problem.status === 0">未提交</small>
               <small class="text-warning" v-else-if="problem.status === 1">未通过</small>
               <small class="text-success" v-else>已通过</small>
-            </div>
+            </router-link>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@
       </h5>
       <div class="list-group mt-2 mb-2" v-if="registrableExamsList && registrableExamsList.length > 0">
         <a class="list-group-item list-group-item-action" @click="subscribeExam(exam)"
-           v-for="exam in registrableExamsList" v-bind:key="exam.id">
+           v-for="exam in registrableExamsList" v-bind:key="exam.id" href="#">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"> {{ exam.name }}</h5>
             <small>{{ exam.number }}</small>
@@ -28,7 +28,7 @@
       </h5>
       <div class="list-group mt-2 mb-2" v-if="registrableContestsList && registrableContestsList.length > 0">
         <a class="list-group-item list-group-item-action" @click="subscribeContest(contest)"
-           v-for="contest in registrableContestsList" v-bind:key="contest.id">
+           v-for="contest in registrableContestsList" v-bind:key="contest.id" href="#">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"> {{ contest.name }}</h5>
             <small>{{ contest.number }}</small>

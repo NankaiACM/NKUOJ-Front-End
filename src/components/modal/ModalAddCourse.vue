@@ -5,7 +5,7 @@
     <div class="container">
       <div class="list-group" v-if="electableCoursesList && electableCoursesList.length > 0">
         <a class="list-group-item list-group-item-action" @click="subscribeCourse(course)"
-           v-for="course in electableCoursesList" v-bind:key="course.id">
+           v-for="course in electableCoursesList" v-bind:key="course.id" href="#">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"> {{ course.name }}</h5>
             <small>{{ course.number }}</small>
