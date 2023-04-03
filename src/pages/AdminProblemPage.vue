@@ -99,13 +99,13 @@
               <div class="form-check">
                 <input class="form-check-input" type="radio" :value="1" id="radio-spj-compare" v-model="dataObject.specialJudge">
                 <label class="form-check-label" for="radio-spj-compare">
-                  Special Judge （比较模式）
+                  启用，比较模式
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" :value="2" id="radio-spj-interactive" v-model="dataObject.specialJudge">
                 <label class="form-check-label" for="radio-spj-interactive">
-                  Special Judge （交互模式）
+                  启用，交互模式
                 </label>
               </div>
               <small class="form-text text-muted">
