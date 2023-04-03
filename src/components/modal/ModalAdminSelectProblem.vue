@@ -4,11 +4,11 @@
              @ok="dismiss()" @close="dismiss()" @cancel="dismiss()">
     <div class="container" v-if="itemsList.length > 0">
       <div class="list-group">
-        <div class="list-group-item-action list-group-item d-flex justify-content-between align-items-center" @click="selectItem(item.id)"
-                           v-for="item in itemsList" :key="item.id">
+        <a class="list-group-item-action list-group-item d-flex justify-content-between align-items-center"
+                     @click="selectItem(item.id)" v-for="item in itemsList" :key="item.id" href="#">
           {{ item.name }}
           <span class="text-muted">#{{ item.id }}</span>
-        </div>
+        </a>
       </div>
       <div class="d-flex justify-content-center mt-4">
         <Pagination v-model="currentPage" :total-rows="itemsCount" :per-page="perPage" v-if="itemsCount > perPage"
