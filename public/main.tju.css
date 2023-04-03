@@ -141,3 +141,6 @@
   background-color: #005187;
   border-color: #005187;
 }
+.cursor-pointer {
+  cursor: pointer;
+}

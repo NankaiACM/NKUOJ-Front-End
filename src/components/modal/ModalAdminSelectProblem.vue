@@ -4,8 +4,8 @@
              @ok="dismiss()" @close="dismiss()" @cancel="dismiss()">
     <div class="container" v-if="itemsList.length > 0">
       <div class="list-group">
-        <a class="list-group-item-action list-group-item d-flex justify-content-between align-items-center"
-                     @click="selectItem(item.id)" v-for="item in itemsList" :key="item.id" href="#">
+        <a class="list-group-item-action list-group-item d-flex justify-content-between align-items-center cursor-pointer"
+                     @click="selectItem(item.id)" v-for="item in itemsList" :key="item.id">
           {{ item.name }}
           <span class="text-muted">#{{ item.id }}</span>
         </a>
