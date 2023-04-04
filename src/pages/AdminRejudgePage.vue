@@ -22,8 +22,8 @@
     </ul>
   </div>
   <div class="row">
-    <div class="col-md-6 col-12 order-first">
-      <div class="card h-100 border-0 rounded-4 p-2 bg-light mb-2">
+    <div class="col-md-6 col-12 order-first mb-4">
+      <div class="card h-100 border-0 rounded-4 p-2 bg-light">
         <div class="card-body bg-transparent">
           <h4>重测提交</h4>
           <label class="mb-2">提交编号：</label>
@@ -34,8 +34,8 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 col-12 order-last">
-      <div class="card h-100 border-0 p-2 rounded-4 bg-light mb-2">
+    <div class="col-md-6 col-12 order-last mb-4">
+      <div class="card h-100 border-0 p-2 rounded-4 bg-light">
         <div class="card-body bg-transparent">
           <h4>重测题目</h4>
           <label class="mb-2">题目编号：</label>
