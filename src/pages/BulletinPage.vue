@@ -9,7 +9,7 @@
     </p>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       <div class="col" v-for="announcement in announcements" :key="announcement.id">
-        <div class="card rounded-4 h-100">
+        <div class="card rounded-4 h-100 border-0 bg-light">
           <div class="card-body">
             <h5 class="card-title"><span class="badge rounded-pill text-bg-secondary me-2" v-if="announcement.top">置顶</span>{{announcement.title}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{getLocaleDate(announcement.time)}}</h6>
