@@ -10,10 +10,10 @@
       </h5>
       <div class="list-group mt-2 mb-2" v-if="registrableExamsList && registrableExamsList.length > 0">
         <a class="list-group-item list-group-item-action" @click="subscribeExam(exam)"
-           v-for="exam in registrableExamsList" v-bind:key="exam.id" href="#">
+           v-for="exam in registrableExamsList" v-bind:key="exam.psid" href="#">
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1"> {{ exam.name }}</h5>
-            <small>{{ exam.number }}</small>
+            <h5 class="mb-1"> {{ exam.title }}</h5>
+            <small>{{ exam.psid }}</small>
           </div>
           <small> 考试 </small>
         </a>
@@ -28,10 +28,10 @@
       </h5>
       <div class="list-group mt-2 mb-2" v-if="registrableContestsList && registrableContestsList.length > 0">
         <a class="list-group-item list-group-item-action" @click="subscribeContest(contest)"
-           v-for="contest in registrableContestsList" v-bind:key="contest.id" href="#">
+           v-for="contest in registrableContestsList" v-bind:key="contest.psid" href="#">
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1"> {{ contest.name }}</h5>
-            <small>{{ contest.number }}</small>
+            <h5 class="mb-1"> {{ contest.title }}</h5>
+            <small>{{ contest.psid }}</small>
           </div>
           <small> 竞赛 </small>
         </a>
@@ -81,11 +81,11 @@ export default {
       this.internalShow = true;
     },
     subscribeExam: function (exam) {
-      this.$refs.confirm_modal.show('警告', `确定要加入考试${exam.name}？您将无法退出考试。`,
-        () => {this.submitSubscribeExamRequest(exam.id, {});});
+      this.$refs.confirm_modal.show('警告', `确定要加入考试${exam.title}？您将无法退出考试。`,
+        () => {this.submitSubscribeExamRequest(exam.psid);});
     },
-    submitSubscribeExamRequest: function (examId, payload) {
-      axios.post(`/api/problemset/subscribe/${examId}`, payload)
+    submitSubscribeExamRequest: function (examId) {
+      axios.get(`/api/problemset/subscribe/${examId}`)
         .then(res => {
           if (res.status === 200) {
             this.$refs.msg_box_modal.show('提示', '成功加入该考试');
@@ -100,11 +100,11 @@ export default {
         });
     },
     subscribeContest: function (contest) {
-      this.$refs.confirm_modal.show('警告', `确定要加入竞赛${contest.name}？您将无法退出竞赛。`,
-        () => {this.submitSubscribeContestRequest(contest.id, {});});
+      this.$refs.confirm_modal.show('警告', `确定要加入竞赛${contest.title}？您将无法退出竞赛。`,
+        () => {this.submitSubscribeContestRequest(contest.psid);});
     },
-    submitSubscribeContestRequest: function (contestId, payload) {
-      axios.post(`/api/problemset/subscribe/${contestId}`, payload)
+    submitSubscribeContestRequest: function (contestId) {
+      axios.get(`/api/problemset/subscribe/${contestId}`)
         .then(res => {
           if (res.status === 200) {
             this.$refs.msg_box_modal.show('提示', '成功加入该竞赛');
