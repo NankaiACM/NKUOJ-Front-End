@@ -142,8 +142,8 @@
             </ul>
           </div>
         </div>
-        <p class="h6 mt-4 mb-3" v-if="isFoolsDay">天津大学ACM算法协会 © 2022–2023</p>
-        <p class="h6 mt-4 mb-3" v-else>南开大学ACM算法协会 © 2022–2023</p>
+        <p class="h6 mt-4 mb-3" v-if="isFoolsDay">天津大学ACM算法协会 © 2022–{{ getTodayYear }}</p>
+        <p class="h6 mt-4 mb-3" v-else>南开大学ACM算法协会 © 2022–{{ getTodayYear }}</p>
       </div>
     </div>
   </div>
@@ -251,6 +251,10 @@ export default {
       const month = today.getMonth() + 1;
       const day = today.getDate();
       return month === 4 && day === 1;
+    },
+    getTodayYear: function () {
+      const today = new Date();
+      return today.getFullYear();
     }
   },
   mounted() {
